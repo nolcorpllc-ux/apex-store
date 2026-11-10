@@ -662,6 +662,10 @@ h1, h2, h3, p { margin: 0; }
 }
 .QuickAdd button:hover { background: var(--carbon); color: white; }
 .Card__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+@media (max-width: 340px) {
+  .Card__top { flex-wrap: wrap; }
+  .Card__top h3 { flex: 1 1 100%; min-width: 0; }
+}
 .Card__dept {
   font-size: 11px;
   letter-spacing: 0.14em;
@@ -1220,6 +1224,16 @@ h1, h2, h3, p { margin: 0; }
 .Train__grid button {
   aspect-ratio: 4 / 5;
   min-height: 260px;
+}
+/* min-height + 4/5 aspect forces a 208px min width. Two of those plus the
+   grid gap are wider than a phone, which scrolls the page sideways. Let the
+   column width win below the desktop 4-up layout. */
+@media (max-width: 960px) {
+  .Train__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .Train__grid button { min-width: 0; min-height: 0; }
+}
+@media (max-width: 860px) {
+  .Train__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .Train__grid img {
   object-fit: cover;
