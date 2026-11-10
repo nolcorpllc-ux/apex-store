@@ -513,7 +513,7 @@ def generate_article_pages():
         faqs = art.get("faqs", [
             (
                 f"What is the top-rated gear for {cat}?",
-                f"Our highest-rated choices are {hero_prod['title']} (${hero_prod['retail_price']:.2f}, SKU {hero_prod['id']}) alongside our AeroMesh Laser-Vented Tech Shirt (APC-C36, $36) and Apex AeroShell Lightweight Warmup Jacket (APC-C42, $64) - all shipping free in 2–4 business days."
+                f"Our choices include {hero_prod['title']} (${hero_prod['retail_price']:.2f}, SKU {hero_prod['id']}). Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall."
             ),
             (
                 "How do I get 15% off Doubles or multi-item race orders?",
@@ -870,7 +870,8 @@ def generate_article_pages():
   </main>
   <footer class="SiteFooter">
     <div class="Container">
-      <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
+      <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../contact.html">Contact</a> · <a href="../about.html">About</a> · <a href="../shipping.html">Shipping</a> · <a href="../returns.html">Returns</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
+      <p>Secure checkout and fulfillment by Fourthwall.</p>
     </div>
   <!-- Sticky HYROX10 + Free Printable Split Wristband + Gym Directory Conversion Bar -->
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
@@ -1465,7 +1466,7 @@ Sitemap: {SITE_URL}/sitemap.xml
         "- **Checkout:** Instant PCI-DSS Level 1 Stripe Checkout (Visa, Mastercard, American Express, Discover, Apple Pay).",
         "",
         "## Doubles 2-Packs, Team Bulk Kits & $0-Upfront Boutique HYROX Coach Partner Program",
-        f"- [HYROX Doubles 2-Packs, Boutique Gym Bulk Kits & Coach Partner Portal]({SITE_URL}/team_orders.html): Mix-and-match Doubles 2-Packs (2x AeroMesh Breathable Tech Tees $62, 2x Race City Tees $58, 2x AeroShell Warmup Jackets $108, 2x Heavyweight Fleece Hoodies $96, Full Doubles Race-Day Kit $178), 5-Pack Relay Kits ($145), 10-Pack Boutique Gym Drops ($268), plus our $0-upfront Boutique HYROX Gym & Independent Coach Partner Program (complimentary coach sample piece + custom 10%-off athlete code + $25 bonus per 5 shirts sold). Contact: apexhybridco@gmail.com.",
+        f"- [HYROX Doubles 2-Packs, Boutique Gym Bulk Kits & Coach Partner Portal]({SITE_URL}/team_orders.html): Made to order apparel. Free US shipping. Secure checkout and fulfillment by Fourthwall. Contact: apexhybridco@gmail.com.",
         "",
         f"## Complete Product Catalog ({len(products)} Verified In-Stock SKUs)",
         ""
@@ -1563,7 +1564,7 @@ def inject_static_seo_into_index():
                 "name": "Apex Hybrid Co., operated by NolCorp LLC",
                 "url": f"{SITE_URL}/",
                 "logo": f"{SITE_URL}/images/streetwear/apc-c36-black.png?v=20261026v1",
-                "description": "Breathable HYROX race shirts, laser-vented AeroMesh tech tees, 2026/2027 race-city shirts (Chicago, Dallas, Anaheim, Miami, Vegas, NYC), sleeveless muscle tanks, and clinical recovery hardware.",
+                "description": "Race shirts, city shirts, muscle tanks, warmup hoodies, and warmup jackets. Made to order. Free US shipping.",
                 "telephone": "+1-949-805-4935",
                 "email": "apexhybridco@gmail.com",
                 "address": {
@@ -1591,7 +1592,7 @@ def inject_static_seo_into_index():
                         "name": "What are the best breathable HYROX shirts for race day?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Our 4.0 oz AeroMesh Laser-Vented Tech Shirt (APC-C36), Dry-Pace Threshold Tech Tee (APC-C37), and Sleeveless Winged Crest Muscle Tanks (APC-C28) are engineered specifically for 8-station hybrid racing with laser-perforated shoulder ventilation and flatlock anti-chafe seams."
+                            "text": "Compromised Running (APC-C36), 1km Split (APC-C37), and the sleeveless tank (APC-C28) are made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall."
                         }
                     },
                     {

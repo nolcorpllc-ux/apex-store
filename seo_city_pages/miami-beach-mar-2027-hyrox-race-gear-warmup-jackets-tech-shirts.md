@@ -3,7 +3,7 @@
 - **Canonical Storefront URL:** https://www.apexhybridco.com/articles/miami-beach-mar-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html
 - **Event / Venue:** Miami Beach Convention Center (March 2027 · 25.7959° N, 80.1329° W)
 - **Category:** Miami Beach Mar 2027 Race City Guide (7 min read)
-- **Summary:** Beat South Florida heat and humidity at Miami Beach (March 2027) with laser-perforated Compromised Running & Push Heavy anti-chafe tech shirts (APC-C40), Miami Beach Heat-Block Tees (APC-C19), Pro Division Quarter-Zip Warmup Shells (APC-C44), and ice-bath recovery pods.
+- **Summary:** Beat South Florida heat and humidity at Miami Beach (March 2027) with Compromised Running & Push Heavy anti-chafe tech shirts (APC-C40), Miami Beach Heat-Block Tees (APC-C19), Pro Division Quarter-Zip Warmup Shells (APC-C44), and ice-bath recovery pods.
 
 ## Direct Buy Now & Product Spec Links
 
