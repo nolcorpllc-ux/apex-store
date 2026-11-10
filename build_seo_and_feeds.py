@@ -165,6 +165,7 @@ def generate_product_pages():
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{html.escape(seo_title)} | Apex Hybrid Co., operated by NolCorp LLC</title>
   <meta name="description" content="{html.escape(short_desc)} Made to order. Free US shipping from Apex Hybrid Co." />
@@ -604,6 +605,7 @@ def generate_article_pages():
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{html.escape(title)} | Apex Hybrid Co., operated by NolCorp LLC</title>
   <meta name="description" content="{html.escape(summary)}" />
@@ -801,6 +803,7 @@ def generate_article_pages():
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HYROX Training, Pacing, Race-City &amp; Recovery Buyer Guides ({len(guides)} Guides) | Apex Hybrid Co.</title>
   <meta name="description" content="Explore all {len(guides)} data-backed HYROX &amp; hybrid athlete training protocols, start-corral warmup guides, 1km pacing strategies, 2026/2027 race-city guides, and recovery blueprints." />
@@ -1287,6 +1290,7 @@ def generate_returns_page():
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Returns, Exchanges &amp; Shipping | Apex Hybrid Co.</title>
   <meta name="description" content="Print errors and defects are replaced or refunded. Made-to-order items are not eligible for general returns. Free US shipping from Apex Hybrid Co." />

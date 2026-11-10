@@ -515,6 +515,16 @@ function openProduct(sku) {
   const isFw = isFourthwallItem(p);
   const fulfillmentLine = "Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.";
   const buyBtnLabel = "Buy Now - Instant Checkout";
+  const withoutMade = (text) => String(text || "")
+    .replace(/made to order\s*·\s*made to order\s*·?/gi, "")
+    .replace(/made to order\s*[.·]?\s*/gi, "")
+    .replace(/\s*·\s*·\s*/g, " · ")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+\./g, ".")
+    .trim();
+  const highlights = (p.highlights || [])
+    .map(withoutMade)
+    .filter((h) => h && !/^fulfillment:\s*$/i.test(h));
   $("#productModalContent").innerHTML = `
     <div class="ProductLayout">
       <div class="ProductLayout__photo"><img src="${esc(photoOf(p))}" alt="${esc(p.title)}" /></div>
@@ -530,8 +540,8 @@ function openProduct(sku) {
           <button class="Btn Btn--cobalt" type="button" data-buy="${p.id}" style="font-weight:800">${esc(buyBtnLabel)} · ${money(p.retail_price)} →</button>
           <button class="Btn Btn--plain" type="button" data-add="${p.id}">Add to bag</button>
         </div>
-        <p style="margin-top:10px">${esc(p.short_desc || "")}</p>
-        <ul class="Highlights">${(p.highlights || []).map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
+        <p style="margin-top:10px">${esc(withoutMade(p.short_desc || ""))}</p>
+        <ul class="Highlights">${highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
         ${p.review_quote ? `<blockquote class="Quote">${esc(p.review_quote)}</blockquote>` : ""}
       </div>
     </div>`;
@@ -813,12 +823,6 @@ function onClick(event) {
   }
   const quick = event.target.closest("[data-quick]");
   if (quick) {
-    const p = findProduct(quick.dataset.quick);
-    const page = p && (p.product_url || p.product_page_url || "");
-    if (page && /dallas-race-day\.html/i.test(page)) {
-      window.location.href = page.replace(/^https?:\/\/[^/]+/, "") || page;
-      return;
-    }
     openProduct(quick.dataset.quick);
     return;
   }
@@ -906,6 +910,15 @@ function onClick(event) {
     const nav = $("#siteNav");
     const open = nav.classList.toggle("is-open");
     menu.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.classList.toggle("nav-open", open);
+    return;
+  }
+  if (event.target.closest("#siteNav a")) {
+    const nav = $("#siteNav");
+    if (nav) nav.classList.remove("is-open");
+    document.body.classList.remove("nav-open");
+    const btn = $("#menuBtn");
+    if (btn) btn.setAttribute("aria-expanded", "false");
   }
 }
 
