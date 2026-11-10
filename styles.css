@@ -1418,7 +1418,7 @@ h1, h2, h3, p { margin: 0; }
   font-family: var(--sans, sans-serif);
   font-size: 0.92rem;
   color: #64748b;
-  text-decoration: line-through;
+  ;
 }
 .HighlightsList {
   list-style: disc;

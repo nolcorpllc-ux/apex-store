@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Builds the complete SEO & Organic Traffic Architecture for Apex Hybrid & Recovery Supply:
+Builds the complete SEO & Organic Traffic Architecture for Apex Hybrid Co., operated by NolCorp LLC:
 1. 68 Static Product Landing Pages (/products/<handle>.html) with JSON-LD Product, Offer, AggregateRating, and BreadcrumbList schema + Nominative Fair-Use HYROX Compatibility SEO.
 2. 16 High-Intent SEO Blog / Guide Pages (/articles/<slug>.html) with Article & FAQPage JSON-LD schema and internal product links.
 3. Google Merchant Center RSS 2.0 XML Product Feed (/google_shopping_feed.xml) for Free Google Shopping Tab listings.
@@ -99,22 +99,6 @@ def generate_product_pages():
                     "keywords": f"HYROX shirts, breathable HYROX race shirt, {title}, {dept}, hybrid athlete apparel, 8-station functional fitness gear",
                     "brand": {"@type": "Brand", "name": "Apex Hybrid Co"},
                     "category": dept,
-                    "aggregateRating": {
-                        "@type": "AggregateRating",
-                        "ratingValue": str(prod["rating"]),
-                        "reviewCount": str(prod["reviews"]),
-                        "bestRating": "5",
-                        "worstRating": "1",
-                    },
-                    "review": [
-                        {
-                            "@type": "Review",
-                            "author": {"@type": "Person", "name": "Verified Hybrid Athlete"},
-                            "datePublished": "2026-10-01",
-                            "reviewBody": prod.get("review_quote", "Built for high-output hybrid training and fast recovery."),
-                            "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
-                        }
-                    ],
                     "offers": {
                         "@type": "Offer",
                         "url": canonical,
@@ -123,7 +107,7 @@ def generate_product_pages():
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
-                        "seller": {"@type": "Organization", "name": "Apex Hybrid & Recovery Supply"},
+                        "seller": {"@type": "Organization", "name": "Apex Hybrid Co., operated by NolCorp LLC"},
                         "shippingDetails": {
                             "@type": "OfferShippingDetails",
                             "shippingRate": {"@type": "MonetaryAmount", "value": "0.00", "currency": "USD"},
@@ -137,10 +121,7 @@ def generate_product_pages():
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                            "merchantReturnDays": 30,
-                            "returnMethod": "https://schema.org/ReturnByMail",
-                            "returnFees": "https://schema.org/FreeReturn",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
                         },
                     },
                 },
@@ -171,12 +152,12 @@ def generate_product_pages():
         if is_fw:
             fw_blank = html.escape(prod.get("fourthwall_blank") or "Premium Athletic Blank")
             fw_url = prod.get("fourthwall_product_url") or prod.get("checkout_url") or f"../index.html?buy={prod['id']}&fulfillment=fourthwall"
-            fulfillment_line = f'<div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f1f5f9; padding:8px 10px; border-radius:6px; border-left:3px solid #2563eb;">✓ Ships in 2–4 business days from our US hubs · Free 30-day size exchanges · <a href="{html.escape(fw_url)}" style="color:#2563eb;text-decoration:underline;">Instant 1-Click Checkout →</a></div>'
+            fulfillment_line = f'<div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f1f5f9; padding:8px 10px; border-radius:6px; border-left:3px solid #2563eb;">✓ Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall. <a href="{html.escape(fw_url)}" style="color:#2563eb;text-decoration:underline;">Instant 1-Click Checkout →</a></div>'
             buy_href = fw_url
             top_buy_label = f"Instant Checkout (${price})"
             main_buy_label = "Buy Now  -  Instant Checkout"
         else:
-            fulfillment_line = f'<div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f0fdf4; padding:8px 10px; border-radius:6px; border-left:3px solid #16a34a;">✓ Ships free from our US warehouses (CA/TX/NJ) in 2–4 business days · 1-year hardware warranty</div>'
+            fulfillment_line = f'<div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f0fdf4; padding:8px 10px; border-radius:6px; border-left:3px solid #16a34a;">✓ Made to order. Free US shipping</div>'
             buy_href = f"../index.html?buy={prod['id']}"
             top_buy_label = f"Quick Checkout (${price})"
             main_buy_label = "Instant Stripe Checkout"
@@ -186,7 +167,7 @@ def generate_product_pages():
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{html.escape(seo_title)} | Apex Hybrid &amp; Recovery Supply</title>
+  <title>{html.escape(seo_title)} | Apex Hybrid Co., operated by NolCorp LLC</title>
   <meta name="description" content="{html.escape(short_desc)} Free US Ground Shipping &amp; 30-Day Returns at Apex Hybrid Co." />
   <meta name="keywords" content="hyrox shirts, breathable hyrox shirt, {html.escape(title)}, {html.escape(prod['category'])}, {html.escape(dept)}, hybrid athlete gear, functional fitness recovery" />
   <link rel="canonical" href="{canonical}" />
@@ -245,7 +226,7 @@ def generate_product_pages():
           </button>
           <button type="button" onclick="document.getElementById('staticMainProdImg').src='../{prod['alt_image']}'" style="cursor:pointer; border:2px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; color:#0f172a; display:flex; align-items:center; gap:8px; font-weight:700; font-size:12.5px;">
             <img src="../{prod['alt_image']}" alt="{html.escape(title)}  -  Bone Edition View" style="width:48px; height:48px; object-fit:cover; border-radius:4px;" />
-            <span>2. Bone / White Edition</span>
+            <span>2. Black Edition</span>
           </button>
         </div>''' if prod.get("alt_image") else ""}
       </div>
@@ -262,7 +243,7 @@ def generate_product_pages():
         <div style="padding:12px 0; border-top:1px solid #eee; border-bottom:1px solid #eee; margin-bottom:14px;">
           <div style="display:flex; align-items:baseline; gap:10px;">
             <span style="font-size:28px; font-weight:900;">${price}</span>
-            <span style="font-size:14px; color:#525866; text-decoration:line-through;">List: ${list_price}</span>
+            <span style="font-size:14px; color:#525866; ">List: ${list_price}</span>
           </div>
           <div style="font-size:13px; color:#0e8345; font-weight:700; margin-top:4px;">
             ✓ {html.escape(prod['stock_status'])} · {html.escape(prod['ship_time'])}
@@ -274,7 +255,7 @@ def generate_product_pages():
             <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; margin-bottom:6px;">1. Select Colorway: <span id="staticColorLabel" style="color:#0066ff;">Black</span></div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
               <button type="button" class="StaticColorBtn" data-color="Black" onclick="window.selectStaticColor('Black','../{prod['image']}',this)" style="cursor:pointer; padding:7px 14px; border-radius:6px; border:2px solid #0f172a; background:#0f172a; color:#fff; font-weight:800; font-size:12.5px;">Black</button>
-              <button type="button" class="StaticColorBtn" data-color="White" onclick="window.selectStaticColor('White','../{prod.get('alt_image') or prod['image']}',this)" style="cursor:pointer; padding:7px 14px; border-radius:6px; border:1.5px solid #cbd5e1; background:#fff; color:#0f172a; font-weight:700; font-size:12.5px;">Bone / White</button>
+              <button type="button" class="StaticColorBtn" data-color="White" onclick="window.selectStaticColor('White','../{prod.get('alt_image') or prod['image']}',this)" style="cursor:pointer; padding:7px 14px; border-radius:6px; border:1.5px solid #cbd5e1; background:#fff; color:#0f172a; font-weight:700; font-size:12.5px;">Black</button>
             </div>
           </div>""" if prod.get("alt_image") else ""}
           {f"""<div style="margin-bottom:12px;">
@@ -312,7 +293,7 @@ def generate_product_pages():
         </ul>
         <div style="margin:14px 0; padding:14px 16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; font-size:13.5px; color:#1e293b; line-height:1.55;">
           <div style="font-weight:800; color:#0f172a; text-transform:uppercase; letter-spacing:0.04em; font-size:12px; margin-bottom:6px;">✓ Fit, Fabric &amp; Race-Day Guarantee</div>
-          <div>{"Engineered with a featherlight 3.8 oz / 4.0 oz ASICS-style moisture-wicking race-day knit that breathes through high-output 1km splits, sheds sweat in the Roxzone, and sits smooth under a sled harness when running on heavy legs." if str(prod.get("id", "")) in {"APC-C36","APC-C37","APC-C38","APC-C40","APC-C41"} else "Cut on a structured 6.1 oz garment-dyed 100% ring-spun cotton athletic silhouette (or 8.5 oz warmup fleece) built for pre-race corral nerves, paying the sled push tax, surviving wall ball no-reps, and training for race week or Cancun. Soft-hand cured ink never cracks or peels, with pre-shrunk double-needle seams and free 30-day size exchanges."}</div>
+          <div>Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.</div>
         </div>
         <div class="ReviewSnippetBox">
           <strong>★★★★★ Verified HYROX &amp; Hybrid Athlete Review:</strong><br/>
@@ -327,7 +308,7 @@ def generate_product_pages():
             <span style="font-size:11px;font-weight:900;text-transform:uppercase;color:#38bdf8;letter-spacing:0.06em;">⚡ 2026 Race-Week Express US Dispatch (Chicago · Dallas · Anaheim)</span>
             <span style="font-size:11.5px;color:#4ade80;font-weight:800;">✓ 2–4 Day US Delivery</span>
           </div>
-          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Take <strong>10% OFF single items</strong> with code <code style="background:#334155;color:#38bdf8;padding:1px 6px;border-radius:4px;font-weight:900;">HYROX10</code> or <strong>15% OFF Doubles 2-Packs &amp; Relay 4-Packs</strong> with code <code style="background:#334155;color:#4ade80;padding:1px 6px;border-radius:4px;font-weight:900;">TEAM15</code>.</p>
+          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <a href="../team_orders.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">Shop Doubles 2-Packs (15% Off) →</a>
             <a href="../wristband.html" style="background:#0f172a;border:1px solid #475569;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">⏱️ Free Printable Split Wristband</a>
@@ -360,16 +341,16 @@ def generate_product_pages():
 
   <footer class="SiteFooter">
     <div class="Container">
-      <p><strong>Apex Hybrid &amp; Recovery Supply (Apex Hybrid Co.)</strong> · 8420 Spectrum, Irvine, CA 92618 · Support: <a href="mailto:apexhybridco@gmail.com" style="color:#38bdf8;">apexhybridco@gmail.com</a> · Athlete Support: <a href="tel:+19498054935" style="color:#38bdf8;">(949) 805-4935</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
-      <p style="font-size:11.5px; color:#94a3b8; margin-top:8px;">Apex Hybrid &amp; Recovery Supply is an independent athletic &amp; recovery brand engineered for athletes competing in HYROX, DEKA, CrossFit, and functional fitness events. Not affiliated with or endorsed by HYROX World GmbH.</p>
+      <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../contact.html">Contact</a> · <a href="../about.html">About</a> · <a href="../shipping.html">Shipping</a> · <a href="../returns.html">Returns</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="mailto:apexhybridco@gmail.com" style="color:#38bdf8;">apexhybridco@gmail.com</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
+      <p style="font-size:11.5px; color:#94a3b8; margin-top:8px;">Apex Hybrid Co., operated by NolCorp LLC is an independent athletic &amp; recovery brand engineered for athletes competing in HYROX, DEKA, CrossFit, and functional fitness events. Not affiliated with or endorsed by HYROX World GmbH.</p>
     </div>
   <!-- Sticky HYROX10 + Free Printable Split Wristband + Gym Directory Conversion Bar -->
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Race-Week Perks</span>
-        <span>Take <strong>10% OFF</strong> single items (<code style="background:#334155;color:#38bdf8;padding:2px 6px;border-radius:4px;font-weight:900;">HYROX10</code>) or <strong>15% OFF</strong> Doubles 2-Packs (<code style="background:#334155;color:#4ade80;padding:2px 6px;border-radius:4px;font-weight:900;">TEAM15</code>)</span>
-        <button type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText('HYROX10');this.textContent='✓ Copied HYROX10!';this.style.background='#16a34a';" style="cursor:pointer;background:#38bdf8;color:#0f172a;border:none;border-radius:5px;padding:4px 10px;font-weight:900;font-size:11.5px;">Copy HYROX10</button>
+        <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
+        
       </div>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <a href="../wristband.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:5px 11px;border-radius:6px;font-weight:800;font-size:12px;">⏱️ Free Printable Split Wristband →</a>
@@ -402,7 +383,7 @@ def generate_product_pages():
       var img = document.getElementById("staticMainProdImg");
       if (img && imgSrc) img.src = imgSrc;
       var lbl = document.getElementById("staticColorLabel");
-      if (lbl) lbl.textContent = (c === "White" ? "Bone / White" : "Black");
+      if (lbl) lbl.textContent = (c === "White" ? "Black" : "Black");
       var btns = document.querySelectorAll(".StaticColorBtn");
       for (var i = 0; i < btns.length; i++) {{
         var active = btns[i].getAttribute("data-color") === c;
@@ -536,7 +517,7 @@ def generate_article_pages():
             ),
             (
                 "How do I get 15% off Doubles or multi-item race orders?",
-                "Add any 2 or more items to your bag at Apex Hybrid & Recovery Supply and apply code HURRY15 (or HYROX15) at checkout for 15% off plus Free 2–4 Day US Shipping and 30-Day Free Returns."
+                "Add any 2 or more items to your bag at Apex Hybrid Co., operated by NolCorp LLC and apply code  at checkout for 15% off plus Free 2–4 Day US Shipping and 30-Day Free Returns."
             )
         ])
 
@@ -551,7 +532,7 @@ def generate_article_pages():
                     "author": {"@type": "Organization", "name": "Apex Hybrid Performance Lab"},
                     "publisher": {
                         "@type": "Organization",
-                        "name": "Apex Hybrid & Recovery Supply",
+                        "name": "Apex Hybrid Co., operated by NolCorp LLC",
                         "logo": {"@type": "ImageObject", "url": f"{SITE_URL}/images/streetwear/apc-c36-black.png?v=20261026v1"},
                     },
                     "datePublished": "2026-10-20",
@@ -630,9 +611,9 @@ def generate_article_pages():
                   </div>
                   <div class="ProductCard__PriceRow" style="margin:6px 0;">
                     <span class="PriceWhole" style="font-size:19px;font-weight:900;">${p['retail_price']:.2f}</span>
-                    <span class="PriceList" style="color:#64748b;text-decoration:line-through;font-size:13px;">${(p.get('list_price') or p['retail_price']):.2f}</span>
+                    <span class="PriceList" style="color:#64748b;font-size:13px;">${(p.get('list_price') or p['retail_price']):.2f}</span>
                   </div>
-                  <div style="font-size:12px;color:#0e8345;font-weight:700;margin-bottom:8px;">✓ In Stock · Free 2–4 Day US Shipping</div>
+                  <div style="font-size:12px;color:#0e8345;font-weight:700;margin-bottom:8px;">Made to order · Free US shipping</div>
                 </div>
               </div>
               <div style="padding:0 14px 14px;display:flex;flex-direction:column;gap:6px;">
@@ -658,7 +639,7 @@ def generate_article_pages():
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{html.escape(title)} | Apex Hybrid &amp; Recovery Supply</title>
+  <title>{html.escape(title)} | Apex Hybrid Co., operated by NolCorp LLC</title>
   <meta name="description" content="{html.escape(summary)}" />
   <meta name="keywords" content="hyrox shirts, breathable hyrox shirt, lightweight warmup jacket, {html.escape(cat)}, hybrid athlete guide, functional race prep, cold plunge recovery" />
   <link rel="canonical" href="{canonical}" />
@@ -686,7 +667,7 @@ def generate_article_pages():
         </a>
         <div style="margin-left:auto; display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
           <a href="../index.html#articles" style="color:#fff; font-size:13px; font-weight:700;">← All Buyer Guides</a>
-          <a href="tel:+19498054935" style="color:#cbd5e1; font-size:12.5px; font-weight:700; text-decoration:none;">24/7 Athlete Line: (949) 805-4935</a>
+          <a href="tel:" style="color:#cbd5e1; font-size:12.5px; font-weight:700; text-decoration:none;">24/7 Athlete Line: </a>
           <a href="{hero_prod.get('fourthwall_product_url') or ('../index.html?buy=' + hero_prod['id'])}" class="Btn Btn--BuyNow" style="width:auto; padding:8px 16px;">1-Click Buy Top Pick (${hero_prod['retail_price']:.2f})</a>
         </div>
       </div>
@@ -705,7 +686,7 @@ def generate_article_pages():
       <section aria-label="Express 1-Click Checkout" style="background:#0f172a;color:#fff;padding:16px 18px;border-radius:10px;margin-bottom:26px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
           <span style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:#38bdf8;">⚡ Featured Gear In This Guide  -  Instant 1-Click Checkout</span>
-          <span style="font-size:12px;color:#cbd5e1;">Bundle 2+ Items: Use Code <strong style="color:#fff;">TEAM15</strong> for 15% Off + Free US Shipping</span>
+          <span style="font-size:12px;color:#cbd5e1;">Bundle 2+ Items: Use Code <strong style="color:#fff;"></strong> for 15% Off + Free US Shipping</span>
         </div>
         <div style="display:grid;gap:8px;">
 {top_strip_pills}
@@ -716,7 +697,7 @@ def generate_article_pages():
             <span style="font-size:11px;font-weight:900;text-transform:uppercase;color:#38bdf8;letter-spacing:0.06em;">⚡ 2026 Race-Week Express US Dispatch (Chicago · Dallas · Anaheim)</span>
             <span style="font-size:11.5px;color:#4ade80;font-weight:800;">✓ 2–4 Day US Delivery</span>
           </div>
-          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Take <strong>10% OFF single items</strong> with code <code style="background:#334155;color:#38bdf8;padding:1px 6px;border-radius:4px;font-weight:900;">HYROX10</code> or <strong>15% OFF Doubles 2-Packs &amp; Relay 4-Packs</strong> with code <code style="background:#334155;color:#4ade80;padding:1px 6px;border-radius:4px;font-weight:900;">TEAM15</code>.</p>
+          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <a href="../team_orders.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">Shop Doubles 2-Packs (15% Off) →</a>
             <a href="../wristband.html" style="background:#0f172a;border:1px solid #475569;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">⏱️ Free Printable Split Wristband</a>
@@ -730,7 +711,7 @@ def generate_article_pages():
 
       <section style="margin-top:32px; padding-top:24px; border-top:1px solid #e4e6eb;">
         <h2 style="font-size:20px; margin-bottom:6px;">Shop Featured HYROX Race Apparel &amp; Recovery Hardware (1-Click Checkout)</h2>
-        <p style="font-size:13.5px; color:#475569; margin-bottom:16px;">Every order ships Free in 2–4 Business Days from our US warehouses (CA, TX, East Coast) with 30-Day Free Returns &amp; Exchanges.</p>
+        <p style="font-size:13.5px; color:#475569; margin-bottom:16px;">Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
         <div class="ProductGrid">
           {rec_html}
         </div>
@@ -747,15 +728,15 @@ def generate_article_pages():
 
   <footer class="SiteFooter">
     <div class="Container">
-      <p><strong>Apex Hybrid &amp; Recovery Supply (Apex Hybrid Co.)</strong> · 8420 Spectrum, Irvine, CA 92618 · Support: <a href="mailto:apexhybridco@gmail.com" style="color:#38bdf8;">apexhybridco@gmail.com</a> · Athlete Support: <a href="tel:+19498054935" style="color:#38bdf8;">(949) 805-4935</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
+      <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../contact.html">Contact</a> · <a href="../about.html">About</a> · <a href="../shipping.html">Shipping</a> · <a href="../returns.html">Returns</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="mailto:apexhybridco@gmail.com" style="color:#38bdf8;">apexhybridco@gmail.com</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
     </div>
   <!-- Sticky HYROX10 + Free Printable Split Wristband + Gym Directory Conversion Bar -->
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Race-Week Perks</span>
-        <span>Take <strong>10% OFF</strong> single items (<code style="background:#334155;color:#38bdf8;padding:2px 6px;border-radius:4px;font-weight:900;">HYROX10</code>) or <strong>15% OFF</strong> Doubles 2-Packs (<code style="background:#334155;color:#4ade80;padding:2px 6px;border-radius:4px;font-weight:900;">TEAM15</code>)</span>
-        <button type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText('HYROX10');this.textContent='✓ Copied HYROX10!';this.style.background='#16a34a';" style="cursor:pointer;background:#38bdf8;color:#0f172a;border:none;border-radius:5px;padding:4px 10px;font-weight:900;font-size:11.5px;">Copy HYROX10</button>
+        <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
+        
       </div>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <a href="../wristband.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:5px 11px;border-radius:6px;font-weight:800;font-size:12px;">⏱️ Free Printable Split Wristband →</a>
@@ -889,15 +870,15 @@ def generate_article_pages():
   </main>
   <footer class="SiteFooter">
     <div class="Container">
-      <p><strong>Apex Hybrid &amp; Recovery Supply (Apex Hybrid Co.)</strong> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
+      <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
     </div>
   <!-- Sticky HYROX10 + Free Printable Split Wristband + Gym Directory Conversion Bar -->
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Race-Week Perks</span>
-        <span>Take <strong>10% OFF</strong> single items (<code style="background:#334155;color:#38bdf8;padding:2px 6px;border-radius:4px;font-weight:900;">HYROX10</code>) or <strong>15% OFF</strong> Doubles 2-Packs (<code style="background:#334155;color:#4ade80;padding:2px 6px;border-radius:4px;font-weight:900;">TEAM15</code>)</span>
-        <button type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText('HYROX10');this.textContent='✓ Copied HYROX10!';this.style.background='#16a34a';" style="cursor:pointer;background:#38bdf8;color:#0f172a;border:none;border-radius:5px;padding:4px 10px;font-weight:900;font-size:11.5px;">Copy HYROX10</button>
+        <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
+        
       </div>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <a href="../wristband.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:5px 11px;border-radius:6px;font-weight:800;font-size:12px;">⏱️ Free Printable Split Wristband →</a>
@@ -1107,7 +1088,6 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         "      <g:condition>new</g:condition>",
         f"      <g:availability>{availability}</g:availability>",
         f"      <g:price>{price}</g:price>",
-        f"      <g:sale_price>{sale_price}</g:sale_price>",
         "      <g:brand>Apex Hybrid Co</g:brand>",
         f"      <g:mpn>{html.escape(prod['id'])}</g:mpn>",
         "      <g:identifier_exists>no</g:identifier_exists>",
@@ -1219,9 +1199,9 @@ def generate_google_shopping_feed():
     rss_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
-    <title>Apex Hybrid &amp; Recovery Supply  -  HYROX Shirts, Breathable Race Apparel &amp; Recovery Feed</title>
+    <title>Apex Hybrid Co., operated by NolCorp LLC  -  HYROX Shirts, Breathable Race Apparel &amp; Recovery Feed</title>
     <link>{SITE_URL}</link>
-    <description>Official Google Merchant Center product feed for Apex Hybrid &amp; Recovery Supply (www.apexhybridco.com)  -  HYROX shirts, breathable tech tees, 2026/2027 race-city shirts, and recovery hardware.</description>
+    <description>Official Google Merchant Center product feed for Apex Hybrid Co., operated by NolCorp LLC (www.apexhybridco.com)  -  HYROX shirts, breathable tech tees, 2026/2027 race-city shirts, and recovery hardware.</description>
 {chr(10).join(items_xml)}
   </channel>
 </rss>
@@ -1331,13 +1311,13 @@ def generate_pinterest_csv_feed():
                     "description": prod["short_desc"],
                     "link": f"{SITE_URL}/products/{prod['handle']}.html",
                     "image_link": f"{SITE_URL}/{prod['image']}",
-                    "price": f"{(prod.get('list_price') or prod['retail_price']):.2f} USD",
-                    "sale_price": f"{prod['retail_price']:.2f} USD",
+                    "price": f"{prod['retail_price']:.2f} USD",
+                    "sale_price": "",
                     "availability": "in stock",
                     "condition": "new",
                     "google_product_category": google_category_for(prod),
                     "product_type": f"{prod['dept']} > {prod['category']}",
-                    "brand": "Apex Hybrid & Recovery Supply",
+                    "brand": "Apex Hybrid Co., operated by NolCorp LLC",
                 }
             )
 
@@ -1351,7 +1331,7 @@ def generate_returns_page():
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Returns, Exchanges &amp; Shipping | Apex Hybrid Co.</title>
-  <meta name="description" content="Free 30-day returns and size exchanges by mail, and free shipping on every US order from Apex Hybrid Co." />
+  <meta name="description" content="Print errors and defects are replaced or refunded. Made-to-order items are not eligible for general returns. Free US shipping from Apex Hybrid Co." />
   <link rel="canonical" href="https://www.apexhybridco.com/returns.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1362,25 +1342,15 @@ def generate_returns_page():
 <body>
   <header class="SiteHead"><div class="Wrap" style="padding:16px 20px"><a class="Wordmark" href="index.html"><span class="Wordmark__text"><strong>Apex</strong><span>Hybrid Co.</span></span></a></div></header>
   <main class="Policy">
-    <h1>Returns, exchanges &amp; shipping</h1>
-    <p>Wrong size? Changed your mind? We keep this simple.</p>
-    <h2>30 days, no cost to you</h2>
-    <ul>
-      <li>You have 30 days from the day your order arrives to send it back.</li>
-      <li>Size exchanges are free. So are returns: we send you a prepaid return label, and there is no restocking fee.</li>
-      <li>Items should be unworn and unwashed, with tags on.</li>
-      <li>Returns are by mail and this policy covers orders shipped within the United States.</li>
-    </ul>
-    <h2>How to start a return or exchange</h2>
-    <ol>
-      <li>Email <a href="mailto:apexhybridco@gmail.com">apexhybridco@gmail.com</a> with your order number, the item, and the size you want (or say you want a refund).</li>
-      <li>We reply with a prepaid label, usually within one business day.</li>
-      <li>Drop the package off. We ship your new size as soon as the return is scanned, or refund your original payment method once it reaches us.</li>
-    </ol>
+    <h1>Returns and shipping</h1>
+    <p>Apex Hybrid Co., operated by NolCorp LLC. Products are made to order.</p>
+    <h2>Print errors and defects</h2>
+    <p>A print error or visible quality issue is replaced or refunded. Email <a href="mailto:apexhybridco@gmail.com">apexhybridco@gmail.com</a> with the order number and a photo of the item on a flat, well-lit surface.</p>
+    <h2>General returns</h2>
+    <p>Made-to-order items are not eligible for general returns or fit exchanges.</p>
     <h2>Shipping</h2>
-    <p>Shipping is free on every US order. Orders are made and shipped from our US fulfillment partners, and you get a tracking link by email as soon as your order leaves.</p>
-    <h2>Questions</h2>
-    <p>Email <a href="mailto:apexhybridco@gmail.com">apexhybridco@gmail.com</a> or call <a href="tel:+19498054935">(949) 805-4935</a>. Apex Hybrid Co., 8420 Spectrum, Irvine, CA 92618.</p>
+    <p>Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
+    <p><a href="contact.html">Contact</a> · <a href="about.html">About</a> · <a href="shipping.html">Shipping</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
     <p><a href="index.html">&larr; Back to the shop</a></p>
   </main>
 <script data-goatcounter="https://apexhybridco.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1399,6 +1369,11 @@ def generate_sitemap_and_robots():
         (f"{SITE_URL}/wristband.html", "0.95", "daily"),
         (f"{SITE_URL}/articles/index.html", "0.9", "daily"),
         (f"{SITE_URL}/returns.html", "0.6", "monthly"),
+        (f"{SITE_URL}/contact.html", "0.5", "monthly"),
+        (f"{SITE_URL}/about.html", "0.5", "monthly"),
+        (f"{SITE_URL}/shipping.html", "0.5", "monthly"),
+        (f"{SITE_URL}/privacy.html", "0.4", "yearly"),
+        (f"{SITE_URL}/terms.html", "0.4", "yearly"),
     ]
     city_dir = os.path.join(BASE_DIR, "seo_city_pages")
     if os.path.isdir(city_dir):
@@ -1467,26 +1442,26 @@ Sitemap: {SITE_URL}/sitemap.xml
 
     # Also generate llms.txt dynamically from products and guides
     llms_lines = [
-        "# Apex Hybrid & Recovery Supply (Apex Hybrid Co.)",
+        "# Apex Hybrid Co., operated by NolCorp LLC",
         "",
         f"> Official Storefront: {SITE_URL} (also accessible at https://apexhybridco.com and https://nolan2j-ui.github.io/apex-store/)",
-        "> Breathable HYROX race shirts, laser-vented AeroMesh tech tees, 2026/2027 race-city shirts (Chicago, Dallas, Anaheim, Miami, Las Vegas, NYC), sleeveless muscle tanks, heavyweight warmup hoodies, lightweight warmup jackets, and clinical-grade athlete recovery hardware with free 2–4 business day US shipping and 30-day free returns.",
+        "> Race shirts, city shirts, muscle tanks, warmup hoodies, and warmup jackets. Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall.",
         "",
         "## Brand & Merchant Overview",
-        "- **Business Name:** Apex Hybrid & Recovery Supply (Apex Hybrid Co.)",
-        "- **Headquarters:** 8420 Spectrum, Irvine, CA 92618",
+        "- **Business Name:** Apex Hybrid Co., operated by NolCorp LLC",
+        "- **Fulfillment:** Fourthwall. ",
         "- **Support Email:** apexhybridco@gmail.com",
         f"- **Primary Website:** {SITE_URL}/",
         f"- **Doubles 2-Packs, Boutique Gym Bulk Kits & $0-Upfront HYROX Coach Partner Portal:** {SITE_URL}/team_orders.html",
         f"- **HYROX Gym Finder & Certified Coach Directory (72 Verified North America Hubs):** {SITE_URL}/gyms/ (and {SITE_URL}/directory.html)",
-        f"- **Free Printable HYROX Race-Day Pace & 8-Station Split Wristband Generator (+ 10% Code HYROX10):** {SITE_URL}/wristband.html",
+        f"- **Free Printable HYROX Race-Day Pace & 8-Station Split Wristband Generator :** {SITE_URL}/wristband.html",
         f"- **XML Sitemap:** {SITE_URL}/sitemap.xml",
         f"- **RSS 2.0 & WebSub Editorial Feed:** {SITE_URL}/feed.xml",
         f"- **RSS 2.0 Mirror Feed:** {SITE_URL}/rss.xml",
         f"- **Google Merchant Shopping Feed:** {SITE_URL}/google_shopping_feed.xml",
         f"- **Pinterest Product Catalog Feed:** {SITE_URL}/pinterest_catalog_feed.csv",
-        "- **Shipping Policy:** Free US Ground Shipping ($0.00 USD), 0–1 business day handling, 2–5 business day transit from California, Texas, and East Coast US warehouses.",
-        "- **Return Policy:** 30-day free returns & exchanges by mail (`https://schema.org/FreeReturn`).",
+        "- **Shipping Policy:** Free US shipping ($0.00 USD). Made to order. Secure checkout and fulfillment by Fourthwall.",
+        "- **Return Policy:** Print errors and defects are replaced or refunded. No general returns.",
         "- **Checkout:** Instant PCI-DSS Level 1 Stripe Checkout (Visa, Mastercard, American Express, Discover, Apple Pay).",
         "",
         "## Doubles 2-Packs, Team Bulk Kits & $0-Upfront Boutique HYROX Coach Partner Program",
@@ -1585,7 +1560,7 @@ def inject_static_seo_into_index():
             {
                 "@type": "OnlineStore",
                 "@id": f"{SITE_URL}/#organization",
-                "name": "Apex Hybrid & Recovery Supply",
+                "name": "Apex Hybrid Co., operated by NolCorp LLC",
                 "url": f"{SITE_URL}/",
                 "logo": f"{SITE_URL}/images/streetwear/apc-c36-black.png?v=20261026v1",
                 "description": "Breathable HYROX race shirts, laser-vented AeroMesh tech tees, 2026/2027 race-city shirts (Chicago, Dallas, Anaheim, Miami, Vegas, NYC), sleeveless muscle tanks, and clinical recovery hardware.",
@@ -1593,7 +1568,7 @@ def inject_static_seo_into_index():
                 "email": "apexhybridco@gmail.com",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "8420 Spectrum",
+                    "streetAddress": "",
                     "addressLocality": "Irvine",
                     "addressRegion": "CA",
                     "postalCode": "92618",
@@ -1604,7 +1579,7 @@ def inject_static_seo_into_index():
                 "@type": "WebSite",
                 "@id": f"{SITE_URL}/#website",
                 "url": f"{SITE_URL}/",
-                "name": "Apex Hybrid & Recovery Supply  -  HYROX Shirts, Breathable Race Apparel & Recovery Lab",
+                "name": "Apex Hybrid Co., operated by NolCorp LLC  -  HYROX Shirts, Breathable Race Apparel & Recovery Lab",
                 "publisher": {"@id": f"{SITE_URL}/#organization"},
             },
             {
@@ -1631,7 +1606,7 @@ def inject_static_seo_into_index():
             },
             {
                 "@type": "ItemList",
-                "name": "Apex Hybrid & Recovery Supply Full Catalog",
+                "name": "Apex Hybrid Co., operated by NolCorp LLC Full Catalog",
                 "numberOfItems": len(products),
                 "itemListElement": [
                     {
