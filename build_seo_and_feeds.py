@@ -822,6 +822,19 @@ def generate_article_pages():
             for g_other in guides:
                 oslug = g_other["slug"]
                 city_html = city_html.replace(f'href="{oslug}.html"', f'href="../articles/{oslug}.html"')
+            # City URLs stay published, but they duplicate the article. Canonical
+            # and og:url must name the article or Search Console treats them as copies.
+            article_url = f"{SITE_URL}/articles/{slug}.html"
+            city_html = city_html.replace(
+                f'<link rel="canonical" href="{SITE_URL}/seo_city_pages/{slug}.html" />',
+                f'<link rel="canonical" href="{article_url}" />',
+                1,
+            )
+            city_html = city_html.replace(
+                f'<meta property="og:url" content="{SITE_URL}/seo_city_pages/{slug}.html" />',
+                f'<meta property="og:url" content="{article_url}" />',
+                1,
+            )
             with open(city_page_path, "w", encoding="utf-8") as out_city:
                 out_city.write(city_html)
 
