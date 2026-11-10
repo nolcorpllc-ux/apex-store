@@ -1253,7 +1253,7 @@ def generate_google_shopping_feed():
 
 
 def strip_speed_claims(text):
-    """Keep editorial RSS titles and summaries from republishing retired speed claims."""
+    """Drop retired speed claims from editorial RSS titles and summaries on every rebuild."""
     if not text:
         return text
     repls = [
