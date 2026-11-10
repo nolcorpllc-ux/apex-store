@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="/favicon.ico" />
   <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1km Split | Apex Hybrid Co., operated by NolCorp LLC</title>
   <meta name="description" content="1km Split. 100% ring-spun cotton, heavyweight fabric (6.1 oz). Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall. Made to order. Free US shipping from Apex Hybrid Co." />
@@ -25,7 +25,7 @@
   <meta name="twitter:title" content="1km Split" />
   <meta name="twitter:description" content="1km Split. 100% ring-spun cotton, heavyweight fabric (6.1 oz). Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall." />
   <meta name="twitter:image" content="https://www.apexhybridco.com/images/streetwear/apc-c37-black.jpg?v=20261105h" />
-  <link rel="stylesheet" href="../styles.css?v=20261110qa" />
+  <link rel="stylesheet" href="../styles.css?v=20261026v3" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -170,7 +170,6 @@
             ✓ Made to order · Free US shipping
           </div>
           <p id="usShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.</p>
-
           <div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f1f5f9; padding:8px 10px; border-radius:6px; border-left:3px solid #2563eb;">✓ Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall. <a href="https://apex-hybrid-co-shop.fourthwall.com/products/1km-split-station-repeat-tech-tee" style="color:#2563eb;text-decoration:underline;">Instant 1-Click Checkout →</a></div>
         </div>
         <div id="staticVariantBox" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px 16px; margin-bottom:16px;">
@@ -281,12 +280,12 @@
     <section style="margin-top:36px; background:#fff; border:1px solid #e4e6eb; border-radius:12px; padding:24px;">
       <h2 style="font-size:18px; margin-bottom:12px;">Related HYROX Training, Pacing &amp; Recovery Buyer Guides</h2>
       <ul style="padding-left:20px; line-height:1.9; font-size:14px;">
-        <li><a href="../articles/roxzone-transition-drills-cut-dead-time-between-stations.html" style="color:#0066ff; font-weight:700;">Roxzone Transition Drills - Cut Dead Time Between the 8 Stations (Gear Drops, Breathing, Line Choice, Doubles)</a>  -  <span style="color:#475569;">Roxzone &amp; Transitions (8 min read)</span></li>
+        <li><a href="../articles/treadmill-compromised-running-workouts-for-winter-hybrid-race-training.html" style="color:#0066ff; font-weight:700;">Treadmill Compromised Running Workouts for Winter Hybrid Race Training</a>  -  <span style="color:#475569;">Training Plans (8 min read)</span></li>
+<li><a href="../articles/roxzone-transition-drills-cut-dead-time-between-stations.html" style="color:#0066ff; font-weight:700;">Roxzone Transition Drills - Cut Dead Time Between the 8 Stations (Gear Drops, Breathing, Line Choice, Doubles)</a>  -  <span style="color:#475569;">Roxzone &amp; Transitions (8 min read)</span></li>
 <li><a href="../articles/compromised-running-pacing-calculator-and-1km-split-strategy.html" style="color:#0066ff; font-weight:700;">Compromised Running Pacing Guide: How to Hold Your 1km Splits After Heavy Sleds</a>  -  <span style="color:#475569;">Pacing &amp; Split Strategy (8 min read)</span></li>
 <li><a href="../articles/dallas-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html" style="color:#0066ff; font-weight:700;">Dallas Nov 2026 HYROX Race Gear, Lightweight Warmup Jackets &amp; Breathable Tech Shirts</a>  -  <span style="color:#475569;">Dallas Nov 2026 Race City Guide (7 min read)</span></li>
 <li><a href="../articles/hyrox-dallas-lone-star-race-tee.html" style="color:#0066ff; font-weight:700;">HYROX Dallas Lone Star Race Tee (Nov 2026)  -  Turf &amp; Threshold 8-Station Shirt + Texas Race Prep Gear</a>  -  <span style="color:#475569;">Dallas Race City Guide (6 min read)</span></li>
 <li><a href="../articles/skierg-rowerg-1000m-pacing-split-targets-hybrid-race.html" style="color:#0066ff; font-weight:700;">SkiErg &amp; RowErg 1000m Pacing: Split Targets That Save Your Legs for the Next Run</a>  -  <span style="color:#475569;">Erg Pacing Strategy (7 min read)</span></li>
-<li><a href="../articles/sandbag-lunges-100m-station-7-pacing-posture-and-leg-recovery.html" style="color:#0066ff; font-weight:700;">Sandbag Lunges Station 7: Pacing, Posture and How to Save Your Legs for Wall Balls</a>  -  <span style="color:#475569;">Sandbag Lunge Strategy (7 min read)</span></li>
       </ul>
     </section>
   </main>
@@ -360,6 +359,16 @@
     };
     window.selectStaticSize = function(s, btn) {
       state.size = s;
+      var picked = prodVariants[s];
+      if (picked && picked.price != null) {
+        var priced = "$" + Number(picked.price).toFixed(2);
+        var buy = document.getElementById("staticBuyNowBtn");
+        if (buy && buy.textContent.indexOf("$") !== -1) buy.textContent = buy.textContent.replace(/\$[\d.]+/, priced);
+        var add = document.getElementById("staticAddBagLink");
+        if (add && add.textContent.indexOf("$") !== -1) add.textContent = add.textContent.replace(/\$[\d.]+/, priced);
+        var big = document.getElementById("staticPrice");
+        if (big) big.textContent = priced;
+      }
       var lbl = document.getElementById("staticSizeLabel");
       if (lbl) lbl.textContent = s;
       var btns = document.querySelectorAll(".StaticSizeBtn");
@@ -435,6 +444,5 @@
   })();
   </script>
 <script data-goatcounter="https://apexhybridco.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script src="/perks-bar.js?v=20261110qa"></script>
 </body>
 </html>

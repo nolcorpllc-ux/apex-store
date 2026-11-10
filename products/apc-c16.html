@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="/favicon.ico" />
   <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apex Race City Heavyweight - Chicago Championship Division | Apex Hybrid Co., operated by NolCorp LLC</title>
   <meta name="description" content="Rep your race venue from the warmup corral to the finish line. Precision-centered city crest printed with breathable soft-hand cured ink on 6.1 oz 100% ring-spun garment-dyed US cotton. Made to order. Free US shipping from Apex Hybrid Co." />
@@ -25,7 +25,7 @@
   <meta name="twitter:title" content="Apex Race City Heavyweight - Chicago Championship Division" />
   <meta name="twitter:description" content="Rep your race venue from the warmup corral to the finish line. Precision-centered city crest printed with breathable soft-hand cured ink on 6.1 oz 100% ring-spun garment-dyed US cotton." />
   <meta name="twitter:image" content="https://www.apexhybridco.com/images/streetwear/apc-c16-black.jpg?v=20261105h" />
-  <link rel="stylesheet" href="../styles.css?v=20261110qa" />
+  <link rel="stylesheet" href="../styles.css?v=20261026v3" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,7 +63,7 @@
         "https://www.apexhybridco.com/images/streetwear/apc-c16-black.jpg?v=20261105h",
         "https://www.apexhybridco.com/images/streetwear/apc-c16-black-detail.jpg?v=20261105h"
       ],
-      "description": "Rep your race venue from the warmup corral to the finish line. Precision-centered city crest printed with breathable soft-hand cured ink on 6.1 oz 100% ring-spun garment-dyed US cotton. Blank Options: 6.1 oz 100% ring-spun garment-dyed cotton Fit & Sizing: Relaxed athletic drape. True to size for training; size up one for an oversized pump cover Durable Breathable Print: Soft-hand cured ink bonded into the fibers so it holds, peels, or traps chest heat Fulfillment: Made to order \u00b7 Made to order \u00b7 ",
+      "description": "Rep your race venue from the warmup corral to the finish line. Precision-centered city crest printed with breathable soft-hand cured ink on 6.1 oz 100% ring-spun garment-dyed US cotton. Blank Options: 6.1 oz 100% ring-spun garment-dyed cotton Fit & Sizing: Relaxed athletic drape. True to size for training; size up one for an oversized pump cover Durable Breathable Print: Soft-hand cured ink bonded into the fibers so it holds, peels, or traps chest heat Fulfillment: Made to order. Free US shipping.",
       "keywords": "HYROX shirts, breathable HYROX race shirt, Apex Race City Heavyweight - Chicago Championship Division, Race City Editions, hybrid athlete apparel, 8-station functional fitness gear",
       "brand": {
         "@type": "Brand",
@@ -170,7 +170,6 @@
             ✓ Made to order · Free US shipping
           </div>
           <p id="usShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.</p>
-
           <div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f1f5f9; padding:8px 10px; border-radius:6px; border-left:3px solid #2563eb;">✓ Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall. <a href="https://apex-hybrid-co-shop.fourthwall.com/products/apex-race-city-heavyweight-tee-chicago-championship-division" style="color:#2563eb;text-decoration:underline;">Instant 1-Click Checkout →</a></div>
         </div>
         <div id="staticVariantBox" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px 16px; margin-bottom:16px;">
@@ -361,6 +360,16 @@
     };
     window.selectStaticSize = function(s, btn) {
       state.size = s;
+      var picked = prodVariants[s];
+      if (picked && picked.price != null) {
+        var priced = "$" + Number(picked.price).toFixed(2);
+        var buy = document.getElementById("staticBuyNowBtn");
+        if (buy && buy.textContent.indexOf("$") !== -1) buy.textContent = buy.textContent.replace(/\$[\d.]+/, priced);
+        var add = document.getElementById("staticAddBagLink");
+        if (add && add.textContent.indexOf("$") !== -1) add.textContent = add.textContent.replace(/\$[\d.]+/, priced);
+        var big = document.getElementById("staticPrice");
+        if (big) big.textContent = priced;
+      }
       var lbl = document.getElementById("staticSizeLabel");
       if (lbl) lbl.textContent = s;
       var btns = document.querySelectorAll(".StaticSizeBtn");
@@ -436,6 +445,5 @@
   })();
   </script>
 <script data-goatcounter="https://apexhybridco.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script src="/perks-bar.js?v=20261110qa"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="/favicon.ico" />
   <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Compromised Running | Apex Hybrid Co., operated by NolCorp LLC</title>
   <meta name="description" content="Compromised Running. 100% ring-spun cotton, heavyweight fabric (6.1 oz). Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall. Made to order. Free US shipping from Apex Hybrid Co." />
@@ -25,7 +25,7 @@
   <meta name="twitter:title" content="Compromised Running" />
   <meta name="twitter:description" content="Compromised Running. 100% ring-spun cotton, heavyweight fabric (6.1 oz). Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall." />
   <meta name="twitter:image" content="https://www.apexhybridco.com/images/streetwear/apc-c36-black.jpg?v=20261105h" />
-  <link rel="stylesheet" href="../styles.css?v=20261110qa" />
+  <link rel="stylesheet" href="../styles.css?v=20261026v3" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -170,7 +170,6 @@
             ✓ Made to order · Free US shipping
           </div>
           <p id="usShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.</p>
-
           <div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f1f5f9; padding:8px 10px; border-radius:6px; border-left:3px solid #2563eb;">✓ Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall. <a href="https://apex-hybrid-co-shop.fourthwall.com/products/compromised-running-tech-shirt" style="color:#2563eb;text-decoration:underline;">Instant 1-Click Checkout →</a></div>
         </div>
         <div id="staticVariantBox" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px 16px; margin-bottom:16px;">
@@ -281,12 +280,12 @@
     <section style="margin-top:36px; background:#fff; border:1px solid #e4e6eb; border-radius:12px; padding:24px;">
       <h2 style="font-size:18px; margin-bottom:12px;">Related HYROX Training, Pacing &amp; Recovery Buyer Guides</h2>
       <ul style="padding-left:20px; line-height:1.9; font-size:14px;">
-        <li><a href="../articles/cancun-feb-2027-hyrox-heat-humidity-race-gear-and-warmup.html" style="color:#0066ff; font-weight:700;">HYROX Cancun Feb 2027 Heat &amp; Humidity Gear Guide - Malecón Tajamar Race-Week Apparel, Packing &amp; Warmup</a>  -  <span style="color:#475569;">Race City &amp; Heat Prep (8 min read)</span></li>
+        <li><a href="../articles/racing-a-hybrid-fitness-race-at-altitude-denver-pacing-hydration-and-gear.html" style="color:#0066ff; font-weight:700;">Racing a Hybrid Fitness Race at Altitude: Denver Pacing, Hydration &amp; Gear Guide</a>  -  <span style="color:#475569;">Race City Prep (8 min read)</span></li>
+<li><a href="../articles/cancun-feb-2027-hyrox-heat-humidity-race-gear-and-warmup.html" style="color:#0066ff; font-weight:700;">HYROX Cancun Feb 2027 Heat &amp; Humidity Gear Guide - Malecón Tajamar Race-Week Apparel, Packing &amp; Warmup</a>  -  <span style="color:#475569;">Race City &amp; Heat Prep (8 min read)</span></li>
 <li><a href="../articles/roxzone-transition-drills-cut-dead-time-between-stations.html" style="color:#0066ff; font-weight:700;">Roxzone Transition Drills - Cut Dead Time Between the 8 Stations (Gear Drops, Breathing, Line Choice, Doubles)</a>  -  <span style="color:#475569;">Roxzone &amp; Transitions (8 min read)</span></li>
 <li><a href="../articles/compromised-running-pacing-calculator-and-1km-split-strategy.html" style="color:#0066ff; font-weight:700;">Compromised Running Pacing Guide: How to Hold Your 1km Splits After Heavy Sleds</a>  -  <span style="color:#475569;">Pacing &amp; Split Strategy (8 min read)</span></li>
 <li><a href="../articles/wall-balls-station-8-unbroken-rep-strategy-and-mobility-prep.html" style="color:#0066ff; font-weight:700;">Station 8 Wall Balls: How to Go Unbroken on Your Final 100 Reps</a>  -  <span style="color:#475569;">Station 08 Strategy (7 min read)</span></li>
 <li><a href="../articles/48-hour-post-race-recovery-protocol-cold-plunge-compression-red-light.html" style="color:#0066ff; font-weight:700;">The 48-Hour Post-Race Recovery Protocol: Cold Plunge, Compression Boots &amp; Cupping Timing</a>  -  <span style="color:#475569;">Post-Race Recovery Science (8 min read)</span></li>
-<li><a href="../articles/matching-hyrox-doubles-team-shirts-2026.html" style="color:#0066ff; font-weight:700;">Matching HYROX Doubles Team Shirts 2026/2027  -  Men&#x27;s, Women&#x27;s &amp; Mixed Doubles Race Tops (15% Off 2-Shirt Bundle)</a>  -  <span style="color:#475569;">Doubles Team Apparel Guide (6 min read)</span></li>
       </ul>
     </section>
   </main>
@@ -360,6 +359,16 @@
     };
     window.selectStaticSize = function(s, btn) {
       state.size = s;
+      var picked = prodVariants[s];
+      if (picked && picked.price != null) {
+        var priced = "$" + Number(picked.price).toFixed(2);
+        var buy = document.getElementById("staticBuyNowBtn");
+        if (buy && buy.textContent.indexOf("$") !== -1) buy.textContent = buy.textContent.replace(/\$[\d.]+/, priced);
+        var add = document.getElementById("staticAddBagLink");
+        if (add && add.textContent.indexOf("$") !== -1) add.textContent = add.textContent.replace(/\$[\d.]+/, priced);
+        var big = document.getElementById("staticPrice");
+        if (big) big.textContent = priced;
+      }
       var lbl = document.getElementById("staticSizeLabel");
       if (lbl) lbl.textContent = s;
       var btns = document.querySelectorAll(".StaticSizeBtn");
@@ -435,6 +444,5 @@
   })();
   </script>
 <script data-goatcounter="https://apexhybridco.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script src="/perks-bar.js?v=20261110qa"></script>
 </body>
 </html>
