@@ -392,7 +392,7 @@ function lineFrom(p, qty = 1) {
     blank: blankLabel(p),
     variant,
     is_fourthwall: isFw,
-    fulfillment_partner: isFw ? "Fourthwall" : (p.fulfillment_partner || "US Warehouse Direct Wholesale"),
+    fulfillment_partner: isFw ? "Fourthwall" : (p.fulfillment_partner || "US  Direct Wholesale"),
     fourthwall_blank: isFw ? (p.fourthwall_blank || "Athletic Blank") : "",
     fourthwall_handle: isFw ? (p.fourthwall_handle || p.handle || "") : "",
     fourthwall_product_url: isFw ? (p.fourthwall_product_url || p.checkout_url || "") : "",
@@ -615,13 +615,13 @@ function submitOrder(event) {
   const zip = String(data.get("zip") || "").trim();
   const lines = bag.map((item) => {
     const stripe = [item.stripe_price_id, item.stripe_product_id, item.stripe_account_id].filter(Boolean).join(" | ");
-    const fulfill = item.is_fourthwall ? `Fourthwall (${item.fourthwall_blank})` : "US Warehouse Direct Wholesale";
+    const fulfill = item.is_fourthwall ? `Fourthwall (${item.fourthwall_blank})` : "US  Direct Wholesale";
     return `- ${item.qty}x ${item.title} (${item.variant}) ${money(item.price * item.qty)} [Fulfillment: ${fulfill} | ${stripe}]`;
   }).join("\n");
   const hasFw = bag.some((item) => item.is_fourthwall);
   const subject = encodeURIComponent(`Order ${orderId}  -  ${hasFw ? "Fourthwall & Stripe" : "Stripe"} Checkout (${money(sub)})`);
   const promoLine = promoInfo ? `\nPromo Code: ${promoInfo.code} (${promoInfo.pct}% Off, -${money(discAmt)})` : "";
-  const body = encodeURIComponent(`Order ID: ${orderId}\nCustomer: ${name} (${email})\nShip To: ${street}, ${city} ${zip}\nFulfillment: ${hasFw ? "Fourthwall US Apparel Production / Direct US Dispatch" : "US Warehouse Direct Wholesale"}${promoLine}\n\nItems:\n${lines}\n\nTotal: ${money(sub)} (Free US shipping)`);
+  const body = encodeURIComponent(`Order ID: ${orderId}\nCustomer: ${name} (${email})\nShip To: ${street}, ${city} ${zip}\nFulfillment: ${hasFw ? "Fourthwall US Apparel Production / Direct US Dispatch" : "US  Direct Wholesale"}${promoLine}\n\nItems:\n${lines}\n\nTotal: ${money(sub)} (Free US shipping)`);
   $("#checkoutModalContent").innerHTML = `
     <h2 style="letter-spacing:-0.04em;font-size:32px">Order ${esc(orderId)} is reserved</h2>
     <p style="margin:8px 0 14px">Thanks ${esc(name)}  -  your order is reserved for ${esc(city)} ${esc(zip)}. Click below to confirm your order and receive your instant payment and tracking link.</p>
