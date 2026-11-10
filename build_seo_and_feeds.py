@@ -1627,6 +1627,100 @@ def enforce_delisted_noindex():
             x = _re.sub(r'\s*<url>\s*<loc>[^<]*/products/' + h + r'\.html</loc>.*?</url>', "", x, flags=_re.S)
         open(sm, "w", encoding="utf-8").write(x)
 
+# Whole-token rewrites. Fabric words are only removed after these slugs are
+# rewritten, so a rebuild cannot split a product URL again.
+SLUG_REWRITES = (
+    ("aeromesh-breathable-breathable-hyrox-race-tech-tee", "compromised-running"),
+    ("aeromesh-laser-vented-breathable-hyrox-race-tech-tee", "compromised-running"),
+    ("coolcore--turf-and-sled-breathable-tech-shirt", "push-heavy"),
+    ("coolcore-anti-chafe-turf-and-sled-breathable-tech-shirt", "push-heavy"),
+    ("dry-pace--threshold-hyrox-tech-tee", "1km-split"),
+    ("dry-pace-moisture-wicking-threshold-hyrox-tech-tee", "1km-split"),
+    ("hyperbreathe--roxzone-speed-dept-tech-tee", "roxzone-speed-dept"),
+    ("hyperbreathe-seamless-roxzone-speed-dept-tech-tee", "roxzone-speed-dept"),
+    ("venttech-perforated-zone4-zone5-hybrid-training-shirt", "zone-5-engine"),
+    ("aeromeshtm-breathable-breathable-tech-shirt-built-for-compromised-running", "compromised-running-tech-shirt"),
+    ("aeromeshtm-laser-vented-breathable-tech-shirt-built-for-compromised-running", "compromised-running-tech-shirt"),
+    ("coolcoretm--turf-sled-tech-shirt-push-heavy-run-fast", "push-heavy-run-fast-tech-shirt"),
+    ("coolcoretm-anti-chafe-turf-sled-tech-shirt-push-heavy-run-fast", "push-heavy-run-fast-tech-shirt"),
+    ("dry-pacetm--threshold-tech-tee-1km-split-station-repeat", "1km-split-station-repeat-tech-tee"),
+    ("dry-pacetm-moisture-wicking-threshold-tech-tee-1km-split-station-repeat", "1km-split-station-repeat-tech-tee"),
+    ("hyperbreathetm--conditioning-tee-roxzone-speed-dept", "roxzone-speed-dept-tee"),
+    ("hyperbreathetm-seamless-conditioning-tee-roxzone-speed-dept", "roxzone-speed-dept-tee"),
+    ("venttechtm-perforated-hybrid-training-shirt-zone-4-zone-5-engine", "zone-4-zone-5-engine-shirt"),
+)
+
+
+def scrub_text(text):
+    """Repair product links, then drop claims that must not appear on the site."""
+    text = text.replace(
+        "27_aeromesh_tech_tee_black.png",
+        "streetwear/apc-c36-black.jpg",
+    )
+    for old, new in SLUG_REWRITES:
+        text = text.replace(old, new)
+    for city in ("Dallas", "Denver", "Anaheim", "Nashville", "Vancouver"):
+        name = f"{city} Race Day"
+        text = text.replace(f"Apex {name} Jacket | Apex Hybrid Co", name)
+        text = text.replace(f"Apex {name} Jacket", name)
+        text = text.replace(f"Apex &quot;{name}&quot;", name)
+        text = text.replace(f'Apex "{name}"', name)
+        text = text.replace(f"Apex {name}", name)
+    text = re.sub(r"(?i)aeromesh", "Compromised Running", text)
+    text = re.sub(r"(?i)coolcore", "Push Heavy", text)
+    text = re.sub(r"(?i)venttech", "Zone 5 Engine", text)
+    text = re.sub(r"(?i)dry-pace", "1km Split", text)
+    text = re.sub(r"(?i)hyperbreathe", "Roxzone Speed Dept.", text)
+    text = re.sub(r"(?i)laser-vented", "breathable", text)
+    text = re.sub(r"(?i)anti-chafe", "", text)
+    text = re.sub(r"(?i)moisture-wicking", "", text)
+    text = re.sub(r"(?i)seamlessly", "cleanly", text)
+    text = re.sub(r"(?i)seamless", "", text)
+    text = re.sub(r"(?i)official hyrox", "HYROX", text)
+    text = text.replace(
+        "Because Apex Hybrid Co., operated by NolCorp LLC is headquartered in Irvine, CA (Orange County) with California fulfillment, Anaheim and SoCal orders arrive in 1–3 business days with free shipping.",
+        "Made to order. Free US shipping.",
+    )
+    text = re.sub(r"(?i)headquartered in [^.<]*", "Made to order", text)
+    text = re.sub(r"(?i)headquartered", "", text)
+    text = re.sub(r"(?i)with California fulfillment", "", text)
+    text = re.sub(r"(?i)California fulfillment", "", text)
+    text = re.sub(
+        r"(?i)from our California, Texas, and East Coast fulfillment centers",
+        "",
+        text,
+    )
+    text = re.sub(r"(?i)Texas & California fulfillment hubs", "", text)
+    text = re.sub(r"(?i)Clinical Recovery Hardware · Direct US Warehouse Dispatch", "", text)
+    text = re.sub(r"(?i)Clinical Recovery Hardware", "", text)
+    text = re.sub(r"(?i)30-Day Trial &amp; Warranty", "", text)
+    text = re.sub(r"(?i)30-Day Trial & Warranty", "", text)
+    text = re.sub(r"(?i)30-day free exchanges", "Print errors and defects are replaced or refunded", text)
+    text = re.sub(r"(?i)\bIrvine\b", "", text)
+    text = re.sub(r"(?i)warehouse", "", text)
+    text = re.sub(r"(?i)clinical", "", text)
+    text = re.sub(r"(?i)30-day", "", text)
+    return text
+
+
+def scrub_published_files():
+    """Keep a rebuild from writing mangled product links or retired claims."""
+    exts = {".html", ".js", ".json", ".xml", ".csv", ".txt"}
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        if ".git" in dirpath or "__pycache__" in dirpath:
+            continue
+        for name in filenames:
+            path = os.path.join(dirpath, name)
+            if os.path.splitext(name)[1].lower() not in exts:
+                continue
+            if os.path.abspath(path) == os.path.abspath(__file__):
+                continue
+            original = open(path, encoding="utf-8").read()
+            updated = scrub_text(original)
+            if updated != original:
+                open(path, "w", encoding="utf-8").write(updated)
+
+
 if __name__ == "__main__":
     generate_product_pages()
     generate_article_pages()
@@ -1636,5 +1730,6 @@ if __name__ == "__main__":
     generate_returns_page()
     generate_sitemap_and_robots()
     enforce_delisted_noindex()
+    scrub_published_files()
     # inject_static_seo_into_index() disabled to preserve clean index.html
     print(f"Successfully generated {len(products)} product pages, {len(guides)} SEO articles, Shopping XML/CSV feeds, and sitemap.xml")
