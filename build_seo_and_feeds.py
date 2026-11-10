@@ -1226,9 +1226,9 @@ def generate_editorial_rss_feeds():
         feed_doc = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>Apex Hybrid Co.  -  HYROX Race Streetwear, Breathable Tech Shirts, Buyer Guides &amp; Recovery Hardware</title>
+    <title>Apex Hybrid Co</title>
     <link>{SITE_URL}/</link>
-    <description>Official RSS 2.0 &amp; WebSub feed for Apex Hybrid Co. ({SITE_URL})  -  {len(guides)} data-backed HYROX &amp; hybrid racing buyer guides, 2026/2027 race-city apparel (Chicago, Dallas, Anaheim, Las Vegas, Miami, NYC), and 45 performance apparel &amp; race-gear products.</description>
+    <description>Apex Hybrid Co product and training updates</description>
     <language>en-us</language>
     <lastBuildDate>{pub_rfc822}</lastBuildDate>
     <managingEditor>apexhybridco@gmail.com (Apex Hybrid Co.)</managingEditor>
