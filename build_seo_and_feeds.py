@@ -14,6 +14,7 @@ import html
 import json
 import os
 import re
+import shutil
 from datetime import datetime, timezone
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1219,9 +1220,12 @@ def generate_google_shopping_feed():
   </channel>
 </rss>
 """
-    for filename in ("google_shopping_feed.xml", "google_merchant_feed.xml"):
-        with open(os.path.join(BASE_DIR, filename), "w", encoding="utf-8") as f:
-            f.write(rss_xml)
+    shopping_path = os.path.join(BASE_DIR, "google_shopping_feed.xml")
+    with open(shopping_path, "w", encoding="utf-8") as f:
+        f.write(rss_xml)
+    shutil.copyfile(shopping_path, os.path.join(BASE_DIR, "google_shopping_feed_ghpages.xml"))
+    with open(os.path.join(BASE_DIR, "google_merchant_feed.xml"), "w", encoding="utf-8") as f:
+        f.write(rss_xml)
     summary = {
         "items": len(items_xml),
         "apparel_products": apparel_products,
