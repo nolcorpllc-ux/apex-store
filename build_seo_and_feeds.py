@@ -193,6 +193,11 @@ def generate_product_pages():
                 f'<p id="raceDayDenverNote" style="font-size:13.5px; color:#0f172a; font-weight:800; margin:6px 0 0; line-height:1.45; display:{denver_display};">'
                 "Won't arrive before Denver race weekend (Nov 12–15).</p>"
             )
+        else:
+            ship_note_html = (
+                '<p id="usShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">'
+                "Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.</p>"
+            )
 
         page_html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1114,11 +1119,15 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         "        <g:service>Standard Ground</g:service>",
         "        <g:price>0.00 USD</g:price>",
     ])
-    # Overseas made-to-order window for the five Race Day jackets only.
     if prod.get("id") in RACE_DAY_HANDLING_IDS:
         lines.extend([
             "        <g:min_handling_time>10</g:min_handling_time>",
             "        <g:max_handling_time>14</g:max_handling_time>",
+        ])
+    else:
+        lines.extend([
+            "        <g:min_handling_time>7</g:min_handling_time>",
+            "        <g:max_handling_time>10</g:max_handling_time>",
         ])
     lines.extend([
         "      </g:shipping>",

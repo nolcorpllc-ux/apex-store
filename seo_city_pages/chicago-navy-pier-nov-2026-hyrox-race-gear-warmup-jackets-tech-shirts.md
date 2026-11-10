@@ -27,4 +27,4 @@ Arrive at Navy Pier wearing the Apex AeroShell Lightweight Race Warmup Jacket (`
 Wear a lightweight breathable breathable tech shirt like the Compromised Running Tech Shirt (APC-C36) or Chicago Championship Division Tee (APC-C16) for the race itself, layered under the Apex AeroShell Lightweight Race Warmup Jacket (APC-C42) or 26/27 World Series Lightweight Warmup Jacket (APC-C45) for the cold Lake Michigan walk into Navy Pier.
 
 ### Q: Where can I buy the Chicago Navy Pier 8x1000m Championship Division shirt and warmup jacket?
-Order the Chicago Championship Division Tee (APC-C16) and Apex AeroShell Lightweight Race Warmup Jacket (APC-C42) directly at Apex Hybrid Co., operated by NolCorp LLC (https://www.apexhybridco.com) Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.
+Order the Chicago Championship Division Tee (APC-C16) and Apex AeroShell Lightweight Race Warmup Jacket (APC-C42) directly at Apex Hybrid Co., operated by NolCorp LLC (https://www.apexhybridco.com) Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.
