@@ -1747,6 +1747,14 @@ def scrub_text(text):
     )
     text = re.sub(r"(?i)\b9\s*oz\b", "", text)
     text = re.sub(r"(?i)6\.0\s+to\s+6\.5\s*oz(?:/yd²|/yd\u00b2)?", "", text)
+    text = re.sub(
+        r"(?i)sweat-wicking\s+60/40 combed ringspun cotton/poly performance blend",
+        "100% ring-spun cotton, heavyweight fabric (6.1 oz)",
+        text,
+    )
+    text = text.replace("Heavyweight ring-spun cotton/poly brushed warmup fleece", "Heavyweight ring-spun fleece")
+    text = text.replace("50L Race Day Tactical Duffle", "8-Station Race Day 50L All-Weather Gym & Shoe Bag")
+    text = text.replace("50L Tactical Duffle", "8-Station Race Day bag")
     return text
 
 
