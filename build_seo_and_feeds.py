@@ -1484,9 +1484,9 @@ Sitemap: {SITE_URL}/sitemap.xml
     with open(os.path.join(BASE_DIR, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(robots_txt)
 
-    for k_str in (INDEXNOW_KEY, "a8f9d2e4c7b14f6093e5d8c2a1b4e7f0", "a4b8c9d0e1f234567890abcdef123456", "a8f4c2e9d1b740639c5e2a1f8b3d7e90"):
-        with open(os.path.join(BASE_DIR, f"{k_str}.txt"), "w", encoding="utf-8") as f:
-            f.write(k_str)
+    # Only this key is accepted by IndexNow. Older key files stay hosted and are not rewritten.
+    with open(os.path.join(BASE_DIR, f"{INDEXNOW_KEY}.txt"), "w", encoding="utf-8") as f:
+        f.write(INDEXNOW_KEY)
 
     # Also generate llms.txt dynamically from products and guides
     llms_lines = [
