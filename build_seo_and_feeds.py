@@ -1159,9 +1159,9 @@ def generate_google_shopping_feed():
     rss_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
-    <title>Apex Hybrid Co., operated by NolCorp LLC  -  HYROX Shirts, Breathable Race Apparel &amp; Recovery Feed</title>
+    <title>Apex Hybrid Co</title>
     <link>{SITE_URL}</link>
-    <description>Official Google Merchant Center product feed for Apex Hybrid Co., operated by NolCorp LLC (www.apexhybridco.com)  -  HYROX shirts, breathable tech tees, 2026/2027 race-city shirts, and recovery hardware.</description>
+    <description>Apex Hybrid Co product feed - hybrid training apparel</description>
 {chr(10).join(items_xml)}
   </channel>
 </rss>
