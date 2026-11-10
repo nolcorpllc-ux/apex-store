@@ -40,33 +40,36 @@
       "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-dallas-race-day",
       "product_page_url": "https://www.apexhybridco.com/products/dallas-race-day.html#dallas",
       "fourthwall_variants": {
+        "XS": {
+          "id": "88638db0-ac4c-4f93-ad88-d5748192096a",
+          "price": 68.0
+        },
         "S": {
-          "id": "8bf68146-4fcf-4c1e-81a0-d9678d1c8cc4",
-          "price": 68.0,
-          "sku": "XR77-5LM200S"
+          "id": "93db90a0-3e22-4c6f-b7e9-942d269785ef",
+          "price": 68.0
         },
         "M": {
-          "id": "8d08060f-60a4-4346-b824-af238bb5739b",
-          "price": 68.0,
-          "sku": "XR77-HN5200M"
+          "id": "7033864b-0915-448c-9967-226148d4217a",
+          "price": 68.0
         },
         "L": {
-          "id": "df0cdaa7-038a-4a5f-a2fc-0fcdd42bd3d8",
-          "price": 68.0,
-          "sku": "XR77-N8W200L"
+          "id": "d73d3810-ec7d-4935-817e-7bbdbe97eb29",
+          "price": 68.0
         },
         "XL": {
-          "id": "0d3fd155-509c-459a-9f56-dc3069af0b8e",
-          "price": 68.0,
-          "sku": "XR77-HL020XL"
+          "id": "a791d8c6-0c37-4d68-9525-a4a49bbb4c19",
+          "price": 68.0
         },
         "2XL": {
-          "id": "c34b65cd-b538-410d-a9e1-391b55793798",
-          "price": 70.0,
-          "sku": "XR77-HSX202X"
+          "id": "211ecd05-1958-4409-911d-27c11d2a2e1a",
+          "price": 70.0
+        },
+        "3XL": {
+          "id": "9d423e89-e54f-4368-acb1-097407fe9390",
+          "price": 72.0
         }
       },
-      "fourthwall_default_variant_id": "8d08060f-60a4-4346-b824-af238bb5739b",
+      "fourthwall_default_variant_id": "d73d3810-ec7d-4935-817e-7bbdbe97eb29",
       "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#dallas"
     },
     {
@@ -1933,34 +1936,34 @@
       "product_page_url": "https://www.apexhybridco.com/products/chicago-dallas-socal-world-series-prep-heavyweight-hoodie.html",
       "fourthwall_variants": {
         "Black": {
-          "S": "85bb4f83-bff1-4998-9f68-b8a23b08dfb0",
-          "M": "dc53f607-5617-474d-abff-3eac666aee20",
-          "L": "9a69d869-5c34-440a-b058-fe89ca39a209",
-          "XL": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b",
-          "2XL": "4811b656-fb01-4fc0-89aa-4cc71c7dc1c9",
-          "3XL": "136ea0e4-c417-4e9f-9b52-00ca6ca399e6",
-          "4XL": "31b5b1e2-256e-48cb-b2d3-fb8eadbba363"
+          "XS": "85bb4f83-bff1-4998-9f68-b8a23b08dfb0",
+          "S": "dc53f607-5617-474d-abff-3eac666aee20",
+          "M": "9a69d869-5c34-440a-b058-fe89ca39a209",
+          "L": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b",
+          "XL": "4811b656-fb01-4fc0-89aa-4cc71c7dc1c9",
+          "2XL": "136ea0e4-c417-4e9f-9b52-00ca6ca399e6",
+          "3XL": "31b5b1e2-256e-48cb-b2d3-fb8eadbba363"
         },
         "White": {
-          "S": "85bb4f83-bff1-4998-9f68-b8a23b08dfb0",
-          "M": "dc53f607-5617-474d-abff-3eac666aee20",
-          "L": "9a69d869-5c34-440a-b058-fe89ca39a209",
-          "XL": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b",
-          "2XL": "4811b656-fb01-4fc0-89aa-4cc71c7dc1c9",
-          "3XL": "136ea0e4-c417-4e9f-9b52-00ca6ca399e6",
-          "4XL": "31b5b1e2-256e-48cb-b2d3-fb8eadbba363"
+          "XS": "85bb4f83-bff1-4998-9f68-b8a23b08dfb0",
+          "S": "dc53f607-5617-474d-abff-3eac666aee20",
+          "M": "9a69d869-5c34-440a-b058-fe89ca39a209",
+          "L": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b",
+          "XL": "4811b656-fb01-4fc0-89aa-4cc71c7dc1c9",
+          "2XL": "136ea0e4-c417-4e9f-9b52-00ca6ca399e6",
+          "3XL": "31b5b1e2-256e-48cb-b2d3-fb8eadbba363"
         },
         "Default": {
-          "S": "85bb4f83-bff1-4998-9f68-b8a23b08dfb0",
-          "M": "dc53f607-5617-474d-abff-3eac666aee20",
-          "L": "9a69d869-5c34-440a-b058-fe89ca39a209",
-          "XL": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b",
-          "2XL": "4811b656-fb01-4fc0-89aa-4cc71c7dc1c9",
-          "3XL": "136ea0e4-c417-4e9f-9b52-00ca6ca399e6",
-          "4XL": "31b5b1e2-256e-48cb-b2d3-fb8eadbba363"
+          "XS": "85bb4f83-bff1-4998-9f68-b8a23b08dfb0",
+          "S": "dc53f607-5617-474d-abff-3eac666aee20",
+          "M": "9a69d869-5c34-440a-b058-fe89ca39a209",
+          "L": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b",
+          "XL": "4811b656-fb01-4fc0-89aa-4cc71c7dc1c9",
+          "2XL": "136ea0e4-c417-4e9f-9b52-00ca6ca399e6",
+          "3XL": "31b5b1e2-256e-48cb-b2d3-fb8eadbba363"
         }
       },
-      "fourthwall_default_variant_id": "9a69d869-5c34-440a-b058-fe89ca39a209"
+      "fourthwall_default_variant_id": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b"
     },
     {
       "id": "APC-C37",
@@ -2475,34 +2478,34 @@
       "product_page_url": "https://www.apexhybridco.com/products/burpee-broad-jumps-build-character-warmup-hoodie.html",
       "fourthwall_variants": {
         "Black": {
-          "S": "5add8ab6-c9a0-4c43-8bfe-1771842a5461",
-          "M": "6193f3d6-fccc-481d-b493-8c06b68d4d9d",
-          "L": "151176d5-13a0-4afb-81a4-3edf6f740222",
-          "XL": "ed173816-a15c-43e1-b1fa-0630825c49bb",
-          "2XL": "1df12133-b013-4342-a712-6cc249ba527b",
-          "3XL": "d55b3a2a-323c-4007-8cf3-e0463b9e34ee",
-          "4XL": "1c0ca70a-8ef9-4d9f-9d69-4ea136a3bb45"
+          "XS": "5add8ab6-c9a0-4c43-8bfe-1771842a5461",
+          "S": "6193f3d6-fccc-481d-b493-8c06b68d4d9d",
+          "M": "151176d5-13a0-4afb-81a4-3edf6f740222",
+          "L": "ed173816-a15c-43e1-b1fa-0630825c49bb",
+          "XL": "1df12133-b013-4342-a712-6cc249ba527b",
+          "2XL": "d55b3a2a-323c-4007-8cf3-e0463b9e34ee",
+          "3XL": "1c0ca70a-8ef9-4d9f-9d69-4ea136a3bb45"
         },
         "White": {
-          "S": "5add8ab6-c9a0-4c43-8bfe-1771842a5461",
-          "M": "6193f3d6-fccc-481d-b493-8c06b68d4d9d",
-          "L": "151176d5-13a0-4afb-81a4-3edf6f740222",
-          "XL": "ed173816-a15c-43e1-b1fa-0630825c49bb",
-          "2XL": "1df12133-b013-4342-a712-6cc249ba527b",
-          "3XL": "d55b3a2a-323c-4007-8cf3-e0463b9e34ee",
-          "4XL": "1c0ca70a-8ef9-4d9f-9d69-4ea136a3bb45"
+          "XS": "5add8ab6-c9a0-4c43-8bfe-1771842a5461",
+          "S": "6193f3d6-fccc-481d-b493-8c06b68d4d9d",
+          "M": "151176d5-13a0-4afb-81a4-3edf6f740222",
+          "L": "ed173816-a15c-43e1-b1fa-0630825c49bb",
+          "XL": "1df12133-b013-4342-a712-6cc249ba527b",
+          "2XL": "d55b3a2a-323c-4007-8cf3-e0463b9e34ee",
+          "3XL": "1c0ca70a-8ef9-4d9f-9d69-4ea136a3bb45"
         },
         "Default": {
-          "S": "5add8ab6-c9a0-4c43-8bfe-1771842a5461",
-          "M": "6193f3d6-fccc-481d-b493-8c06b68d4d9d",
-          "L": "151176d5-13a0-4afb-81a4-3edf6f740222",
-          "XL": "ed173816-a15c-43e1-b1fa-0630825c49bb",
-          "2XL": "1df12133-b013-4342-a712-6cc249ba527b",
-          "3XL": "d55b3a2a-323c-4007-8cf3-e0463b9e34ee",
-          "4XL": "1c0ca70a-8ef9-4d9f-9d69-4ea136a3bb45"
+          "XS": "5add8ab6-c9a0-4c43-8bfe-1771842a5461",
+          "S": "6193f3d6-fccc-481d-b493-8c06b68d4d9d",
+          "M": "151176d5-13a0-4afb-81a4-3edf6f740222",
+          "L": "ed173816-a15c-43e1-b1fa-0630825c49bb",
+          "XL": "1df12133-b013-4342-a712-6cc249ba527b",
+          "2XL": "d55b3a2a-323c-4007-8cf3-e0463b9e34ee",
+          "3XL": "1c0ca70a-8ef9-4d9f-9d69-4ea136a3bb45"
         }
       },
-      "fourthwall_default_variant_id": "151176d5-13a0-4afb-81a4-3edf6f740222"
+      "fourthwall_default_variant_id": "ed173816-a15c-43e1-b1fa-0630825c49bb"
     },
     {
       "id": "APC-C33",
@@ -2545,34 +2548,34 @@
       "product_page_url": "https://www.apexhybridco.com/products/the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie.html",
       "fourthwall_variants": {
         "Black": {
-          "S": "2313798a-5651-4821-91d0-81ed4775ed72",
-          "M": "10959ca1-dbff-4df4-8713-ffbbcd6df723",
-          "L": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc",
-          "XL": "78f1465a-6d25-45ed-b287-548e93135679",
-          "2XL": "6230fc26-5a17-4be0-aae0-6722a5b29b72",
-          "3XL": "cd66966a-a461-48a6-96c1-33beb5bfa28a",
-          "4XL": "281e8326-b981-41e2-9869-642ce8f84a20"
+          "XS": "2313798a-5651-4821-91d0-81ed4775ed72",
+          "S": "10959ca1-dbff-4df4-8713-ffbbcd6df723",
+          "M": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc",
+          "L": "78f1465a-6d25-45ed-b287-548e93135679",
+          "XL": "6230fc26-5a17-4be0-aae0-6722a5b29b72",
+          "2XL": "cd66966a-a461-48a6-96c1-33beb5bfa28a",
+          "3XL": "281e8326-b981-41e2-9869-642ce8f84a20"
         },
         "White": {
-          "S": "2313798a-5651-4821-91d0-81ed4775ed72",
-          "M": "10959ca1-dbff-4df4-8713-ffbbcd6df723",
-          "L": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc",
-          "XL": "78f1465a-6d25-45ed-b287-548e93135679",
-          "2XL": "6230fc26-5a17-4be0-aae0-6722a5b29b72",
-          "3XL": "cd66966a-a461-48a6-96c1-33beb5bfa28a",
-          "4XL": "281e8326-b981-41e2-9869-642ce8f84a20"
+          "XS": "2313798a-5651-4821-91d0-81ed4775ed72",
+          "S": "10959ca1-dbff-4df4-8713-ffbbcd6df723",
+          "M": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc",
+          "L": "78f1465a-6d25-45ed-b287-548e93135679",
+          "XL": "6230fc26-5a17-4be0-aae0-6722a5b29b72",
+          "2XL": "cd66966a-a461-48a6-96c1-33beb5bfa28a",
+          "3XL": "281e8326-b981-41e2-9869-642ce8f84a20"
         },
         "Default": {
-          "S": "2313798a-5651-4821-91d0-81ed4775ed72",
-          "M": "10959ca1-dbff-4df4-8713-ffbbcd6df723",
-          "L": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc",
-          "XL": "78f1465a-6d25-45ed-b287-548e93135679",
-          "2XL": "6230fc26-5a17-4be0-aae0-6722a5b29b72",
-          "3XL": "cd66966a-a461-48a6-96c1-33beb5bfa28a",
-          "4XL": "281e8326-b981-41e2-9869-642ce8f84a20"
+          "XS": "2313798a-5651-4821-91d0-81ed4775ed72",
+          "S": "10959ca1-dbff-4df4-8713-ffbbcd6df723",
+          "M": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc",
+          "L": "78f1465a-6d25-45ed-b287-548e93135679",
+          "XL": "6230fc26-5a17-4be0-aae0-6722a5b29b72",
+          "2XL": "cd66966a-a461-48a6-96c1-33beb5bfa28a",
+          "3XL": "281e8326-b981-41e2-9869-642ce8f84a20"
         }
       },
-      "fourthwall_default_variant_id": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc"
+      "fourthwall_default_variant_id": "78f1465a-6d25-45ed-b287-548e93135679"
     },
     {
       "id": "APC-C09",
@@ -2616,34 +2619,34 @@
       "product_page_url": "https://www.apexhybridco.com/products/run-station-repeat-heavy-blend-hoodie.html",
       "fourthwall_variants": {
         "Black": {
-          "S": "7d1b0e76-e17e-493c-8a79-23d4a9129316",
-          "M": "8dae9001-7052-4aba-ad20-57680b7e7508",
-          "L": "6caec690-8afd-44bb-8566-e232270d856b",
-          "XL": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b",
-          "2XL": "176d4371-37a1-4eb4-bab0-c971b0ecdb51",
-          "3XL": "6254dadd-73ae-4777-9da1-29b60660b3ef",
-          "4XL": "29defe28-d413-4fdd-9e2f-84ee97266dfd"
+          "XS": "7d1b0e76-e17e-493c-8a79-23d4a9129316",
+          "S": "8dae9001-7052-4aba-ad20-57680b7e7508",
+          "M": "6caec690-8afd-44bb-8566-e232270d856b",
+          "L": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b",
+          "XL": "176d4371-37a1-4eb4-bab0-c971b0ecdb51",
+          "2XL": "6254dadd-73ae-4777-9da1-29b60660b3ef",
+          "3XL": "29defe28-d413-4fdd-9e2f-84ee97266dfd"
         },
         "White": {
-          "S": "7d1b0e76-e17e-493c-8a79-23d4a9129316",
-          "M": "8dae9001-7052-4aba-ad20-57680b7e7508",
-          "L": "6caec690-8afd-44bb-8566-e232270d856b",
-          "XL": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b",
-          "2XL": "176d4371-37a1-4eb4-bab0-c971b0ecdb51",
-          "3XL": "6254dadd-73ae-4777-9da1-29b60660b3ef",
-          "4XL": "29defe28-d413-4fdd-9e2f-84ee97266dfd"
+          "XS": "7d1b0e76-e17e-493c-8a79-23d4a9129316",
+          "S": "8dae9001-7052-4aba-ad20-57680b7e7508",
+          "M": "6caec690-8afd-44bb-8566-e232270d856b",
+          "L": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b",
+          "XL": "176d4371-37a1-4eb4-bab0-c971b0ecdb51",
+          "2XL": "6254dadd-73ae-4777-9da1-29b60660b3ef",
+          "3XL": "29defe28-d413-4fdd-9e2f-84ee97266dfd"
         },
         "Default": {
-          "S": "7d1b0e76-e17e-493c-8a79-23d4a9129316",
-          "M": "8dae9001-7052-4aba-ad20-57680b7e7508",
-          "L": "6caec690-8afd-44bb-8566-e232270d856b",
-          "XL": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b",
-          "2XL": "176d4371-37a1-4eb4-bab0-c971b0ecdb51",
-          "3XL": "6254dadd-73ae-4777-9da1-29b60660b3ef",
-          "4XL": "29defe28-d413-4fdd-9e2f-84ee97266dfd"
+          "XS": "7d1b0e76-e17e-493c-8a79-23d4a9129316",
+          "S": "8dae9001-7052-4aba-ad20-57680b7e7508",
+          "M": "6caec690-8afd-44bb-8566-e232270d856b",
+          "L": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b",
+          "XL": "176d4371-37a1-4eb4-bab0-c971b0ecdb51",
+          "2XL": "6254dadd-73ae-4777-9da1-29b60660b3ef",
+          "3XL": "29defe28-d413-4fdd-9e2f-84ee97266dfd"
         }
       },
-      "fourthwall_default_variant_id": "6caec690-8afd-44bb-8566-e232270d856b"
+      "fourthwall_default_variant_id": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b"
     },
     {
       "id": "APC-C10",
@@ -2687,34 +2690,34 @@
       "product_page_url": "https://www.apexhybridco.com/products/wall-balls-bad-decisions-hoodie.html",
       "fourthwall_variants": {
         "Black": {
-          "S": "9dcb8fc2-40f2-44e8-a248-6e966b632807",
-          "M": "7545a9f0-3169-4918-8107-c6caa0aa559b",
-          "L": "4b60582b-d219-4491-a543-b42fb2b7e40d",
-          "XL": "06660872-edb1-47b0-9ade-6b3d31fa98f8",
-          "2XL": "12e17539-d1e3-48d9-80a9-41c16a6a7c60",
-          "3XL": "7b8e7c6a-d1f8-4d21-af73-8d7e193330de",
-          "4XL": "87f73a63-de61-4270-b9ac-c1af04661b8c"
+          "XS": "9dcb8fc2-40f2-44e8-a248-6e966b632807",
+          "S": "7545a9f0-3169-4918-8107-c6caa0aa559b",
+          "M": "4b60582b-d219-4491-a543-b42fb2b7e40d",
+          "L": "06660872-edb1-47b0-9ade-6b3d31fa98f8",
+          "XL": "12e17539-d1e3-48d9-80a9-41c16a6a7c60",
+          "2XL": "7b8e7c6a-d1f8-4d21-af73-8d7e193330de",
+          "3XL": "87f73a63-de61-4270-b9ac-c1af04661b8c"
         },
         "White": {
-          "S": "9dcb8fc2-40f2-44e8-a248-6e966b632807",
-          "M": "7545a9f0-3169-4918-8107-c6caa0aa559b",
-          "L": "4b60582b-d219-4491-a543-b42fb2b7e40d",
-          "XL": "06660872-edb1-47b0-9ade-6b3d31fa98f8",
-          "2XL": "12e17539-d1e3-48d9-80a9-41c16a6a7c60",
-          "3XL": "7b8e7c6a-d1f8-4d21-af73-8d7e193330de",
-          "4XL": "87f73a63-de61-4270-b9ac-c1af04661b8c"
+          "XS": "9dcb8fc2-40f2-44e8-a248-6e966b632807",
+          "S": "7545a9f0-3169-4918-8107-c6caa0aa559b",
+          "M": "4b60582b-d219-4491-a543-b42fb2b7e40d",
+          "L": "06660872-edb1-47b0-9ade-6b3d31fa98f8",
+          "XL": "12e17539-d1e3-48d9-80a9-41c16a6a7c60",
+          "2XL": "7b8e7c6a-d1f8-4d21-af73-8d7e193330de",
+          "3XL": "87f73a63-de61-4270-b9ac-c1af04661b8c"
         },
         "Default": {
-          "S": "9dcb8fc2-40f2-44e8-a248-6e966b632807",
-          "M": "7545a9f0-3169-4918-8107-c6caa0aa559b",
-          "L": "4b60582b-d219-4491-a543-b42fb2b7e40d",
-          "XL": "06660872-edb1-47b0-9ade-6b3d31fa98f8",
-          "2XL": "12e17539-d1e3-48d9-80a9-41c16a6a7c60",
-          "3XL": "7b8e7c6a-d1f8-4d21-af73-8d7e193330de",
-          "4XL": "87f73a63-de61-4270-b9ac-c1af04661b8c"
+          "XS": "9dcb8fc2-40f2-44e8-a248-6e966b632807",
+          "S": "7545a9f0-3169-4918-8107-c6caa0aa559b",
+          "M": "4b60582b-d219-4491-a543-b42fb2b7e40d",
+          "L": "06660872-edb1-47b0-9ade-6b3d31fa98f8",
+          "XL": "12e17539-d1e3-48d9-80a9-41c16a6a7c60",
+          "2XL": "7b8e7c6a-d1f8-4d21-af73-8d7e193330de",
+          "3XL": "87f73a63-de61-4270-b9ac-c1af04661b8c"
         }
       },
-      "fourthwall_default_variant_id": "4b60582b-d219-4491-a543-b42fb2b7e40d"
+      "fourthwall_default_variant_id": "06660872-edb1-47b0-9ade-6b3d31fa98f8"
     },
     {
       "id": "APC-C11",
@@ -2758,34 +2761,34 @@
       "product_page_url": "https://www.apexhybridco.com/products/compromised-running-club-fleece-hoodie.html",
       "fourthwall_variants": {
         "Black": {
-          "S": "09ebf420-ca29-435e-8884-c4ed99a23200",
-          "M": "f5a4f975-06b7-4e38-9002-a8908588995a",
-          "L": "e686cf02-2840-4545-afa0-0a5c13741a31",
-          "XL": "e7bc46ab-f42f-45c6-aebb-ed1bad633116",
-          "2XL": "f4da2641-2534-4816-89f8-29bea7337b66",
-          "3XL": "2b1d8377-4021-418a-84f0-cc84b5cba47b",
-          "4XL": "21f9f457-4512-4f1a-89b5-fcd74e21d98a"
+          "XS": "09ebf420-ca29-435e-8884-c4ed99a23200",
+          "S": "f5a4f975-06b7-4e38-9002-a8908588995a",
+          "M": "e686cf02-2840-4545-afa0-0a5c13741a31",
+          "L": "e7bc46ab-f42f-45c6-aebb-ed1bad633116",
+          "XL": "f4da2641-2534-4816-89f8-29bea7337b66",
+          "2XL": "2b1d8377-4021-418a-84f0-cc84b5cba47b",
+          "3XL": "21f9f457-4512-4f1a-89b5-fcd74e21d98a"
         },
         "White": {
-          "S": "09ebf420-ca29-435e-8884-c4ed99a23200",
-          "M": "f5a4f975-06b7-4e38-9002-a8908588995a",
-          "L": "e686cf02-2840-4545-afa0-0a5c13741a31",
-          "XL": "e7bc46ab-f42f-45c6-aebb-ed1bad633116",
-          "2XL": "f4da2641-2534-4816-89f8-29bea7337b66",
-          "3XL": "2b1d8377-4021-418a-84f0-cc84b5cba47b",
-          "4XL": "21f9f457-4512-4f1a-89b5-fcd74e21d98a"
+          "XS": "09ebf420-ca29-435e-8884-c4ed99a23200",
+          "S": "f5a4f975-06b7-4e38-9002-a8908588995a",
+          "M": "e686cf02-2840-4545-afa0-0a5c13741a31",
+          "L": "e7bc46ab-f42f-45c6-aebb-ed1bad633116",
+          "XL": "f4da2641-2534-4816-89f8-29bea7337b66",
+          "2XL": "2b1d8377-4021-418a-84f0-cc84b5cba47b",
+          "3XL": "21f9f457-4512-4f1a-89b5-fcd74e21d98a"
         },
         "Default": {
-          "S": "09ebf420-ca29-435e-8884-c4ed99a23200",
-          "M": "f5a4f975-06b7-4e38-9002-a8908588995a",
-          "L": "e686cf02-2840-4545-afa0-0a5c13741a31",
-          "XL": "e7bc46ab-f42f-45c6-aebb-ed1bad633116",
-          "2XL": "f4da2641-2534-4816-89f8-29bea7337b66",
-          "3XL": "2b1d8377-4021-418a-84f0-cc84b5cba47b",
-          "4XL": "21f9f457-4512-4f1a-89b5-fcd74e21d98a"
+          "XS": "09ebf420-ca29-435e-8884-c4ed99a23200",
+          "S": "f5a4f975-06b7-4e38-9002-a8908588995a",
+          "M": "e686cf02-2840-4545-afa0-0a5c13741a31",
+          "L": "e7bc46ab-f42f-45c6-aebb-ed1bad633116",
+          "XL": "f4da2641-2534-4816-89f8-29bea7337b66",
+          "2XL": "2b1d8377-4021-418a-84f0-cc84b5cba47b",
+          "3XL": "21f9f457-4512-4f1a-89b5-fcd74e21d98a"
         }
       },
-      "fourthwall_default_variant_id": "e686cf02-2840-4545-afa0-0a5c13741a31"
+      "fourthwall_default_variant_id": "e7bc46ab-f42f-45c6-aebb-ed1bad633116"
     },
     {
       "id": "APC-C12",
@@ -2829,34 +2832,34 @@
       "product_page_url": "https://www.apexhybridco.com/products/defend-my-sled-push-fleece-hoodie.html",
       "fourthwall_variants": {
         "Black": {
-          "S": "c2c4b556-38b3-45fe-8671-f7c3098d9877",
-          "M": "b368c389-dad2-4166-8bdf-ec6c646b0e16",
-          "L": "7c04c499-643c-4f2c-8b59-995d4b9060e9",
-          "XL": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c",
-          "2XL": "6e3a13c8-8982-4062-ada8-8589c122ae7e",
-          "3XL": "efaff547-a0ba-4879-bfb5-c956e32895e4",
-          "4XL": "7cc96662-1bc1-4a72-ada2-8e6a350b1425"
+          "XS": "c2c4b556-38b3-45fe-8671-f7c3098d9877",
+          "S": "b368c389-dad2-4166-8bdf-ec6c646b0e16",
+          "M": "7c04c499-643c-4f2c-8b59-995d4b9060e9",
+          "L": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c",
+          "XL": "6e3a13c8-8982-4062-ada8-8589c122ae7e",
+          "2XL": "efaff547-a0ba-4879-bfb5-c956e32895e4",
+          "3XL": "7cc96662-1bc1-4a72-ada2-8e6a350b1425"
         },
         "White": {
-          "S": "c2c4b556-38b3-45fe-8671-f7c3098d9877",
-          "M": "b368c389-dad2-4166-8bdf-ec6c646b0e16",
-          "L": "7c04c499-643c-4f2c-8b59-995d4b9060e9",
-          "XL": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c",
-          "2XL": "6e3a13c8-8982-4062-ada8-8589c122ae7e",
-          "3XL": "efaff547-a0ba-4879-bfb5-c956e32895e4",
-          "4XL": "7cc96662-1bc1-4a72-ada2-8e6a350b1425"
+          "XS": "c2c4b556-38b3-45fe-8671-f7c3098d9877",
+          "S": "b368c389-dad2-4166-8bdf-ec6c646b0e16",
+          "M": "7c04c499-643c-4f2c-8b59-995d4b9060e9",
+          "L": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c",
+          "XL": "6e3a13c8-8982-4062-ada8-8589c122ae7e",
+          "2XL": "efaff547-a0ba-4879-bfb5-c956e32895e4",
+          "3XL": "7cc96662-1bc1-4a72-ada2-8e6a350b1425"
         },
         "Default": {
-          "S": "c2c4b556-38b3-45fe-8671-f7c3098d9877",
-          "M": "b368c389-dad2-4166-8bdf-ec6c646b0e16",
-          "L": "7c04c499-643c-4f2c-8b59-995d4b9060e9",
-          "XL": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c",
-          "2XL": "6e3a13c8-8982-4062-ada8-8589c122ae7e",
-          "3XL": "efaff547-a0ba-4879-bfb5-c956e32895e4",
-          "4XL": "7cc96662-1bc1-4a72-ada2-8e6a350b1425"
+          "XS": "c2c4b556-38b3-45fe-8671-f7c3098d9877",
+          "S": "b368c389-dad2-4166-8bdf-ec6c646b0e16",
+          "M": "7c04c499-643c-4f2c-8b59-995d4b9060e9",
+          "L": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c",
+          "XL": "6e3a13c8-8982-4062-ada8-8589c122ae7e",
+          "2XL": "efaff547-a0ba-4879-bfb5-c956e32895e4",
+          "3XL": "7cc96662-1bc1-4a72-ada2-8e6a350b1425"
         }
       },
-      "fourthwall_default_variant_id": "7c04c499-643c-4f2c-8b59-995d4b9060e9"
+      "fourthwall_default_variant_id": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c"
     },
     {
       "id": "APC-C43",
@@ -2925,8 +2928,8 @@
     {
       "id": "APC-C44",
       "handle": "pro-division-lightweight-quarter-zip-race-shell",
-      "title": "Pro Division \"Sub-65 Club\"",
-      "seo_title": "Pro Division \"Sub-65 Club\"",
+      "title": "Pro Division",
+      "seo_title": "Pro Division",
       "dept": "Lightweight Jackets",
       "category": "Lightweight Race Jackets",
       "retail_price": 68.0,
