@@ -140,7 +140,6 @@ def generate_product_pages():
                 <div class="ProductCard__Title" style="font-size:14px;">{html.escape(r['title'])}</div>
                 <div class="ProductCard__PriceRow">
                   <span class="PriceWhole" style="font-size:18px;">${r['retail_price']:.2f}</span>
-                  <span class="PriceList">${(r.get('list_price') or r['retail_price']):.2f}</span>
                 </div>
               </div>
             </a>
@@ -168,7 +167,7 @@ def generate_product_pages():
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{html.escape(seo_title)} | Apex Hybrid Co., operated by NolCorp LLC</title>
-  <meta name="description" content="{html.escape(short_desc)} Free US Ground Shipping &amp; 30-Day Returns at Apex Hybrid Co." />
+  <meta name="description" content="{html.escape(short_desc)} Made to order. Free US shipping from Apex Hybrid Co." />
   <meta name="keywords" content="hyrox shirts, breathable hyrox shirt, {html.escape(title)}, {html.escape(prod['category'])}, {html.escape(dept)}, hybrid athlete gear, functional fitness recovery" />
   <link rel="canonical" href="{canonical}" />
   <meta property="og:type" content="product" />
@@ -199,7 +198,7 @@ def generate_product_pages():
       <div class="Container TopHeader__Inner">
         <a href="../index.html" class="BrandLogo">
           <span class="BrandLogo__Mark">APEX</span>
-          <span class="BrandLogo__Sub">HYBRID &amp; RECOVERY CO.</span>
+          <span class="BrandLogo__Sub">HYBRID CO.</span>
         </a>
         <div style="margin-left:auto; display:flex; gap:14px; align-items:center;">
           <a href="../index.html" style="color:#fff; font-size:13px; font-weight:700;">← Back to Full Catalog &amp; News Hub</a>
@@ -225,7 +224,7 @@ def generate_product_pages():
             <span>1. Black Edition (Front Crest)</span>
           </button>
           <button type="button" onclick="document.getElementById('staticMainProdImg').src='../{prod['alt_image']}'" style="cursor:pointer; border:2px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; color:#0f172a; display:flex; align-items:center; gap:8px; font-weight:700; font-size:12.5px;">
-            <img src="../{prod['alt_image']}" alt="{html.escape(title)}  -  Bone Edition View" style="width:48px; height:48px; object-fit:cover; border-radius:4px;" />
+            <img src="../{prod['alt_image']}" alt="{html.escape(title)} back view" style="width:48px; height:48px; object-fit:cover; border-radius:4px;" />
             <span>2. Black Edition</span>
           </button>
         </div>''' if prod.get("alt_image") else ""}
@@ -235,15 +234,9 @@ def generate_product_pages():
           {html.escape(dept)} · {html.escape(prod['category'])}
         </div>
         <h1 style="font-size:24px; line-height:1.25; margin-bottom:10px;">{html.escape(title)}</h1>
-        <div style="display:flex; align-items:center; gap:8px; font-size:13px; margin-bottom:12px;">
-          <span class="Stars">★★★★★</span>
-          <strong>{prod['rating']} out of 5</strong>
-          <span style="color:#525866;">({prod['reviews']} verified athlete reviews)</span>
-        </div>
         <div style="padding:12px 0; border-top:1px solid #eee; border-bottom:1px solid #eee; margin-bottom:14px;">
           <div style="display:flex; align-items:baseline; gap:10px;">
             <span style="font-size:28px; font-weight:900;">${price}</span>
-            <span style="font-size:14px; color:#525866; ">List: ${list_price}</span>
           </div>
           <div style="font-size:13px; color:#0e8345; font-weight:700; margin-top:4px;">
             ✓ {html.escape(prod['stock_status'])} · {html.escape(prod['ship_time'])}
@@ -251,26 +244,7 @@ def generate_product_pages():
           {fulfillment_line}
         </div>
         <div id="staticVariantBox" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px 16px; margin-bottom:16px;">
-          {f"""<div style="margin-bottom:12px;">
-            <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; margin-bottom:6px;">1. Select Colorway: <span id="staticColorLabel" style="color:#0066ff;">Black</span></div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="StaticColorBtn" data-color="Black" onclick="window.selectStaticColor('Black','../{prod['image']}',this)" style="cursor:pointer; padding:7px 14px; border-radius:6px; border:2px solid #0f172a; background:#0f172a; color:#fff; font-weight:800; font-size:12.5px;">Black</button>
-              <button type="button" class="StaticColorBtn" data-color="White" onclick="window.selectStaticColor('White','../{prod.get('alt_image') or prod['image']}',this)" style="cursor:pointer; padding:7px 14px; border-radius:6px; border:1.5px solid #cbd5e1; background:#fff; color:#0f172a; font-weight:700; font-size:12.5px;">Black</button>
-            </div>
-          </div>""" if prod.get("alt_image") else ""}
-          {f"""<div style="margin-bottom:12px;">
-            <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; margin-bottom:6px;">2. Select Shirt Blank / Material: <span id="staticBlankLabel" style="color:#0066ff;">{"3.8 oz Breathable Workout Tee" if dept == "Breathable Tech Shirts" else "6.1 oz Heavyweight Cotton"}</span></div>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:8px;">
-              <button type="button" class="StaticBlankBtn" data-blank="6.1 oz Heavyweight Cotton" onclick="window.selectStaticBlank('6.1 oz Heavyweight Cotton',this)" style="cursor:pointer; text-align:left; padding:9px 12px; border-radius:8px; border:{'1.5px solid #cbd5e1' if dept == 'Breathable Tech Shirts' else '2px solid #0f172a'}; background:{'#fff' if dept == 'Breathable Tech Shirts' else '#0f172a'}; color:{'#0f172a' if dept == 'Breathable Tech Shirts' else '#fff'};">
-                <div style="font-weight:800; font-size:12.5px;">6.1 oz Heavyweight Cotton</div>
-                <div style="font-size:11px; opacity:0.82;">Structured garment-dyed street &amp; pump cover drape</div>
-              </button>
-              <button type="button" class="StaticBlankBtn" data-blank="3.8 oz Breathable Workout Tee" onclick="window.selectStaticBlank('3.8 oz Breathable Workout Tee',this)" style="cursor:pointer; text-align:left; padding:9px 12px; border-radius:8px; border:{'2px solid #0f172a' if dept == 'Breathable Tech Shirts' else '1.5px solid #cbd5e1'}; background:{'#0f172a' if dept == 'Breathable Tech Shirts' else '#fff'}; color:{'#fff' if dept == 'Breathable Tech Shirts' else '#0f172a'};">
-                <div style="font-weight:800; font-size:12.5px;">3.8 oz Breathable Workout Tee</div>
-                <div style="font-size:11px; opacity:0.82;">Sweat-wicking race &amp; turf training technical knit</div>
-              </button>
-            </div>
-          </div>""" if dept in ("Tees & Pump Covers", "Race City Editions", "Breathable Tech Shirts") else ""}
+
           {f"""<div style="margin-bottom:14px;">
             <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; margin-bottom:6px;">Select Size (Unisex Athletic Fit): <span id="staticSizeLabel" style="color:#0066ff;">L</span></div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -295,22 +269,14 @@ def generate_product_pages():
           <div style="font-weight:800; color:#0f172a; text-transform:uppercase; letter-spacing:0.04em; font-size:12px; margin-bottom:6px;">✓ Fit, Fabric &amp; Race-Day Guarantee</div>
           <div>Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.</div>
         </div>
-        <div class="ReviewSnippetBox">
-          <strong>★★★★★ Verified HYROX &amp; Hybrid Athlete Review:</strong><br/>
-          “{html.escape(prod.get('review_quote', ''))}”
-        </div>
         <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">
           <a href="../index.html?add={prod['id']}" class="Btn Btn--Cart" style="padding:13px 22px; font-size:14px; text-align:center;">Add to Bag  -  ${price}</a>
           <a href="{buy_href}" class="Btn Btn--BuyNow" style="padding:13px 22px; font-size:14px; text-align:center;">{main_buy_label}</a>
         </div>
         <div style="margin-top:16px;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#f8fafc;border:1.5px solid #0066ff;border-radius:10px;padding:14px 16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
-            <span style="font-size:11px;font-weight:900;text-transform:uppercase;color:#38bdf8;letter-spacing:0.06em;">⚡ 2026 Race-Week Express US Dispatch (Chicago · Dallas · Anaheim)</span>
-            <span style="font-size:11.5px;color:#4ade80;font-weight:800;">✓ 2–4 Day US Delivery</span>
-          </div>
-          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
+          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="../team_orders.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">Shop Doubles 2-Packs (15% Off) →</a>
+            <a href="../team_orders.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">Team orders</a>
             <a href="../wristband.html" style="background:#0f172a;border:1px solid #475569;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">⏱️ Free Printable Split Wristband</a>
             <a href="../gyms/index.html" style="background:#0f172a;border:1px solid #475569;color:#38bdf8;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">🏋️ HYROX Gym Finder (72 Hubs)</a>
           </div>
@@ -370,7 +336,7 @@ def generate_product_pages():
     var state = {{
       color: "Black",
       size: {json.dumps("L" if prod.get("has_sizes") else "One Size")},
-      blank: {json.dumps("3.8 oz Breathable Workout Tee" if dept == "Breathable Tech Shirts" else "6.1 oz Heavyweight Cotton")}
+      blank: "Black"
     }};
     function syncAddLink() {{
       var addEl = document.getElementById("staticAddBagLink");
@@ -517,7 +483,7 @@ def generate_article_pages():
             ),
             (
                 "How do I get 15% off Doubles or multi-item race orders?",
-                "Add any 2 or more items to your bag at Apex Hybrid Co., operated by NolCorp LLC and apply code  at checkout for 15% off plus Free 2–4 Day US Shipping and 30-Day Free Returns."
+                "Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall."
             )
         ])
 
@@ -586,7 +552,7 @@ def generate_article_pages():
               </a>
               <div style="min-width:0;">
                 <a href="../products/{p['handle']}.html" style="color:#fff;font-weight:800;font-size:13.5px;text-decoration:none;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{html.escape(p['title'])}</a>
-                <span style="color:#94a3b8;font-size:12px;">★ {p['rating']} ({p['reviews']} reviews) · <strong style="color:#4ade80;">${p['retail_price']:.2f}</strong> · Free 2–4 Day US Shipping</span>
+                <span style="color:#94a3b8;font-size:12px;"><strong style="color:#4ade80;">${p['retail_price']:.2f}</strong> · Free US shipping</span>
               </div>
             </div>
             <div style="display:flex;gap:6px;flex-shrink:0;align-items:center;">
@@ -663,7 +629,7 @@ def generate_article_pages():
       <div class="Container TopHeader__Inner">
         <a href="../index.html" class="BrandLogo">
           <span class="BrandLogo__Mark">APEX</span>
-          <span class="BrandLogo__Sub">HYBRID &amp; RECOVERY CO.</span>
+          <span class="BrandLogo__Sub">HYBRID CO.</span>
         </a>
         <div style="margin-left:auto; display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
           <a href="../index.html#articles" style="color:#fff; font-size:13px; font-weight:700;">← All Buyer Guides</a>
@@ -676,30 +642,25 @@ def generate_article_pages():
 
   <main class="Container" style="max-width:980px; padding:28px 20px 64px;">
     <article style="background:#fff; border:1px solid #e4e6eb; border-radius:12px; padding:32px;">
-      <div class="ArticleEyebrow">{html.escape(cat)} · {html.escape(art['read_time'])} · Free 2–4 Day US Shipping</div>
+      <div class="ArticleEyebrow">{html.escape(cat)} · {html.escape(art['read_time'])} · Free US shipping</div>
       <h1 style="font-size:28px; line-height:1.22; margin:8px 0 14px;">{html.escape(title)}</h1>
       <p style="font-size:16px; color:#444; border-left:3px solid #0066ff; padding-left:14px; margin-bottom:20px;">
         {html.escape(summary)}
       </p>
 
-      <!-- Top Quick-Buy Express Checkout Strip -->
-      <section aria-label="Express 1-Click Checkout" style="background:#0f172a;color:#fff;padding:16px 18px;border-radius:10px;margin-bottom:26px;">
+      <section aria-label="Featured gear checkout" style="background:#0f172a;color:#fff;padding:16px 18px;border-radius:10px;margin-bottom:26px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
           <span style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:#38bdf8;">⚡ Featured Gear In This Guide  -  Instant 1-Click Checkout</span>
-          <span style="font-size:12px;color:#cbd5e1;">Bundle 2+ Items: Use Code <strong style="color:#fff;"></strong> for 15% Off + Free US Shipping</span>
+          <span style="font-size:12px;color:#cbd5e1;">Made to order. Free US shipping</span>
         </div>
         <div style="display:grid;gap:8px;">
 {top_strip_pills}
         </div>
       </section>
         <div style="margin-top:16px;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#f8fafc;border:1.5px solid #0066ff;border-radius:10px;padding:14px 16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
-            <span style="font-size:11px;font-weight:900;text-transform:uppercase;color:#38bdf8;letter-spacing:0.06em;">⚡ 2026 Race-Week Express US Dispatch (Chicago · Dallas · Anaheim)</span>
-            <span style="font-size:11.5px;color:#4ade80;font-weight:800;">✓ 2–4 Day US Delivery</span>
-          </div>
-          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
+          <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px;line-height:1.45;">Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="../team_orders.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">Shop Doubles 2-Packs (15% Off) →</a>
+            <a href="../team_orders.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">Team orders</a>
             <a href="../wristband.html" style="background:#0f172a;border:1px solid #475569;color:#fff;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">⏱️ Free Printable Split Wristband</a>
             <a href="../gyms/index.html" style="background:#0f172a;border:1px solid #475569;color:#38bdf8;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:800;">🏋️ HYROX Gym Finder (72 Hubs)</a>
           </div>
@@ -852,7 +813,7 @@ def generate_article_pages():
       <div class="Container TopHeader__Inner">
         <a href="../index.html" class="BrandLogo">
           <span class="BrandLogo__Mark">APEX</span>
-          <span class="BrandLogo__Sub">HYBRID &amp; RECOVERY CO.</span>
+          <span class="BrandLogo__Sub">HYBRID CO.</span>
         </a>
         <div style="margin-left:auto; display:flex; gap:14px; align-items:center;">
           <a href="../team_orders.html" style="color:#38bdf8; font-size:13px; font-weight:700;">Doubles 2-Packs &amp; Coach Program →</a>
@@ -1068,8 +1029,6 @@ def feed_prices(prod, variant_price):
     """Keep the existing list/sale pair when it still applies to this size."""
     retail = float(prod["retail_price"])
     list_price = float(prod.get("list_price") or retail)
-    if variant_price == retail and list_price > retail:
-        return money_usd(list_price), money_usd(variant_price)
     return money_usd(variant_price), money_usd(variant_price)
 
 
@@ -1083,7 +1042,7 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         "    <item>",
         f"      <g:id>{html.escape(item_id)}</g:id>",
         f"      <g:title>{html.escape(title)}</g:title>",
-        f"      <g:description>{html.escape(prod['short_desc'])}</g:description>",
+        f"      <g:description>{html.escape((prod['short_desc'] + (' ' + prod['fourthwall_product_url'] if prod.get('fourthwall_product_url') else '')).strip())}</g:description>",
         f"      <g:link>{html.escape(link)}</g:link>",
         f"      <g:image_link>{html.escape(img_link)}</g:image_link>",
         "      <g:condition>new</g:condition>",
@@ -1294,7 +1253,6 @@ def generate_pinterest_csv_feed():
         "link",
         "image_link",
         "price",
-        "sale_price",
         "availability",
         "condition",
         "google_product_category",
@@ -1309,11 +1267,10 @@ def generate_pinterest_csv_feed():
                 {
                     "id": prod["id"],
                     "title": prod.get("seo_title", prod["title"]),
-                    "description": prod["short_desc"],
+                    "description": (prod["short_desc"] + (" " + prod["fourthwall_product_url"] if prod.get("fourthwall_product_url") else "")).strip(),
                     "link": f"{SITE_URL}/products/{prod['handle']}.html",
                     "image_link": f"{SITE_URL}/{prod['image']}",
                     "price": f"{prod['retail_price']:.2f} USD",
-                    "sale_price": "",
                     "availability": "in stock",
                     "condition": "new",
                     "google_product_category": google_category_for(prod),
@@ -1478,7 +1435,7 @@ Sitemap: {SITE_URL}/sitemap.xml
         llms_lines.append(f"### {dept} ({len(items)} SKUs)")
         for p in items:
             llms_lines.append(
-                f"- [{p['title']}]({SITE_URL}/products/{p['handle']}.html)  -  **${float(p['retail_price']):.2f} USD** (SKU: `{p['id']}`, Category: {p['category']}, Rating: {p['rating']}★ from {p['reviews']} reviews, {p['ship_time']}). {p['short_desc']}"
+                f"- [{p['title']}]({SITE_URL}/products/{p['handle']}.html)  -  **${float(p['retail_price']):.2f} USD** (SKU: `{p['id']}`, Category: {p['category']}, {p['ship_time']}). {p['short_desc']}"
             )
         llms_lines.append("")
     llms_lines.append(f"## Athlete Buyer Guides & Training Protocols ({len(guides)} Articles)")
@@ -1500,8 +1457,7 @@ def inject_static_seo_into_index():
     # Build static product cards so search crawlers index all 68 products + links on the homepage
     static_cards = []
     for p in products:
-        badge_class = "top-rated" if p["badge"] == "Top Rated" else ("new-release" if p["badge"] == "New Release" else "")
-        badge_html = f'<span class="ProductCard__Badge {badge_class}">{html.escape(p["badge"])}</span>' if p["badge"] else ""
+        badge_html = ""
         whole = int(p["retail_price"])
         cents = f"{round((p['retail_price'] - whole) * 100):02d}"
         static_cards.append(
@@ -1516,14 +1472,8 @@ def inject_static_seo_into_index():
                 <h2 class="ProductCard__Title" onclick="openProductModal('{p['id']}')">
                   <a href="products/{p['handle']}.html" onclick="event.stopPropagation();">{html.escape(p['title'])}</a>
                 </h2>
-                <div class="ProductCard__RatingRow">
-                  <span class="Stars">★★★★★</span>
-                  <span class="ProductCard__RatingNum">{p['rating'].__format__('.1f')}</span>
-                  <span class="ProductCard__ReviewCount">({p['reviews']})</span>
-                </div>
                 <div class="ProductCard__PriceRow">
                   <span class="PriceWhole"><sup>$</sup>{whole}<sup>{cents}</sup></span>
-                  <span class="PriceList">List: ${(p.get('list_price') or p['retail_price']):.2f}</span>
                 </div>
                 <div class="ProductCard__Delivery"><strong>{html.escape(p['ship_time'])}</strong></div>
                 <div class="ProductCard__Stock">✓ {html.escape(p['stock_status'])}</div>
@@ -1565,16 +1515,7 @@ def inject_static_seo_into_index():
                 "url": f"{SITE_URL}/",
                 "logo": f"{SITE_URL}/images/streetwear/apc-c36-black.png?v=20261026v1",
                 "description": "Race shirts, city shirts, muscle tanks, warmup hoodies, and warmup jackets. Made to order. Free US shipping.",
-                "telephone": "+1-949-805-4935",
                 "email": "apexhybridco@gmail.com",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "",
-                    "addressLocality": "Irvine",
-                    "addressRegion": "CA",
-                    "postalCode": "92618",
-                    "addressCountry": "US",
-                },
             },
             {
                 "@type": "WebSite",
@@ -1600,7 +1541,7 @@ def inject_static_seo_into_index():
                         "name": "Do you carry 2026/2027 HYROX race-city shirts for Chicago, Dallas, Anaheim, Miami, Las Vegas, and New York?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Yes. Our Race City Editions collection includes Winged Apex Crest tees for Chicago Navy Pier (APC-C16), Dallas Lone Star Division (APC-C17), Anaheim SoCal (APC-C18), Miami Beach (APC-C19), Las Vegas (APC-C20), and New York Hudson Pier (APC-C21) with free 2–4 day US shipping."
+                            "text": "Yes. Our Race City Editions collection includes Winged Apex Crest tees for Chicago Navy Pier (APC-C16), Dallas Lone Star Division (APC-C17), Anaheim SoCal (APC-C18), Miami Beach (APC-C19), Las Vegas (APC-C20), and New York Hudson Pier (APC-C21) Made to order. Free US shipping."
                         }
                     }
                 ]

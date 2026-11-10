@@ -172,9 +172,8 @@ const sizeChoice = {};
 const colorChoice = {};
 const blankChoice = {};
 
-function hasBlankChoice(p) {
-  if (!p) return false;
-  return p.dept === "Tees & Pump Covers" || p.dept === "Breathable Tech Shirts" || p.dept === "Race City Editions";
+function hasBlankChoice() {
+  return false;
 }
 function blankOf(p) {
   if (!p) return "heavy";
@@ -331,8 +330,8 @@ function renderProducts() {
     const swatches = ""; // black-only — no color toggle
     const hoverSrc = hoverPhotoOf(p);
     const hover = hoverSrc ? `<img class="Card__img Card__img--b" src="${esc(hoverSrc)}" alt="" loading="lazy" decoding="async" width="1000" height="1250" />` : "";
-    const was = p.list_price && p.list_price > p.retail_price ? `<s>${money(p.list_price)}</s>` : "";
-    const badge = p.badge ? `<span class="Badge">${esc(p.badge)}</span>` : "";
+    const was = "";
+    const badge = "";
     const sizes = p.has_sizes
       ? ["S", "M", "L", "XL", "2XL"].map((sz) => `<button type="button" data-quick-add="${p.id}" data-size="${sz}" aria-label="Add size ${sz}">${sz}</button>`).join("")
       : `<button type="button" data-quick-add="${p.id}">Add</button>`;
@@ -503,31 +502,18 @@ function openProduct(sku) {
   if (!p) return;
   trackHit("product_views_total");
   trackHit(`view_${p.id}`);
-  const was = p.list_price && p.list_price > p.retail_price ? `<s>${money(p.list_price)}</s>` : "";
+  const was = "";
   const swatches = `
     <div class="Swatches" style="position:static;margin:12px 0">
       <button class="Swatch Swatch--black" type="button" data-color="black" data-sku="${p.id}" aria-label="Black" aria-pressed="true" disabled></button>
       <span>Color: <strong>Black</strong></span>
     </div>`;
-  const blankSelector = hasBlankChoice(p) ? `
-    <div class="BlankPicker">
-      <span class="BlankPicker__label">Select Shirt Blank &amp; Material</span>
-      <div class="BlankPicker__grid">
-        <button class="BlankBtn" type="button" data-blank="heavy" data-sku="${p.id}" aria-pressed="${blankOf(p) === "heavy"}">
-          <strong>6.1 oz Heavyweight Cotton</strong>
-          <small>Garment-dyed ring-spun cotton pump cover · Boxy streetwear drape · Soft-hand cured print</small>
-        </button>
-        <button class="BlankBtn" type="button" data-blank="light" data-sku="${p.id}" aria-pressed="${blankOf(p) === "light"}">
-          <strong>3.8 oz Breathable Workout Tee</strong>
-          <small>Featherlight moisture-wicking race knit · Built for compromised running &amp; turf stations</small>
-        </button>
-      </div>
-    </div>` : "";
+  const blankSelector = "";
   const sizes = p.has_sizes ? `<div class="Sizes" style="margin:12px 0">${["S", "M", "L", "XL", "2XL"].map((sz) => `
     <button class="SizeBtn" type="button" data-size="${sz}" data-sku="${p.id}" aria-pressed="${sizeOf(p) === sz}">${sz}</button>
   `).join("")}</div>` : "";
   const isFw = isFourthwallItem(p);
-  const fulfillmentLine = `✓ Ships in 2 - 4 business days from our US hubs · Print errors are replaced or refunded`;
+  const fulfillmentLine = "Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.";
   const buyBtnLabel = "Buy Now - Instant Checkout";
   $("#productModalContent").innerHTML = `
     <div class="ProductLayout">
@@ -579,8 +565,8 @@ function openCheckout(lines) {
   const sub = Math.max(0, rawSub - discAmt);
   const hasFw = bag.some((item) => item.is_fourthwall);
   const hasWs = bag.some((item) => !item.is_fourthwall);
-  const checkoutTitle = "Express Athlete Checkout";
-  const checkoutDesc = "All apparel and recovery hardware ships free from our US hubs in 2–4 business days with 30-day easy exchanges.";
+  const checkoutTitle = "Secure checkout";
+  const checkoutDesc = "Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.";
   const submitLabel = `Complete Order · ${money(sub)}`;
   $("#checkoutModalContent").innerHTML = `
     <h2 style="letter-spacing:-0.04em;font-size:32px">${esc(checkoutTitle)}</h2>
@@ -588,7 +574,7 @@ function openCheckout(lines) {
     <div style="margin-bottom:14px">
       ${bag.map((item) => `
         <div class="Row"><span>${item.qty} × ${esc(item.title)} <span class="StripeId">${esc(item.variant)}</span></span><strong>${money(item.price * item.qty)}</strong></div>
-        <div class="StripeId">Ships in 2–4 business days (US)${item.is_fourthwall && item.fourthwall_product_url ? ` · <a href="${esc(item.fourthwall_product_url)}" target="_blank" rel="noopener" style="color:#2563eb;font-weight:700">Instant 1-Click Checkout →</a>` : ""}</div>
+        <div class="StripeId">Free US shipping${item.is_fourthwall && item.fourthwall_product_url ? ` · <a href="${esc(item.fourthwall_product_url)}" target="_blank" rel="noopener" style="color:#2563eb;font-weight:700">Secure checkout and fulfillment by Fourthwall</a>` : ""}</div>
       `).join("")}
       <div style="margin:10px 0;display:flex;gap:8px;align-items:center">
         <input id="checkoutPromoInput" type="text" value="${esc(activePromo)}" placeholder="Promo code" style="flex:1;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;text-transform:uppercase" />

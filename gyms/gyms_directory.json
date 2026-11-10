@@ -160,7 +160,7 @@
     "market": "Houston",
     "category": "Boutique Warehouse HYROX Affiliate",
     "website": "http://hnstrainingfacility.com/hyrox/",
-    "code": "HNSHYROX10",
+    "code": "HNSDALLAS10",
     "specialty": "23,000 sq ft Houston  facility on Normandy St running Tuesday/Thursday HYROX Performance blocks and Saturday Partner simulation sessions.",
     "hub": "Houston"
   },
@@ -171,7 +171,7 @@
     "market": "Houston",
     "category": "Boutique HYROX Personal & Group Coaching",
     "website": "https://www.dc7results.com/",
-    "code": "DC7HYROX10",
+    "code": "DC7DALLAS10",
     "specialty": "Results-driven Katy and Houston training community led by Coach Darryl Blunt offering small-group HYROX conditioning and 1-on-1 race prep.",
     "hub": "Houston"
   },
@@ -325,7 +325,7 @@
     "market": "San Diego (Scripps Ranch / Poway), CA (SoCal)",
     "category": "Boutique Independent & Simulation Host",
     "website": "https://fitnessquest10.com/hyrox/",
-    "code": "FQ10HYROX10",
+    "code": "FQ10DALLAS10",
     "specialty": "Boutique San Diego performance facility running 4 dedicated HYROX tracks (Foundational, Engine, Power, Complete) and Sunday 10 AM HYROX classes coached by Certified HYROX Coach James Vandergriff.",
     "hub": "Anaheim / SoCal"
   },
@@ -422,7 +422,7 @@
     "coach": "Talon Smith (Co-Owner, Head Coach, Retired Navy Chief, HYROX L2 Coach & 52x HYROX Racer) / Coach Jaci & Coach Clayton",
     "city_state": "Fort Worth / DFW, TX",
     "market": "Fort Worth / DFW, TX",
-    "category": "Boutique Official HYROX Training Partner & Pro Doubles Coaching Hub",
+    "category": "Boutique HYROX training partner & Pro Doubles Coaching Hub",
     "website": "https://ftxhybrid.com",
     "code": "FTX10",
     "specialty": "Veteran-owned boutique Fort Worth HYROX partner gym (52x HYROX racer Talon Smith, 54 podiums, 91+ athletes racing HYROX Dallas) running selective Maverick & ATHENA Pro Doubles squads.",
@@ -532,10 +532,10 @@
     "coach": "Coach Jake Taylor (Founder, Owner & Head HYROX Coach) & Coach Kaylee",
     "city_state": "Anaheim, CA (Orange County / SoCal)",
     "market": "Anaheim, CA (Orange County / SoCal)",
-    "category": "Boutique Official HYROX Partner Gym",
+    "category": "Boutique HYROX partner gym",
     "website": "https://grndfit.com/",
     "code": "GRND10",
-    "specialty": "Boutique Official HYROX Partner Gym right on W Broadway in Anaheim led by founder & HYROX competitor Coach Jake Taylor and Coach Kaylee ('Strength Is Our Aesthetic'), running weekly 8-station split benchmarks and Hell Week challenges.",
+    "specialty": "Boutique HYROX partner gym right on W Broadway in Anaheim led by founder & HYROX competitor Coach Jake Taylor and Coach Kaylee ('Strength Is Our Aesthetic'), running weekly 8-station split benchmarks and Hell Week challenges.",
     "hub": "Anaheim / SoCal"
   },
   {
@@ -556,7 +556,7 @@
     "market": "Irvine / Costa Mesa, CA",
     "category": "Hybrid & Functional Gym",
     "website": "https://www.cptgyms.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "High-energy Orange County hybrid and functional strength gym in Irvine and Costa Mesa equipped with competition turf lanes, Concept2 ergs, and heavy sleds.",
     "hub": "Anaheim / SoCal"
   },
@@ -567,7 +567,7 @@
     "market": "Newport Beach / Irvine, CA",
     "category": "Hybrid Strength + Cold Plunge Studio",
     "website": "https://caztrainingclub.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Newport Beach and Irvine hybrid strength and contrast-recovery studio combining functional turf conditioning with on-site cold plunge recovery.",
     "hub": "Anaheim / SoCal"
   },
@@ -578,7 +578,7 @@
     "market": "Costa Mesa, CA",
     "category": "Strength & Conditioning Gym",
     "website": "https://www.ironcoastfitness.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Costa Mesa strength and conditioning gym offering barbell progression, sled turf work, and metabolic conditioning for Southern California hybrid athletes.",
     "hub": "Anaheim / SoCal"
   },
@@ -589,7 +589,7 @@
     "market": "Irvine, CA",
     "category": "Functional Strength Gym",
     "website": "https://www.rebelstrengthoc.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Irvine functional strength and conditioning gym focused on heavy sled drive, barbell mechanics, and posterior-chain durability for hybrid racers.",
     "hub": "Anaheim / SoCal"
   },
@@ -600,7 +600,7 @@
     "market": "Irvine, CA",
     "category": "Private Functional Performance Gym",
     "website": "https://goat-fitness.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Private functional performance studio in Irvine specializing in 1-on-1 and small-group hybrid race preparation, mobility, and strength training.",
     "hub": "Anaheim / SoCal"
   },
@@ -611,7 +611,7 @@
     "market": "Huntington Beach, CA",
     "category": "Tread + Strength + Recovery Studio",
     "website": "https://www.stridefitness.com/huntington-beach",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Huntington Beach treadmill interval, strength, and recovery studio ideal for dialing in 1,000m compromised running splits and threshold pacing.",
     "hub": "Anaheim / SoCal"
   },
@@ -622,7 +622,7 @@
     "market": "Huntington Beach, CA",
     "category": "Functional Conditioning & Weightlifting",
     "website": "https://www.drsathletics.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Huntington Beach functional conditioning and weightlifting facility running structured erg, sled push, and high-rep wall-ball workouts.",
     "hub": "Anaheim / SoCal"
   },
@@ -633,7 +633,7 @@
     "market": "Fountain Valley, CA",
     "category": "Speed & Conditioning Lab",
     "website": "https://www.ocfasttwitch.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Fountain Valley speed, agility, and conditioning lab helping Orange County endurance athletes improve running economy and lower-leg durability.",
     "hub": "Anaheim / SoCal"
   },
@@ -644,7 +644,7 @@
     "market": "Costa Mesa, CA",
     "category": "Infrared Sauna & Cold Plunge Studio",
     "website": "https://www.revibeoc.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Costa Mesa infrared sauna and cold plunge recovery lounge built for contrast therapy and nervous-system reset after heavy weekend training blocks.",
     "hub": "Anaheim / SoCal"
   },
@@ -655,7 +655,7 @@
     "market": "Costa Mesa, CA",
     "category": "Cryo, Float & Contrast Therapy Lounge",
     "website": "https://www.newportbodyworks.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Costa Mesa cryotherapy, float, and contrast-therapy wellness lounge supporting post-race inflammation flushing and joint recovery.",
     "hub": "Anaheim / SoCal"
   },
@@ -666,7 +666,7 @@
     "market": "Newport Beach, CA",
     "category": "Contrast Therapy & LED Recovery Studio",
     "website": "https://pausestudio.com/locations/newport-beach",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Newport Beach contrast-therapy, infrared sauna, and LED red-light recovery studio for endurance runners and hybrid athletes.",
     "hub": "Anaheim / SoCal"
   },
@@ -677,7 +677,7 @@
     "market": "Los Angeles, CA",
     "category": "Contrast Therapy & Cold Plunge Studio",
     "website": "https://www.resetonthird.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Los Angeles contrast-therapy and cold plunge studio on West 3rd St offering guided breathwork, ice baths, and sauna recovery sessions.",
     "hub": "Anaheim / SoCal"
   },
@@ -688,7 +688,7 @@
     "market": "Venice / Los Angeles, CA",
     "category": "Sauna & Ice Bath Social Club",
     "website": "https://teddyshothouse.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Venice Beach community sauna and ice bath social club hosting post-run contrast sessions for Westside runners and hybrid athletes.",
     "hub": "Anaheim / SoCal"
   },
@@ -699,7 +699,7 @@
     "market": "Santa Monica, CA",
     "category": "Functional Movement & Mobility Studio",
     "website": "https://www.pvolve.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Santa Monica functional movement, stability, and low-impact mobility studio focused on hip, core, and joint longevity.",
     "hub": "Anaheim / SoCal"
   },
@@ -710,7 +710,7 @@
     "market": "San Diego, CA",
     "category": "Performance Gym & Contrast Lounge",
     "website": "https://catalystperformancesd.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "San Diego performance gym and contrast-therapy lounge combining turf conditioning with cold plunge and infrared recovery under one roof.",
     "hub": "Anaheim / SoCal"
   },
@@ -721,7 +721,7 @@
     "market": "San Diego, CA",
     "category": "Functional Gym, Cold Plunge & Sauna",
     "website": "https://blueoceansclub.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Downtown San Diego functional training gym with integrated cold plunge tubs and sauna facilities for year-round hybrid prep.",
     "hub": "Anaheim / SoCal"
   },
@@ -732,7 +732,7 @@
     "market": "Scottsdale, AZ",
     "category": "Functional Gym + Plunge/Sauna Room",
     "website": "https://anarchyfitnessaz.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Scottsdale functional training gym featuring an on-site plunge and sauna recovery room alongside heavy sled and erg lanes.",
     "hub": "Phoenix & Scottsdale"
   },
@@ -743,7 +743,7 @@
     "market": "Scottsdale, AZ",
     "category": "Strength & Red Light / Plunge Center",
     "website": "https://scottsdalefit.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Scottsdale strength and recovery center combining hybrid conditioning blocks with red-light therapy and pneumatic leg recovery.",
     "hub": "Phoenix & Scottsdale"
   },
@@ -754,7 +754,7 @@
     "market": "Scottsdale, AZ",
     "category": "Community Endurance Run Club",
     "website": "https://scottsdalerunclub.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Community endurance run club in Scottsdale hosting weekly track intervals, tempo group runs, and HYROX race-prep pacing blocks.",
     "hub": "Phoenix & Scottsdale"
   },
@@ -765,7 +765,7 @@
     "market": "Denver, CO",
     "category": "Hybrid Strength, Engine & Recovery Gym",
     "website": "https://www.fithousedenver.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Denver hybrid strength, aerobic engine, and recovery gym built for altitude endurance blocks and 8-station turf simulations.",
     "hub": "Denver"
   },
@@ -776,7 +776,7 @@
     "market": "Austin, TX",
     "category": "Functional Strength & Conditioning Gym",
     "website": "https://athleticoutcomes.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Austin functional strength and conditioning gym offering structured hybrid turf workouts, running intervals, and mobility classes.",
     "hub": "Austin"
   },
@@ -787,7 +787,7 @@
     "market": "Miami, FL",
     "category": "Functional Endurance & Sled Facility",
     "website": "https://www.hybridlabmiami.com",
-    "code": "HYROX10",
+    "code": "DALLAS10",
     "specialty": "Miami Edgewater functional endurance and sled facility built for high-humidity hybrid conditioning, partner workouts, and race simulations.",
     "hub": "Miami & South FL"
   }
