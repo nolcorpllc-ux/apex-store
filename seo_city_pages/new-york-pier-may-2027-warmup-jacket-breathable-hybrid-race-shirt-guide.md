@@ -27,4 +27,4 @@ Layer our Apex AeroShell Lightweight Race Warmup Jacket (`APC-C42`), Hybrid 8-St
 A lightweight DWR wind-and-thermal warmup shell (like our Apex AeroShell Jacket APC-C42 or Pro Division Quarter-Zip APC-C44) traps muscle heat during your 15-minute warmup without soaking up sweat, and packs down into your 50L Race Day Duffle (APC-C14) in 5 seconds at wave call.
 
 ### Q: Where can I get the New York Hudson Pier May 2027 hybrid race tee and warmup shell?
-Order the New York Hudson Pier Race Tee (APC-C21), 26/27 World Series Lightweight Warmup Jacket (APC-C45), and Roxzone Speed Dept.  Tech Tee (APC-C41) at https://www.apexhybridco.com Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.
+Order the New York Hudson Pier Race Tee (APC-C21), 26/27 World Series Lightweight Warmup Jacket (APC-C45), and Roxzone Speed Dept.  Tech Tee (APC-C41) at https://www.apexhybridco.com Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.

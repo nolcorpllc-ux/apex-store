@@ -972,6 +972,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -997,6 +999,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1022,6 +1026,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1047,6 +1053,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1072,6 +1080,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1097,6 +1107,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1122,6 +1134,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1147,6 +1161,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1172,6 +1188,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1197,6 +1215,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1222,6 +1242,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1247,6 +1269,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1272,6 +1296,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1297,6 +1323,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1322,6 +1350,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1347,6 +1377,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1372,6 +1404,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1397,6 +1431,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1422,6 +1458,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1447,6 +1485,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1472,6 +1512,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1497,6 +1539,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1522,6 +1566,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1547,6 +1593,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1572,6 +1620,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1597,6 +1647,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1622,6 +1674,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1647,6 +1701,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1672,6 +1728,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1697,6 +1755,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1722,6 +1782,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1747,6 +1809,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1772,6 +1836,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1797,6 +1863,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1822,6 +1890,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1847,6 +1917,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1872,6 +1944,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1897,6 +1971,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1922,6 +1998,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1947,6 +2025,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1972,6 +2052,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -1997,6 +2079,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2022,6 +2106,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2047,6 +2133,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2072,6 +2160,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2097,6 +2187,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2122,6 +2214,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2147,6 +2241,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2172,6 +2268,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2197,6 +2295,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2222,6 +2322,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2247,6 +2349,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2272,6 +2376,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2297,6 +2403,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2322,6 +2430,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2347,6 +2457,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2372,6 +2484,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2397,6 +2511,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2422,6 +2538,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2447,6 +2565,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2472,6 +2592,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2497,6 +2619,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2522,6 +2646,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2547,6 +2673,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2572,6 +2700,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2597,6 +2727,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2622,6 +2754,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2647,6 +2781,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2672,6 +2808,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2697,6 +2835,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2722,6 +2862,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2747,6 +2889,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2772,6 +2916,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2797,6 +2943,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2822,6 +2970,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2847,6 +2997,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2872,6 +3024,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2897,6 +3051,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2922,6 +3078,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2947,6 +3105,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2972,6 +3132,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -2997,6 +3159,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3022,6 +3186,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3047,6 +3213,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3072,6 +3240,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3097,6 +3267,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3122,6 +3294,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3147,6 +3321,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3172,6 +3348,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3197,6 +3375,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3222,6 +3402,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3247,6 +3429,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3272,6 +3456,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3297,6 +3483,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3322,6 +3510,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3347,6 +3537,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3372,6 +3564,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3397,6 +3591,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3422,6 +3618,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3447,6 +3645,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3472,6 +3672,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3497,6 +3699,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3522,6 +3726,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3547,6 +3753,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3572,6 +3780,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3597,6 +3807,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3622,6 +3834,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3647,6 +3861,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3672,6 +3888,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3697,6 +3915,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3722,6 +3942,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3747,6 +3969,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3772,6 +3996,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3797,6 +4023,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3822,6 +4050,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3847,6 +4077,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3872,6 +4104,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3897,6 +4131,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3922,6 +4158,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3947,6 +4185,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3972,6 +4212,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -3997,6 +4239,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4022,6 +4266,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4047,6 +4293,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4072,6 +4320,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4097,6 +4347,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4122,6 +4374,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4147,6 +4401,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4172,6 +4428,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4197,6 +4455,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4222,6 +4482,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4247,6 +4509,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4272,6 +4536,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4297,6 +4563,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4322,6 +4590,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4347,6 +4617,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4372,6 +4644,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4397,6 +4671,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4422,6 +4698,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4447,6 +4725,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4472,6 +4752,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4497,6 +4779,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4522,6 +4806,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4547,6 +4833,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4572,6 +4860,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4597,6 +4887,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4622,6 +4914,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4647,6 +4941,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4672,6 +4968,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4697,6 +4995,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4722,6 +5022,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4747,6 +5049,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4772,6 +5076,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4797,6 +5103,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4822,6 +5130,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4847,6 +5157,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4872,6 +5184,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4897,6 +5211,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4922,6 +5238,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4947,6 +5265,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4972,6 +5292,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -4997,6 +5319,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5022,6 +5346,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5047,6 +5373,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5072,6 +5400,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5097,6 +5427,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5122,6 +5454,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5147,6 +5481,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5172,6 +5508,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5197,6 +5535,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5222,6 +5562,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5247,6 +5589,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5272,6 +5616,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5297,6 +5643,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5322,6 +5670,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5347,6 +5697,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5372,6 +5724,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5397,6 +5751,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5422,6 +5778,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5447,6 +5805,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5472,6 +5832,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5497,6 +5859,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5522,6 +5886,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5547,6 +5913,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5572,6 +5940,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5597,6 +5967,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5622,6 +5994,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5647,6 +6021,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5672,6 +6048,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5697,6 +6075,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5722,6 +6102,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5747,6 +6129,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5772,6 +6156,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5797,6 +6183,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5822,6 +6210,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5847,6 +6237,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5872,6 +6264,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5897,6 +6291,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5922,6 +6318,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5947,6 +6345,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5972,6 +6372,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -5997,6 +6399,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6022,6 +6426,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6047,6 +6453,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6072,6 +6480,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6097,6 +6507,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6122,6 +6534,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6147,6 +6561,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6172,6 +6588,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6197,6 +6615,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6222,6 +6642,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6247,6 +6669,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6272,6 +6696,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6297,6 +6723,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6322,6 +6750,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6347,6 +6777,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6372,6 +6804,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6397,6 +6831,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6422,6 +6858,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6447,6 +6885,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6472,6 +6912,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6497,6 +6939,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6522,6 +6966,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6547,6 +6993,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6572,6 +7020,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6597,6 +7047,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6622,6 +7074,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6647,6 +7101,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6672,6 +7128,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6697,6 +7155,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6722,6 +7182,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6747,6 +7209,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6772,6 +7236,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6797,6 +7263,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6822,6 +7290,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6847,6 +7317,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6872,6 +7344,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6897,6 +7371,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6922,6 +7398,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6947,6 +7425,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6972,6 +7452,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -6997,6 +7479,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7022,6 +7506,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7047,6 +7533,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7072,6 +7560,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7097,6 +7587,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7122,6 +7614,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7147,6 +7641,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7172,6 +7668,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7197,6 +7695,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7222,6 +7722,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7247,6 +7749,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7272,6 +7776,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7297,6 +7803,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7322,6 +7830,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7347,6 +7857,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7372,6 +7884,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7397,6 +7911,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
     <item>
@@ -7422,6 +7938,8 @@
         <g:country>US</g:country>
         <g:service>Standard Ground</g:service>
         <g:price>0.00 USD</g:price>
+        <g:min_handling_time>7</g:min_handling_time>
+        <g:max_handling_time>10</g:max_handling_time>
       </g:shipping>
     </item>
   </channel>
