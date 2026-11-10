@@ -197,6 +197,30 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 function sizeOf(p) {
   return sizeChoice[p.id] || (p.has_sizes ? "L" : "");
 }
+
+const SIZE_RANK = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"];
+
+function isRaceDayJacket(p) {
+  return Boolean(p && /^APC-C4[6-9]$|^APC-C50$/.test(p.id));
+}
+
+function sizesFor(p) {
+  if (!p || !p.has_sizes) return [];
+  if (isRaceDayJacket(p)) {
+    const known = Object.keys((p.fourthwall_variants) || {});
+    const ordered = SIZE_RANK.filter((sz) => known.includes(sz));
+    const extra = known.filter((sz) => !ordered.includes(sz));
+    if (ordered.length || extra.length) return ordered.concat(extra);
+  }
+  return ["S", "M", "L", "XL", "2XL"];
+}
+
+function selectedPrice(p) {
+  const sz = sizeOf(p);
+  const variant = p && p.fourthwall_variants && p.fourthwall_variants[sz];
+  if (isRaceDayJacket(p) && variant && variant.price != null) return Number(variant.price);
+  return Number(p.retail_price);
+}
 function colorOf(p) {
   return colorChoice[p.id] || "black";
 }
@@ -333,7 +357,7 @@ function renderProducts() {
     const was = "";
     const badge = "";
     const sizes = p.has_sizes
-      ? ["S", "M", "L", "XL", "2XL"].map((sz) => `<button type="button" data-quick-add="${p.id}" data-size="${sz}" aria-label="Add size ${sz}">${sz}</button>`).join("")
+      ? sizesFor(p).map((sz) => `<button type="button" data-quick-add="${p.id}" data-size="${sz}" aria-label="Add size ${sz}">${sz}</button>`).join("")
       : `<button type="button" data-quick-add="${p.id}">Add</button>`;
     return `
       <article class="Card">
@@ -386,7 +410,7 @@ function lineFrom(p, qty = 1) {
     id: p.id,
     title: p.title,
     image: photoOf(p),
-    price: p.retail_price,
+    price: selectedPrice(p),
     qty,
     size: sizeOf(p) || "L",
     blank: blankLabel(p),
@@ -509,7 +533,8 @@ function openProduct(sku) {
       <span>Color: <strong>Black</strong></span>
     </div>`;
   const blankSelector = "";
-  const sizes = p.has_sizes ? `<div class="Sizes" style="margin:12px 0">${["S", "M", "L", "XL", "2XL"].map((sz) => `
+  const shownPrice = selectedPrice(p);
+  const sizes = p.has_sizes ? `<div class="Sizes" style="margin:12px 0">${sizesFor(p).map((sz) => `
     <button class="SizeBtn" type="button" data-size="${sz}" data-sku="${p.id}" aria-pressed="${sizeOf(p) === sz}">${sz}</button>
   `).join("")}</div>` : "";
   const isFw = isFourthwallItem(p);
@@ -531,13 +556,13 @@ function openProduct(sku) {
       <div class="ProductLayout__copy">
         <div class="Card__dept">${esc(p.dept)} · ${esc(p.category || "")}</div>
         <h2>${esc(p.title)}</h2>
-        <div class="Price"><span>${money(p.retail_price)}</span>${was}</div>
+        <div class="Price"><span>${money(shownPrice)}</span>${was}</div>
         <p style="margin-top:10px;font-size:13px;font-weight:600;color:#0f172a">${esc(fulfillmentLine)}</p>
         ${blankSelector}
         ${swatches}
         ${sizes}
         <div class="Card__actions" style="margin-top:14px;margin-bottom:14px">
-          <button class="Btn Btn--cobalt" type="button" data-buy="${p.id}" style="font-weight:800">${esc(buyBtnLabel)} · ${money(p.retail_price)} →</button>
+          <button class="Btn Btn--cobalt" type="button" data-buy="${p.id}" style="font-weight:800">${esc(buyBtnLabel)} · ${money(shownPrice)} →</button>
           <button class="Btn Btn--plain" type="button" data-add="${p.id}">Add to bag</button>
         </div>
         <p style="margin-top:10px">${esc(withoutMade(p.short_desc || ""))}</p>

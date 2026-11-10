@@ -161,6 +161,29 @@ def generate_product_pages():
             top_buy_label = f"Quick Checkout (${price})"
             main_buy_label = "Instant Stripe Checkout"
 
+        race_day_ids = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50"}
+        size_order = ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+        if prod.get("id") in race_day_ids:
+            known = list((prod.get("fourthwall_variants") or {}).keys())
+            size_names = [sz for sz in size_order if sz in known]
+        elif prod.get("has_sizes"):
+            size_names = ["S", "M", "L", "XL", "2XL"]
+        else:
+            size_names = []
+
+        def _size_btn(sz, active=False):
+            border = "2px solid #0f172a" if active else "1.5px solid #cbd5e1"
+            bg = "#0f172a" if active else "#fff"
+            color = "#fff" if active else "#0f172a"
+            return (
+                f'<button type="button" class="StaticSizeBtn" data-size="{sz}" '
+                f'onclick="window.selectStaticSize(\'{sz}\',this)" '
+                f'style="cursor:pointer; min-width:44px; padding:8px 12px; border-radius:6px; '
+                f'border:{border}; background:{bg}; color:{color}; font-weight:800; font-size:13px;">{sz}</button>'
+            )
+
+        size_buttons = "\n              ".join(_size_btn(sz, sz == "L") for sz in size_names)
+
         page_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,11 +272,7 @@ def generate_product_pages():
           {f"""<div style="margin-bottom:14px;">
             <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#0f172a; margin-bottom:6px;">Select Size (Unisex Athletic Fit): <span id="staticSizeLabel" style="color:#0066ff;">L</span></div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="StaticSizeBtn" data-size="S" onclick="window.selectStaticSize('S',this)" style="cursor:pointer; min-width:44px; padding:8px 12px; border-radius:6px; border:1.5px solid #cbd5e1; background:#fff; color:#0f172a; font-weight:800; font-size:13px;">S</button>
-              <button type="button" class="StaticSizeBtn" data-size="M" onclick="window.selectStaticSize('M',this)" style="cursor:pointer; min-width:44px; padding:8px 12px; border-radius:6px; border:1.5px solid #cbd5e1; background:#fff; color:#0f172a; font-weight:800; font-size:13px;">M</button>
-              <button type="button" class="StaticSizeBtn" data-size="L" onclick="window.selectStaticSize('L',this)" style="cursor:pointer; min-width:44px; padding:8px 12px; border-radius:6px; border:2px solid #0f172a; background:#0f172a; color:#fff; font-weight:800; font-size:13px;">L</button>
-              <button type="button" class="StaticSizeBtn" data-size="XL" onclick="window.selectStaticSize('XL',this)" style="cursor:pointer; min-width:44px; padding:8px 12px; border-radius:6px; border:1.5px solid #cbd5e1; background:#fff; color:#0f172a; font-weight:800; font-size:13px;">XL</button>
-              <button type="button" class="StaticSizeBtn" data-size="2XL" onclick="window.selectStaticSize('2XL',this)" style="cursor:pointer; min-width:44px; padding:8px 12px; border-radius:6px; border:1.5px solid #cbd5e1; background:#fff; color:#0f172a; font-weight:800; font-size:13px;">2XL</button>
+              {size_buttons}
             </div>
           </div>""" if prod.get("has_sizes") else ""}
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -375,6 +394,16 @@ def generate_product_pages():
     }};
     window.selectStaticSize = function(s, btn) {{
       state.size = s;
+      var picked = prodVariants[s];
+      if (picked && picked.price != null) {{
+        var priced = "$" + Number(picked.price).toFixed(2);
+        var buy = document.getElementById("staticBuyNowBtn");
+        if (buy && buy.textContent.indexOf("$") !== -1) buy.textContent = buy.textContent.replace(/\$[\d.]+/, priced);
+        var add = document.getElementById("staticAddBagLink");
+        if (add && add.textContent.indexOf("$") !== -1) add.textContent = add.textContent.replace(/\$[\d.]+/, priced);
+        var big = document.getElementById("staticPrice");
+        if (big) big.textContent = priced;
+      }}
       var lbl = document.getElementById("staticSizeLabel");
       if (lbl) lbl.textContent = s;
       var btns = document.querySelectorAll(".StaticSizeBtn");
