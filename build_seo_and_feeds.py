@@ -625,7 +625,7 @@ def generate_article_pages():
                     <span class="PriceWhole" style="font-size:19px;font-weight:900;">${p['retail_price']:.2f}</span>
                     <span class="PriceList" style="color:#64748b;font-size:13px;">${(p.get('list_price') or p['retail_price']):.2f}</span>
                   </div>
-                  <div style="font-size:12px;color:#0e8345;font-weight:700;margin-bottom:8px;">Made to order · Free US shipping</div>
+                  <div style="font-size:12px;color:#0e8345;font-weight:700;margin-bottom:8px;">{article_ship_line(p)}</div>
                 </div>
               </div>
               <div style="padding:0 14px 14px;display:flex;flex-direction:column;gap:6px;">
@@ -1273,6 +1273,16 @@ def strip_speed_claims(text):
     for old, new in repls:
         text = text.replace(old, new)
     return text
+
+
+def article_ship_line(prod):
+    """Shipping line for a product card inside a guide."""
+    if prod.get("id") in RACE_DAY_HANDLING_IDS:
+        line = "Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping."
+        if prod.get("id") == "APC-C47":
+            line += "<br>Won't arrive before Denver race weekend (Nov 12–15)."
+        return line
+    return "Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping."
 
 
 def generate_editorial_rss_feeds():
