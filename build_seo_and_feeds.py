@@ -183,6 +183,15 @@ def generate_product_pages():
             )
 
         size_buttons = "\n              ".join(_size_btn(sz, sz == "L") for sz in size_names)
+        ship_note_html = ""
+        if prod.get("id") in race_day_ids:
+            denver_display = "block" if prod.get("id") == "APC-C47" else "none"
+            ship_note_html = (
+                '<p id="raceDayShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">'
+                "Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.</p>"
+                f'<p id="raceDayDenverNote" style="font-size:13.5px; color:#0f172a; font-weight:800; margin:6px 0 0; line-height:1.45; display:{denver_display};">'
+                "Won't arrive before Denver race weekend (Nov 12–15).</p>"
+            )
 
         page_html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -265,6 +274,7 @@ def generate_product_pages():
           <div style="font-size:13px; color:#0e8345; font-weight:700; margin-top:4px;">
             ✓ {html.escape(prod['stock_status'])} · {html.escape(prod['ship_time'])}
           </div>
+          {ship_note_html}
           {fulfillment_line}
         </div>
         <div id="staticVariantBox" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px 16px; margin-bottom:16px;">
@@ -334,7 +344,7 @@ def generate_product_pages():
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Race-Week Perks</span>
+        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Shipping</span>
         <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
         
       </div>
@@ -726,7 +736,7 @@ def generate_article_pages():
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Race-Week Perks</span>
+        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Shipping</span>
         <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
         
       </div>
@@ -870,7 +880,7 @@ def generate_article_pages():
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Race-Week Perks</span>
+        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Shipping</span>
         <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
         
       </div>

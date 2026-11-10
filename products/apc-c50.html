@@ -63,7 +63,7 @@
         "https://www.apexhybridco.com/images/streetwear/vancouver-race-day/fw_front.jpg?v=20261107qa",
         "https://www.apexhybridco.com/images/streetwear/vancouver-race-day/fw_back.jpg?v=20261106fw"
       ],
-      "description": "Vancouver Race Day packable warmup \u2014 black with left-chest crest. Vancouver Conv Centre \u00b7 Dec 17\u201320, 2026. Black Vancouver Race Day jacket \u00b7 left-chest + full back print Made to order \u00b7 XS\u2013XL $68 \u00b7 2XL $70 \u00b7 3XL $72 Free US shipping on Fourthwall checkout Limited Vancouver race-week run",
+      "description": "Vancouver Race Day packable warmup \u2014 black with left-chest crest. Vancouver Conv Centre \u00b7 Dec 17\u201320, 2026. Black Vancouver Race Day jacket \u00b7 left-chest + full back print Made to order \u00b7 XS\u2013XL $68 \u00b7 2XL $70 \u00b7 3XL $72 Free US shipping on Fourthwall checkout Limited Vancouver city print",
       "keywords": "HYROX shirts, breathable HYROX race shirt, Vancouver Race Day, Lightweight Jackets, hybrid athlete apparel, 8-station functional fitness gear",
       "brand": {
         "@type": "Brand",
@@ -169,6 +169,9 @@
           <div style="font-size:13px; color:#0e8345; font-weight:700; margin-top:4px;">
             ✓ Made to order · Free US shipping
           </div>
+          <p id="raceDayShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.</p>
+          <p id="raceDayDenverNote" style="font-size:13.5px; color:#0f172a; font-weight:800; margin:6px 0 0; line-height:1.45; display:none;">Won't arrive before Denver race weekend (Nov 12–15).</p>
+
           <div style="font-size:12.5px; color:#0f172a; font-weight:700; margin-top:6px; background:#f1f5f9; padding:8px 10px; border-radius:6px; border-left:3px solid #2563eb;">✓ Made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall. <a href="https://apex-hybrid-co-shop.fourthwall.com/products/apex-vancouver-race-day" style="color:#2563eb;text-decoration:underline;">Instant 1-Click Checkout →</a></div>
         </div>
         <div id="staticVariantBox" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px 16px; margin-bottom:16px;">
@@ -196,7 +199,7 @@
           <li>Black Vancouver Race Day jacket · left-chest + full back print</li>
 <li>Made to order · XS–XL $68 · 2XL $70 · 3XL $72</li>
 <li>Free US shipping on Fourthwall checkout</li>
-<li>Limited Vancouver race-week run</li>
+<li>Limited Vancouver city print</li>
         </ul>
         <div style="margin:14px 0; padding:14px 16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; font-size:13.5px; color:#1e293b; line-height:1.55;">
           <div style="font-weight:800; color:#0f172a; text-transform:uppercase; letter-spacing:0.04em; font-size:12px; margin-bottom:6px;">✓ Fit, Fabric &amp; Race-Day Guarantee</div>
@@ -301,7 +304,7 @@
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Race-Week Perks</span>
+        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Shipping</span>
         <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
         
       </div>
@@ -479,8 +482,10 @@
       if (crumb) crumb.textContent = pack.name;
       var items = document.querySelectorAll(".HighlightsList li");
       for (var n = 0; n < items.length; n++) {
-        if (/Limited .+ race-week run/i.test(items[n].textContent || "")) items[n].textContent = "Limited " + pack.city + " race-week run";
+        if (/Limited .+ city print/i.test(items[n].textContent || "")) items[n].textContent = "Limited " + pack.city + " city print";
       }
+      var denverNote = document.getElementById("raceDayDenverNote");
+      if (denverNote) denverNote.style.display = pack.city === "Denver" ? "block" : "none";
       if (typeof syncAddLink === "function") syncAddLink();
     }
     applyRaceCity();
