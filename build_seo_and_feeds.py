@@ -50,7 +50,9 @@ def google_category_for(prod):
     if dept in ("Tees & Pump Covers", "Breathable Tech Shirts", "Race City Editions", "Muscle Tanks"):
         return "Apparel & Accessories > Clothing > Shirts & Tops"
     if dept == "Hoodies":
-        return "Apparel & Accessories > Clothing > Activewear > Sweatshirts & Hoodies"
+        # Google's taxonomy has no "Sweatshirts & Hoodies" node; hoodies and
+        # sweatshirts belong under Shirts & Tops (212).
+        return "Apparel & Accessories > Clothing > Shirts & Tops"
     if dept == "Lightweight Jackets":
         return "Apparel & Accessories > Clothing > Outerwear > Coats & Jackets"
     if dept == "Training Gear":
@@ -979,6 +981,39 @@ def load_fourthwall_variant_prices():
     return json.loads(raw)
 
 
+FEED_COLOR = "Black"  # every Apex product is sold in black only
+MERCHANT_CATEGORY_OVERRIDES = {
+    # Gym bag: a real Google taxonomy node (103) instead of the generic
+    # Sporting Goods bucket, so the item carries full apparel-style attributes.
+    "Gym Bags": "Luggage & Bags > Duffel Bags",
+}
+
+
+def merchant_category_for(prod):
+    return MERCHANT_CATEGORY_OVERRIDES.get(prod.get("category", "")) or google_category_for(prod)
+
+
+def load_fourthwall_feed_variants():
+    """Live Fourthwall offers written by sync_fourthwall_feed_variants.py."""
+    path = os.path.join(BASE_DIR, "fourthwall_feed_variants.json")
+    if not os.path.exists(path):
+        return {}
+    return json.load(open(path, encoding="utf-8")).get("products") or {}
+
+
+def fourthwall_snapshot_offers(prod, snapshot):
+    """Sizes, prices and stock straight from the Fourthwall product page."""
+    entry = snapshot.get(prod["id"])
+    if not entry:
+        return []
+    return [
+        {"size": v["size"], "variant_id": v["variant_id"], "price": float(v["price"]),
+         "in_stock": bool(v.get("in_stock", True))}
+        for v in entry.get("variants") or []
+        if v.get("size") and v.get("price") is not None
+    ]
+
+
 def verified_size_offers(prod, fw_variants, city_jackets=None):
     """Sizes whose catalog variant id matches Fourthwall and has a price.
 
@@ -1047,7 +1082,8 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
     link = f"{SITE_URL}/products/{prod['handle']}.html"
     image = prod.get("image") or ""
     img_link = image if image.startswith("http") else f"{SITE_URL}/{image.lstrip('/')}"
-    g_cat = google_category_for(prod)
+    g_cat = merchant_category_for(prod)
+    availability = "in_stock" if (apparel or {}).get("in_stock", True) else "out_of_stock"
     lines = [
         "    <item>",
         f"      <g:id>{html.escape(item_id)}</g:id>",
@@ -1056,7 +1092,7 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         f"      <g:link>{html.escape(link)}</g:link>",
         f"      <g:image_link>{html.escape(img_link)}</g:image_link>",
         "      <g:condition>new</g:condition>",
-        "      <g:availability>in_stock</g:availability>",
+        f"      <g:availability>{availability}</g:availability>",
         f"      <g:price>{price}</g:price>",
         f"      <g:sale_price>{sale_price}</g:sale_price>",
         "      <g:brand>Apex Hybrid Co</g:brand>",
@@ -1092,6 +1128,7 @@ def generate_google_shopping_feed():
     size. The gym bag stays a non-apparel row. APC-C04 and APC-C39 are never
     emitted.
     """
+    fw_snapshot = load_fourthwall_feed_variants()
     fw_variants = load_fourthwall_variant_prices()
     city_file = load_city_jacket_variant_file()
     city_products = city_file.get("products") or {}
@@ -1111,6 +1148,25 @@ def generate_google_shopping_feed():
             gaps.append(f"{prod['id']}: banned artwork image excluded")
             continue
         title = prod.get("seo_title") or prod["title"]
+        fw_offers = fourthwall_snapshot_offers(prod, fw_snapshot)
+        if fw_offers:
+            # Fourthwall is the source of truth: one item per live variant,
+            # each with category, age group, gender, color and size.
+            apparel_products.append(prod["id"])
+            for offer in fw_offers:
+                price, sale = feed_prices(prod, offer["price"])
+                item_id = prod["id"] if len(fw_offers) == 1 else f"{prod['id']}-{offer['size']}"
+                variant_title = title if len(fw_offers) == 1 else f"{title} - {offer['size']}"
+                items_xml.append(merchant_item_xml(
+                    prod,
+                    item_id=item_id,
+                    title=variant_title,
+                    price=price,
+                    sale_price=sale,
+                    apparel={**offer, "color": FEED_COLOR},
+                ))
+            continue
+        gaps.append(f"{prod['id']}: not in fourthwall_feed_variants.json; fell back to catalog variants")
         if not is_apparel_product(prod):
             retail = float(prod["retail_price"])
             price, sale = feed_prices(prod, retail)
