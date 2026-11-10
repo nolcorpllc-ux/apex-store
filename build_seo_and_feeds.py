@@ -1273,7 +1273,7 @@ def generate_pinterest_csv_feed():
                     "price": f"{prod['retail_price']:.2f} USD",
                     "availability": "in stock",
                     "condition": "new",
-                    "google_product_category": google_category_for(prod),
+                    "google_product_category": merchant_category_for(prod),
                     "product_type": f"{prod['dept']} > {prod['category']}",
                     "brand": "Apex Hybrid Co., operated by NolCorp LLC",
                 }
