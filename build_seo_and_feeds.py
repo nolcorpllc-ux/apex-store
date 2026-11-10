@@ -1700,12 +1700,59 @@ def scrub_text(text):
     text = re.sub(r"(?i)warehouse", "", text)
     text = re.sub(r"(?i)clinical", "", text)
     text = re.sub(r"(?i)30-day", "", text)
+    text = re.sub(
+        r"(?i)Just 20 minutes north of our[^,]*,\s*CA headquarters,\s*",
+        "",
+        text,
+    )
+    text = re.sub(r"(?i)headquarters", "", text)
+    text = re.sub(r"(?i)Designed in\s*,\s*CA\s*[-–]\s*", "", text)
+    text = text.replace("Newport Beach / , CA", "Newport Beach, CA")
+    text = text.replace("Newport Beach / , ca", "Newport Beach, CA")
+    text = text.replace("e.g. , CA", "e.g. your city")
+    text = re.sub(r"\s+, CA\b", "", text)
+    text = re.sub(r"\s+, ca\b", "", text)
+    text = text.replace("Carbon Black and Warm Bone colorways", "Carbon Black")
+    text = text.replace("Carbon Black and Warm Bone", "Carbon Black")
+    text = text.replace("Carbon Black or Warm Bone", "Carbon Black")
+    text = text.replace("in Carbon Black and Warm Bone", "in Carbon Black")
+    text = re.sub(r"(?i)Vintage Black and Bone White", "black", text)
+    text = re.sub(r"(?i)Vintage Black \+ Bone White", "black", text)
+    text = re.sub(r"(?i)Black \+ Bone White", "black", text)
+    text = re.sub(r"(?i)Bone White", "black", text)
+    text = re.sub(r"(?i)black or bone", "in black", text)
+    text = re.sub(r"(?i)Black or Bone", "Carbon Black", text)
+    text = re.sub(r'"Warm Bone"\s*,\s*', "", text)
+    text = re.sub(r',\s*"Warm Bone"', "", text)
+    text = text.replace("Warm Bone", "Carbon Black")
+    text = text.replace("white/bone", "other colors")
+    text = text.replace("Btn--bone", "Btn--plain")
+    text = text.replace("Swatch--bone", "Swatch--light")
+    text = re.sub(r"(?i)\s*\(plus lightweight\s+3\.8\s*-?\s*oz[^)]*\)", "", text)
+    text = re.sub(r"(?i)\s*OR lightweight\s+3\.8\s*-?\s*oz breathable workout knit", "", text)
+    text = re.sub(r"(?i)Ultra-Light\s+3\.8\s*-?\s*oz\s*(?:&amp;|&)\s*", "", text)
+    text = text.replace("3.8\\u20134.0 oz", "lightweight")
+    text = text.replace("3.8\\u20134.2 oz", "lightweight")
+    text = re.sub(r"(?i)3\.8\s*[\u2013\-]\s*4\.\d\s*-?\s*oz", "lightweight", text)
+    text = re.sub(r"(?i)3\.8\s*-?\s*oz", "", text)
+    text = re.sub(r"(?i)3\.8\s*[\u2013\-]\s*", "lightweight ", text)
+    text = text.replace(" (or  warmup fleece)", "")
+    text = text.replace("(or  warmup fleece)", "")
+    text = re.sub(r"(?i)ASICS-style", "", text)
+    text = re.sub(r"(?i)\bASICS\b", "", text)
+    text = re.sub(
+        r"(?i)\b(?:4\.0|4\.2|4\.3|6\.5|8\.0|8\.5|9\.0|14)\s*oz(?:/yd²|/yd\u00b2)?",
+        "",
+        text,
+    )
+    text = re.sub(r"(?i)\b9\s*oz\b", "", text)
+    text = re.sub(r"(?i)6\.0\s+to\s+6\.5\s*oz(?:/yd²|/yd\u00b2)?", "", text)
     return text
 
 
 def scrub_published_files():
     """Keep a rebuild from writing mangled product links or retired claims."""
-    exts = {".html", ".js", ".json", ".xml", ".csv", ".txt"}
+    exts = {".html", ".js", ".json", ".xml", ".csv", ".txt", ".css", ".md"}
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
         if ".git" in dirpath or "__pycache__" in dirpath:
             continue

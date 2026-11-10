@@ -183,8 +183,8 @@ function blankOf(p) {
 function blankLabel(p) {
   if (!hasBlankChoice(p)) return "";
   return blankOf(p) === "light"
-    ? "3.8 oz Breathable Workout Tee"
-    : "6.1 oz Heavyweight Cotton Tee";
+    ? " Breathable Workout Tee"
+    : "Heavyweight cotton tee";
 }
 let labTab = "calculator";
 let activeArticle = null;
@@ -457,7 +457,7 @@ function renderCart() {
       `<div style="margin-top:12px;padding-top:12px;border-top:1px solid #e5e7eb">
         <div style="display:flex;gap:6px;align-items:center">
           <input id="cartPromoInput" type="text" value="${esc(activePromo)}" placeholder="Promo code" style="flex:1;padding:7px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:12px;text-transform:uppercase" />
-          <button type="button" class="Btn Btn--bone" data-apply-promo="cart" style="padding:7px 12px;font-size:12px">Apply</button>
+          <button type="button" class="Btn Btn--plain" data-apply-promo="cart" style="padding:7px 12px;font-size:12px">Apply</button>
         </div>
         ${promoInfo ? `<div style="display:flex;justify-content:space-between;font-size:12px;color:#059669;font-weight:700;margin-top:6px"><span>✓ ${esc(promoInfo.label)}</span><span>−${money(discAmt)}</span></div>` : ""}
       </div>`
@@ -528,7 +528,7 @@ function openProduct(sku) {
         ${sizes}
         <div class="Card__actions" style="margin-top:14px;margin-bottom:14px">
           <button class="Btn Btn--cobalt" type="button" data-buy="${p.id}" style="font-weight:800">${esc(buyBtnLabel)} · ${money(p.retail_price)} →</button>
-          <button class="Btn Btn--bone" type="button" data-add="${p.id}">Add to bag</button>
+          <button class="Btn Btn--plain" type="button" data-add="${p.id}">Add to bag</button>
         </div>
         <p style="margin-top:10px">${esc(p.short_desc || "")}</p>
         <ul class="Highlights">${(p.highlights || []).map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
@@ -578,7 +578,7 @@ function openCheckout(lines) {
       `).join("")}
       <div style="margin:10px 0;display:flex;gap:8px;align-items:center">
         <input id="checkoutPromoInput" type="text" value="${esc(activePromo)}" placeholder="Promo code" style="flex:1;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;text-transform:uppercase" />
-        <button type="button" class="Btn Btn--bone" data-apply-promo="checkout" style="padding:8px 14px;font-size:13px">Apply Code</button>
+        <button type="button" class="Btn Btn--plain" data-apply-promo="checkout" style="padding:8px 14px;font-size:13px">Apply Code</button>
       </div>
       ${promoInfo ? `<div class="Row" style="color:#059669;font-weight:700"><span>Promo (${esc(promoInfo.code)} · ${promoInfo.pct}% off)</span><strong>−${money(discAmt)}</strong></div>` : ""}
       <div class="Row" style="margin-top:8px"><span>US delivery</span><strong>Free</strong></div>
@@ -691,7 +691,7 @@ function updateRaceSplitCalculator() {
     const cityPrice = cityProd ? money(cityProd.retail_price) : "$38";
     calcCta.innerHTML = `
       <button class="Btn Btn--cobalt" type="button" data-buy="${esc(city.sku)}" style="font-weight:800">Buy ${esc(city.name)} Race Tee (${cityPrice}) — Instant Checkout →</button>
-      <button class="Btn Btn--bone" type="button" data-buy="APC-C36">Buy Compromised Running ($42) →</button>
+      <button class="Btn Btn--plain" type="button" data-buy="APC-C36">Buy Compromised Running ($42) →</button>
       <a class="Btn Btn--ghost" href="team_orders.html" style="text-decoration:none">Doubles 2-Pack Bundles (15% Off) →</a>
     `;
   }
@@ -730,7 +730,7 @@ function renderArticles() {
           <div>${money(p.retail_price)}</div>
           <div style="display:flex;gap:6px;margin-top:6px">
             <button class="Btn Btn--cobalt" type="button" data-buy="${p.id}" style="flex:1;padding:7px 10px;font-size:12px">Buy Now →</button>
-            <button class="Btn Btn--bone" type="button" data-add="${p.id}" style="padding:7px 10px;font-size:12px">+ Bag</button>
+            <button class="Btn Btn--plain" type="button" data-add="${p.id}" style="padding:7px 10px;font-size:12px">+ Bag</button>
           </div>
         </div>`).join("")}
     </div>`;
@@ -792,7 +792,7 @@ function onClick(event) {
   }
   const color = event.target.closest("[data-color]");
   if (color) {
-    // Black-only storefront — ignore white/bone selections.
+    // Black-only storefront — ignore other colors selections.
     colorChoice[color.dataset.sku] = "black";
     renderProducts();
     if ($("#productModal").classList.contains("is-open")) openProduct(color.dataset.sku);
@@ -935,7 +935,7 @@ function boot(data) {
   if (targetProd) {
     if (params.get("size")) sizeChoice[targetProd.id] = params.get("size");
     if (params.get("color")) colorChoice[targetProd.id] = "black";
-    if (params.get("blank")) blankChoice[targetProd.id] = String(params.get("blank")).toLowerCase().includes("3.8") || String(params.get("blank")).toLowerCase().includes("light") ? "light" : "heavy";
+    if (params.get("blank")) blankChoice[targetProd.id] = String(params.get("blank")).toLowerCase().includes("light") ? "light" : "heavy";
   }
   if (buy) {
     if (isFourthwallItem(buy)) {

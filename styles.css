@@ -297,7 +297,7 @@ h1, h2, h3, p { margin: 0; }
 .Btn--ghost { border-color: var(--ink); background: transparent; }
 .Btn--ghost:hover { background: var(--ink); color: white; }
 .Btn--acid { background: var(--acid); color: var(--carbon); }
-.Btn--bone { background: white; color: var(--ink); border-color: var(--line); }
+.Btn--plain { background: white; color: var(--ink); border-color: var(--line); }
 .Btn--full { width: 100%; }
 .Hero__notes {
   display: flex;
@@ -623,7 +623,7 @@ h1, h2, h3, p { margin: 0; }
 }
 .Swatch[aria-pressed="true"] { outline: 2px solid var(--cobalt); outline-offset: 2px; }
 .Swatch--black { background: #12161e; }
-.Swatch--bone { background: #f4efe6; }
+.Swatch--light { background: #f4efe6; }
 .Card__body { padding: 12px 2px 0; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .Rating {
   display: flex;
