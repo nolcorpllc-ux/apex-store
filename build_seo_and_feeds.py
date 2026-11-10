@@ -1074,6 +1074,9 @@ def feed_prices(prod, variant_price):
     return money_usd(variant_price), money_usd(variant_price)
 
 
+RACE_DAY_HANDLING_IDS = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50"}
+
+
 def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
     link = f"{SITE_URL}/products/{prod['handle']}.html"
     image = prod.get("image") or ""
@@ -1109,6 +1112,14 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         "        <g:country>US</g:country>",
         "        <g:service>Standard Ground</g:service>",
         "        <g:price>0.00 USD</g:price>",
+    ])
+    # Overseas made-to-order window for the five Race Day jackets only.
+    if prod.get("id") in RACE_DAY_HANDLING_IDS:
+        lines.extend([
+            "        <g:min_handling_time>10</g:min_handling_time>",
+            "        <g:max_handling_time>14</g:max_handling_time>",
+        ])
+    lines.extend([
         "      </g:shipping>",
         "    </item>",
     ])
