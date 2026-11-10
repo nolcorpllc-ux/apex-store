@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="/favicon.ico" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Denver Race Day | Apex Hybrid Co., operated by NolCorp LLC</title>
@@ -24,7 +25,7 @@
   <meta name="twitter:title" content="Denver Race Day" />
   <meta name="twitter:description" content="Denver Race Day packable warmup — black with left-chest crest. Stockyards Event Ctr · Nov 12–15, 2026." />
   <meta name="twitter:image" content="https://www.apexhybridco.com/images/streetwear/denver-race-day/fw_front.jpg?v=20261107qa" />
-  <link rel="stylesheet" href="../styles.css?v=20261026v3" />
+  <link rel="stylesheet" href="../styles.css?v=20261110qa" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -370,8 +371,11 @@
       syncAddLink();
     };
     function getSelectedVariantId() {
+      var direct = prodVariants[state.size];
+      if (direct && direct.id) return direct.id;
       var byColor = prodVariants[state.color] || prodVariants["Black"] || prodVariants["Default"] || {};
-      return byColor[state.size] || byColor["L"] || byColor["One Size"] || defaultVid;
+      if (byColor && byColor.id) return byColor.id;
+      return (byColor && (byColor[state.size] || byColor["L"] || byColor["One Size"])) || defaultVid;
     }
     function redirectFourthwallVariant(vid, triggerEl, fbHref) {
       if (!vid) {
@@ -409,6 +413,67 @@
         window.location.href = fbHref || fallbackUrl;
       });
     }
+
+    var raceCities = {"dallas": {"id": "APC-C46", "name": "Dallas Race Day", "city": "Dallas", "buy": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-dallas-race-day", "desc": "Dallas Race Day packable warmup — black Sublicolor all-over print with left-chest crest. Kay Bailey Center · Nov 18–22, 2026.", "variants": {"XS": {"id": "88638db0-ac4c-4f93-ad88-d5748192096a", "price": 68.0}, "S": {"id": "93db90a0-3e22-4c6f-b7e9-942d269785ef", "price": 68.0}, "M": {"id": "7033864b-0915-448c-9967-226148d4217a", "price": 68.0}, "L": {"id": "d73d3810-ec7d-4935-817e-7bbdbe97eb29", "price": 68.0}, "XL": {"id": "a791d8c6-0c37-4d68-9525-a4a49bbb4c19", "price": 68.0}, "2XL": {"id": "211ecd05-1958-4409-911d-27c11d2a2e1a", "price": 70.0}, "3XL": {"id": "9d423e89-e54f-4368-acb1-097407fe9390", "price": 72.0}}, "defaultVid": "d73d3810-ec7d-4935-817e-7bbdbe97eb29", "front": "../images/streetwear/dallas-race-day/fw_front.jpg?v=20261107qa", "back": "../images/streetwear/dallas-race-day/fw_back.jpg?v=20261106fw", "og": "https://www.apexhybridco.com/images/streetwear/dallas-race-day/fw_front.jpg?v=20261107qa"}, "denver": {"id": "APC-C47", "name": "Denver Race Day", "city": "Denver", "buy": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-denver-race-day", "desc": "Denver Race Day packable warmup — black with left-chest crest. Stockyards Event Ctr · Nov 12–15, 2026.", "variants": {"XS": {"id": "d18be3b5-e1c0-41db-9c6e-4af872a0656e", "price": 68.0}, "S": {"id": "b4bb75cd-7351-41d2-8c5b-edb645c79901", "price": 68.0}, "M": {"id": "49a70789-ff66-4530-8883-b775102487c9", "price": 68.0}, "L": {"id": "04d6fe08-b677-455d-8f0b-34da2541ffbc", "price": 68.0}, "XL": {"id": "284b13ab-b857-4849-bfe9-f8437e23e0eb", "price": 68.0}, "2XL": {"id": "609497f7-f428-4269-b954-ce8b2975082e", "price": 70.0}, "3XL": {"id": "784f7aee-911e-4cbf-8a50-fc3955d0c9ed", "price": 72.0}}, "defaultVid": "49a70789-ff66-4530-8883-b775102487c9", "front": "../images/streetwear/denver-race-day/fw_front.jpg?v=20261107qa", "back": "../images/streetwear/denver-race-day/fw_back.jpg?v=20261106fw", "og": "https://www.apexhybridco.com/images/streetwear/denver-race-day/fw_front.jpg?v=20261107qa"}, "anaheim": {"id": "APC-C48", "name": "Anaheim Race Day", "city": "Anaheim", "buy": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-anaheim-race-day", "desc": "Anaheim Race Day packable warmup — black with left-chest crest. Anaheim Conv Center · Dec 3–6, 2026.", "variants": {"XS": {"id": "09b2e4e6-3b63-418f-9669-085406f68b76", "price": 68.0}, "S": {"id": "9aaaa0cc-34b8-44fd-b190-2fbd05010cfd", "price": 68.0}, "M": {"id": "84739359-672a-4505-a6ea-c85c4a654a82", "price": 68.0}, "L": {"id": "dfb61407-e94f-42a3-9040-5baf77f33357", "price": 68.0}, "XL": {"id": "6f908b2e-83dc-4f09-9ca0-4035aabe3bb0", "price": 68.0}, "2XL": {"id": "636e0288-b874-4af0-9029-65faeef71345", "price": 70.0}, "3XL": {"id": "aaba7ca1-cc86-4de2-b164-30d1fa6e6b70", "price": 72.0}}, "defaultVid": "84739359-672a-4505-a6ea-c85c4a654a82", "front": "../images/streetwear/anaheim-race-day/fw_front.jpg?v=20261107qa", "back": "../images/streetwear/anaheim-race-day/fw_back.jpg?v=20261106fw", "og": "https://www.apexhybridco.com/images/streetwear/anaheim-race-day/fw_front.jpg?v=20261107qa"}, "nashville": {"id": "APC-C49", "name": "Nashville Race Day", "city": "Nashville", "buy": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-nashville-race-day", "desc": "Nashville Race Day packable warmup — black with left-chest crest. Music City Center · Dec 9–13, 2026.", "variants": {"XS": {"id": "3b359a10-5903-41aa-a561-6f25116ecc0b", "price": 68.0}, "S": {"id": "cc1685fc-4451-4048-a24c-ec36c6840bf3", "price": 68.0}, "M": {"id": "33e2fb39-ec59-4f54-87c1-115abac69ddc", "price": 68.0}, "L": {"id": "544f0ee9-427c-40d5-bcba-9d521c178385", "price": 68.0}, "XL": {"id": "53f97ac6-0c6b-4944-a24c-fe7221789f8c", "price": 68.0}, "2XL": {"id": "2281f7f4-f0a0-4d78-b6a6-74acd468d0d6", "price": 70.0}, "3XL": {"id": "fa56b60f-2650-4043-9d0d-57e4df78abf0", "price": 72.0}}, "defaultVid": "33e2fb39-ec59-4f54-87c1-115abac69ddc", "front": "../images/streetwear/nashville-race-day/fw_front.jpg?v=20261107qa", "back": "../images/streetwear/nashville-race-day/fw_back.jpg?v=20261106fw", "og": "https://www.apexhybridco.com/images/streetwear/nashville-race-day/fw_front.jpg?v=20261107qa"}, "vancouver": {"id": "APC-C50", "name": "Vancouver Race Day", "city": "Vancouver", "buy": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-vancouver-race-day", "desc": "Vancouver Race Day packable warmup — black with left-chest crest. Vancouver Conv Centre · Dec 17–20, 2026.", "variants": {"XS": {"id": "55bb3750-8434-4166-b1dd-414a77a343b7", "price": 68.0}, "S": {"id": "4f5ffa91-d8de-4a55-ae84-61f0e84db1c3", "price": 68.0}, "M": {"id": "14b9fd59-4309-4f54-ac2d-be4baab7b2b0", "price": 68.0}, "L": {"id": "756a654f-ea4d-4ee9-99c5-7ce6f60eff73", "price": 68.0}, "XL": {"id": "e8da8e96-d2a6-42b2-8e67-d52578ed34a1", "price": 68.0}, "2XL": {"id": "5d6b7c07-e61f-4bfa-a4fd-aea9b86c12f0", "price": 70.0}, "3XL": {"id": "336d2761-2b13-4060-b748-54a99426f77e", "price": 72.0}}, "defaultVid": "14b9fd59-4309-4f54-ac2d-be4baab7b2b0", "front": "../images/streetwear/vancouver-race-day/fw_front.jpg?v=20261107qa", "back": "../images/streetwear/vancouver-race-day/fw_back.jpg?v=20261106fw", "og": "https://www.apexhybridco.com/images/streetwear/vancouver-race-day/fw_front.jpg?v=20261107qa"}};
+    function applyRaceCity() {
+      var key = String(location.hash || "").replace(/^#/, "").toLowerCase().replace(/[^a-z]/g, "");
+      var pack = raceCities[key];
+      if (!pack) return;
+      prodId = pack.id;
+      prodVariants = pack.variants;
+      defaultVid = pack.defaultVid;
+      fallbackUrl = pack.buy;
+      document.title = pack.name + " | Apex Hybrid Co., operated by NolCorp LLC";
+      var h1 = document.querySelector("h1");
+      if (h1) h1.textContent = pack.name;
+      var ogt = document.querySelector('meta[property="og:title"]');
+      if (ogt) ogt.setAttribute("content", pack.name + " | Apex Hybrid Co.");
+      var tw = document.querySelector('meta[name="twitter:title"]');
+      if (tw) tw.setAttribute("content", pack.name + " | Apex Hybrid Co.");
+      var ogi = document.querySelector('meta[property="og:image"]');
+      if (ogi) ogi.setAttribute("content", pack.og);
+      var main = document.getElementById("staticMainProdImg");
+      if (main) { main.src = pack.front; main.alt = pack.name; }
+      var media = document.querySelector(".ProdModalMedia");
+      var buttons = media ? media.querySelectorAll("button") : [];
+      if (buttons[0]) {
+        buttons[0].setAttribute("onclick", "document.getElementById('staticMainProdImg').src='" + pack.front + "'");
+        var im = buttons[0].querySelector("img");
+        if (im) { im.src = pack.front; im.alt = pack.name + " front"; }
+      }
+      if (buttons[1]) {
+        buttons[1].setAttribute("onclick", "document.getElementById('staticMainProdImg').src='" + pack.back + "'");
+        var im2 = buttons[1].querySelector("img");
+        if (im2) { im2.src = pack.back; im2.alt = pack.name + " back"; }
+      }
+      var links = document.querySelectorAll('a[href*="fourthwall.com/products/"]');
+      for (var i = 0; i < links.length; i++) {
+        var href = links[i].getAttribute("href") || "";
+        if (/apex-(dallas|denver|anaheim|nashville|vancouver)-race-day/.test(href)) links[i].setAttribute("href", pack.buy);
+      }
+      var adds = document.querySelectorAll('a[href*="add=APC-C"]');
+      for (var j = 0; j < adds.length; j++) {
+        var ah = adds[j].getAttribute("href") || "";
+        adds[j].setAttribute("href", ah.replace(/APC-C46|APC-C47|APC-C48|APC-C49|APC-C50/g, pack.id));
+      }
+      var buys = document.querySelectorAll("[data-buy]");
+      for (var k = 0; k < buys.length; k++) {
+        var bid = buys[k].getAttribute("data-buy") || "";
+        if (/^APC-C4[6-9]$|^APC-C50$/.test(bid)) buys[k].setAttribute("data-buy", pack.id);
+      }
+      var desc = document.querySelector('p[style*="font-size:14.5px"]');
+      if (desc) desc.textContent = pack.desc;
+      var crumb = document.querySelector('nav[aria-label="Breadcrumb"] span');
+      if (crumb) crumb.textContent = pack.name;
+      var items = document.querySelectorAll(".HighlightsList li");
+      for (var n = 0; n < items.length; n++) {
+        if (/Limited .+ race-week run/i.test(items[n].textContent || "")) items[n].textContent = "Limited " + pack.city + " race-week run";
+      }
+      if (typeof syncAddLink === "function") syncAddLink();
+    }
+    applyRaceCity();
+    window.addEventListener("hashchange", applyRaceCity);
+
     window.launchStaticCheckout = function(btn) {
       redirectFourthwallVariant(getSelectedVariantId(), btn, fallbackUrl);
     };
@@ -433,5 +498,6 @@
   })();
   </script>
 <script data-goatcounter="https://apexhybridco.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script src="/perks-bar.js?v=20261110qa"></script>
 </body>
 </html>

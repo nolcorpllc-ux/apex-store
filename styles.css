@@ -1135,7 +1135,18 @@ h1, h2, h3, p { margin: 0; }
     padding: 12px 20px 18px;
     gap: 12px;
   }
-  .SiteNav.is-open { display: flex; }
+  .SiteNav.is-open {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: calc(100vh - var(--bar-h) - var(--header-h));
+    z-index: 40;
+    background: var(--alabaster);
+    overflow-y: auto;
+    padding: 18px 22px 40px;
+  }
   .Hero, .Index, .Grid, .Journal__grid, .SplitForm, .Reader, .ProductLayout, .CityList, .Recs, .CheckoutGrid {
     grid-template-columns: 1fr;
   }
@@ -1446,9 +1457,24 @@ h1, h2, h3, p { margin: 0; }
 .Toast {
   z-index: 10100 !important;
 }
-body.is-locked #apexStickyPromoBar {
-  pointer-events: none;
-  opacity: 0.25;
+body:has(#apexStickyPromoBar) { padding-bottom: 84px; }
+body.perks-closed { padding-bottom: 0 !important; }
+body.is-locked #apexStickyPromoBar,
+body.nav-open #apexStickyPromoBar,
+body.nav-open .RW {
+  display: none !important;
+}
+body.nav-open .SiteHead { z-index: 20040; }
+.PerksDismiss {
+  margin-left: 8px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #64748b;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 @media (max-width: 760px) {
