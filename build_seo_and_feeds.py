@@ -1252,6 +1252,29 @@ def generate_google_shopping_feed():
 
 
 
+def strip_speed_claims(text):
+    """Keep editorial RSS titles and summaries from republishing retired speed claims."""
+    if not text:
+        return text
+    repls = [
+        ("Last-Minute Race Shirt & Doubles 2-Pack Fast US Shipping", "Chicago Navy Pier Race Shirt & Doubles 2-Pack"),
+        ("Fast US Shipping", "Free US Shipping"),
+        ("Priority Texas Dispatch", "Dallas Nov 2026 guide"),
+        ("Dallas Nov 2026 Priority Dispatch", "Dallas Nov 2026 guide"),
+        ("Priority Texas & US fulfillment open for ", "Guide for "),
+        ("Anaheim Dec 2026 SoCal Dispatch", "Anaheim Dec 2026"),
+        ("Dispatched directly from our Orange County / US fulfillment network for ", "Made to order for "),
+        ("and fast local  dispatch.", " Made to order. Ships from the US and arrives in about 7–10 business days."),
+        ("Lock in guaranteed after production US delivery on ", "Shop "),
+        ("Guaranteed US Delivery for ", ""),
+        ("Quick-Ship ", ""),
+        ("Zero-Lead-Time ", "Made-to-order "),
+    ]
+    for old, new in repls:
+        text = text.replace(old, new)
+    return text
+
+
 def generate_editorial_rss_feeds():
     """
     Generates standards-compliant RSS 2.0 + Atom + WebSub hub feeds (feed.xml and rss.xml)
@@ -1266,12 +1289,12 @@ def generate_editorial_rss_feeds():
             art_url = f"{SITE_URL}/articles/{art['slug']}.html"
             items_xml.append(
                 f"""    <item>
-      <title>{html.escape(art['title'])}</title>
+      <title>{html.escape(strip_speed_claims(art['title']))}</title>
       <link>{art_url}</link>
       <guid isPermaLink="true">{art_url}</guid>
       <pubDate>{pub_rfc822}</pubDate>
-      <category>{html.escape(art.get('category', 'HYROX & Hybrid Racing Guide'))}</category>
-      <description>{html.escape(art.get('summary', ''))}</description>
+      <category>{html.escape(strip_speed_claims(art.get('category', 'HYROX & Hybrid Racing Guide')))}</category>
+      <description>{html.escape(strip_speed_claims(art.get('summary', '')))}</description>
     </item>"""
             )
         for prod in products:
@@ -1608,7 +1631,7 @@ def inject_static_seo_into_index():
                         "name": "Do you carry 2026/2027 HYROX race-city shirts for Chicago, Dallas, Anaheim, Miami, Las Vegas, and New York?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Yes. Our Race City Editions collection includes Winged Apex Crest tees for Chicago Navy Pier (APC-C16), Dallas Lone Star Division (APC-C17), Anaheim SoCal (APC-C18), Miami Beach (APC-C19), Las Vegas (APC-C20), and New York Hudson Pier (APC-C21) Made to order. Free US shipping."
+                            "text": "Yes. Our Race City Editions collection includes Winged Apex Crest tees for Chicago Navy Pier (APC-C16), Dallas Lone Star Division (APC-C17), Anaheim SoCal (APC-C18), Miami Beach (APC-C19), Las Vegas (APC-C20), and New York Hudson Pier (APC-C21). They are made to order, ship from the US, and arrive in about 7–10 business days. Free US shipping."
                         }
                     }
                 ]

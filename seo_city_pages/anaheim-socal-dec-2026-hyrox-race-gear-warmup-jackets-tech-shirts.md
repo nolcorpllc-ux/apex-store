@@ -23,7 +23,7 @@ Anaheim Convention Center hosts one of the fastest tracks on the West Coast, dra
 December mornings in Orange County start around 50°F outside the plaza before warming rapidly inside the hall. Wear the Pro Division Lightweight Quarter-Zip Shell (`APC-C44`) or 26/27 World Series Lightweight Warmup Jacket (`APC-C45`) for outdoor warmup strides, and race in our Zone 5 Engine Perforated Hybrid Training Shirt (`APC-C38`) or Anaheim SoCal Open Division Tee (`APC-C18`).
 
 ## 3. Frequently Asked Questions
-### Q: How fast does Anaheim race gear ship to Southern California?
+### Q: How long does Anaheim race gear take to arrive in Southern California?
 Because Apex Hybrid Co., operated by NolCorp LLC is Made to order.
 
 ### Q: What shirt prevents overheating during Anaheim's fast 1,000m laps?
