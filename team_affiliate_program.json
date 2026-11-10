@@ -22,7 +22,7 @@
     {
       "bundle_id": "BUNDLE-DBL-TECH-2PK",
       "title": "HYROX Doubles Breathable Tech Tee 2-Pack",
-      "subtitle": "2x AeroMesh 4.0 or Dry-Pace Perforated Race Tees (Mix & Match Partner A & B Sizes)",
+      "subtitle": "2x Compromised Running 4.0 or 1km Split Perforated Race Tees (Mix & Match Partner A & B Sizes)",
       "badge": "Most Popular Doubles Kit",
       "pack_size": 2,
       "category": "Doubles 2-Pack",
@@ -283,7 +283,7 @@
         "partner_commission_pct": 20,
         "shirt_sales_bonus": "$25 bonus per 5 shirts sold",
         "perks": [
-          "Free Coach Sample Kit (AeroMesh Tech Shirt or AeroShell Warmup Jacket) for the head coach/owner",
+          "Free Coach Sample Kit (Compromised Running Tech Shirt or AeroShell Warmup Jacket) for the head coach/owner",
           "Custom gym 10% off code + dedicated referral link",
           "$25 bonus per 5 shirts sold + up to 20% partner revenue share on crew bundles",
           "Priority access to 2026/2027 Race City Tees (Chicago, Dallas, Anaheim/SoCal, Miami, Vegas, NYC)"
@@ -292,7 +292,7 @@
     ],
     "payout_rules": [
       "100% performance-based ($0 upfront spend): commissions are calculated on net collected product revenue after customer checkout clears.",
-      "14-day settlement window: payouts release 14 days post-fulfillment to account for size exchanges or returns.",
+      "14-day settlement window: payouts release 14 days post-fulfillment to account for print-error replacements or returns.",
       "Dual attribution: sales are credited whenever a buyer uses your referral URL (?ref=CODE) or enters your partner promo code at checkout."
     ]
   }
