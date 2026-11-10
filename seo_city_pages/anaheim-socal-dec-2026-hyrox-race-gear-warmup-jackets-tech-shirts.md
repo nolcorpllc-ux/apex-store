@@ -3,7 +3,7 @@
 - **Canonical Storefront URL:** https://www.apexhybridco.com/articles/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html
 - **Event / Venue:** Anaheim Convention Center (SoCal Open) (December 2026 · 33.8003° N, 117.9208° W)
 - **Category:** Anaheim Dec 2026 Race City Guide (7 min read)
-- **Summary:** Official Orange County & SoCal December 2026 hybrid race guide: Anaheim Pacific Coast Division tees (APC-C18), Pro Division Lightweight Quarter-Zip Shells (APC-C44) for crisp 52°F SoCal mornings, Zone 5 Engine perforated Zone 4/5 shirts (APC-C38), and fast local  dispatch.
+- **Summary:** Orange County & SoCal December 2026 hybrid race guide: Anaheim Pacific Coast Division tees (APC-C18), Pro Division Lightweight Quarter-Zip Shells (APC-C44) for crisp 52°F SoCal mornings, Zone 5 Engine perforated Zone 4/5 shirts (APC-C38), and fast local  dispatch.
 
 ## Direct Buy Now & Product Spec Links
 
