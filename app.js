@@ -538,7 +538,13 @@ function openProduct(sku) {
     <button class="SizeBtn" type="button" data-size="${sz}" data-sku="${p.id}" aria-pressed="${sizeOf(p) === sz}">${sz}</button>
   `).join("")}</div>` : "";
   const isFw = isFourthwallItem(p);
-  const fulfillmentLine = "Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.";
+  const raceDayShip = isRaceDayJacket(p);
+  const fulfillmentLine = raceDayShip
+    ? "Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall."
+    : "Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.";
+  const shipNote = raceDayShip
+    ? `<p style="margin-top:8px;font-size:13.5px;font-weight:700;color:#0f172a">Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.</p>${p.id === "APC-C47" ? `<p style="margin-top:6px;font-size:13.5px;font-weight:800;color:#0f172a">Won't arrive before Denver race weekend (Nov 12–15).</p>` : ""}`
+    : "";
   const buyBtnLabel = "Buy Now - Instant Checkout";
   const withoutMade = (text) => String(text || "")
     .replace(/made to order\s*·\s*made to order\s*·?/gi, "")
@@ -557,6 +563,7 @@ function openProduct(sku) {
         <div class="Card__dept">${esc(p.dept)} · ${esc(p.category || "")}</div>
         <h2>${esc(p.title)}</h2>
         <div class="Price"><span>${money(shownPrice)}</span>${was}</div>
+        ${shipNote}
         <p style="margin-top:10px;font-size:13px;font-weight:600;color:#0f172a">${esc(fulfillmentLine)}</p>
         ${blankSelector}
         ${swatches}
