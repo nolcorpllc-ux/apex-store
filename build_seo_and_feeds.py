@@ -1295,6 +1295,16 @@ def generate_editorial_rss_feeds():
     for filename in ("feed.xml", "rss.xml"):
         self_url = f"{SITE_URL}/{filename}"
         items_xml = []
+        items_xml.append(
+            f"""    <item>
+      <title>{html.escape("Gifts for Hybrid Athletes: Holiday Gift Guide")}</title>
+      <link>{SITE_URL}/gift-guide.html</link>
+      <guid isPermaLink="true">{SITE_URL}/gift-guide.html</guid>
+      <pubDate>{pub_rfc822}</pubDate>
+      <category>Gift Guide</category>
+      <description>{html.escape("Black gifts for hybrid athletes, grouped by price. Regular list prices. Made to order. Free US shipping.")}</description>
+    </item>"""
+        )
         for art in guides:
             art_url = f"{SITE_URL}/articles/{art['slug']}.html"
             items_xml.append(
@@ -1426,6 +1436,7 @@ def generate_sitemap_and_robots():
         (f"{SITE_URL}/directory.html", "0.95", "daily"),
         (f"{SITE_URL}/wristband.html", "0.95", "daily"),
         (f"{SITE_URL}/articles/index.html", "0.9", "daily"),
+        (f"{SITE_URL}/gift-guide.html", "0.9", "weekly"),
         (f"{SITE_URL}/returns.html", "0.6", "monthly"),
         (f"{SITE_URL}/contact.html", "0.5", "monthly"),
         (f"{SITE_URL}/about.html", "0.5", "monthly"),
