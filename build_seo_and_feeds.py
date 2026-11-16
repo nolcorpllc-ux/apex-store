@@ -508,6 +508,81 @@ def generate_product_pages():
                 out_c18.write(page_html)
 
 
+BLOCKED_SHOP_IDS = {"APC-C04", "APC-C39"}
+FALLBACK_SHOP_IDS = ("APC-C36", "APC-C28", "APC-C42", "APC-C13", "APC-C11", "APC-C14")
+
+
+def is_shop_strip_product(prod):
+    """Black catalog products only. Never the retired logo SKUs."""
+    if not prod or prod.get("id") in BLOCKED_SHOP_IDS:
+        return False
+    img = (prod.get("image") or "").lower()
+    if "black" not in img and "race-day" not in img:
+        return False
+    return bool(prod.get("fourthwall_product_url") and prod.get("handle"))
+
+
+def shop_strip_products(rec_skus):
+    """First three featured products, then best-fit black fallbacks."""
+    picks = []
+    seen = set()
+    for sku in list(rec_skus or []) + list(FALLBACK_SHOP_IDS):
+        if sku in seen:
+            continue
+        seen.add(sku)
+        prod = product_by_id.get(sku)
+        if not is_shop_strip_product(prod):
+            continue
+        picks.append(prod)
+        if len(picks) == 3:
+            break
+    return picks
+
+
+def shop_the_gear_html(picks, prefix):
+    """Compact buy strip. List prices only. No shipping-speed copy."""
+    cards = []
+    for prod in picks:
+        title = html.escape(prod["title"])
+        amount = float(prod["retail_price"])
+        price = f"${amount:.0f}" if amount == int(amount) else f"${amount:.2f}"
+        page = html.escape(f"{prefix}products/{prod['handle']}.html")
+        img = html.escape(f"{prefix}{prod['image']}")
+        buy = html.escape(prod["fourthwall_product_url"])
+        cards.append(
+            f"""          <article class="ShopStrip__card">
+            <a class="ShopStrip__media" href="{page}"><img src="{img}" alt="{title}" /></a>
+            <h3><a href="{page}">{title}</a></h3>
+            <p class="ShopStrip__price">{price}</p>
+            <div class="ShopStrip__actions">
+              <a class="ShopStrip__buy" href="{buy}">Buy · {price}</a>
+              <a class="ShopStrip__view" href="{page}">View</a>
+            </div>
+          </article>"""
+        )
+    inner = "\n".join(cards)
+    return f"""      <section class="ShopStrip" data-shop-strip="gear" aria-label="Shop the gear">
+        <style>
+          .ShopStrip{{margin:0 0 26px}}
+          .ShopStrip h2{{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#38bdf8;margin:0 0 10px}}
+          .ShopStrip__row{{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:4px}}
+          .ShopStrip__card{{flex:1 1 0;min-width:210px;scroll-snap-align:start;background:#0b0f17;color:#f8fafc;border:1px solid #1f2937;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}}
+          .ShopStrip__media{{display:block;background:#0b0f17;border-radius:8px;overflow:hidden}}
+          .ShopStrip__media img{{width:100%;height:140px;object-fit:contain;background:#0b0f17}}
+          .ShopStrip__card h3{{font-size:14px;line-height:1.3;font-weight:800;margin:0}}
+          .ShopStrip__card h3 a{{color:#fff;text-decoration:none}}
+          .ShopStrip__price{{margin:0;font-size:18px;font-weight:900;color:#fff}}
+          .ShopStrip__actions{{display:flex;gap:8px;margin-top:auto}}
+          .ShopStrip__buy{{flex:1;text-align:center;background:#0066ff;color:#fff;text-decoration:none;font-weight:800;border-radius:8px;padding:8px 10px;font-size:13px}}
+          .ShopStrip__view{{display:inline-flex;align-items:center;justify-content:center;border:1px solid #475569;color:#fff;text-decoration:none;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:700}}
+        </style>
+        <h2>Shop the gear</h2>
+        <div class="ShopStrip__row">
+{inner}
+        </div>
+      </section>"""
+
+
 def generate_article_pages():
     for art in guides:
         slug = art["slug"]
@@ -516,6 +591,7 @@ def generate_article_pages():
         summary = art["summary"]
         canonical = f"{SITE_URL}/articles/{slug}.html"
         rec_skus = art.get("recommended_skus", [])
+        shop_strip = shop_the_gear_html(shop_strip_products(rec_skus), "../")
         rec_products = [product_by_id[s] for s in rec_skus if s in product_by_id]
         if not rec_products:
             rec_products = [product_by_id[s] for s in ("APC-C36", "APC-C42", "APC-E01", "APC-E12") if s in product_by_id]
@@ -694,6 +770,8 @@ def generate_article_pages():
       <p style="font-size:16px; color:#444; border-left:3px solid #0066ff; padding-left:14px; margin-bottom:20px;">
         {html.escape(summary)}
       </p>
+
+{shop_strip}
 
       <section aria-label="Featured gear checkout" style="background:#0f172a;color:#fff;padding:16px 18px;border-radius:10px;margin-bottom:26px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
