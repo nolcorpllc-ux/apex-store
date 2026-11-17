@@ -1320,7 +1320,7 @@
       "stock_status": "Made to order",
       "has_sizes": true,
       "has_colorways": false,
-      "short_desc": "Heavyweight black hoodie with a heat, wave, lane, and bib board. The numbers are sample marks. 16.5 oz, 65% cotton and 35% recycled polyester, relaxed fit, kangaroo pocket.",
+      "short_desc": "Black heavyweight hoodie with a heat, wave, lane, and bib board. The numbers are sample marks. 16.5 oz, 65% cotton and 35% recycled polyester, relaxed fit, kangaroo pocket.",
       "highlights": [
         "Fabric: Heavyweight fabric (16.5 oz), 65% cotton and 35% recycled polyester, relaxed fit, raglan sleeves, kangaroo pocket.",
         "Color: Black only. Sizes XS, S, M, L, XL, 2XL, 3XL.",
@@ -5238,6 +5238,6 @@
     "apparel_fulfillment": "Fourthwall US On-Demand Production & Direct Athlete Fulfillment (APC-C01 through APC-C45)",
     "equipment_fulfillment": "Fourthwall US Direct Fulfillment (APC-C01 through APC-C45)",
     "fourthwall_storefront_url": "https://apex-hybrid-co-shop.fourthwall.com",
-    "product_count": 45
+    "product_count": 65
   }
 }
