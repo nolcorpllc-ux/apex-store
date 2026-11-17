@@ -19,8 +19,7 @@ const APPAREL = new Set([
   "Muscle Tanks",
   "Tees & Pump Covers",
   "Hoodies",
-  "Lightweight Jackets",
-  "Race Day Windbreakers",
+  "Windbreakers",
   "Training Gear",
 ]);
 
@@ -31,8 +30,7 @@ const PILLS = [
   ["Muscle Tanks", "Muscle Tanks"],
   ["Tees & Pump Covers", "Race Tees & Pump Covers"],
   ["Hoodies", "Warmup Hoodies"],
-  ["Lightweight Jackets", "Lightweight Jackets"],
-  ["Race Day Windbreakers", "Race Day Windbreakers"],
+  ["Windbreakers", "Windbreakers"],
   ["Training Gear", "Training Gear"],
 ];
 
@@ -275,7 +273,8 @@ function hoverPhotoOf(p) {
 function matchesDept(p) {
   if (dept === "apparel") return APPAREL.has(p.dept);
   if (dept === "all") return true;
-  return p.dept === dept;
+  const wanted = (dept === "Lightweight Jackets" || dept === "Race Day Windbreakers") ? "Windbreakers" : dept;
+  return p.dept === wanted;
 }
 
 function visibleProducts() {
@@ -1006,7 +1005,7 @@ function boot(data) {
   }
   const reqDept = params.get("dept") || "";
   if (reqDept) {
-    dept = reqDept;
+    dept = (reqDept === "Lightweight Jackets" || reqDept === "Race Day Windbreakers") ? "Windbreakers" : reqDept;
     renderProducts();
   }
   const reqQty = Math.max(1, parseInt(params.get("qty") || "1", 10) || 1);
