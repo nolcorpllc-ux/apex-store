@@ -352,11 +352,11 @@ const SHORT = {
   "APC-C48": "Anaheim Race Day",
   "APC-C49": "Nashville Race Day",
   "APC-C50": "Vancouver Race Day",
-  "APC-C51": "Dallas Race Day Stitched",
-  "APC-C52": "Denver Race Day Stitched",
-  "APC-C53": "Anaheim Race Day Stitched",
-  "APC-C54": "Nashville Race Day Stitched",
-  "APC-C55": "Vancouver Race Day Stitched",
+  "APC-C51": "Dallas Race Day Windbreaker",
+  "APC-C52": "Denver Race Day Windbreaker",
+  "APC-C53": "Anaheim Race Day Windbreaker",
+  "APC-C54": "Nashville Race Day Windbreaker",
+  "APC-C55": "Vancouver Race Day Windbreaker",
 };
 
 function shortTitle(p) {
