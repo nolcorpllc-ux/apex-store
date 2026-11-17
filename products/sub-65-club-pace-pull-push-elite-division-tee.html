@@ -689,6 +689,7 @@
       return variantId(map[state.size]) || variantId(map["L"]) || variantId(map["One Size"]) || variantId(map["One size"]) || defaultVid;
     }
     function redirectFourthwallVariant(vid, triggerEl, fbHref) {
+      try { hit("checkout_clicks_total"); hit("checkout_" + prodId); } catch (e) {}
       if (!vid) {
         window.location.href = fbHref || fallbackUrl;
         return;
@@ -740,7 +741,27 @@
     try {
       var isBot = /bot|crawl|spider|slurp|headless|lighthouse/i.test(navigator.userAgent || "");
       var ns = "https://abacus.jasoncameron.dev/hit/apexhybridco.com";
-      var hit = function(k){ if (!isBot) fetch(ns + "/" + k, {method:"GET", mode:"cors", keepalive:true, cache:"no-store"}).catch(function(){}); };
+      var hit = function(k){
+        if (isBot || !k) return;
+        try { fetch(ns + "/" + k, {method:"GET", mode:"cors", keepalive:true, cache:"no-store"}).catch(function(){}); } catch (e) {}
+        var sendGc = function(){
+          if (window.goatcounter && window.goatcounter.count) {
+            window.goatcounter.count({path: k, title: k, event: true});
+            return true;
+          }
+          return false;
+        };
+        if (!sendGc()) {
+          var tries = 0;
+          var timer = setInterval(function(){ tries++; if (sendGc() || tries > 25) clearInterval(timer); }, 200);
+        }
+      };
+      document.addEventListener("click", function(ev){
+        var add = ev.target && ev.target.closest ? ev.target.closest("a[href*='index.html?add=']") : null;
+        if (!add) return;
+        hit("cart_add_total");
+        hit("cart_add_" + prodId);
+      });
       hit("pageviews_total");
       hit("product_views_total");
       hit("view_APC-C27");
