@@ -13,7 +13,7 @@
 | `APC-C44` | **Pro Division Lightweight Quarter-Zip Shell — 'Sub-65 Club'** | Lightweight Jackets | **$64.00** | [Product Page](https://www.apexhybridco.com/products/pro-division-lightweight-quarter-zip-race-shell.html) | [Buy Now ($64.00)](https://www.apexhybridco.com/?buy=APC-C44) |
 | `APC-C38` | **Zone 5 Engine Perforated Hybrid Training Shirt — 'Zone 4 / Zone 5 Engine'** | Breathable Tech Tees | **$38.00** | [Product Page](https://www.apexhybridco.com/products/zone-5-engine.html) | [Buy Now ($38.00)](https://www.apexhybridco.com/?buy=APC-C38) |
 | `APC-C45` | **26/27 World Series Lightweight Warmup Jacket — 'Chicago · Dallas · SoCal · NYC'** | Lightweight Jackets | **$68.00** | [Product Page](https://www.apexhybridco.com/products/26-27-world-series-lightweight-warmup-jacket.html) | [Buy Now ($68.00)](https://www.apexhybridco.com/?buy=APC-C45) |
-| `APC-C14` | **8-Station Race Day 50L All-Weather Gym & Shoe Bag** | Gym Bags | **$64.00** | [Product Page](https://www.apexhybridco.com/products/apex-8-station-race-day-tactical-duffle.html) | [Buy Now ($64.00)](https://www.apexhybridco.com/?buy=APC-C14) |
+| `APC-C14` | **8-Station Haul** | Gym Bags | **$64.00** | [Product Page](https://www.apexhybridco.com/products/apex-8-station-race-day-tactical-duffle.html) | [Buy Now ($64.00)](https://www.apexhybridco.com/?buy=APC-C14) |
 | `APC-E03` | **CryoPod 105-Gallon Portable Ice Bath Tub Cold Plunge + Insulated Lid** | Cold Plunge & Thermal | **$149.00** | [Product Page](https://www.apexhybridco.com/products/insulated-portable-cold-plunge-ice-pod-pro.html) | [Buy Now ($149.00)](https://www.apexhybridco.com/?buy=APC-E03) |
 
 ## 1. Venue Course Conditions & Turf Strategy — Anaheim Convention Center (SoCal Open)
