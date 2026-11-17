@@ -4,7 +4,11 @@ function trackHit(key) {
     if (!key) return;
     if (/bot|crawl|spider|slurp|headless|lighthouse/i.test(navigator.userAgent || "")) return;
     const clean = String(key).replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 62);
+    // keepalive GET survives the move to Fourthwall. Abacus ignores POST (308).
     fetch(`${BEACON_NS}/${clean}`, { method: "GET", mode: "cors", keepalive: true, cache: "no-store" }).catch(() => {});
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({ path: clean, title: clean, event: true });
+    }
   } catch (_) {}
 }
 window.apexTrackHit = trackHit;
@@ -454,11 +458,13 @@ function lineFrom(p, qty = 1) {
   };
 }
 
-function addToCart(sku, openDrawer = true) {
+function addToCart(sku, openDrawer = true, track = true) {
   const p = findProduct(sku);
   if (!p) return;
-  trackHit("cart_add_total");
-  trackHit(`cart_add_${p.id}`);
+  if (track) {
+    trackHit("cart_add_total");
+    trackHit(`cart_add_${p.id}`);
+  }
   const line = lineFrom(p);
   const existing = cart.find((item) => item.key === line.key);
   if (existing) existing.qty += 1;
@@ -1025,7 +1031,7 @@ function boot(data) {
       checkoutViaFourthwallApi([lineFrom(add, reqQty)], add.fourthwall_product_url);
       return;
     }
-    addToCart(add.id, true);
+    addToCart(add.id, true, false);
   }
 }
 
