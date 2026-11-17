@@ -11,8 +11,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/dallas-race-day/fw_front.jpg?v=20261107qa",
-      "alt_image": "images/streetwear/dallas-race-day/fw_back.jpg?v=20261106fw",
+      "image": "images/streetwear/apex-dallas-race-day/01.jpg?v=20261117hyrxprint",
+      "alt_image": "images/streetwear/apex-dallas-race-day/02.jpg?v=20261117hyrxprint",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -70,7 +70,12 @@
         }
       },
       "fourthwall_default_variant_id": "d73d3810-ec7d-4935-817e-7bbdbe97eb29",
-      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#dallas"
+      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#dallas",
+      "extra_images": [
+        "images/streetwear/apex-dallas-race-day/03.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-dallas-race-day/04.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-dallas-race-day/05.jpg?v=20261117hyrxprint"
+      ]
     },
     {
       "id": "APC-C51",
@@ -140,8 +145,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/denver-race-day/fw_front.jpg?v=20261107qa",
-      "alt_image": "images/streetwear/denver-race-day/fw_back.jpg?v=20261106fw",
+      "image": "images/streetwear/apex-denver-race-day/01.jpg?v=20261117hyrxprint",
+      "alt_image": "images/streetwear/apex-denver-race-day/02.jpg?v=20261117hyrxprint",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -199,7 +204,12 @@
         }
       },
       "fourthwall_default_variant_id": "49a70789-ff66-4530-8883-b775102487c9",
-      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#denver"
+      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#denver",
+      "extra_images": [
+        "images/streetwear/apex-denver-race-day/03.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-denver-race-day/04.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-denver-race-day/05.jpg?v=20261117hyrxprint"
+      ]
     },
     {
       "id": "APC-C52",
@@ -269,8 +279,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/anaheim-race-day/fw_front.jpg?v=20261107qa",
-      "alt_image": "images/streetwear/anaheim-race-day/fw_back.jpg?v=20261106fw",
+      "image": "images/streetwear/apex-anaheim-race-day/01.jpg?v=20261117hyrxprint",
+      "alt_image": "images/streetwear/apex-anaheim-race-day/02.jpg?v=20261117hyrxprint",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -328,7 +338,14 @@
         }
       },
       "fourthwall_default_variant_id": "84739359-672a-4505-a6ea-c85c4a654a82",
-      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#anaheim"
+      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#anaheim",
+      "extra_images": [
+        "images/streetwear/apex-anaheim-race-day/03.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-anaheim-race-day/04.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-anaheim-race-day/05.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-anaheim-race-day/06.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-anaheim-race-day/07.jpg?v=20261117hyrxprint"
+      ]
     },
     {
       "id": "APC-C53",
@@ -398,8 +415,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/nashville-race-day/fw_front.jpg?v=20261107qa",
-      "alt_image": "images/streetwear/nashville-race-day/fw_back.jpg?v=20261106fw",
+      "image": "images/streetwear/apex-nashville-race-day/01.jpg?v=20261117hyrxprint",
+      "alt_image": "images/streetwear/apex-nashville-race-day/02.jpg?v=20261117hyrxprint",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -457,7 +474,13 @@
         }
       },
       "fourthwall_default_variant_id": "33e2fb39-ec59-4f54-87c1-115abac69ddc",
-      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#nashville"
+      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#nashville",
+      "extra_images": [
+        "images/streetwear/apex-nashville-race-day/03.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-nashville-race-day/04.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-nashville-race-day/05.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-nashville-race-day/06.jpg?v=20261117hyrxprint"
+      ]
     },
     {
       "id": "APC-C54",
@@ -527,8 +550,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/vancouver-race-day/fw_front.jpg?v=20261107qa",
-      "alt_image": "images/streetwear/vancouver-race-day/fw_back.jpg?v=20261106fw",
+      "image": "images/streetwear/apex-vancouver-race-day/01.jpg?v=20261117hyrxprint",
+      "alt_image": "images/streetwear/apex-vancouver-race-day/02.jpg?v=20261117hyrxprint",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -586,7 +609,14 @@
         }
       },
       "fourthwall_default_variant_id": "14b9fd59-4309-4f54-ac2d-be4baab7b2b0",
-      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#vancouver"
+      "product_url": "https://www.apexhybridco.com/products/dallas-race-day.html#vancouver",
+      "extra_images": [
+        "images/streetwear/apex-vancouver-race-day/03.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-vancouver-race-day/04.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-vancouver-race-day/05.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-vancouver-race-day/06.jpg?v=20261117hyrxprint",
+        "images/streetwear/apex-vancouver-race-day/07.jpg?v=20261117hyrxprint"
+      ]
     },
     {
       "id": "APC-C55",
