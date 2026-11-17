@@ -132,10 +132,12 @@ def generate_product_pages(only_ids=None):
                 },
             ],
         }
-        if prod.get("id") in NA_PACKABLE_IDS:
+        if prod.get("id") in NA_PACKABLE_IDS and prod.get("id") not in STITCHED_RACE_IDS:
             handling = json_ld["@graph"][1]["offers"]["shippingDetails"]["deliveryTime"]["handlingTime"]
             handling["minValue"] = 7
             handling["maxValue"] = 10
+        if prod.get("id") in STITCHED_RACE_IDS:
+            json_ld["@graph"][1]["offers"]["shippingDetails"].pop("deliveryTime", None)
         priced_for_schema = fourthwall_size_prices(prod)
         if len({amount for _, amount in priced_for_schema}) > 1:
             base_offer = json_ld["@graph"][1]["offers"]
@@ -232,6 +234,11 @@ def generate_product_pages(only_ids=None):
                 "Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.</p>"
                 f'<p id="raceDayDenverNote" style="font-size:13.5px; color:#0f172a; font-weight:800; margin:6px 0 0; line-height:1.45; display:{denver_display};">'
                 "Won't arrive before Denver race weekend (Nov 12–15).</p>"
+            )
+        elif prod.get("id") in STITCHED_RACE_IDS:
+            ship_note_html = (
+                '<p id="usShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">'
+                + STITCHED_SHIP_LINE + "</p>"
             )
         elif prod.get("id") in NA_PACKABLE_IDS:
             ship_note_html = (
@@ -1265,8 +1272,10 @@ def feed_prices(prod, variant_price):
 
 
 RACE_DAY_HANDLING_IDS = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50"}
+STITCHED_RACE_IDS = {"APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55", "APC-C57"}
 NA_PACKABLE_IDS = {"APC-C43", "APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55", "APC-C57"}
 NA_SHIP_LINE = "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping."
+STITCHED_SHIP_LINE = "Made to order. Ships from the US or Canada. Free US shipping."
 OVERSEAS_SHIP_LINE = "Made overseas. Ships in about 10–14 business days. Free US shipping."
 
 
@@ -1274,8 +1283,8 @@ def feed_description(prod):
     desc = (prod.get("short_desc") or "").strip()
     if prod.get("id") in RACE_DAY_HANDLING_IDS and "overseas" not in desc.lower():
         desc = f"{desc} {OVERSEAS_SHIP_LINE}".strip()
-    if prod.get("id") == "APC-C57" and "US or Canada" not in desc:
-        desc = f"{desc} Made to order. Ships from the US or Canada. Free US shipping.".strip()
+    if prod.get("id") in STITCHED_RACE_IDS and "US or Canada" not in desc:
+        desc = f"{desc} {STITCHED_SHIP_LINE}".strip()
     elif prod.get("id") in NA_PACKABLE_IDS and "US or Canada" not in desc:
         desc = f"{desc} {NA_SHIP_LINE}".strip()
     url = prod.get("fourthwall_product_url") or ""
@@ -1491,6 +1500,8 @@ def article_ship_line(prod):
         if prod.get("id") == "APC-C47":
             line += "<br>Won't arrive before Denver race weekend (Nov 12–15)."
         return line
+    if prod.get("id") in STITCHED_RACE_IDS:
+        return STITCHED_SHIP_LINE
     if prod.get("id") in NA_PACKABLE_IDS:
         return NA_SHIP_LINE
     return "Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping."
