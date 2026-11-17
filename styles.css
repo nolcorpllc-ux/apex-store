@@ -886,6 +886,12 @@ h1, h2, h3, p { margin: 0; }
   font-size: 12px;
   max-width: 90ch;
 }
+.FineLinks { margin-top: 18px; }
+.SiteFooter .FineLinks a { display: inline; padding: 0; }
+@media (max-width: 860px) {
+  .FineLinks .FineDot { display: none; }
+  .SiteFooter .FineLinks a { display: inline-block; margin: 0 14px 8px 0; }
+}
 
 .Sheet {
   position: fixed;
