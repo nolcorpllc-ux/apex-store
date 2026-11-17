@@ -19,7 +19,7 @@
     if (!document.body.contains(bar)) return;
     if (document.body.classList.contains("perks-closed") || document.body.classList.contains("is-locked") || document.body.classList.contains("nav-open")) return;
     var h = bar.offsetHeight || 64;
-    document.body.style.paddingBottom = (h + 16) + "px";
+    document.body.style.setProperty("padding-bottom", (h + 36) + "px", "important");
   }
 
   var btn = document.createElement("button");
@@ -37,4 +37,5 @@
   else bar.appendChild(btn);
   syncPad();
   window.addEventListener("resize", syncPad);
+  if (window.ResizeObserver) new ResizeObserver(syncPad).observe(bar);
 })();
