@@ -3729,6 +3729,127 @@
         }
       },
       "fourthwall_default_variant_id": "a1c2426f-97bb-4493-b715-852ee8e840a5"
+    },
+    {
+      "id": "APC-C70",
+      "handle": "phoenix-race-day-stitched",
+      "title": "Phoenix Race Day Windbreaker",
+      "seo_title": "Phoenix Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/phoenix-race-day-stitched/01.jpg?v=20261117phoenix",
+      "alt_image": "images/streetwear/phoenix-race-day-stitched/02.jpg?v=20261117phoenix",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The Phoenix crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered Phoenix crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "phoenix-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/phoenix-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/phoenix-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/phoenix-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/phoenix-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "0b0ff21b-f8e1-4458-ba5d-b3f40c6be867",
+          "M": "a529a12a-1dc8-4e71-a77d-f5cea4de4fbb",
+          "L": "5e07f5e1-8cf3-4500-9645-aa9373502104",
+          "XL": "e6f6636c-a389-4d91-af91-60d343149fdf",
+          "2XL": "30e98bfb-723f-40c7-bd4e-c306c470e1ee"
+        }
+      },
+      "fourthwall_default_variant_id": "5e07f5e1-8cf3-4500-9645-aa9373502104",
+      "extra_images": [
+        "images/streetwear/phoenix-race-day-stitched/03.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-race-day-stitched/04.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-race-day-stitched/05.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-race-day-stitched/06.jpg?v=20261117phoenix"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/phoenix-race-day-stitched.html"
+    },
+    {
+      "id": "APC-C71",
+      "handle": "phoenix-crest",
+      "title": "Phoenix Crest",
+      "seo_title": "Phoenix Crest",
+      "dept": "Tees & Pump Covers",
+      "category": "Workout & Turf Tees",
+      "retail_price": 38.0,
+      "list_price": 38.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/phoenix-crest/01.jpg?v=20261117phoenix",
+      "alt_image": "images/streetwear/phoenix-crest/02.jpg?v=20261117phoenix",
+      "extra_images": [
+        "images/streetwear/phoenix-crest/03.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/04.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/05.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/06.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/07.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/08.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/09.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/10.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/11.jpg?v=20261117phoenix",
+        "images/streetwear/phoenix-crest/12.jpg?v=20261117phoenix"
+      ],
+      "badge": "New",
+      "ship_time": "Made to order. Ships from the US, UK, EU or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black heavyweight tee with the Phoenix crest printed center chest. The back is plain. 100% ring-spun cotton, heavyweight fabric (6.1 oz), relaxed fit.",
+      "highlights": [
+        "Fabric: 100% ring-spun cotton, heavyweight fabric (6.1 oz), relaxed fit.",
+        "Color: Black only. Sizes S, M, L, XL, 2XL, 3XL, 4XL.",
+        "Fulfillment: Made to order. Ships from the US, UK, EU or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% ring-spun cotton, heavyweight fabric (6.1 oz), relaxed fit.",
+      "fulfillment_method": "Ships from the US, UK, EU or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "phoenix-crest",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/phoenix-crest",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/phoenix-crest",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/phoenix-crest",
+      "product_page_url": "https://www.apexhybridco.com/products/phoenix-crest.html",
+      "product_url": "https://www.apexhybridco.com/products/phoenix-crest.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "a534b315-7fa2-4562-95d6-106655c076fa",
+          "M": "a6c08ce4-0dda-4085-8f9e-28dd8cab7f56",
+          "L": "e34e3bbb-ed51-4012-8b48-da33732ffd6d",
+          "XL": "0f5a8049-c4c8-4a3c-993f-e93b274f940f",
+          "2XL": "6371549d-7a81-439c-96f4-f961e40aa2f6",
+          "3XL": "866911f7-6c7b-44dd-ade8-6f30fcf29498",
+          "4XL": "ceaf10c0-4c22-4cfe-bd33-91f6c314657b"
+        }
+      },
+      "fourthwall_default_variant_id": "e34e3bbb-ed51-4012-8b48-da33732ffd6d"
     }
   ],
   "guides": [
@@ -5238,6 +5359,6 @@
     "apparel_fulfillment": "Fourthwall US On-Demand Production & Direct Athlete Fulfillment (APC-C01 through APC-C45)",
     "equipment_fulfillment": "Fourthwall US Direct Fulfillment (APC-C01 through APC-C45)",
     "fourthwall_storefront_url": "https://apex-hybrid-co-shop.fourthwall.com",
-    "product_count": 65
+    "product_count": 67
   }
 }
