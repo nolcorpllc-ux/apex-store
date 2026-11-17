@@ -2583,6 +2583,67 @@
      "in_stock": true
     }
    ]
+  },
+  "APC-C56": {
+   "url": "https://apex-hybrid-co-shop.fourthwall.com/products/hyrx-finish",
+   "variants": [
+    {
+     "color": "Black",
+     "size": "S",
+     "variant_id": "e73f0fb6-1559-463d-ad5a-d2b4327955c5",
+     "price": 38.0,
+     "currency": "USD",
+     "in_stock": true
+    },
+    {
+     "color": "Black",
+     "size": "M",
+     "variant_id": "a327d72a-28a6-4d17-a94f-0f7cc5d85bb1",
+     "price": 38.0,
+     "currency": "USD",
+     "in_stock": true
+    },
+    {
+     "color": "Black",
+     "size": "L",
+     "variant_id": "fa36084e-c4b3-46b5-84d7-af62db938a0a",
+     "price": 38.0,
+     "currency": "USD",
+     "in_stock": true
+    },
+    {
+     "color": "Black",
+     "size": "XL",
+     "variant_id": "fea0f6d7-7ec3-4a03-af52-44abd98d8f71",
+     "price": 38.0,
+     "currency": "USD",
+     "in_stock": true
+    },
+    {
+     "color": "Black",
+     "size": "2XL",
+     "variant_id": "33230674-0284-4dae-85df-e54e608d9c43",
+     "price": 38.0,
+     "currency": "USD",
+     "in_stock": true
+    },
+    {
+     "color": "Black",
+     "size": "3XL",
+     "variant_id": "2422593e-c37b-475f-ba8b-dc7f767ce667",
+     "price": 38.0,
+     "currency": "USD",
+     "in_stock": true
+    },
+    {
+     "color": "Black",
+     "size": "4XL",
+     "variant_id": "dc83d55a-b644-42c3-818a-8690e96e9cb7",
+     "price": 38.0,
+     "currency": "USD",
+     "in_stock": true
+    }
+   ]
   }
  }
 }
