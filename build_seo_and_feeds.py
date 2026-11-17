@@ -61,8 +61,10 @@ def google_category_for(prod):
     return "Health & Beauty > Health Care > Massage & Relaxation"
 
 
-def generate_product_pages():
+def generate_product_pages(only_ids=None):
     for prod in products:
+        if only_ids is not None and prod["id"] not in only_ids:
+            continue
         handle = prod["handle"]
         title = prod["title"]
         seo_title = prod.get("seo_title", f"{title}  -  HYROX & Hybrid Race Gear")
@@ -130,6 +132,10 @@ def generate_product_pages():
                 },
             ],
         }
+        if prod.get("id") in NA_PACKABLE_IDS:
+            handling = json_ld["@graph"][1]["offers"]["shippingDetails"]["deliveryTime"]["handlingTime"]
+            handling["minValue"] = 7
+            handling["maxValue"] = 10
 
         highlights_html = "\n".join(f"<li>{html.escape(h)}</li>" for h in highlights)
         related_html = "\n".join(
@@ -204,10 +210,10 @@ def generate_product_pages():
                 f'<p id="raceDayDenverNote" style="font-size:13.5px; color:#0f172a; font-weight:800; margin:6px 0 0; line-height:1.45; display:{denver_display};">'
                 "Won't arrive before Denver race weekend (Nov 12–15).</p>"
             )
-        elif prod.get("id") == "APC-C43":
+        elif prod.get("id") in NA_PACKABLE_IDS:
             ship_note_html = (
                 '<p id="usShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">'
-                "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping.</p>"
+                + NA_SHIP_LINE + "</p>"
             )
         else:
             ship_note_html = (
@@ -1191,6 +1197,18 @@ def feed_prices(prod, variant_price):
 
 
 RACE_DAY_HANDLING_IDS = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50"}
+NA_PACKABLE_IDS = {"APC-C43", "APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55"}
+NA_SHIP_LINE = "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping."
+
+
+def feed_description(prod):
+    desc = (prod.get("short_desc") or "").strip()
+    if prod.get("id") in NA_PACKABLE_IDS and "US or Canada" not in desc:
+        desc = f"{desc} {NA_SHIP_LINE}".strip()
+    url = prod.get("fourthwall_product_url") or ""
+    if url:
+        desc = f"{desc} {url}".strip()
+    return desc
 
 
 def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
@@ -1203,11 +1221,11 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         "    <item>",
         f"      <g:id>{html.escape(item_id)}</g:id>",
         f"      <g:title>{html.escape(title)}</g:title>",
-        f"      <g:description>{html.escape((prod['short_desc'] + (' ' + prod['fourthwall_product_url'] if prod.get('fourthwall_product_url') else '')).strip())}</g:description>",
+        f"      <g:description>{html.escape(feed_description(prod))}</g:description>",
         f"      <g:link>{html.escape(link)}</g:link>",
         f"      <g:image_link>{html.escape(img_link)}</g:image_link>",
     ]
-    if prod.get("id") == "APC-C43":
+    if prod.get("id") in NA_PACKABLE_IDS:
         for extra in [prod.get("alt_image")] + list(prod.get("extra_images") or []):
             if not extra:
                 continue
@@ -1400,8 +1418,8 @@ def article_ship_line(prod):
         if prod.get("id") == "APC-C47":
             line += "<br>Won't arrive before Denver race weekend (Nov 12–15)."
         return line
-    if prod.get("id") == "APC-C43":
-        return "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping."
+    if prod.get("id") in NA_PACKABLE_IDS:
+        return NA_SHIP_LINE
     return "Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping."
 
 
