@@ -20,6 +20,7 @@ const APPAREL = new Set([
   "Tees & Pump Covers",
   "Hoodies",
   "Lightweight Jackets",
+  "Race Day Windbreakers",
   "Training Gear",
 ]);
 
@@ -31,6 +32,7 @@ const PILLS = [
   ["Tees & Pump Covers", "Race Tees & Pump Covers"],
   ["Hoodies", "Warmup Hoodies"],
   ["Lightweight Jackets", "Lightweight Jackets"],
+  ["Race Day Windbreakers", "Race Day Windbreakers"],
   ["Training Gear", "Training Gear"],
 ];
 

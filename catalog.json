@@ -77,8 +77,8 @@
       "handle": "dallas-race-day-stitched",
       "title": "Dallas Race Day Stitched",
       "seo_title": "Dallas Race Day Stitched",
-      "dept": "Lightweight Jackets",
-      "category": "Lightweight Race Jackets",
+      "dept": "Race Day Windbreakers",
+      "category": "Packable Windbreakers",
       "retail_price": 68.0,
       "list_price": 68.0,
       "rating": 0,
@@ -102,7 +102,7 @@
       "stripe_product_id": null,
       "stripe_price_id": null,
       "fulfillment_partner": "Fourthwall",
-      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker Jacket (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
+      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
       "fulfillment_method": "Fourthwall US Production & Direct Fulfillment",
       "checkout_provider": "Fourthwall + Stripe Express Checkout",
       "fourthwall_status": "PUBLIC_LIVE",
@@ -124,18 +124,7 @@
       "extra_images": [
         "images/streetwear/apc-c51-black-wear.jpg?v=20261117st"
       ],
-      "product_url": "https://www.apexhybridco.com/products/dallas-race-day-stitched.html",
-      "_prices": {
-        "S": 68.0,
-        "M": 68.0,
-        "L": 68.0,
-        "XL": 68.0,
-        "2XL": 70.0
-      },
-      "city": "Dallas",
-      "_short": "Black packable windbreaker. The Dallas crest is embroidered on the left chest. The back is plain.",
-      "_image": "images/streetwear/apc-c51-black.jpg?v=20261117st",
-      "_url": "https://apex-hybrid-co-shop.fourthwall.com/products/dallas-race-day-stitched"
+      "product_url": "https://www.apexhybridco.com/products/dallas-race-day-stitched.html"
     },
     {
       "id": "APC-C47",
@@ -214,8 +203,8 @@
       "handle": "denver-race-day-stitched",
       "title": "Denver Race Day Stitched",
       "seo_title": "Denver Race Day Stitched",
-      "dept": "Lightweight Jackets",
-      "category": "Lightweight Race Jackets",
+      "dept": "Race Day Windbreakers",
+      "category": "Packable Windbreakers",
       "retail_price": 68.0,
       "list_price": 68.0,
       "rating": 0,
@@ -239,7 +228,7 @@
       "stripe_product_id": null,
       "stripe_price_id": null,
       "fulfillment_partner": "Fourthwall",
-      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker Jacket (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
+      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
       "fulfillment_method": "Fourthwall US Production & Direct Fulfillment",
       "checkout_provider": "Fourthwall + Stripe Express Checkout",
       "fourthwall_status": "PUBLIC_LIVE",
@@ -261,18 +250,7 @@
       "extra_images": [
         "images/streetwear/apc-c52-black-wear.jpg?v=20261117st"
       ],
-      "product_url": "https://www.apexhybridco.com/products/denver-race-day-stitched.html",
-      "_prices": {
-        "S": 68.0,
-        "M": 68.0,
-        "L": 68.0,
-        "XL": 68.0,
-        "2XL": 70.0
-      },
-      "city": "Denver",
-      "_short": "Black packable windbreaker. The Denver crest is embroidered on the left chest. The back is plain.",
-      "_image": "images/streetwear/apc-c52-black.jpg?v=20261117st",
-      "_url": "https://apex-hybrid-co-shop.fourthwall.com/products/denver-race-day-stitched"
+      "product_url": "https://www.apexhybridco.com/products/denver-race-day-stitched.html"
     },
     {
       "id": "APC-C48",
@@ -351,8 +329,8 @@
       "handle": "anaheim-race-day-stitched",
       "title": "Anaheim Race Day Stitched",
       "seo_title": "Anaheim Race Day Stitched",
-      "dept": "Lightweight Jackets",
-      "category": "Lightweight Race Jackets",
+      "dept": "Race Day Windbreakers",
+      "category": "Packable Windbreakers",
       "retail_price": 68.0,
       "list_price": 68.0,
       "rating": 0,
@@ -376,7 +354,7 @@
       "stripe_product_id": null,
       "stripe_price_id": null,
       "fulfillment_partner": "Fourthwall",
-      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker Jacket (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
+      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
       "fulfillment_method": "Fourthwall US Production & Direct Fulfillment",
       "checkout_provider": "Fourthwall + Stripe Express Checkout",
       "fourthwall_status": "PUBLIC_LIVE",
@@ -398,18 +376,7 @@
       "extra_images": [
         "images/streetwear/apc-c53-black-wear.jpg?v=20261117st"
       ],
-      "product_url": "https://www.apexhybridco.com/products/anaheim-race-day-stitched.html",
-      "_prices": {
-        "S": 68.0,
-        "M": 68.0,
-        "L": 68.0,
-        "XL": 68.0,
-        "2XL": 70.0
-      },
-      "city": "Anaheim",
-      "_short": "Black packable windbreaker. The Anaheim crest is embroidered on the left chest. The back is plain.",
-      "_image": "images/streetwear/apc-c53-black.jpg?v=20261117st",
-      "_url": "https://apex-hybrid-co-shop.fourthwall.com/products/anaheim-race-day-stitched"
+      "product_url": "https://www.apexhybridco.com/products/anaheim-race-day-stitched.html"
     },
     {
       "id": "APC-C49",
@@ -488,8 +455,8 @@
       "handle": "nashville-race-day-stitched",
       "title": "Nashville Race Day Stitched",
       "seo_title": "Nashville Race Day Stitched",
-      "dept": "Lightweight Jackets",
-      "category": "Lightweight Race Jackets",
+      "dept": "Race Day Windbreakers",
+      "category": "Packable Windbreakers",
       "retail_price": 68.0,
       "list_price": 68.0,
       "rating": 0,
@@ -513,7 +480,7 @@
       "stripe_product_id": null,
       "stripe_price_id": null,
       "fulfillment_partner": "Fourthwall",
-      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker Jacket (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
+      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
       "fulfillment_method": "Fourthwall US Production & Direct Fulfillment",
       "checkout_provider": "Fourthwall + Stripe Express Checkout",
       "fourthwall_status": "PUBLIC_LIVE",
@@ -535,18 +502,7 @@
       "extra_images": [
         "images/streetwear/apc-c54-black-wear.jpg?v=20261117st"
       ],
-      "product_url": "https://www.apexhybridco.com/products/nashville-race-day-stitched.html",
-      "_prices": {
-        "S": 68.0,
-        "M": 68.0,
-        "L": 68.0,
-        "XL": 68.0,
-        "2XL": 70.0
-      },
-      "city": "Nashville",
-      "_short": "Black packable windbreaker. The Nashville crest is embroidered on the left chest. The back is plain.",
-      "_image": "images/streetwear/apc-c54-black.jpg?v=20261117st",
-      "_url": "https://apex-hybrid-co-shop.fourthwall.com/products/nashville-race-day-stitched"
+      "product_url": "https://www.apexhybridco.com/products/nashville-race-day-stitched.html"
     },
     {
       "id": "APC-C50",
@@ -625,8 +581,8 @@
       "handle": "vancouver-race-day-stitched",
       "title": "Vancouver Race Day Stitched",
       "seo_title": "Vancouver Race Day Stitched",
-      "dept": "Lightweight Jackets",
-      "category": "Lightweight Race Jackets",
+      "dept": "Race Day Windbreakers",
+      "category": "Packable Windbreakers",
       "retail_price": 68.0,
       "list_price": 68.0,
       "rating": 0,
@@ -650,7 +606,7 @@
       "stripe_product_id": null,
       "stripe_price_id": null,
       "fulfillment_partner": "Fourthwall",
-      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker Jacket (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
+      "fourthwall_blank": "Champion CO200 Packable Quarter-Zip / Windbreaker (water-resistant micro-poplin shell with embroidered chest crest, fulfilled via Fourthwall)",
       "fulfillment_method": "Fourthwall US Production & Direct Fulfillment",
       "checkout_provider": "Fourthwall + Stripe Express Checkout",
       "fourthwall_status": "PUBLIC_LIVE",
@@ -672,18 +628,7 @@
       "extra_images": [
         "images/streetwear/apc-c55-black-wear.jpg?v=20261117st"
       ],
-      "product_url": "https://www.apexhybridco.com/products/vancouver-race-day-stitched.html",
-      "_prices": {
-        "S": 68.0,
-        "M": 68.0,
-        "L": 68.0,
-        "XL": 68.0,
-        "2XL": 70.0
-      },
-      "city": "Vancouver",
-      "_short": "Black packable windbreaker. The Vancouver crest is embroidered on the left chest. The back is plain.",
-      "_image": "images/streetwear/apc-c55-black.jpg?v=20261117st",
-      "_url": "https://apex-hybrid-co-shop.fourthwall.com/products/vancouver-race-day-stitched"
+      "product_url": "https://www.apexhybridco.com/products/vancouver-race-day-stitched.html"
     },
     {
       "id": "APC-C01",

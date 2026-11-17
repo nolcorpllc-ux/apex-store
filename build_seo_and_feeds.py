@@ -54,7 +54,7 @@ def google_category_for(prod):
         # Google's taxonomy has no "Sweatshirts & Hoodies" node; hoodies and
         # sweatshirts belong under Shirts & Tops (212).
         return "Apparel & Accessories > Clothing > Shirts & Tops"
-    if dept == "Lightweight Jackets":
+    if dept in ("Lightweight Jackets", "Race Day Windbreakers"):
         return "Apparel & Accessories > Clothing > Outerwear > Coats & Jackets"
     if dept == "Training Gear":
         return "Sporting Goods > Exercise & Fitness"
