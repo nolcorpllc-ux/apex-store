@@ -382,7 +382,7 @@ def generate_product_pages():
   <script>
   (function(){{
     var prodId = {json.dumps(prod['id'])};
-    var prodVariants = {json.dumps(prod.get('fourthwall_variants', {}))};
+    var prodVariants = {json.dumps(black_only_variant_map(prod.get('fourthwall_variants', {})))};
     var defaultVid = {json.dumps(prod.get('fourthwall_default_variant_id', ''))};
     var fallbackUrl = {json.dumps(buy_href)};
     var fwSlugs = {json.dumps(fw_slugs_map)};
@@ -1034,6 +1034,21 @@ def sold_color(prod):
         if "black" in blob:
             return "black"
     return None
+
+
+SIZE_KEYS = {"XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "One size", "One Size"}
+
+
+def black_only_variant_map(variants):
+    """Publish only the Black size map. White and Default repeat those ids."""
+    if not isinstance(variants, dict) or not variants:
+        return {}
+    if set(variants).issubset(SIZE_KEYS):
+        return variants
+    black = variants.get("Black")
+    if isinstance(black, dict):
+        return {"Black": black}
+    return {k: v for k, v in variants.items() if k == "Black" or k in SIZE_KEYS}
 
 
 def catalog_size_variant_ids(prod):
