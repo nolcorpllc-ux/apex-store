@@ -1267,10 +1267,13 @@ def feed_prices(prod, variant_price):
 RACE_DAY_HANDLING_IDS = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50"}
 NA_PACKABLE_IDS = {"APC-C43", "APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55"}
 NA_SHIP_LINE = "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping."
+OVERSEAS_SHIP_LINE = "Made overseas. Ships in about 10–14 business days. Free US shipping."
 
 
 def feed_description(prod):
     desc = (prod.get("short_desc") or "").strip()
+    if prod.get("id") in RACE_DAY_HANDLING_IDS and "overseas" not in desc.lower():
+        desc = f"{desc} {OVERSEAS_SHIP_LINE}".strip()
     if prod.get("id") in NA_PACKABLE_IDS and "US or Canada" not in desc:
         desc = f"{desc} {NA_SHIP_LINE}".strip()
     url = prod.get("fourthwall_product_url") or ""

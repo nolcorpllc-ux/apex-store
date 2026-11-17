@@ -484,10 +484,10 @@
             <span aria-hidden="true">Dallas</span>
           </a>
           <div class="Pin__tiles" role="group" aria-label="Show another city">
-            <button type="button" data-city="Denver" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Denver windbreaker"><img src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Denver</span></button>
-            <button type="button" data-city="Anaheim" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Anaheim windbreaker"><img src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Anaheim</span></button>
-            <button type="button" data-city="Nashville" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Nashville windbreaker"><img src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Nashville</span></button>
-            <button type="button" data-city="Vancouver" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Vancouver windbreaker"><img src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Vancouver</span></button>
+            <button type="button" data-city="Denver" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261117hyrxcrest" data-sku="APC-C52" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/denver-race-day-stitched" aria-label="Show the Denver windbreaker"><img src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Denver</span></button>
+            <button type="button" data-city="Anaheim" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261117hyrxcrest" data-sku="APC-C53" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/anaheim-race-day-stitched" aria-label="Show the Anaheim windbreaker"><img src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Anaheim</span></button>
+            <button type="button" data-city="Nashville" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261117hyrxcrest" data-sku="APC-C54" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/nashville-race-day-stitched" aria-label="Show the Nashville windbreaker"><img src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Nashville</span></button>
+            <button type="button" data-city="Vancouver" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261117hyrxcrest" data-sku="APC-C55" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/vancouver-race-day-stitched" aria-label="Show the Vancouver windbreaker"><img src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Vancouver</span></button>
           </div>
         </div>
         <div>
@@ -503,7 +503,7 @@
             <a href="products/vancouver-race-day-stitched.html" style="text-decoration:none">Vancouver</a>
           </div>
           <div class="Pin__cta">
-            <a class="Btn Btn--cobalt" href="https://apex-hybrid-co-shop.fourthwall.com/products/dallas-race-day-stitched" data-goatcounter-click="click-pinned-raceday-buy">Buy Dallas · $68 →</a>
+            <a class="Btn Btn--cobalt" id="pinBuy" href="https://apex-hybrid-co-shop.fourthwall.com/products/dallas-race-day-stitched" data-buy="APC-C51" data-goatcounter-click="click-pinned-raceday-buy">Buy Dallas $68</a>
             <a class="Btn Btn--ghost" href="collections/race-day-windbreakers.html" style="color:#fff;border-color:#475569">Shop all five</a>
           </div>
           <ul class="Pin__trust"><li>Free US shipping, no minimum</li><li>Made to order. Free US shipping</li><li>Secure checkout</li></ul>
@@ -522,7 +522,8 @@
           var heroImg=hero&&hero.querySelector("img");
           var heroLabel=hero&&hero.querySelector("span");
           var tileGroup=document.querySelector(".Pin__tiles");
-          if(hero&&heroImg&&tileGroup){
+          var buy=document.getElementById("pinBuy");
+          if(hero&&heroImg&&tileGroup&&buy){
             tileGroup.addEventListener("click",function(ev){
               var btn=ev.target.closest("button");
               if(!btn||!tileGroup.contains(btn))return;
@@ -531,17 +532,26 @@
               var nextCity=btn.getAttribute("data-city");
               var nextHref=btn.getAttribute("data-href");
               var nextSrc=btn.getAttribute("data-src");
+              var nextSku=btn.getAttribute("data-sku");
+              var nextBuy=btn.getAttribute("data-buy-href");
               var prevCity=hero.getAttribute("data-city")||"Dallas";
               var prevHref=hero.getAttribute("href");
               var prevSrc=heroImg.getAttribute("src");
+              var prevSku=buy.getAttribute("data-buy");
+              var prevBuy=buy.getAttribute("href");
               hero.setAttribute("data-city",nextCity);
               hero.setAttribute("href",nextHref);
               heroImg.setAttribute("src",nextSrc);
               heroImg.setAttribute("alt","Model wearing the "+nextCity+" Race Day Windbreaker, front crest visible");
               if(heroLabel)heroLabel.textContent=nextCity;
+              buy.textContent="Buy "+nextCity+" $68";
+              buy.setAttribute("href",nextBuy);
+              buy.setAttribute("data-buy",nextSku);
               btn.setAttribute("data-city",prevCity);
               btn.setAttribute("data-href",prevHref);
               btn.setAttribute("data-src",prevSrc);
+              btn.setAttribute("data-sku",prevSku);
+              btn.setAttribute("data-buy-href",prevBuy);
               if(img)img.setAttribute("src",prevSrc);
               if(label)label.textContent=prevCity;
               btn.setAttribute("aria-label","Show the "+prevCity+" windbreaker");
