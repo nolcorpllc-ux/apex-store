@@ -1271,7 +1271,7 @@ def feed_prices(prod, variant_price):
     return money_usd(variant_price), money_usd(variant_price)
 
 
-RACE_DAY_HANDLING_IDS = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50"}
+RACE_DAY_HANDLING_IDS = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50", "APC-C75"}
 STITCHED_RACE_IDS = {"APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55", "APC-C57", "APC-C70"}
 NA_PACKABLE_IDS = {"APC-C43", "APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55", "APC-C57", "APC-C70"}
 NA_SHIP_LINE = "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping."
