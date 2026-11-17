@@ -136,6 +136,24 @@ def generate_product_pages(only_ids=None):
             handling = json_ld["@graph"][1]["offers"]["shippingDetails"]["deliveryTime"]["handlingTime"]
             handling["minValue"] = 7
             handling["maxValue"] = 10
+        priced_for_schema = fourthwall_size_prices(prod)
+        if len({amount for _, amount in priced_for_schema}) > 1:
+            base_offer = json_ld["@graph"][1]["offers"]
+            schema_offers = []
+            for size, amount in priced_for_schema:
+                offer = json.loads(json.dumps(base_offer))
+                offer["price"] = f"{amount:.2f}"
+                offer["name"] = f"{title} - {size}"
+                offer["sku"] = f"{prod['id']}-{size}"
+                schema_offers.append(offer)
+            json_ld["@graph"][1]["offers"] = {
+                "@type": "AggregateOffer",
+                "lowPrice": f"{min(amount for _, amount in priced_for_schema):.2f}",
+                "highPrice": f"{max(amount for _, amount in priced_for_schema):.2f}",
+                "priceCurrency": "USD",
+                "offerCount": len(schema_offers),
+                "offers": schema_offers,
+            }
 
         highlights_html = "\n".join(f"<li>{html.escape(h)}</li>" for h in highlights)
         related_html = "\n".join(
@@ -171,14 +189,19 @@ def generate_product_pages(only_ids=None):
             main_buy_label = "Instant Stripe Checkout"
 
         race_day_ids = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50"}
-        size_order = ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
-        if prod.get("id") in race_day_ids:
-            known = list((prod.get("fourthwall_variants") or {}).keys())
-            size_names = [sz for sz in size_order if sz in known]
-        elif prod.get("has_sizes"):
-            size_names = ["S", "M", "L", "XL", "2XL"]
+        priced_sizes = fourthwall_size_prices(prod)
+        if priced_sizes:
+            size_names = [sz for sz, _ in priced_sizes]
         else:
-            size_names = []
+            size_order = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"]
+            if prod.get("id") in race_day_ids:
+                known = list((prod.get("fourthwall_variants") or {}).keys())
+                size_names = [sz for sz in size_order if sz in known]
+            elif prod.get("has_sizes"):
+                size_names = ["S", "M", "L", "XL", "2XL"]
+            else:
+                size_names = []
+        size_price_map = {sz: price for sz, price in priced_sizes}
 
         def _size_btn(sz, active=False):
             border = "2px solid #0f172a" if active else "1.5px solid #cbd5e1"
@@ -298,7 +321,7 @@ def generate_product_pages(only_ids=None):
         <h1 style="font-size:24px; line-height:1.25; margin-bottom:10px;">{html.escape(title)}</h1>
         <div style="padding:12px 0; border-top:1px solid #eee; border-bottom:1px solid #eee; margin-bottom:14px;">
           <div style="display:flex; align-items:baseline; gap:10px;">
-            <span style="font-size:28px; font-weight:900;">${price}</span>
+            <span id="staticPrice" style="font-size:28px; font-weight:900;">${price}</span>
           </div>
           <div style="font-size:13px; color:#0e8345; font-weight:700; margin-top:4px;">
             ✓ {html.escape(prod['stock_status'])} · {html.escape(prod['ship_time'])}
@@ -389,6 +412,7 @@ def generate_product_pages(only_ids=None):
   (function(){{
     var prodId = {json.dumps(prod['id'])};
     var prodVariants = {json.dumps(black_only_variant_map(prod.get('fourthwall_variants', {})))};
+    var sizePrices = {json.dumps(size_price_map)};
     var defaultVid = {json.dumps(prod.get('fourthwall_default_variant_id', ''))};
     var fallbackUrl = {json.dumps(buy_href)};
     var fwSlugs = {json.dumps(fw_slugs_map)};
@@ -434,8 +458,9 @@ def generate_product_pages(only_ids=None):
     window.selectStaticSize = function(s, btn) {{
       state.size = s;
       var picked = prodVariants[s];
-      if (picked && picked.price != null) {{
-        var priced = "$" + Number(picked.price).toFixed(2);
+      var price = (sizePrices && sizePrices[s] != null) ? sizePrices[s] : (picked && picked.price != null ? picked.price : null);
+      if (price != null) {{
+        var priced = "$" + Number(price).toFixed(2);
         var buy = document.getElementById("staticBuyNowBtn");
         if (buy && buy.textContent.indexOf("$") !== -1) buy.textContent = buy.textContent.replace(/\$[\d.]+/, priced);
         var add = document.getElementById("staticAddBagLink");
@@ -454,9 +479,15 @@ def generate_product_pages(only_ids=None):
       }}
       syncAddLink();
     }};
+    function variantId(val) {{
+      if (!val) return "";
+      if (typeof val === "object") return val.id || "";
+      return val;
+    }}
     function getSelectedVariantId() {{
-      var byColor = prodVariants[state.color] || prodVariants["Black"] || prodVariants["Default"] || {{}};
-      return byColor[state.size] || byColor["L"] || byColor["One Size"] || defaultVid;
+      var map = prodVariants[state.color] || prodVariants["Black"] || prodVariants["Default"];
+      if (!map || typeof map !== "object" || map.id) map = prodVariants;
+      return variantId(map[state.size]) || variantId(map["L"]) || variantId(map["One Size"]) || variantId(map["One size"]) || defaultVid;
     }}
     function redirectFourthwallVariant(vid, triggerEl, fbHref) {{
       if (!vid) {{
@@ -1089,6 +1120,22 @@ def load_city_jacket_variant_file():
     return data
 
 
+def fourthwall_size_prices(prod):
+    """Live size order and prices from the Fourthwall checkout map."""
+    entry = load_fourthwall_variant_prices().get(prod.get("id")) or {}
+    variants = entry.get("variants") or {}
+    order = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "One Size", "One size"]
+    sizes = [sz for sz in order if sz in variants]
+    sizes += [sz for sz in variants if sz not in sizes]
+    priced = []
+    for size in sizes:
+        info = variants.get(size) or {}
+        if info.get("price") is None:
+            continue
+        priced.append((size, float(info["price"])))
+    return priced
+
+
 def load_fourthwall_variant_prices():
     """Size prices and ids from app.js FW_VARIANTS, the checkout source."""
     path = os.path.join(BASE_DIR, "app.js")
@@ -1505,26 +1552,34 @@ def generate_pinterest_csv_feed():
         "google_product_category",
         "product_type",
         "brand",
+        "size",
     ]
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for prod in products:
-            writer.writerow(
-                {
-                    "id": prod["id"],
-                    "title": prod.get("seo_title", prod["title"]),
-                    "description": (prod["short_desc"] + (" " + prod["fourthwall_product_url"] if prod.get("fourthwall_product_url") else "")).strip(),
-                    "link": f"{SITE_URL}/products/{prod['handle']}.html",
-                    "image_link": f"{SITE_URL}/{prod['image']}",
-                    "price": f"{prod['retail_price']:.2f} USD",
-                    "availability": "in stock",
-                    "condition": "new",
-                    "google_product_category": merchant_category_for(prod),
-                    "product_type": f"{prod['dept']} > {prod['category']}",
-                    "brand": "Apex Hybrid Co., operated by NolCorp LLC",
-                }
-            )
+            priced = fourthwall_size_prices(prod)
+            if not priced:
+                priced = [("", float(prod["retail_price"]))]
+            base = {
+                "title": prod.get("seo_title", prod["title"]),
+                "description": feed_description(prod) if "US or Canada" in (prod.get("short_desc") or "") or prod.get("id") in NA_PACKABLE_IDS else (prod["short_desc"] + (" " + prod["fourthwall_product_url"] if prod.get("fourthwall_product_url") else "")).strip(),
+                "link": f"{SITE_URL}/products/{prod['handle']}.html",
+                "image_link": f"{SITE_URL}/{prod['image']}",
+                "availability": "in stock",
+                "condition": "new",
+                "google_product_category": merchant_category_for(prod),
+                "product_type": f"{prod['dept']} > {prod['category']}",
+                "brand": "Apex Hybrid Co., operated by NolCorp LLC",
+            }
+            multi = len(priced) > 1
+            for size, amount in priced:
+                row = dict(base)
+                row["id"] = f"{prod['id']}-{size}" if multi and size else prod["id"]
+                row["title"] = f"{base['title']} - {size}" if multi and size else base["title"]
+                row["price"] = f"{amount:.2f} USD"
+                row["size"] = size
+                writer.writerow(row)
 
 
 

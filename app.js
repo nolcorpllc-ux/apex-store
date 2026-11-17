@@ -226,19 +226,22 @@ function isRaceDayJacket(p) {
 
 function sizesFor(p) {
   if (!p || !p.has_sizes) return [];
-  if (isRaceDayJacket(p)) {
-    const known = Object.keys((p.fourthwall_variants) || {});
+  const fw = FW_VARIANTS[p.id] && FW_VARIANTS[p.id].variants;
+  const known = fw ? Object.keys(fw) : (isRaceDayJacket(p) ? Object.keys(p.fourthwall_variants || {}) : []);
+  if (known.length) {
     const ordered = SIZE_RANK.filter((sz) => known.includes(sz));
     const extra = known.filter((sz) => !ordered.includes(sz));
-    if (ordered.length || extra.length) return ordered.concat(extra);
+    return ordered.concat(extra);
   }
   return ["S", "M", "L", "XL", "2XL"];
 }
 
 function selectedPrice(p) {
   const sz = sizeOf(p);
+  const fw = FW_VARIANTS[p.id] && FW_VARIANTS[p.id].variants && FW_VARIANTS[p.id].variants[sz];
+  if (fw && fw.price != null) return Number(fw.price);
   const variant = p && p.fourthwall_variants && p.fourthwall_variants[sz];
-  if (isRaceDayJacket(p) && variant && variant.price != null) return Number(variant.price);
+  if (variant && variant.price != null) return Number(variant.price);
   return Number(p.retail_price);
 }
 function colorOf(p) {
