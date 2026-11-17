@@ -1214,6 +1214,7 @@ h1, h2, h3, p { margin: 0; }
   .Pin__hero { width: 100%; flex: none; }
   .Pin__hero img, .Pin__tiles img { max-height: none !important; width: 100% !important; max-width: 100%; margin: 0; object-fit: cover; object-position: center top; }
   .Pin__tiles { gap: 6px; }
+  .Pin__tiles button span { font-size: 9px; letter-spacing: 0.02em; }
   .Pin__dek { order: 6; margin: 6px 0; }
   .Pin__sizes { order: 7; margin-bottom: 8px; }
   .Pin__trust { order: 8; margin-top: 8px; }
