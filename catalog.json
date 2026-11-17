@@ -2867,19 +2867,19 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c43-black.jpg?v=20261105h",
-      "alt_image": "images/streetwear/apc-c43-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c43-black.jpg?v=20261117fw",
+      "alt_image": "images/streetwear/apc-c43-black-detail.jpg?v=20261117fw",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
       "has_sizes": true,
       "has_colorways": false,
-      "short_desc": "Articulated raglan warmup track jacket with a breathable mesh lining, elastic no-snag cuffs, and our 01–08 station grid down the back. Keeps your shoulders and core warm between corral check-in and the starting horn.",
+      "short_desc": "Black packable windbreaker with an embroidered left-chest crest and a plain back. Mesh lining, elastic cuffs, and a drawcord hem.",
       "highlights": [
-        "Lightweight packable quarter-zip windbreaker shell (water-resistant micro-poplin shell with embroidered chest crest",
-        "Micro-mesh interior lining wicks sweat without clinging over a tech tee or tank",
-        "Elasticated wrist cuffs & drawcord hem lock in warmth between outdoor track repeats",
-        "High-contrast 08-Station Race Division streetwear typography in in black"
+        "Embroidered left-chest crest on a black packable shell",
+        "Plain back",
+        "Mesh lining, elastic cuffs, and a drawcord hem",
+        "Packable quarter-zip shell, fulfilled by Fourthwall"
       ],
       "review_quote": "",
       "stripe_account_id": "acct_1UUawuRsZaeIoAJJ",
@@ -2918,7 +2918,11 @@
           "2XL": "0d56b749-acbb-4258-b3ad-ef382e503de8"
         }
       },
-      "fourthwall_default_variant_id": "586a1a3e-cdc7-4b76-b2a9-61b2ef7b7519"
+      "fourthwall_default_variant_id": "586a1a3e-cdc7-4b76-b2a9-61b2ef7b7519",
+      "extra_images": [
+        "images/streetwear/apc-c43-black-wear.jpg?v=20261117fw",
+        "images/streetwear/apc-c43-black-backwear.jpg?v=20261117fw"
+      ]
     },
     {
       "id": "APC-C44",

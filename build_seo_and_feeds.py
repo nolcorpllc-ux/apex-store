@@ -95,7 +95,9 @@ def generate_product_pages():
                     "name": seo_title,
                     "sku": prod["id"],
                     "mpn": prod["id"],
-                    "image": [img_url] + ([f"{SITE_URL}/{prod['alt_image']}"] if prod.get("alt_image") else []),
+                    "image": [img_url]
+                    + ([f"{SITE_URL}/{prod['alt_image']}"] if prod.get("alt_image") else [])
+                    + [f"{SITE_URL}/{extra}" for extra in (prod.get("extra_images") or [])],
                     "description": short_desc + " " + " ".join(highlights),
                     "keywords": f"HYROX shirts, breathable HYROX race shirt, {title}, {dept}, hybrid athlete apparel, 8-station functional fitness gear",
                     "brand": {"@type": "Brand", "name": "Apex Hybrid Co"},
@@ -184,6 +186,15 @@ def generate_product_pages():
             )
 
         size_buttons = "\n              ".join(_size_btn(sz, sz == "L") for sz in size_names)
+        extra_gallery_html = ""
+        for idx, path in enumerate(prod.get("extra_images") or [], start=3):
+            label = "Worn, chest crest" if idx == 3 else "Worn, plain back"
+            extra_gallery_html += (
+                f'<button type="button" onclick="document.getElementById(\'staticMainProdImg\').src=\'../{path}\'" '
+                f'style="cursor:pointer; border:2px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; color:#0f172a; display:flex; align-items:center; gap:8px; font-weight:700; font-size:12.5px;">'
+                f'<img src="../{path}" alt="{html.escape(title)} {html.escape(label)}" style="width:48px; height:48px; object-fit:cover; border-radius:4px;" />'
+                f'<span>{idx}. {html.escape(label)}</span></button>'
+            )
         ship_note_html = ""
         if prod.get("id") in race_day_ids:
             denver_display = "block" if prod.get("id") == "APC-C47" else "none"
@@ -192,6 +203,11 @@ def generate_product_pages():
                 "Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.</p>"
                 f'<p id="raceDayDenverNote" style="font-size:13.5px; color:#0f172a; font-weight:800; margin:6px 0 0; line-height:1.45; display:{denver_display};">'
                 "Won't arrive before Denver race weekend (Nov 12–15).</p>"
+            )
+        elif prod.get("id") == "APC-C43":
+            ship_note_html = (
+                '<p id="usShipNote" style="font-size:13.5px; color:#0f172a; font-weight:700; margin:8px 0 0; line-height:1.45;">'
+                "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping.</p>"
             )
         else:
             ship_note_html = (
@@ -266,6 +282,7 @@ def generate_product_pages():
             <img src="../{prod['alt_image']}" alt="{html.escape(title)} back view" style="width:48px; height:48px; object-fit:cover; border-radius:4px;" />
             <span>2. Black Edition</span>
           </button>
+          {extra_gallery_html}
         </div>''' if prod.get("alt_image") else ""}
       </div>
       <div>
@@ -1174,6 +1191,14 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         f"      <g:description>{html.escape((prod['short_desc'] + (' ' + prod['fourthwall_product_url'] if prod.get('fourthwall_product_url') else '')).strip())}</g:description>",
         f"      <g:link>{html.escape(link)}</g:link>",
         f"      <g:image_link>{html.escape(img_link)}</g:image_link>",
+    ]
+    if prod.get("id") == "APC-C43":
+        for extra in [prod.get("alt_image")] + list(prod.get("extra_images") or []):
+            if not extra:
+                continue
+            extra_link = extra if str(extra).startswith("http") else f"{SITE_URL}/{str(extra).lstrip('/')}"
+            lines.append(f"      <g:additional_image_link>{html.escape(extra_link)}</g:additional_image_link>")
+    lines += [
         "      <g:condition>new</g:condition>",
         f"      <g:availability>{availability}</g:availability>",
         f"      <g:price>{price}</g:price>",
@@ -1360,6 +1385,8 @@ def article_ship_line(prod):
         if prod.get("id") == "APC-C47":
             line += "<br>Won't arrive before Denver race weekend (Nov 12–15)."
         return line
+    if prod.get("id") == "APC-C43":
+        return "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping."
     return "Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping."
 
 
