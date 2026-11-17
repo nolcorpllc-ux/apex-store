@@ -445,8 +445,9 @@
       .RW__link:hover{border-color:#0066ff}
       .Pin{background:linear-gradient(180deg,#0b0f17 0%,#111827 100%);color:#f8fafc;padding:22px 0 30px}
       .Pin__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
-      .Pin__img{display:block;width:100%;background:#0f141d;border:1px solid #1f2937;border-radius:14px;padding:0;cursor:pointer;overflow:hidden}
-      .Pin__img img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;object-position:center center;background:#0f141d}
+      .Pin__img{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;width:100%;background:transparent;border:0;padding:0}
+      .Pin__img a{display:block;background:#0f141d;border:1px solid #1f2937;border-radius:12px;overflow:hidden}
+      .Pin__img img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain;background:#0f141d}
       .Pin__eyebrow{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#38bdf8;margin:0 0 8px}
       .Pin h2{font-size:clamp(28px,4vw,44px);line-height:1.02;letter-spacing:-0.04em;margin:0 0 10px;color:#fff}
       .Pin__price{font-size:22px;font-weight:900;margin:0 0 4px;color:#fff}
@@ -468,16 +469,20 @@
         <a class="RW__link" href="products/dallas-lone-star-division-turf-threshold-hybrid-race-tee.html" data-goatcounter-click="click-dallas-banner" data-goatcounter-title="Dallas banner" onclick="window.apexTrackHit&&apexTrackHit('click_dallas_banner')">Shop the Dallas tee →</a>
       </div>
     </section>
-    <section class="Pin" aria-label="Featured: Dallas Race Day Windbreaker">
+    <section class="Pin" aria-label="Race Day Windbreakers">
       <div class="Wrap Pin__grid">
-        <a class="Pin__img" href="products/dallas-race-day-stitched.html" data-goatcounter-click="click-pinned-raceday-image" aria-label="View Dallas Race Day Windbreaker">
-          <img src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Dallas Race Day Windbreaker" fetchpriority="high" decoding="async" style="width:100%;height:auto;max-height:none;object-fit:contain;object-position:center center;background:#0f141d;border-radius:10px" />
-        </a>
+        <div class="Pin__img">
+          <a href="products/dallas-race-day-stitched.html"><img src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Dallas Race Day Windbreaker" fetchpriority="high" decoding="async" /></a>
+          <a href="products/denver-race-day-stitched.html"><img src="images/streetwear/denver-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Denver Race Day Windbreaker" decoding="async" /></a>
+          <a href="products/anaheim-race-day-stitched.html"><img src="images/streetwear/anaheim-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Anaheim Race Day Windbreaker" decoding="async" /></a>
+          <a href="products/nashville-race-day-stitched.html"><img src="images/streetwear/nashville-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Nashville Race Day Windbreaker" decoding="async" /></a>
+          <a href="products/vancouver-race-day-stitched.html"><img src="images/streetwear/vancouver-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Vancouver Race Day Windbreaker" decoding="async" /></a>
+        </div>
         <div>
-          <p class="Pin__eyebrow">Ships from the US · Dallas</p>
-          <h2>Dallas Race Day Windbreaker</h2>
-          <p class="Pin__price">$68 <small>Black · Ships from the US · Free US shipping</small></p>
-          <p class="Pin__dek">Made to order. Ships from the US. Free US shipping.</p>
+          <p class="Pin__eyebrow">Ships from the US or Canada</p>
+          <h2><a href="collections/race-day-windbreakers.html" style="color:inherit;text-decoration:none">Race Day Windbreakers</a></h2>
+          <p class="Pin__price">$68 <small>Black · Ships from the US or Canada · Free US shipping</small></p>
+          <p class="Pin__dek">Made to order. Ships from the US or Canada. Free US shipping.</p>
           <div class="Pin__sizes" role="group" aria-label="Choose city">
             <a href="products/dallas-race-day-stitched.html" style="text-decoration:none">Dallas</a>
             <a href="products/denver-race-day-stitched.html" style="text-decoration:none">Denver</a>
@@ -487,7 +492,7 @@
           </div>
           <div class="Pin__cta">
             <a class="Btn Btn--cobalt" href="https://apex-hybrid-co-shop.fourthwall.com/products/dallas-race-day-stitched" data-goatcounter-click="click-pinned-raceday-buy">Buy Dallas · $68 →</a>
-            <a class="Btn Btn--ghost" href="products/dallas-race-day-stitched.html" style="color:#fff;border-color:#475569">View Dallas</a>
+            <a class="Btn Btn--ghost" href="collections/race-day-windbreakers.html" style="color:#fff;border-color:#475569">Shop all five</a>
           </div>
           <ul class="Pin__trust"><li>Free US shipping, no minimum</li><li>Made to order. Free US shipping</li><li>Secure checkout</li></ul>
         </div>
@@ -505,33 +510,13 @@
       })();
     </script>
 <!-- RACEWEEK_PIN_END -->
-    <section class="WB" aria-label="Ships from the US">
+    <section class="WB" aria-label="Also ships from the US or Canada">
       <div class="Wrap">
         <div class="WB__head">
-          <h2>Ships from the US</h2>
+          <h2>Also ships from the US or Canada</h2>
           <a href="collections/windbreakers.html">All windbreakers</a>
         </div>
         <div class="WB__row">
-          <a class="WB__card" href="products/dallas-race-day-stitched.html">
-            <span class="WB__media"><img class="front" src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Dallas Race Day Windbreaker, embroidered crest" /><img class="back" src="images/streetwear/dallas-race-day-stitched/02.jpg?v=20261117hyrxcrest" alt="" /></span>
-            <strong>Dallas Race Day Windbreaker</strong><span>$68</span>
-          </a>
-          <a class="WB__card" href="products/denver-race-day-stitched.html">
-            <span class="WB__media"><img class="front" src="images/streetwear/denver-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Denver Race Day Windbreaker, embroidered crest" /><img class="back" src="images/streetwear/denver-race-day-stitched/02.jpg?v=20261117hyrxcrest" alt="" /></span>
-            <strong>Denver Race Day Windbreaker</strong><span>$68</span>
-          </a>
-          <a class="WB__card" href="products/anaheim-race-day-stitched.html">
-            <span class="WB__media"><img class="front" src="images/streetwear/anaheim-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Anaheim Race Day Windbreaker, embroidered crest" /><img class="back" src="images/streetwear/anaheim-race-day-stitched/02.jpg?v=20261117hyrxcrest" alt="" /></span>
-            <strong>Anaheim Race Day Windbreaker</strong><span>$68</span>
-          </a>
-          <a class="WB__card" href="products/nashville-race-day-stitched.html">
-            <span class="WB__media"><img class="front" src="images/streetwear/nashville-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Nashville Race Day Windbreaker, embroidered crest" /><img class="back" src="images/streetwear/nashville-race-day-stitched/02.jpg?v=20261117hyrxcrest" alt="" /></span>
-            <strong>Nashville Race Day Windbreaker</strong><span>$68</span>
-          </a>
-          <a class="WB__card" href="products/vancouver-race-day-stitched.html">
-            <span class="WB__media"><img class="front" src="images/streetwear/vancouver-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Vancouver Race Day Windbreaker, embroidered crest" /><img class="back" src="images/streetwear/vancouver-race-day-stitched/02.jpg?v=20261117hyrxcrest" alt="" /></span>
-            <strong>Vancouver Race Day Windbreaker</strong><span>$68</span>
-          </a>
           <a class="WB__card" href="products/hybrid-8-station-windbreaker-track-jacket.html">
             <span class="WB__media"><img class="front" src="images/streetwear/apc-c43-black.jpg?v=20261117fw" alt="Hybrid 8-Station" /><img class="back" src="images/streetwear/apc-c43-black-detail.jpg?v=20261117fw" alt="" /></span>
             <strong>Hybrid 8-Station</strong><span>$68</span>
@@ -556,7 +541,7 @@
       .WB__head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px}
       .WB__head h2{margin:0;font-size:18px;letter-spacing:-0.03em;color:#fff}
       .WB__head a{color:#38bdf8;font-weight:800;font-size:13px;text-decoration:none}
-      .WB__row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+      .WB__row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
       .WB__card{color:#fff;text-decoration:none;display:flex;flex-direction:column;gap:6px;min-width:0}
       .WB__media{position:relative;display:block;background:#0f141d;border:1px solid #1f2937;border-radius:10px;overflow:hidden;aspect-ratio:4/5}
       .WB__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0f141d}
