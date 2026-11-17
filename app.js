@@ -562,6 +562,8 @@ function openProduct(sku) {
   const fulfillmentLine = "Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.";
   const shipNote = raceDayShip
     ? `<p style="margin-top:8px;font-size:13.5px;font-weight:700;color:#0f172a">Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping.</p>${p.id === "APC-C47" ? `<p style="margin-top:6px;font-size:13.5px;font-weight:800;color:#0f172a">Won't arrive before Denver race weekend (Nov 12–15).</p>` : ""}`
+    : p.id === "APC-C43"
+    ? `<p style="margin-top:8px;font-size:13.5px;font-weight:700;color:#0f172a">Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping.</p>`
     : `<p style="margin-top:8px;font-size:13.5px;font-weight:700;color:#0f172a">Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.</p>`;
   const buyBtnLabel = "Buy Now - Instant Checkout";
   const withoutMade = (text) => String(text || "")
