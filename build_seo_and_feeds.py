@@ -56,6 +56,8 @@ def google_category_for(prod):
         return "Apparel & Accessories > Clothing > Shirts & Tops"
     if dept in ("Lightweight Jackets", "Race Day Windbreakers", "Windbreakers"):
         return "Apparel & Accessories > Clothing > Outerwear > Coats & Jackets"
+    if dept == "Shoes":
+        return "Apparel & Accessories > Shoes > Athletic Shoes"
     if dept == "Training Gear":
         return "Sporting Goods > Exercise & Fitness"
     return "Health & Beauty > Health Care > Massage & Relaxation"
