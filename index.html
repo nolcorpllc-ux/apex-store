@@ -445,9 +445,16 @@
       .RW__link:hover{border-color:#0066ff}
       .Pin{background:linear-gradient(180deg,#0b0f17 0%,#111827 100%);color:#f8fafc;padding:22px 0 30px}
       .Pin__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
-      .Pin__img{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;width:100%;background:transparent;border:0;padding:0}
-      .Pin__img a{display:block;background:#0f141d;border:1px solid #1f2937;border-radius:12px;overflow:hidden}
-      .Pin__img img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain;background:#0f141d}
+      .Pin__img{display:flex;flex-direction:column;gap:10px;width:100%;background:transparent;border:0;padding:0}
+      .Pin__hero{position:relative;display:block;width:100%;aspect-ratio:4/3;background:#0f141d;border-radius:16px;overflow:hidden;border:1px solid #1f2937}
+      .Pin__hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;background:#0f141d}
+      .Pin__hero span{position:absolute;left:12px;bottom:12px;background:rgba(11,15,23,.78);color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
+      .Pin__tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+      .Pin__tiles button{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;border:0;background:transparent;color:#cbd5e1;cursor:pointer;font:inherit;text-align:center}
+      .Pin__tiles button img{display:block;width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;object-position:center top;background:#0f141d;border-radius:10px;border:1px solid #1f2937}
+      .Pin__tiles button span{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+      .Pin__tiles button:hover span,.Pin__tiles button:focus-visible span{color:#fff}
+      .Pin__tiles button:hover img,.Pin__tiles button:focus-visible img{border-color:#fff}
       .Pin__eyebrow{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#38bdf8;margin:0 0 8px}
       .Pin h2{font-size:clamp(28px,4vw,44px);line-height:1.02;letter-spacing:-0.04em;margin:0 0 10px;color:#fff}
       .Pin__price{font-size:22px;font-weight:900;margin:0 0 4px;color:#fff}
@@ -472,11 +479,16 @@
     <section class="Pin" aria-label="Race Day Windbreakers">
       <div class="Wrap Pin__grid">
         <div class="Pin__img">
-          <a href="products/dallas-race-day-stitched.html"><img src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Dallas Race Day Windbreaker" fetchpriority="high" decoding="async" /></a>
-          <a href="products/denver-race-day-stitched.html"><img src="images/streetwear/denver-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Denver Race Day Windbreaker" decoding="async" /></a>
-          <a href="products/anaheim-race-day-stitched.html"><img src="images/streetwear/anaheim-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Anaheim Race Day Windbreaker" decoding="async" /></a>
-          <a href="products/nashville-race-day-stitched.html"><img src="images/streetwear/nashville-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Nashville Race Day Windbreaker" decoding="async" /></a>
-          <a href="products/vancouver-race-day-stitched.html"><img src="images/streetwear/vancouver-race-day-stitched/01.jpg?v=20261117hyrxcrest" alt="Vancouver Race Day Windbreaker" decoding="async" /></a>
+          <a class="Pin__hero" id="pinHero" href="products/dallas-race-day-stitched.html" data-city="Dallas">
+            <img src="images/streetwear/dallas-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="Model wearing the Dallas Race Day Windbreaker, front crest visible" fetchpriority="high" decoding="async" width="1536" height="1152" />
+            <span aria-hidden="true">Dallas</span>
+          </a>
+          <div class="Pin__tiles" role="group" aria-label="Show another city">
+            <button type="button" data-city="Denver" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Denver windbreaker"><img src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Denver</span></button>
+            <button type="button" data-city="Anaheim" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Anaheim windbreaker"><img src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Anaheim</span></button>
+            <button type="button" data-city="Nashville" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Nashville windbreaker"><img src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Nashville</span></button>
+            <button type="button" data-city="Vancouver" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261117hyrxcrest" aria-label="Show the Vancouver windbreaker"><img src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261117hyrxcrest" alt="" decoding="async" /><span aria-hidden="true">Vancouver</span></button>
+          </div>
         </div>
         <div>
           <p class="Pin__eyebrow">Ships from the US or Canada</p>
@@ -506,6 +518,35 @@
           var g=document.querySelectorAll('.Pin__sizes button');
           g.forEach(function(b){b.addEventListener('click',function(){g.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});var p=document.querySelector('.Pin__price');if(p)p.firstChild.nodeValue=(b.dataset.size==='2XL'?'$40 ':'$38 ');var c=document.querySelector('.Pin__cta [data-buy]');if(c)c.textContent='Buy now · '+(b.dataset.size==='2XL'?'$40':'$38')+' →';});});
           document.addEventListener('DOMContentLoaded',function(){var m=document.querySelector('.Pin__sizes [aria-pressed="true"]');if(m)m.click();});
+          var hero=document.getElementById("pinHero");
+          var heroImg=hero&&hero.querySelector("img");
+          var heroLabel=hero&&hero.querySelector("span");
+          var tileGroup=document.querySelector(".Pin__tiles");
+          if(hero&&heroImg&&tileGroup){
+            tileGroup.addEventListener("click",function(ev){
+              var btn=ev.target.closest("button");
+              if(!btn||!tileGroup.contains(btn))return;
+              var img=btn.querySelector("img");
+              var label=btn.querySelector("span");
+              var nextCity=btn.getAttribute("data-city");
+              var nextHref=btn.getAttribute("data-href");
+              var nextSrc=btn.getAttribute("data-src");
+              var prevCity=hero.getAttribute("data-city")||"Dallas";
+              var prevHref=hero.getAttribute("href");
+              var prevSrc=heroImg.getAttribute("src");
+              hero.setAttribute("data-city",nextCity);
+              hero.setAttribute("href",nextHref);
+              heroImg.setAttribute("src",nextSrc);
+              heroImg.setAttribute("alt","Model wearing the "+nextCity+" Race Day Windbreaker, front crest visible");
+              if(heroLabel)heroLabel.textContent=nextCity;
+              btn.setAttribute("data-city",prevCity);
+              btn.setAttribute("data-href",prevHref);
+              btn.setAttribute("data-src",prevSrc);
+              if(img)img.setAttribute("src",prevSrc);
+              if(label)label.textContent=prevCity;
+              btn.setAttribute("aria-label","Show the "+prevCity+" windbreaker");
+            });
+          }
         }catch(e){}
       })();
     </script>
