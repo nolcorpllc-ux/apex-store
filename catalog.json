@@ -4103,6 +4103,70 @@
         }
       },
       "fourthwall_default_variant_id": "d6da4aa2-4734-4ebb-a4c2-49b47f0330bd"
+    },
+    {
+      "id": "APC-C76",
+      "handle": "apex-athletic-shoe-black-pink",
+      "title": "Apex Athletic Shoe – Black / Pink",
+      "seo_title": "Apex Athletic Shoe – Black / Pink",
+      "dept": "Shoes",
+      "category": "Shoes",
+      "retail_price": 64.0,
+      "list_price": 64.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/apex-athletic-shoe-black-pink/01.jpg?v=20261117shoe",
+      "alt_image": "images/streetwear/apex-athletic-shoe-black-pink/01.jpg?v=20261117shoe",
+      "extra_images": [],
+      "badge": "New",
+      "ship_time": "Made to order. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black athletic trainer with the APEX A-mark in pink. Lightweight mesh upper, cushioned sole.",
+      "highlights": [
+        "Black athletic trainer with the A-mark in pink",
+        "Lightweight mesh upper, cushioned sole",
+        "Men's sizes 5–13, including half sizes. $64 every size.",
+        "Made to order. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "Lightweight mesh athletic trainer, cushioned sole.",
+      "fulfillment_method": "Made to order. Free US shipping.",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "apex-athletic-shoe-black-pink",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-athletic-shoe-black-pink",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-athletic-shoe-black-pink",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/apex-athletic-shoe-black-pink",
+      "product_page_url": "https://www.apexhybridco.com/products/apex-athletic-shoe-black-pink.html",
+      "product_url": "https://www.apexhybridco.com/products/apex-athletic-shoe-black-pink.html",
+      "fourthwall_variants": {
+        "Black / Pink": {
+          "5": "339ba836-f51d-456a-841f-4905937cc1cc",
+          "5.5": "8aa5e9af-dbca-4776-a6f7-c253017d1ed0",
+          "6": "7075c387-50bb-44e3-b2fe-ee42b9f7fee6",
+          "6.5": "eecfdf7d-9bb1-426f-8ad3-247ad4fc7806",
+          "7": "a2170b1b-8639-4961-8b24-51aa3e0e9ccd",
+          "7.5": "86da5cd8-7b52-43fc-83a0-47fb6bd9649d",
+          "8": "ae96da04-9961-4045-974b-1c38c1f7cbd0",
+          "8.5": "078c9f7b-9a98-4995-9ccd-627ecb526ce2",
+          "9": "c7ac38fb-750a-4532-af57-c5736a2d4406",
+          "9.5": "c5da530a-4b72-4303-a943-b806f47485b3",
+          "10": "a1cec674-133b-43dc-8e3b-b6483c43e75c",
+          "10.5": "a783187c-a35f-4a6e-9cfa-5463bc363290",
+          "11": "765c760e-dcbc-40e5-a52f-12826268d99b",
+          "11.5": "59e0c62c-abd7-43be-8998-bbbdce72c238",
+          "12": "461ef5af-4ff0-4bc0-9ed6-1f97c5ebf38d",
+          "12.5": "d283e637-3e6a-470c-89a0-7c4f15e4b8b5",
+          "13": "84c7012e-4df4-4bf9-ab19-894b28d7588c"
+        }
+      },
+      "fourthwall_default_variant_id": "a1cec674-133b-43dc-8e3b-b6483c43e75c"
     }
   ],
   "guides": [
@@ -5612,6 +5676,6 @@
     "apparel_fulfillment": "Fourthwall US On-Demand Production & Direct Athlete Fulfillment (APC-C01 through APC-C45)",
     "equipment_fulfillment": "Fourthwall US Direct Fulfillment (APC-C01 through APC-C45)",
     "fourthwall_storefront_url": "https://apex-hybrid-co-shop.fourthwall.com",
-    "product_count": 71
+    "product_count": 72
   }
 }
