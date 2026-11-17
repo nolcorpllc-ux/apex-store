@@ -1942,8 +1942,19 @@ def scrub_text(text):
         text,
     )
     text = text.replace("Heavyweight ring-spun cotton/poly brushed warmup fleece", "Heavyweight ring-spun fleece")
-    text = text.replace("50L Race Day Tactical Duffle", "8-Station Race Day 50L All-Weather Gym & Shoe Bag")
-    text = text.replace("50L Tactical Duffle", "8-Station Race Day bag")
+    text = text.replace("8-Station Race Day 50L All-Weather Gym &amp; Shoe Bag", "8-Station Haul")
+    text = text.replace("8-Station Race Day 50L All-Weather Gym & Shoe Bag", "8-Station Haul")
+    text = text.replace("8-Station Race Day 50L gym and shoe bag", "8-Station Haul")
+    text = text.replace("8-Station 50L Race Day Duffle", "8-Station Haul")
+    text = text.replace("8-Station 50L gym and shoe bag", "8-Station Haul")
+    text = text.replace("8-Station race day duffle", "8-Station Haul")
+    text = text.replace("50L Race Day Tactical Duffle", "8-Station Haul")
+    text = text.replace("50L Tactical Duffle", "8-Station Haul")
+    text = text.replace("50L Race Day Duffle", "8-Station Haul")
+    text = text.replace("50L Race Duffles", "8-Station Haul")
+    text = text.replace("8-Station race duffle", "8-Station Haul")
+    text = text.replace("8-Station Race Day bag", "8-Station Haul")
+    text = text.replace("8-Station 50L bag", "8-Station Haul")
     return text
 
 
