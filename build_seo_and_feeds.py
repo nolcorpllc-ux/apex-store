@@ -121,8 +121,7 @@ def generate_product_pages(only_ids=None):
                             "shippingDestination": {"@type": "DefinedRegion", "addressCountry": "US"},
                             "deliveryTime": {
                                 "@type": "ShippingDeliveryTime",
-                                "handlingTime": {"@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY"},
-                                "transitTime": {"@type": "QuantitativeValue", "minValue": 2, "maxValue": 5, "unitCode": "DAY"},
+                                "handlingTime": {"@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY"},
                             },
                         },
                         "hasMerchantReturnPolicy": {
@@ -134,12 +133,10 @@ def generate_product_pages(only_ids=None):
                 },
             ],
         }
-        if prod.get("id") in NA_PACKABLE_IDS and prod.get("id") not in STITCHED_RACE_IDS:
+        if prod.get("id") in RACE_DAY_HANDLING_IDS:
             handling = json_ld["@graph"][1]["offers"]["shippingDetails"]["deliveryTime"]["handlingTime"]
-            handling["minValue"] = 7
-            handling["maxValue"] = 10
-        if prod.get("id") in STITCHED_RACE_IDS:
-            json_ld["@graph"][1]["offers"]["shippingDetails"].pop("deliveryTime", None)
+            handling["minValue"] = 10
+            handling["maxValue"] = 14
         priced_for_schema = fourthwall_size_prices(prod)
         if len({amount for _, amount in priced_for_schema}) > 1:
             base_offer = json_ld["@graph"][1]["offers"]
@@ -1276,7 +1273,7 @@ def feed_prices(prod, variant_price):
 RACE_DAY_HANDLING_IDS = {"APC-C46", "APC-C47", "APC-C48", "APC-C49", "APC-C50", "APC-C75"}
 STITCHED_RACE_IDS = {"APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55", "APC-C57", "APC-C70"}
 NA_PACKABLE_IDS = {"APC-C43", "APC-C51", "APC-C52", "APC-C53", "APC-C54", "APC-C55", "APC-C57", "APC-C70"}
-NA_SHIP_LINE = "Made to order. Ships from the US or Canada and arrives in about 7–10 business days. Free US shipping."
+NA_SHIP_LINE = "Made to order. Ships from the US or Canada. Free US shipping."
 STITCHED_SHIP_LINE = "Made to order. Ships from the US or Canada. Free US shipping."
 OVERSEAS_SHIP_LINE = "Made overseas. Ships in about 10–14 business days. Free US shipping."
 
@@ -1348,8 +1345,8 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         ])
     else:
         lines.extend([
-            "        <g:min_handling_time>7</g:min_handling_time>",
-            "        <g:max_handling_time>10</g:max_handling_time>",
+            "        <g:min_handling_time>3</g:min_handling_time>",
+            "        <g:max_handling_time>5</g:max_handling_time>",
         ])
     lines.extend([
         "      </g:shipping>",
@@ -1500,15 +1497,12 @@ def strip_speed_claims(text):
 def article_ship_line(prod):
     """Shipping line for a product card inside a guide."""
     if prod.get("id") in RACE_DAY_HANDLING_IDS:
-        line = "Made to order. Ships from overseas and arrives in about 10–14 business days. Free US shipping."
-        if prod.get("id") == "APC-C47":
-            line += "<br>Won't arrive before Denver race weekend (Nov 12–15)."
-        return line
+        return "Made overseas. Ships in about 10–14 business days. Free US shipping."
     if prod.get("id") in STITCHED_RACE_IDS:
         return STITCHED_SHIP_LINE
     if prod.get("id") in NA_PACKABLE_IDS:
         return NA_SHIP_LINE
-    return "Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping."
+    return "Made to order. Ships from the US. Free US shipping."
 
 
 def generate_editorial_rss_feeds():
