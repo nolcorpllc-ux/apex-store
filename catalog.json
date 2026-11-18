@@ -4551,6 +4551,118 @@
         }
       },
       "fourthwall_default_variant_id": "4f2a652d-cb2b-4801-97ba-cbd39d026a04"
+    },
+    {
+      "id": "APC-C84",
+      "handle": "engine-training-tank-black",
+      "title": "Engine Training Tank – Black",
+      "seo_title": "Engine Training Tank – Black",
+      "dept": "Muscle Tanks",
+      "category": "Training Tanks",
+      "color": "Black",
+      "retail_price": 33.0,
+      "list_price": 33.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/engine-training-tank-black/01.jpg?v=20261118tank",
+      "alt_image": "images/streetwear/engine-training-tank-black/04.jpg?v=20261118tank",
+      "extra_images": [
+        "images/streetwear/engine-training-tank-black/02.jpg?v=20261118tank",
+        "images/streetwear/engine-training-tank-black/03.jpg?v=20261118tank"
+      ],
+      "badge": "New",
+      "ship_time": "Made to order. Ships from the US or EU. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "All-over-print training tank with the HYRX wordmark and a single rule that wraps from front to back. Lightweight, quick-dry performance fabric.",
+      "highlights": [
+        "Lightweight, quick-dry performance fabric.",
+        "Color: Black. Sizes XS, S, M, L, XL, 2XL.",
+        "Fulfillment: Made to order. Ships from the US or EU. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "Lightweight, quick-dry performance fabric.",
+      "fulfillment_method": "Ships from the US or EU",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "engine-training-tank-black",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/engine-training-tank-black",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/engine-training-tank-black",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/engine-training-tank-black",
+      "product_page_url": "https://www.apexhybridco.com/products/engine-training-tank-black.html",
+      "product_url": "https://www.apexhybridco.com/products/engine-training-tank-black.html",
+      "fourthwall_variants": {
+        "Black": {
+          "XS": "d3ea97cf-375b-415a-b5f7-bdc60dcfe215",
+          "S": "265d963e-e964-44d4-9021-36103b09312d",
+          "M": "fdf31e31-6751-4b0b-944c-8f0f424ef795",
+          "L": "e6e0797a-b54a-4887-8df3-0c5b7339010e",
+          "XL": "1a76b5b1-c33f-46da-83c8-e2fe65b95dca",
+          "2XL": "0d80b68c-8d39-476b-81e7-ffa29959b5c5"
+        }
+      },
+      "fourthwall_default_variant_id": "e6e0797a-b54a-4887-8df3-0c5b7339010e"
+    },
+    {
+      "id": "APC-C85",
+      "handle": "engine-training-tank-mint",
+      "title": "Engine Training Tank – Mint",
+      "seo_title": "Engine Training Tank – Mint",
+      "dept": "Muscle Tanks",
+      "category": "Training Tanks",
+      "color": "Mint",
+      "retail_price": 33.0,
+      "list_price": 33.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/engine-training-tank-mint/01.jpg?v=20261118tank",
+      "alt_image": "images/streetwear/engine-training-tank-mint/04.jpg?v=20261118tank",
+      "extra_images": [
+        "images/streetwear/engine-training-tank-mint/02.jpg?v=20261118tank",
+        "images/streetwear/engine-training-tank-mint/03.jpg?v=20261118tank"
+      ],
+      "badge": "New",
+      "ship_time": "Made to order. Ships from the US or EU. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "All-over-print training tank with the HYRX wordmark and a single rule that wraps from front to back. Lightweight, quick-dry performance fabric.",
+      "highlights": [
+        "Lightweight, quick-dry performance fabric.",
+        "Color: Mint. Sizes XS, S, M, L, XL, 2XL.",
+        "Fulfillment: Made to order. Ships from the US or EU. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "Lightweight, quick-dry performance fabric.",
+      "fulfillment_method": "Ships from the US or EU",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "engine-training-tank-mint",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/engine-training-tank-mint",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/engine-training-tank-mint",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/engine-training-tank-mint",
+      "product_page_url": "https://www.apexhybridco.com/products/engine-training-tank-mint.html",
+      "product_url": "https://www.apexhybridco.com/products/engine-training-tank-mint.html",
+      "fourthwall_variants": {
+        "Mint": {
+          "XS": "14ce775a-98ce-45aa-b422-df8f69fdad32",
+          "S": "4252871b-615d-484c-9f33-e85adc3d07b3",
+          "M": "e63cd1f6-9517-4356-9ad2-06888d35c20c",
+          "L": "b8969b43-10c5-406c-a0e1-f43ef4be8873",
+          "XL": "5af243e7-38fa-4d7b-ad2e-ee803ce27d40",
+          "2XL": "91c2d5ba-2ed8-4ed4-9d1b-e11d2fb67dc6"
+        }
+      },
+      "fourthwall_default_variant_id": "b8969b43-10c5-406c-a0e1-f43ef4be8873"
     }
   ],
   "guides": [
@@ -6060,6 +6172,6 @@
     "apparel_fulfillment": "Fourthwall US On-Demand Production & Direct Athlete Fulfillment (APC-C01 through APC-C45)",
     "equipment_fulfillment": "Fourthwall US Direct Fulfillment (APC-C01 through APC-C45)",
     "fourthwall_storefront_url": "https://apex-hybrid-co-shop.fourthwall.com",
-    "product_count": 78
+    "product_count": 80
   }
 }
