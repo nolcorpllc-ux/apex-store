@@ -501,9 +501,8 @@
             <span id="pinBadge" aria-hidden="true">Anaheim</span>
           </a>
                     <div class="Pin__chips" id="pinChips" role="group" aria-label="Choose a Race Day city">
-            <button type="button" aria-pressed="false" data-city="Dallas" data-end="2026-11-22" data-when="Nov 18–22, 2026" data-venue="Kay Bailey Center" data-href="products/dallas-race-day-stitched.html" data-src="images/streetwear/dallas-race-day-stitched/03.jpg?v=20261119skyline">Dallas</button>
+            <button type="button" aria-pressed="true" data-city="Anaheim" data-pin="default" data-end="2026-12-06" data-when="Dec 3–6, 2026" data-venue="Anaheim Conv Center" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261119skyline">Anaheim</button>
             <button type="button" aria-pressed="false" data-city="London" data-end="2026-12-06" data-when="Dec 2–6, 2026" data-venue="ExCeL London" data-href="products/london-race-day-stitched.html" data-src="images/streetwear/london-race-day-stitched/03.jpg?v=20261119eu">London</button>
-            <button type="button" aria-pressed="true" data-city="Anaheim" data-end="2026-12-06" data-when="Dec 3–6, 2026" data-venue="Anaheim Conv Center" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261119skyline">Anaheim</button>
             <button type="button" aria-pressed="false" data-city="Nashville" data-end="2026-12-13" data-when="Dec 9–13, 2026" data-venue="Music City Center" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261119skyline">Nashville</button>
             <button type="button" aria-pressed="false" data-city="Paris" data-end="2026-12-20" data-when="Dec 12–20, 2026" data-venue="Paris Expo" data-href="products/paris-race-day-stitched.html" data-src="images/streetwear/paris-race-day-stitched/03.jpg?v=20261119eu">Paris</button>
             <button type="button" aria-pressed="false" data-city="Vancouver" data-end="2026-12-20" data-when="Dec 17–20, 2026" data-venue="Canada Place" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261119skyline">Vancouver</button>
@@ -520,6 +519,7 @@
             <button type="button" aria-pressed="false" data-city="Minneapolis" data-end="2027-05-09" data-when="May 7–9, 2027" data-venue="US Bank Stadium" data-href="products/minneapolis-race-day-stitched.html" data-src="images/streetwear/minneapolis-race-day-stitched/03.jpg?v=20261119rdw6">Minneapolis</button>
             <button type="button" aria-pressed="false" data-city="San Diego" data-end="2027-05-16" data-when="May 13–16, 2027" data-venue="San Diego Conv Ctr" data-href="products/san-diego-race-day-stitched.html" data-src="images/streetwear/san-diego-race-day-stitched/03.jpg?v=20261119rdw6">San Diego</button>
             <button type="button" aria-pressed="false" data-city="Portland" data-end="2027-05-23" data-when="May 21–23, 2027" data-venue="Oregon Conv Ctr" data-href="products/portland-race-day-stitched.html" data-src="images/streetwear/portland-race-day-stitched/03.jpg?v=20261119rdw6">Portland</button>
+            <button type="button" aria-pressed="false" data-city="Dallas" data-passed="true" data-end="2026-11-22" data-when="Nov 18–22, 2026" data-venue="Kay Bailey Center" data-href="products/dallas-race-day-stitched.html" data-src="images/streetwear/dallas-race-day-stitched/03.jpg?v=20261119skyline">Dallas</button>
             <button type="button" aria-pressed="false" data-city="Denver" data-end="2026-11-15" data-when="Nov 12–15, 2026" data-venue="National Western" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261119skyline">Denver</button>
           </div>
         </div>
@@ -571,27 +571,44 @@
               return d.getFullYear()+"-"+two(d.getMonth()+1)+"-"+two(d.getDate());
             }
           }
+          function isPassed(btn, today){
+            if(btn.getAttribute("data-passed")==="true") return true;
+            return (btn.getAttribute("data-end")||"")<today;
+          }
+          function isPinned(btn, today){
+            return btn.getAttribute("data-pin")==="default" && (btn.getAttribute("data-end")||"")>=today;
+          }
           function arrange(){
             if(!chips) return;
             var today=laToday();
             var buttons=Array.prototype.slice.call(chips.querySelectorAll("button"));
             buttons.forEach(function(btn, i){ btn._pinIndex=i; });
             buttons.sort(function(a,b){
+              var ag=isPinned(a, today)?0:(isPassed(a, today)?2:1);
+              var bg=isPinned(b, today)?0:(isPassed(b, today)?2:1);
+              if(ag!==bg) return ag-bg;
               var ae=a.getAttribute("data-end")||"";
               var be=b.getAttribute("data-end")||"";
-              var ap=ae<today;
-              var bp=be<today;
-              if(ap!==bp) return ap?1:-1;
-              if(ae<be) return -1;
-              if(ae>be) return 1;
+              if(ag===2){
+                if(ae>be) return -1;
+                if(ae<be) return 1;
+              }else{
+                if(ae<be) return -1;
+                if(ae>be) return 1;
+              }
               return a._pinIndex-b._pinIndex;
             });
             buttons.forEach(function(btn){ chips.appendChild(btn); });
             var next=null;
             for(var i=0;i<buttons.length;i++){
-              if((buttons[i].getAttribute("data-end")||"")>=today){ next=buttons[i]; break; }
+              if(isPinned(buttons[i], today)){ next=buttons[i]; break; }
             }
-            if(!next && buttons.length) next=buttons[buttons.length-1];
+            if(!next){
+              for(var j=0;j<buttons.length;j++){
+                if(!isPassed(buttons[j], today)){ next=buttons[j]; break; }
+              }
+            }
+            if(!next && buttons.length) next=buttons[0];
             if(next){
               select(next);
               var edge=next.offsetLeft-(chips.offsetLeft||0);
