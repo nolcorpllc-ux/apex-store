@@ -2746,6 +2746,65 @@ def published_hoodie_pages():
     return pages
 
 
+NEAR_BLACK_LUMINANCE = 20.0
+
+
+def mean_luminance(path):
+    """Average relative luminance of a photo, 0 to 255."""
+    from PIL import Image
+    image = Image.open(path).convert("RGB")
+    image.thumbnail((64, 64))
+    pixels = list(image.getdata())
+    if not pixels:
+        return 0.0
+    return sum((0.2126 * red) + (0.7152 * green) + (0.0722 * blue) for red, green, blue in pixels) / len(pixels)
+
+
+def near_black_frame(path, threshold=NEAR_BLACK_LUMINANCE):
+    return mean_luminance(path) < threshold
+
+
+def skipped_brighter_frame(primary_path, threshold=NEAR_BLACK_LUMINANCE):
+    """A near-black primary while 02, 03, or 04 in the same folder is light enough to use."""
+    if not primary_path or not os.path.exists(primary_path):
+        return False
+    if not near_black_frame(primary_path, threshold):
+        return False
+    folder = os.path.dirname(primary_path)
+    for name in ("02.jpg", "03.jpg", "04.jpg"):
+        candidate = os.path.join(folder, name)
+        if os.path.abspath(candidate) == os.path.abspath(primary_path):
+            continue
+        if os.path.exists(candidate) and mean_luminance(candidate) >= threshold:
+            return True
+    return False
+
+
+def near_black_primary_offenders(products, threshold=NEAR_BLACK_LUMINANCE):
+    """Primaries that are near-black even though a lighter 02-04 frame exists."""
+    offenders = []
+    for product in products:
+        raw = (product.get("primary_image") or product.get("image") or "").split("?")[0]
+        if not raw:
+            continue
+        path = raw if os.path.isabs(raw) else os.path.join(BASE_DIR, raw)
+        if skipped_brighter_frame(path, threshold):
+            offenders.append(f"{product.get('id')} {product.get('handle')} {os.path.basename(path)}")
+    return offenders
+
+
+def list_near_black_primaries(products, threshold=NEAR_BLACK_LUMINANCE):
+    listed = []
+    for product in products:
+        raw = (product.get("primary_image") or product.get("image") or "").split("?")[0]
+        if not raw:
+            continue
+        path = raw if os.path.isabs(raw) else os.path.join(BASE_DIR, raw)
+        if os.path.exists(path) and near_black_frame(path, threshold):
+            listed.append(f"{product.get('id')} {product.get('handle')} {mean_luminance(path):.1f}")
+    return listed
+
+
 def assert_restored_sections():
     """Self-test the regression gates, then check guides, C36, slugs, and old names."""
     if not _lowercase_after_period("Wraps from front to back. quick-dry performance."):
@@ -2995,6 +3054,27 @@ def assert_restored_sections():
     hidden_live = hidden_hoodie_link_errors(published_hoodie_pages())
     if hidden_live:
         raise SystemExit("Hidden hoodie is still linked: " + "; ".join(hidden_live[:12]))
+    import tempfile
+    from PIL import Image
+    with tempfile.TemporaryDirectory() as tmp:
+        black = os.path.join(tmp, "05.jpg")
+        front = os.path.join(tmp, "03.jpg")
+        Image.new("RGB", (16, 16), (0, 0, 0)).save(black)
+        Image.new("RGB", (16, 16), (210, 210, 210)).save(front)
+        if not near_black_frame(black):
+            raise SystemExit("Luminance self-test missed a black frame")
+        if near_black_frame(front):
+            raise SystemExit("Luminance self-test flagged a light frame")
+        if not skipped_brighter_frame(black):
+            raise SystemExit("Luminance self-test missed a dark primary that skipped a lighter frame")
+        if skipped_brighter_frame(front):
+            raise SystemExit("Luminance self-test flagged the lighter front frame")
+    self_tests.append("near-black primary is rejected when a lighter frame exists")
+    catalog = json.loads(open(os.path.join(BASE_DIR, "catalog.json"), encoding="utf-8").read())
+    skipped = near_black_primary_offenders(catalog["products"])
+    if skipped:
+        raise SystemExit("Near-black primary skipped a lighter frame: " + "; ".join(skipped))
+    print("Near-black primaries with no lighter frame: " + ", ".join(list_near_black_primaries(catalog["products"])))
     assert_restored_sections.self_test_count = len(self_tests)
     folder = os.path.join(BASE_DIR, "products")
     guide_total = 0
