@@ -22,6 +22,29 @@ SITE_URL = "https://www.apexhybridco.com"
 TODAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 INDEXNOW_KEY = "b7e3c9a4d2f841069c5e1a8f3b2d6e40"
 
+
+def xml_text(value):
+    """Escape text and URLs for XML element content and attributes."""
+    return html.escape("" if value is None else str(value), quote=True)
+
+
+def assert_published_xml_parses():
+    """Fail the build if any published XML file does not parse."""
+    import xml.etree.ElementTree as ET
+    errors = []
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [name for name in dirnames if name not in {".git", "__pycache__"}]
+        for name in filenames:
+            if not name.endswith(".xml"):
+                continue
+            path = os.path.join(dirpath, name)
+            try:
+                ET.parse(path)
+            except ET.ParseError as exc:
+                errors.append(f"{os.path.relpath(path, BASE_DIR)}: {exc}")
+    if errors:
+        raise SystemExit("XML parse failed:\n" + "\n".join(errors))
+
 with open(os.path.join(BASE_DIR, "catalog.json"), "r", encoding="utf-8") as f:
     catalog = json.load(f)
 
@@ -1304,37 +1327,37 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
     availability = "in_stock" if (apparel or {}).get("in_stock", True) else "out_of_stock"
     lines = [
         "    <item>",
-        f"      <g:id>{html.escape(item_id)}</g:id>",
-        f"      <g:title>{html.escape(title)}</g:title>",
-        f"      <g:description>{html.escape(feed_description(prod))}</g:description>",
-        f"      <g:link>{html.escape(link)}</g:link>",
-        f"      <g:image_link>{html.escape(img_link)}</g:image_link>",
+        f"      <g:id>{xml_text(item_id)}</g:id>",
+        f"      <g:title>{xml_text(title)}</g:title>",
+        f"      <g:description>{xml_text(feed_description(prod))}</g:description>",
+        f"      <g:link>{xml_text(link)}</g:link>",
+        f"      <g:image_link>{xml_text(img_link)}</g:image_link>",
     ]
     if prod.get("id") in NA_PACKABLE_IDS:
         for extra in [prod.get("alt_image")] + list(prod.get("extra_images") or []):
             if not extra:
                 continue
             extra_link = extra if str(extra).startswith("http") else f"{SITE_URL}/{str(extra).lstrip('/')}"
-            lines.append(f"      <g:additional_image_link>{html.escape(extra_link)}</g:additional_image_link>")
+            lines.append(f"      <g:additional_image_link>{xml_text(extra_link)}</g:additional_image_link>")
     lines += [
         "      <g:condition>new</g:condition>",
         f"      <g:availability>{availability}</g:availability>",
         f"      <g:price>{price}</g:price>",
         "      <g:brand>Apex Hybrid Co</g:brand>",
-        f"      <g:mpn>{html.escape(prod['id'])}</g:mpn>",
+        f"      <g:mpn>{xml_text(prod['id'])}</g:mpn>",
         "      <g:identifier_exists>no</g:identifier_exists>",
     ]
     if apparel:
-        lines.append(f"      <g:item_group_id>{html.escape(prod['id'])}</g:item_group_id>")
+        lines.append(f"      <g:item_group_id>{xml_text(prod['id'])}</g:item_group_id>")
         lines.append("      <g:age_group>adult</g:age_group>")
         lines.append("      <g:gender>unisex</g:gender>")
         if apparel.get("color"):
-            lines.append(f"      <g:color>{html.escape(apparel['color'])}</g:color>")
+            lines.append(f"      <g:color>{xml_text(apparel['color'])}</g:color>")
         if apparel.get("size"):
-            lines.append(f"      <g:size>{html.escape(apparel['size'])}</g:size>")
+            lines.append(f"      <g:size>{xml_text(apparel['size'])}</g:size>")
     lines.extend([
-        f"      <g:google_product_category>{html.escape(g_cat)}</g:google_product_category>",
-        f"      <g:product_type>{html.escape(prod['dept'])} &gt; {html.escape(prod['category'])}</g:product_type>",
+        f"      <g:google_product_category>{xml_text(g_cat)}</g:google_product_category>",
+        f"      <g:product_type>{xml_text(prod['dept'])} &gt; {xml_text(prod['category'])}</g:product_type>",
     ])
     if prod.get("id") in {"APC-C37", "APC-C38", "APC-C40", "APC-C41"}:
         lines.append("      <g:material>6.1 oz heavyweight cotton</g:material>")
@@ -1460,6 +1483,7 @@ def generate_google_shopping_feed():
     shutil.copyfile(shopping_path, os.path.join(BASE_DIR, "google_shopping_feed_ghpages.xml"))
     with open(os.path.join(BASE_DIR, "google_merchant_feed.xml"), "w", encoding="utf-8") as f:
         f.write(rss_xml)
+    assert_published_xml_parses()
     summary = {
         "items": len(items_xml),
         "apparel_products": apparel_products,
@@ -1531,24 +1555,24 @@ def generate_editorial_rss_feeds():
         items_xml = []
         items_xml.append(
             f"""    <item>
-      <title>{html.escape("Gifts for Hybrid Athletes: Holiday Gift Guide")}</title>
-      <link>{SITE_URL}/gift-guide.html</link>
-      <guid isPermaLink="true">{SITE_URL}/gift-guide.html</guid>
-      <pubDate>{pub_rfc822}</pubDate>
-      <category>Gift Guide</category>
-      <description>{html.escape("Black gifts for hybrid athletes, grouped by price. Regular list prices. Made to order. Free US shipping.")}</description>
+      <title>{xml_text("Gifts for Hybrid Athletes: Holiday Gift Guide")}</title>
+      <link>{xml_text(SITE_URL + "/gift-guide.html")}</link>
+      <guid isPermaLink="true">{xml_text(SITE_URL + "/gift-guide.html")}</guid>
+      <pubDate>{xml_text(pub_rfc822)}</pubDate>
+      <category>{xml_text("Gift Guide")}</category>
+      <description>{xml_text("Black gifts for hybrid athletes, grouped by price. Regular list prices. Made to order. Free US shipping.")}</description>
     </item>"""
         )
         for art in guides:
             art_url = f"{SITE_URL}/articles/{art['slug']}.html"
             items_xml.append(
                 f"""    <item>
-      <title>{html.escape(strip_speed_claims(art['title']))}</title>
-      <link>{art_url}</link>
-      <guid isPermaLink="true">{art_url}</guid>
-      <pubDate>{pub_rfc822}</pubDate>
-      <category>{html.escape(strip_speed_claims(art.get('category', 'HYROX & Hybrid Racing Guide')))}</category>
-      <description>{html.escape(strip_speed_claims(art.get('summary', '')))}</description>
+      <title>{xml_text(strip_speed_claims(art['title']))}</title>
+      <link>{xml_text(art_url)}</link>
+      <guid isPermaLink="true">{xml_text(art_url)}</guid>
+      <pubDate>{xml_text(pub_rfc822)}</pubDate>
+      <category>{xml_text(strip_speed_claims(art.get('category', 'HYROX & Hybrid Racing Guide')))}</category>
+      <description>{xml_text(strip_speed_claims(art.get('summary', '')))}</description>
     </item>"""
             )
         for prod in products:
@@ -1557,12 +1581,12 @@ def generate_editorial_rss_feeds():
             desc = f"{prod['short_desc']}  -  Price: ${prod['retail_price']:.2f} USD ({prod['ship_time']}). Direct Checkout: {fw_url}"
             items_xml.append(
                 f"""    <item>
-      <title>{html.escape(prod.get('seo_title', prod['title']))} (${prod['retail_price']:.2f})</title>
-      <link>{prod_url}</link>
-      <guid isPermaLink="true">{prod_url}</guid>
-      <pubDate>{pub_rfc822}</pubDate>
-      <category>{html.escape(prod.get('dept', 'Hybrid Race Gear'))}</category>
-      <description>{html.escape(desc)}</description>
+      <title>{xml_text(prod.get('seo_title', prod['title']))} (${prod['retail_price']:.2f})</title>
+      <link>{xml_text(prod_url)}</link>
+      <guid isPermaLink="true">{xml_text(prod_url)}</guid>
+      <pubDate>{xml_text(pub_rfc822)}</pubDate>
+      <category>{xml_text(prod.get('dept', 'Hybrid Race Gear'))}</category>
+      <description>{xml_text(desc)}</description>
     </item>"""
             )
 
@@ -1576,7 +1600,7 @@ def generate_editorial_rss_feeds():
     <lastBuildDate>{pub_rfc822}</lastBuildDate>
     <managingEditor>apexhybridco@gmail.com (Apex Hybrid Co.)</managingEditor>
     <webMaster>apexhybridco@gmail.com (Apex Hybrid Co.)</webMaster>
-    <atom:link href="{self_url}" rel="self" type="application/rss+xml" />
+    <atom:link href="{xml_text(self_url)}" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
     <atom:link href="https://pubsubhubbub.superfeedr.com/" rel="hub" />
 {chr(10).join(items_xml)}
@@ -1585,6 +1609,7 @@ def generate_editorial_rss_feeds():
 """
         with open(os.path.join(BASE_DIR, filename), "w", encoding="utf-8") as f:
             f.write(feed_doc)
+    assert_published_xml_parses()
 
 
 def generate_pinterest_csv_feed():
@@ -1698,10 +1723,10 @@ def generate_sitemap_and_robots():
 
     url_entries = "\n".join(
         f"""  <url>
-    <loc>{u}</loc>
-    <lastmod>{TODAY}</lastmod>
-    <changefreq>{freq}</changefreq>
-    <priority>{prio}</priority>
+    <loc>{xml_text(u)}</loc>
+    <lastmod>{xml_text(TODAY)}</lastmod>
+    <changefreq>{xml_text(freq)}</changefreq>
+    <priority>{xml_text(prio)}</priority>
   </url>"""
         for u, prio, freq in urls
     )
@@ -1713,6 +1738,7 @@ def generate_sitemap_and_robots():
 """
     with open(os.path.join(BASE_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sitemap_xml)
+    assert_published_xml_parses()
 
     robots_txt = f"""User-agent: *
 Allow: /
@@ -2150,5 +2176,6 @@ if __name__ == "__main__":
     generate_sitemap_and_robots()
     enforce_delisted_noindex()
     scrub_published_files()
+    assert_published_xml_parses()
     # inject_static_seo_into_index() disabled to preserve clean index.html
     print(f"Successfully generated {len(products)} product pages, {len(guides)} SEO articles, Shopping XML/CSV feeds, and sitemap.xml")
