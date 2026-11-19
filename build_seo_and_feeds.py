@@ -280,7 +280,7 @@ def generate_product_pages(only_ids=None):
         size_buttons = "\n              ".join(_size_btn(sz, sz == "L") for sz in size_names)
         extra_gallery_html = ""
         for idx, path in enumerate(prod.get("extra_images") or [], start=3):
-            label = "Worn, chest crest" if idx == 3 else "Worn, plain back"
+            label = "Worn" if idx == 3 else "Worn, plain back"
             extra_gallery_html += (
                 f'<button type="button" onclick="document.getElementById(\'staticMainProdImg\').src=\'../{path}\'" '
                 f'style="cursor:pointer; border:2px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; color:#0f172a; display:flex; align-items:center; gap:8px; font-weight:700; font-size:12.5px;">'
@@ -373,7 +373,7 @@ def generate_product_pages(only_ids=None):
         {f'''<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
           <button type="button" onclick="document.getElementById('staticMainProdImg').src='../{prod['image']}'" style="cursor:pointer; border:2px solid #0066ff; border-radius:8px; padding:6px; background:#0f172a; color:#fff; display:flex; align-items:center; gap:8px; font-weight:700; font-size:12.5px;">
             <img src="../{prod['image']}" alt="{html.escape(title)}  -  Primary View" style="width:48px; height:48px; object-fit:cover; border-radius:4px;" />
-            <span>1. Black Edition (Front Crest)</span>
+            <span>1. Front</span>
           </button>
           <button type="button" onclick="document.getElementById('staticMainProdImg').src='../{prod['alt_image']}'" style="cursor:pointer; border:2px solid #cbd5e1; border-radius:8px; padding:6px; background:#f8fafc; color:#0f172a; display:flex; align-items:center; gap:8px; font-weight:700; font-size:12.5px;">
             <img src="../{prod['alt_image']}" alt="{html.escape(title)} back view" style="width:48px; height:48px; object-fit:cover; border-radius:4px;" />
