@@ -826,8 +826,8 @@ def sitewide_garble_hits(text):
         hits.append("code .")
     if re.search(r"\bUS Free\b", text):
         hits.append("US Free")
-    # Standalone "in and" (the missing-city fragment). Not "Austin and" or "check-in and".
-    if re.search(r"(?<![\w-])in and\b", text):
+    # "gym in and Costa Mesa" is a missing city. "jog in and the photo" is a real sentence.
+    if re.search(r"\b(?:gym|located|based|studio)\s+in\s+and\b", text, re.I):
         hits.append("in and")
     return hits
 
@@ -998,7 +998,7 @@ def assert_sitewide_garble():
         '<meta property="og:title" content="Aerobic Engine">'
         '<meta name="twitter:title" content="Aerobic Engine">'
         "</head><body><h1>Aerobic Engine</h1>"
-        "<p>A gym in Irvine and Costa Mesa. Austin and Round Rock. They ship from the US. Free US shipping.</p>"
+        "<p>A gym in Irvine and Costa Mesa. Austin and Round Rock. A simple city tee for the jog in and the photo after. They ship from the US. Free US shipping.</p>"
         '<a class="ProductCard" href="zone-5-engine.html"><img alt="Aerobic Engine" />'
         '<div class="ProductCard__Title">Aerobic Engine</div></a>'
         "</body></html>"
@@ -1008,6 +1008,8 @@ def assert_sitewide_garble():
         raise SystemExit("Sitewide garble self-test flagged a clean page:\n" + "\n".join(clean_errors))
     if sitewide_garble_hits("Austin and Round Rock check-in and warmup"):
         raise SystemExit("Sitewide garble self-test flagged Austin and or check-in and")
+    if sitewide_garble_hits("A simple city tee for the jog in and the photo after."):
+        raise SystemExit("Sitewide garble self-test flagged jog in and the photo after")
     errors = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
         dirnames[:] = [name for name in dirnames if name not in {".git", "__pycache__"}]
@@ -1400,8 +1402,458 @@ OLD_HEAVY_LISTING_NAMES = (
     "Oversized Heavyweight Gym Sweatshirt",
 )
 GUIDE_LINKS_REQUIRED = 6
-# Published HTML contents only. The old 3349 figure counted on-disk paths.
-SLUG_TOKEN_MINIMUM = 3070
+# Unique hyphenated tokens in published HTML, CSS, JS, JSON, XML, CSV, and TXT,
+# including each file's path. Lays counted 3362. Removing the unique duffle
+# tokens 3-in-1, 50-liter, and all-weather, and adding 10-packs, leaves 3360.
+# The floor is that exact published count, with no cushion.
+SLUG_TOKEN_MINIMUM = 3360
+SLUG_PAGE_BASELINE = {
+    'a4b8c9d0e1f234567890abcdef123456.txt': 0,
+    'a8f4c2e9d1b740639c5e2a1f8b3d7e90.txt': 0,
+    'a8f9d2e4c7b14f6093e5d8c2a1b4e7f0.txt': 0,
+    'about.html': 17,
+    'app.js': 1208,
+    'articles/2026-2027-north-america-hybrid-race-calendar-course-and-turf-guide.html': 270,
+    'articles/48-hour-post-race-recovery-protocol-cold-plunge-compression-red-light.html': 271,
+    'articles/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 284,
+    'articles/away-race-travel-packing-list-collapsible-foam-roller-shoe-case.html': 278,
+    'articles/best-breathable-shirt-for-hyrox-compromised-running-sled-push.html': 272,
+    'articles/best-hybrid-athlete-race-day-gear-and-recovery-tools-2026.html': 271,
+    'articles/best-hyrox-shirts-breathable-race-tops-and-training-apparel-guide.html': 269,
+    'articles/best-pump-cover-for-functional-fitness-racing.html': 266,
+    'articles/bulletproof-knees-and-shins-for-compromised-running.html': 265,
+    'articles/burpee-broad-jumps-80m-pacing-technique-and-breathing-strategy.html': 259,
+    'articles/cancun-feb-2027-hyrox-heat-humidity-race-gear-and-warmup.html': 296,
+    'articles/chicago-navy-pier-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 285,
+    'articles/cold-plunge-and-red-light-recovery-routine-for-endurance-runners.html': 279,
+    'articles/cold-plunge-vs-sauna-contrast-therapy-timing-for-hybrid-athletes.html': 258,
+    'articles/compromised-running-pacing-calculator-and-1km-split-strategy.html': 265,
+    'articles/compromised-running-shirt-hybrid-athlete.html': 258,
+    'articles/custom-run-club-hybrid-gym-wholesale-team-shirts.html': 268,
+    'articles/dallas-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 289,
+    'articles/doubles-hybrid-race-strategy-how-to-split-stations-with-your-partner.html': 263,
+    'articles/farmer-carry-grip-strength-liquid-chalk-and-dead-hang-guide.html': 277,
+    'articles/funny-hyrox-workout-shirts-wall-balls-sled-push-roxzone.html': 280,
+    'articles/heavyweight-gym-pump-covers-and-functional-racing-apparel-guide.html': 268,
+    'articles/home-recovery-corner-setup-under-300-for-endurance-athletes.html': 272,
+    'articles/how-to-cut-3-minutes-off-your-roxzone-and-compromised-running-splits.html': 269,
+    'articles/how-to-train-for-your-first-hybrid-fitness-race-8-week-plan.html': 269,
+    'articles/hybrid-athlete-gift-guide-2026.html': 299,
+    'articles/hybrid-race-simulation-workouts-half-and-full-sim-to-predict-your-finish-time.html': 271,
+    'articles/hyrox-anaheim-2026-socal-race-shirt-doubles-relay-team-kits.html': 270,
+    'articles/hyrox-anaheim-socal-open-division-apparel.html': 262,
+    'articles/hyrox-chicago-2026-last-minute-race-shirt-doubles-2-pack-shipping.html': 269,
+    'articles/hyrox-chicago-navy-pier-race-day-shirt.html': 266,
+    'articles/hyrox-dallas-2026-race-week-apparel-doubles-partner-shirts.html': 269,
+    'articles/hyrox-dallas-lone-star-race-tee.html': 262,
+    'articles/hyrox-las-vegas-qualifier-shirt.html': 260,
+    'articles/hyrox-miami-beach-race-day-shirt.html': 254,
+    'articles/hyrox-nyc-hudson-pier-race-shirt.html': 262,
+    'articles/hyrox-pro-division-race-day-kit-checklist-2026.html': 271,
+    'articles/hyrox-relay-team-matching-shirts-4-pack-2026.html': 274,
+    'articles/hyrox-warmup-routine-and-start-corral-gear-guide-2026.html': 274,
+    'articles/index.html': 237,
+    'articles/las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 287,
+    'articles/lower-leg-circulation-stack-compression-boots-ems-foot-mat-cupping.html': 269,
+    'articles/matching-hyrox-doubles-team-shirts-2026.html': 274,
+    'articles/miami-beach-mar-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 292,
+    'articles/new-york-pier-may-2027-warmup-jacket-breathable-hybrid-race-shirt-guide.html': 285,
+    'articles/porta-potty-line-pr-funny-hybrid-race-shirt.html': 281,
+    'articles/post-hyrox-recovery-kit-sore-legs-wall-balls-sled-pull.html': 279,
+    'articles/race-week-taper-carb-loading-and-cold-plunge-recovery-timeline.html': 270,
+    'articles/racing-a-hybrid-fitness-race-at-altitude-denver-pacing-hydration-and-gear.html': 278,
+    'articles/red-light-therapy-panel-vs-belt-660nm-850nm-recovery-guide.html': 277,
+    'articles/respiratory-muscle-training-vo2-max-and-zone-2-heart-rate-guide.html': 269,
+    'articles/roxzone-transition-drills-cut-dead-time-between-stations.html': 287,
+    'articles/sandbag-lunges-100m-station-7-pacing-posture-and-leg-recovery.html': 265,
+    'articles/skierg-rowerg-1000m-pacing-split-targets-hybrid-race.html': 259,
+    'articles/sled-push-and-sled-pull-turf-friction-survival-protocol.html': 268,
+    'articles/sled-push-enthusiast-workout-shirt.html': 267,
+    'articles/sub-90-minute-hybrid-race-pacing-plan-station-by-station-split-targets.html': 287,
+    'articles/the-week-after-a-hybrid-race-7-day-recovery-and-return-to-training-plan.html': 275,
+    'articles/treadmill-compromised-running-workouts-for-winter-hybrid-race-training.html': 270,
+    'articles/two-day-strength-plan-for-hybrid-racers-sled-push-lunges-and-wall-balls.html': 275,
+    'articles/wall-balls-station-8-unbroken-rep-strategy-and-mobility-prep.html': 272,
+    'articles/weighted-vest-murph-and-compromised-running-protocol-2026.html': 276,
+    'articles/what-to-eat-before-a-hybrid-fitness-race-nutrition-and-hydration-plan.html': 268,
+    'articles/what-to-wear-for-first-hyrox-race.html': 273,
+    'articles/what-to-wear-hyrox-anaheim-chicago-dallas-2026.html': 281,
+    'articles/zone-2-chest-strap-heart-rate-training-plan-hybrid-racers.html': 264,
+    'b7e3c9a4d2f841069c5e1a8f3b2d6e40.txt': 0,
+    'catalog.json': 1931,
+    'collections/accessories.html': 46,
+    'collections/hyrx.html': 79,
+    'collections/new.html': 85,
+    'collections/race-day-windbreakers.html': 47,
+    'collections/shoes.html': 26,
+    'collections/tanks.html': 37,
+    'collections/tees.html': 117,
+    'collections/tops.html': 29,
+    'collections/windbreakers.html': 70,
+    'collections/womens.html': 32,
+    'contact.html': 16,
+    'directory.html': 272,
+    'feed.xml': 451,
+    'fourthwall_city_jacket_variants.json': 43,
+    'fourthwall_feed_variants.json': 397,
+    'fourthwall_full_catalog_sync.json': 265,
+    'gift-guide.html': 62,
+    'google8a7e6d0a7e3acfb0.html': 4,
+    'google_merchant_feed.xml': 1372,
+    'google_shopping_feed.xml': 1372,
+    'google_shopping_feed_ghpages.xml': 1372,
+    'gyms/gyms_directory.json': 68,
+    'gyms/index.html': 272,
+    'index.html': 297,
+    'llms.txt': 423,
+    'perks-bar.js': 7,
+    'pinterest_catalog_feed.csv': 1155,
+    'privacy.html': 17,
+    'products/100-wall-balls-unbroken-sleeveless-muscle-tank.html': 177,
+    'products/1km-split.html': 187,
+    'products/200m-farmer-carry-survivors-club-barbell-crest-tee.html': 183,
+    'products/26-27-world-series-lightweight-warmup-jacket.html': 174,
+    'products/8-runs-8-stations-zero-excuses-heavyweight-pump-cover-tee.html': 180,
+    'products/8-station-functional-race-division-oversized-stealth-hoodie.html': 79,
+    'products/aeromesh-breathable-breathable-hyrox-race-tech-tee.html': 7,
+    'products/aeromesh-laser-vented-breathable-hyrox-race-tech-tee.html': 7,
+    'products/anaheim-crest.html': 53,
+    'products/anaheim-hyrx.html': 54,
+    'products/anaheim-race-day-stitched.html': 180,
+    'products/anaheim-race-day.html': 177,
+    'products/anaheim-socal-open-division-pacific-coast-race-tee.html': 177,
+    'products/apc-c01.html': 193,
+    'products/apc-c02.html': 194,
+    'products/apc-c03.html': 192,
+    'products/apc-c04.html': 7,
+    'products/apc-c05.html': 195,
+    'products/apc-c06.html': 196,
+    'products/apc-c07.html': 184,
+    'products/apc-c08.html': 180,
+    'products/apc-c09.html': 180,
+    'products/apc-c10.html': 180,
+    'products/apc-c100.html': 54,
+    'products/apc-c101.html': 54,
+    'products/apc-c102.html': 54,
+    'products/apc-c103.html': 54,
+    'products/apc-c104.html': 54,
+    'products/apc-c105.html': 54,
+    'products/apc-c106.html': 54,
+    'products/apc-c107.html': 54,
+    'products/apc-c108.html': 54,
+    'products/apc-c109.html': 52,
+    'products/apc-c11.html': 185,
+    'products/apc-c110.html': 52,
+    'products/apc-c111.html': 54,
+    'products/apc-c112.html': 54,
+    'products/apc-c113.html': 55,
+    'products/apc-c114.html': 54,
+    'products/apc-c115.html': 54,
+    'products/apc-c116.html': 54,
+    'products/apc-c117.html': 54,
+    'products/apc-c118.html': 54,
+    'products/apc-c119.html': 54,
+    'products/apc-c12.html': 181,
+    'products/apc-c120.html': 54,
+    'products/apc-c121.html': 55,
+    'products/apc-c122.html': 68,
+    'products/apc-c123.html': 65,
+    'products/apc-c124.html': 44,
+    'products/apc-c125.html': 44,
+    'products/apc-c126.html': 43,
+    'products/apc-c127.html': 43,
+    'products/apc-c128.html': 47,
+    'products/apc-c129.html': 48,
+    'products/apc-c13.html': 171,
+    'products/apc-c130.html': 44,
+    'products/apc-c131.html': 42,
+    'products/apc-c132.html': 40,
+    'products/apc-c133.html': 40,
+    'products/apc-c134.html': 40,
+    'products/apc-c135.html': 40,
+    'products/apc-c136.html': 42,
+    'products/apc-c137.html': 42,
+    'products/apc-c138.html': 45,
+    'products/apc-c139.html': 45,
+    'products/apc-c14.html': 165,
+    'products/apc-c140.html': 57,
+    'products/apc-c141.html': 57,
+    'products/apc-c142.html': 54,
+    'products/apc-c143.html': 54,
+    'products/apc-c144.html': 54,
+    'products/apc-c145.html': 54,
+    'products/apc-c146.html': 54,
+    'products/apc-c147.html': 54,
+    'products/apc-c148.html': 54,
+    'products/apc-c149.html': 54,
+    'products/apc-c15.html': 82,
+    'products/apc-c150.html': 54,
+    'products/apc-c16.html': 178,
+    'products/apc-c17.html': 179,
+    'products/apc-c18-anaheim-socal-tee.html': 178,
+    'products/apc-c18.html': 178,
+    'products/apc-c19.html': 179,
+    'products/apc-c20.html': 179,
+    'products/apc-c21.html': 180,
+    'products/apc-c22.html': 180,
+    'products/apc-c23.html': 181,
+    'products/apc-c24.html': 183,
+    'products/apc-c25.html': 183,
+    'products/apc-c26.html': 185,
+    'products/apc-c27.html': 184,
+    'products/apc-c28.html': 178,
+    'products/apc-c29.html': 176,
+    'products/apc-c30.html': 188,
+    'products/apc-c31.html': 177,
+    'products/apc-c32.html': 180,
+    'products/apc-c33.html': 180,
+    'products/apc-c34.html': 181,
+    'products/apc-c35.html': 80,
+    'products/apc-c36.html': 191,
+    'products/apc-c37.html': 187,
+    'products/apc-c38.html': 188,
+    'products/apc-c39.html': 7,
+    'products/apc-c40.html': 189,
+    'products/apc-c41.html': 190,
+    'products/apc-c42.html': 179,
+    'products/apc-c43.html': 177,
+    'products/apc-c44.html': 177,
+    'products/apc-c45.html': 175,
+    'products/apc-c46.html': 179,
+    'products/apc-c47.html': 178,
+    'products/apc-c48.html': 178,
+    'products/apc-c49.html': 178,
+    'products/apc-c50.html': 178,
+    'products/apc-c51.html': 182,
+    'products/apc-c52.html': 182,
+    'products/apc-c53.html': 181,
+    'products/apc-c54.html': 181,
+    'products/apc-c55.html': 181,
+    'products/apc-c56.html': 194,
+    'products/apc-c57.html': 185,
+    'products/apc-c58.html': 54,
+    'products/apc-c59.html': 53,
+    'products/apc-c60.html': 53,
+    'products/apc-c61.html': 53,
+    'products/apc-c62.html': 53,
+    'products/apc-c63.html': 54,
+    'products/apc-c64.html': 53,
+    'products/apc-c65.html': 53,
+    'products/apc-c66.html': 50,
+    'products/apc-c67.html': 54,
+    'products/apc-c68.html': 56,
+    'products/apc-c69.html': 55,
+    'products/apc-c70.html': 183,
+    'products/apc-c71.html': 52,
+    'products/apc-c72.html': 52,
+    'products/apc-c73.html': 52,
+    'products/apc-c74.html': 53,
+    'products/apc-c75.html': 55,
+    'products/apc-c76.html': 32,
+    'products/apc-c77.html': 52,
+    'products/apc-c78.html': 52,
+    'products/apc-c79.html': 52,
+    'products/apc-c80.html': 52,
+    'products/apc-c81.html': 52,
+    'products/apc-c82.html': 52,
+    'products/apc-c83.html': 52,
+    'products/apc-c84.html': 51,
+    'products/apc-c85.html': 51,
+    'products/apc-c86.html': 183,
+    'products/apc-c87.html': 183,
+    'products/apc-c88.html': 183,
+    'products/apc-c89.html': 183,
+    'products/apc-c90.html': 185,
+    'products/apc-c91.html': 183,
+    'products/apc-c92.html': 183,
+    'products/apc-c93.html': 183,
+    'products/apc-c94.html': 183,
+    'products/apc-c95.html': 183,
+    'products/apc-c96.html': 185,
+    'products/apc-c97.html': 185,
+    'products/apc-c98.html': 185,
+    'products/apc-c99.html': 54,
+    'products/apex-8-station-race-day-tactical-duffle.html': 164,
+    'products/apex-aeroshell-lightweight-race-warmup-jacket.html': 178,
+    'products/apex-athletic-shoe-black-pink.html': 31,
+    'products/atlanta-crest.html': 51,
+    'products/atlanta-hyrx.html': 53,
+    'products/atlanta-race-day-stitched.html': 182,
+    'products/burpee-broad-jumps-build-character-tee.html': 194,
+    'products/burpee-broad-jumps-build-character-warmup-hoodie.html': 180,
+    'products/call-room.html': 53,
+    'products/cancun-crest.html': 53,
+    'products/cancun-hyrx.html': 53,
+    'products/cancun-race-day-stitched.html': 184,
+    'products/chicago-championship-division-navy-pier-hybrid-race-tee.html': 177,
+    'products/chicago-crest.html': 53,
+    'products/chicago-dallas-socal-world-series-prep-heavyweight-hoodie.html': 181,
+    'products/chicago-hyrx.html': 53,
+    'products/chicago-race-day-stitched.html': 184,
+    'products/circuit-cities.html': 53,
+    'products/compromised-running-club-breathable-race-tank.html': 187,
+    'products/compromised-running-club-fleece-hoodie.html': 184,
+    'products/compromised-running-club-tee.html': 52,
+    'products/compromised-running-society-club-tee.html': 7,
+    'products/compromised-running.html': 190,
+    'products/coolcore--turf-and-sled-breathable-tech-shirt.html': 7,
+    'products/coolcore-anti-chafe-turf-and-sled-breathable-tech-shirt.html': 7,
+    'products/course-plate.html': 52,
+    'products/dallas-crest.html': 53,
+    'products/dallas-lone-star-division-turf-threshold-hybrid-race-tee.html': 178,
+    'products/dallas-race-day-printable.html': 54,
+    'products/dallas-race-day-stitched.html': 181,
+    'products/dallas-race-day.html': 178,
+    'products/defend-my-sled-push-dept-tee.html': 180,
+    'products/defend-my-sled-push-fleece-hoodie.html': 181,
+    'products/denver-crest.html': 53,
+    'products/denver-race-day-stitched.html': 181,
+    'products/denver-race-day.html': 177,
+    'products/dry-pace--threshold-hyrox-tech-tee.html': 8,
+    'products/dry-pace-moisture-wicking-threshold-hyrox-tech-tee.html': 7,
+    'products/eight-marks.html': 49,
+    'products/electrolyte-pacing-insulated-shaker-bottle.html': 81,
+    'products/engine-biker-shorts-black.html': 53,
+    'products/engine-biker-shorts-mint.html': 53,
+    'products/engine-sports-bra-black.html': 51,
+    'products/engine-sports-bra-mint.html': 51,
+    'products/engine-training-tank-black.html': 50,
+    'products/engine-training-tank-mint.html': 50,
+    'products/featherweight-tri-blend-zero-drag-sub60-race-tee.html': 7,
+    'products/field-issue.html': 52,
+    'products/guadalajara-crest.html': 51,
+    'products/guadalajara-hyrx.html': 53,
+    'products/guadalajara-race-day-stitched.html': 182,
+    'products/hold-the-pace.html': 52,
+    'products/hong-kong-crest.html': 53,
+    'products/hong-kong-hyrx.html': 53,
+    'products/hong-kong-race-day-stitched.html': 184,
+    'products/houston-crest.html': 51,
+    'products/houston-hyrx.html': 53,
+    'products/houston-race-day-stitched.html': 182,
+    'products/hybrid-8-station-windbreaker-track-jacket.html': 176,
+    'products/hyperbreathe--roxzone-speed-dept-tech-tee.html': 7,
+    'products/hyperbreathe-seamless-roxzone-speed-dept-tech-tee.html': 7,
+    'products/hyrx-cuff-beanie-black.html': 39,
+    'products/hyrx-cuff-beanie-heather-grey.html': 39,
+    'products/hyrx-dad-cap.html': 43,
+    'products/hyrx-finish.html': 193,
+    'products/hyrx-gym-sack-black.html': 41,
+    'products/hyrx-gym-sack-burgundy.html': 41,
+    'products/hyrx-low-cap.html': 47,
+    'products/hyrx-mid-cap.html': 41,
+    'products/hyrx-pool-slide-black.html': 56,
+    'products/hyrx-pool-slide-burgundy.html': 56,
+    'products/hyrx-quarter-zip.html': 64,
+    'products/hyrx-rib-beanie-black.html': 39,
+    'products/hyrx-rib-beanie-light-blue.html': 39,
+    'products/hyrx-run-5-panel-black.html': 42,
+    'products/hyrx-run-5-panel-light-blue-white.html': 42,
+    'products/hyrx-station-crew.html': 67,
+    'products/hyrx-station-towel-black.html': 44,
+    'products/hyrx-station-towel-deep-olive.html': 44,
+    'products/hyrx-surf-5-panel.html': 46,
+    'products/hyrx-trucker-graphic.html': 43,
+    'products/hyrx-trucker.html': 43,
+    'products/las-vegas-championship-qualifier-sin-city-turf-club-tee.html': 178,
+    'products/las-vegas-crest.html': 51,
+    'products/las-vegas-hyrx.html': 53,
+    'products/las-vegas-race-day-stitched.html': 182,
+    'products/london-crest.html': 53,
+    'products/london-hyrx.html': 54,
+    'products/london-race-day-stitched.html': 184,
+    'products/miami-beach-crest.html': 51,
+    'products/miami-beach-heat-block-south-florida-endurance-race-tee.html': 178,
+    'products/miami-beach-hyrx.html': 53,
+    'products/miami-beach-race-day-stitched.html': 182,
+    'products/minneapolis-crest.html': 51,
+    'products/minneapolis-hyrx.html': 53,
+    'products/minneapolis-race-day-stitched.html': 182,
+    'products/monterrey-crest.html': 51,
+    'products/monterrey-hyrx.html': 53,
+    'products/monterrey-race-day-stitched.html': 182,
+    'products/nashville-crest.html': 53,
+    'products/nashville-hyrx.html': 53,
+    'products/nashville-race-day-stitched.html': 180,
+    'products/nashville-race-day.html': 177,
+    'products/new-york-hudson-pier-metro-endurance-dept-race-tee.html': 179,
+    'products/outline-mark.html': 52,
+    'products/paris-crest.html': 53,
+    'products/paris-hyrx.html': 53,
+    'products/paris-race-day-stitched.html': 184,
+    'products/peak-sign.html': 53,
+    'products/phoenix-crest.html': 51,
+    'products/phoenix-hyrx.html': 53,
+    'products/phoenix-race-day-stitched.html': 182,
+    'products/porta-potty-line-pr-pre-race-tee.html': 184,
+    'products/portland-crest.html': 51,
+    'products/portland-hyrx.html': 53,
+    'products/portland-race-day-stitched.html': 182,
+    'products/pro-division-lightweight-quarter-zip-race-shell.html': 176,
+    'products/push-heavy.html': 189,
+    'products/roxzone-penalties-ruined-my-pr-athletic-race-tee.html': 181,
+    'products/roxzone-speed-dept.html': 190,
+    'products/run-station-repeat-heavy-blend-hoodie.html': 180,
+    'products/run-station-repeat-performance-tee.html': 192,
+    'products/run-station-repeat-sleeveless-race-day-muscle-tank.html': 178,
+    'products/san-diego-crest.html': 51,
+    'products/san-diego-hyrx.html': 53,
+    'products/san-diego-race-day-stitched.html': 182,
+    'products/sandbag-lunges-are-a-personal-attack-oversized-pump-cover.html': 183,
+    'products/sled-push-dept-raw-armhole-conditioning-muscle-tank.html': 176,
+    'products/sled-push-enthusiast-race-day-tee.html': 191,
+    'products/sleeve-seal.html': 55,
+    'products/stem-type.html': 52,
+    'products/sub-65-club-pace-pull-push-elite-division-tee.html': 184,
+    'products/the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie.html': 180,
+    'products/the-erg-doesnt-care-how-you-feel-tee.html': 195,
+    'products/timing-gate.html': 52,
+    'products/vancouver-crest.html': 53,
+    'products/vancouver-hyrx.html': 53,
+    'products/vancouver-race-day-stitched.html': 180,
+    'products/vancouver-race-day.html': 177,
+    'products/venttech-perforated-zone4-zone5-hybrid-training-shirt.html': 7,
+    'products/wall-balls-bad-decisions-hoodie.html': 180,
+    'products/wall-balls-bad-decisions-oversized-pump-cover.html': 193,
+    'products/work-the-loop.html': 54,
+    'products/zone-2-all-week-redline-all-weekend-performance-tee.html': 185,
+    'products/zone-2-engine-builder-embroidered-dad-hat.html': 170,
+    'products/zone-5-engine.html': 188,
+    'returns.html': 21,
+    'robots.txt': 4,
+    'rss.xml': 451,
+    'seo_articles.json': 656,
+    'seo_city_pages/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 278,
+    'seo_city_pages/best-pump-cover-for-functional-fitness-racing.html': 259,
+    'seo_city_pages/chicago-navy-pier-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 279,
+    'seo_city_pages/compromised-running-shirt-hybrid-athlete.html': 251,
+    'seo_city_pages/dallas-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 283,
+    'seo_city_pages/heavyweight-gym-pump-covers-and-functional-racing-apparel-guide.html': 262,
+    'seo_city_pages/hyrox-anaheim-2026-socal-race-shirt-doubles-relay-team-kits.html': 264,
+    'seo_city_pages/hyrox-anaheim-socal-open-division-apparel.html': 255,
+    'seo_city_pages/hyrox-chicago-2026-last-minute-race-shirt-doubles-2-pack-shipping.html': 263,
+    'seo_city_pages/hyrox-chicago-navy-pier-race-day-shirt.html': 259,
+    'seo_city_pages/hyrox-dallas-2026-race-week-apparel-doubles-partner-shirts.html': 263,
+    'seo_city_pages/hyrox-dallas-lone-star-race-tee.html': 255,
+    'seo_city_pages/hyrox-las-vegas-qualifier-shirt.html': 253,
+    'seo_city_pages/hyrox-miami-beach-race-day-shirt.html': 247,
+    'seo_city_pages/hyrox-nyc-hudson-pier-race-shirt.html': 255,
+    'seo_city_pages/las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 281,
+    'seo_city_pages/miami-beach-mar-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 286,
+    'seo_city_pages/new-york-pier-may-2027-warmup-jacket-breathable-hybrid-race-shirt-guide.html': 279,
+    'seo_city_pages/sled-push-enthusiast-workout-shirt.html': 260,
+    'seo_city_pages/what-to-wear-for-first-hyrox-race.html': 266,
+    'seo_city_pages/what-to-wear-hyrox-anaheim-chicago-dallas-2026.html': 275,
+    'shipping.html': 16,
+    'sitemap.xml': 217,
+    'styles.css': 97,
+    'team_affiliate_program.json': 75,
+    'team_orders.html': 442,
+    'terms.html': 18,
+    'utm.js': 3,
+    'wristband.html': 208,
+}
+_SLUG_FILE_EXTS = {".html", ".css", ".js", ".json", ".xml", ".csv", ".txt"}
 _SLUG_TOKEN_RE = re.compile(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+){1,}")
 _DANGLING_PREP = re.compile(
     r"(?i)\bfrom with\b|\bCut from\s+(?:with|for|to|of|on|in|at|by|into|over)\b"
@@ -1636,24 +2088,46 @@ def collect_slug_tokens(texts):
     return tokens
 
 
-def published_html_texts():
-    texts = []
+def iter_slug_files():
+    """Published text files. Markdown is not part of this count."""
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
         dirnames[:] = [name for name in dirnames if name not in {".git", "__pycache__", "node_modules"}]
         for name in filenames:
-            if not name.endswith(".html"):
+            if os.path.splitext(name)[1].lower() not in _SLUG_FILE_EXTS:
                 continue
             path = os.path.join(dirpath, name)
+            rel = os.path.relpath(path, BASE_DIR)
             try:
-                texts.append(open(path, encoding="utf-8", errors="replace").read())
+                text = open(path, encoding="utf-8", errors="replace").read()
             except OSError:
                 continue
-    return texts
+            yield rel, text
+
+
+def slug_file_tokens(rel, text):
+    return set(_SLUG_TOKEN_RE.findall(rel)) | set(_SLUG_TOKEN_RE.findall(text or ""))
+
+
+def slug_page_counts():
+    return {rel: len(slug_file_tokens(rel, text)) for rel, text in iter_slug_files()}
+
+
+def slug_page_shortfall(baseline, current):
+    """Pages whose published token count fell below the frozen per-page count."""
+    missed = []
+    for rel, required in (baseline or {}).items():
+        have = current.get(rel, 0)
+        if have < required:
+            missed.append(f"{rel}: {have} < {required}")
+    return missed
 
 
 def slug_token_count():
-    """Unique hyphenated tokens in published HTML contents. Not paths, JSON, or Markdown."""
-    return len(collect_slug_tokens(published_html_texts()))
+    """Unique hyphenated tokens across published text files and their paths."""
+    tokens = set()
+    for rel, text in iter_slug_files():
+        tokens |= slug_file_tokens(rel, text)
+    return len(tokens)
 
 
 def lowercase_spec_bullets(page):
@@ -1712,6 +2186,128 @@ def c36_section_errors(page, name):
     for marker in C36_LINKS:
         if marker not in (page or ""):
             errors.append(f"{name}: missing {marker}")
+    opens = len(re.findall(r"<section\b", page or "", flags=re.I))
+    closes = len(re.findall(r"</section>", page or "", flags=re.I))
+    if opens != closes:
+        errors.append(f"{name}: section tags are not balanced ({opens} open, {closes} close)")
+    return errors
+
+
+_BLANK_CODE = re.compile(
+    r"(?i)(?:\bcode\s+_{2,}|\bwith\s+\.(?!\d)|\bcode\s+\)|(?<!\w)\(\s*\)|<code\b[^>]*>\s*</code>)"
+)
+_DOUBLED_WORD = re.compile(r"\b([A-Za-z]{4,})\s+\1\b")
+_DUFFLE_BANNED = re.compile(r"(?i)(?<![\w-])(?:900D|MOLLE|3-in-1|50L|50-liter)(?![\w-])")
+
+
+def blank_code_errors(text, name="page"):
+    """Blank discount-code forms. A real code such as DALLAS10 or TEAM25 is allowed."""
+    if not text:
+        return []
+    visible = re.sub(r"<script\b[^>]*>.*?</script>", " ", text, flags=re.S | re.I)
+    visible = re.sub(r"<style\b[^>]*>.*?</style>", " ", visible, flags=re.S | re.I)
+    if _BLANK_CODE.search(visible):
+        return [f"{name}: blank discount code"]
+    return []
+
+
+def doubled_word_errors(text, name="page"):
+    """A word repeated inside one text node, such as 'Breathable Breathable'."""
+    nodes = re.findall(r">([^<]+)<", text or "")
+    if "<" not in (text or ""):
+        nodes = [text or ""]
+    for node in nodes:
+        plain = re.sub(r"\s+", " ", html.unescape(node)).strip()
+        match = _DOUBLED_WORD.search(plain)
+        if match:
+            return [f"{name}: doubled word {match.group(0)!r}"]
+    return []
+
+
+def public_copy_chunks(name, text):
+    """Prose strings from a feed, JSON, or text file. JSON syntax is not prose."""
+    if name.endswith(".json"):
+        chunks = []
+        for match in re.finditer(r'"((?:\\.|[^"\\])*)"', text or ""):
+            try:
+                chunks.append(json.loads('"' + match.group(1) + '"'))
+            except json.JSONDecodeError:
+                continue
+        return chunks
+    if name.endswith((".xml", ".html")):
+        plain = re.sub(r"<script\b[^>]*>.*?</script>", " ", text or "", flags=re.S | re.I)
+        return [html.unescape(node) for node in re.findall(r">([^<]+)<", plain) if node.strip()]
+    return [text or ""]
+
+
+def paired_section_errors(page, name="page"):
+    """Every Frequently Paired card has to be a complete card inside the grid."""
+    errors = []
+    for match in re.finditer(r"<h2\b[^>]*>\s*Frequently Paired.*?</section>", page or "", flags=re.S | re.I):
+        block = match.group(0)
+        start = block.find('<div class="ProductGrid">')
+        if start < 0:
+            errors.append(f"{name}: Frequently Paired section has no grid")
+            continue
+        pos = start + len('<div class="ProductGrid">')
+        depth = 1
+        grid_end = None
+        while pos < len(block):
+            nxt = re.search(r"</?div\b", block[pos:])
+            if not nxt:
+                break
+            at = pos + nxt.start()
+            if nxt.group(0).startswith("</"):
+                depth -= 1
+                if depth == 0:
+                    grid_end = at
+                    break
+            else:
+                depth += 1
+            pos = at + 4
+        if grid_end is None:
+            errors.append(f"{name}: Frequently Paired grid is not closed")
+            continue
+        grid = block[start:grid_end]
+        after = block[grid_end + len("</div>"):]
+        after_text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", after)).strip()
+        if after_text or re.search(r'class="ProductCard"', after):
+            errors.append(f"{name}: Frequently Paired content sits outside the grid")
+        for card in re.finditer(r'<a\b[^>]*class="[^"]*\bProductCard\b[^"]*"[^>]*>.*?</a>', grid, flags=re.S | re.I):
+            chunk = card.group(0)
+            if "ProductCard__Media" not in chunk or "ProductCard__Title" not in chunk or "<img" not in chunk:
+                errors.append(f"{name}: Frequently Paired card is incomplete")
+                break
+    return errors
+
+
+def duffle_claim_errors(text, name="page"):
+    visible = re.sub(r"https?://\S+", " ", text or "")
+    if _DUFFLE_BANNED.search(visible):
+        return [f"{name}: duffle claim is not in the Fourthwall spec"]
+    return []
+
+
+def cross_sell_errors(page, name="page"):
+    errors = []
+    titles = {}
+    for prod in products:
+        handle = prod.get("handle")
+        title = (prod.get("title") or "").strip()
+        if handle and title:
+            titles[handle] = title
+    for match in re.finditer(
+        r'<div\b[^>]*class="[^"]*\bCrossSell\b[^"]*"[^>]*>\s*<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>',
+        page or "",
+        flags=re.S | re.I,
+    ):
+        handle = _handle_from_href(match.group(1))
+        expected = titles.get(handle)
+        if not expected:
+            continue
+        shown = _plain_text(match.group(2))
+        if shown not in {expected, "Also the " + expected}:
+            errors.append(f"{name}: cross-sell {shown!r} != catalog {expected!r}")
     return errors
 
 
@@ -1799,10 +2395,12 @@ def assert_restored_sections():
     self_tests.append("full guide box passes")
     if guide_link_errors(full_box, "hyrx-finish.html"):
         raise SystemExit("Guide self-test failed: six links were flagged")
-    self_tests.append("slug tokens ignore paths and JSON")
-    html_tokens = collect_slug_tokens(["<p>race-day-tee</p>"])
-    if html_tokens != {"race-day-tee"} or "only-a-filename" in html_tokens or "bio-washed" in html_tokens:
-        raise SystemExit("Slug-token self-test counted a path or a JSON-only token")
+    self_tests.append("slug per-page floor")
+    if not slug_page_shortfall({"products/a.html": 4}, {"products/a.html": 3}):
+        raise SystemExit("Slug self-test missed a per-page drop")
+    self_tests.append("slug per-page exact count passes")
+    if slug_page_shortfall({"products/a.html": 4}, {"products/a.html": 4}):
+        raise SystemExit("Slug self-test flagged an exact per-page count")
     bullet = '<html><body><h1>Sample</h1><ul class="HighlightsList"><li>lining, elastic cuffs, and a drawcord hem.</li></ul></body></html>'
     self_tests.append("lowercase spec bullet")
     if not lowercase_spec_bullets(bullet):
@@ -1829,6 +2427,40 @@ def assert_restored_sections():
         "<body><h1>Sample</h1><p style=\"font-size:15px\">Black hoodie with a sleeve seal.</p></body></html>"
     )
     fail_check("JSON-LD lowercase", copy_quality_errors(jsonld, "jsonld"), "JSON-LD description")
+    broken_grid = (
+        '<section><h2>Frequently Paired Tees</h2><div class="ProductGrid">'
+        '<a class="ProductCard" href="a.html"><div class="ProductCard__Media"><img alt="A"></div>'
+        '<div class="ProductCard__Title">A</div></a></div>'
+        '<div class="ProductCard__Title">Built For Heavy Legs</div></section>'
+    )
+    fail_check("paired card outside grid", paired_section_errors(broken_grid, "paired"), "outside the grid")
+    whole_grid = (
+        '<section><h2>Frequently Paired Tees</h2><div class="ProductGrid">'
+        '<a class="ProductCard" href="a.html"><div class="ProductCard__Media"><img alt="A"></div>'
+        '<div class="ProductCard__Title">A</div></a></div></section>'
+    )
+    self_tests.append("complete paired card passes")
+    if paired_section_errors(whole_grid, "paired"):
+        raise SystemExit("Paired-card self-test flagged a complete card")
+    fail_check("blank code ___", blank_code_errors("Use Code ___ for 15% Off", "code"), "blank discount code")
+    fail_check("blank with .", blank_code_errors("15% OFF Doubles 2-Packs with .", "code"), "blank discount code")
+    fail_check("blank code )", blank_code_errors("Save 15% (code ) today", "code"), "blank discount code")
+    fail_check("blank ( )", blank_code_errors("Relay Team Kits ( )", "code"), "blank discount code")
+    self_tests.append("DALLAS10 is not a blank code")
+    if blank_code_errors("10% off with code DALLAS10.", "code"):
+        raise SystemExit("Blank-code self-test flagged DALLAS10")
+    fail_check("doubled word", doubled_word_errors("<h4>Breathable Breathable Tech Shirts</h4>", "art"), "Breathable")
+    self_tests.append("jog in and passes")
+    if sitewide_garble_hits("A simple city tee for the jog in and the photo after."):
+        raise SystemExit("Garble self-test flagged jog in and the photo after")
+    unbalanced = c36.replace("</section>", "</section></section>", 1)
+    fail_check("balanced section", c36_section_errors(unbalanced, "c36"), "not balanced")
+    fail_check("duffle 50L", duffle_claim_errors("A 50L bag with MOLLE and a 3-in-1 carry.", "duffle"), "duffle claim")
+    self_tests.append("duffle Fourthwall spec passes")
+    if duffle_claim_errors("27.4 L. LEVELED strap system. 93% polyester, 7% nylon, UA Storm.", "duffle"):
+        raise SystemExit("Duffle self-test flagged the Fourthwall spec")
+    foreign_sell = '<div class="CrossSell" data-cross-sell="1"><a href="zone-5-engine.html">Also the Zone 5 Engine</a></div>'
+    fail_check("cross-sell catalog title", cross_sell_errors(foreign_sell, "sell"), "cross-sell")
     assert_restored_sections.self_test_count = len(self_tests)
     folder = os.path.join(BASE_DIR, "products")
     guide_total = 0
@@ -1839,6 +2471,10 @@ def assert_restored_sections():
         page = open(os.path.join(folder, name), encoding="utf-8", errors="replace").read()
         guide_total += _guide_link_count(page)
         errors.extend(guide_link_errors(page, name))
+        errors.extend(paired_section_errors(page, name))
+        errors.extend(cross_sell_errors(page, name))
+        if name in {"apex-8-station-race-day-tactical-duffle.html", "apc-c14.html"}:
+            errors.extend(duffle_claim_errors(page, name))
         errors.extend(lowercase_spec_bullets(page) and [f"{name}: spec bullet starts lowercase ({lowercase_spec_bullets(page)[0][:60]})"])
         errors.extend(regression_errors(page, name))
     for name in ("compromised-running.html", "apc-c36.html"):
@@ -1855,7 +2491,10 @@ def assert_restored_sections():
                 errors.append(f"{name}: missing section {marker}")
     tokens = slug_token_count()
     if tokens < SLUG_TOKEN_MINIMUM:
-        raise SystemExit(f"Slug-token count {tokens} is below {SLUG_TOKEN_MINIMUM}")
+        raise SystemExit(f"Slug-token count {tokens} is below the published baseline {SLUG_TOKEN_MINIMUM}")
+    short = slug_page_shortfall(SLUG_PAGE_BASELINE, slug_page_counts())
+    if short:
+        raise SystemExit("Slug tokens dropped on a published file:\n" + "\n".join(short[:40]))
     # The same names must not survive in articles, collection pages, or feeds.
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
         dirnames[:] = [item for item in dirnames if item not in {".git", "__pycache__", "node_modules"}]
@@ -1865,9 +2504,13 @@ def assert_restored_sections():
             path = os.path.join(dirpath, name)
             text = open(path, encoding="utf-8", errors="replace").read()
             surface = _surface_text(text) if name.endswith(".html") else re.sub(r"https?://\S+", " ", text)
+            rel = os.path.relpath(path, BASE_DIR)
             if name.endswith(".html"):
-                errors.extend(twitter_garble_errors(text, os.path.relpath(path, BASE_DIR)))
-                errors.extend(og_repeat_errors(text, os.path.relpath(path, BASE_DIR)))
+                errors.extend(twitter_garble_errors(text, rel))
+                errors.extend(og_repeat_errors(text, rel))
+                errors.extend(blank_code_errors(text, rel))
+                if rel.startswith("articles/"):
+                    errors.extend(doubled_word_errors(text, rel))
                 for match in re.finditer(
                     r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', text, flags=re.S | re.I
                 ):
@@ -1875,6 +2518,13 @@ def assert_restored_sections():
                         value = json.loads('"' + desc.group(1) + '"')
                         if _starts_lowercase(value):
                             errors.append(f"{os.path.relpath(path, BASE_DIR)}: JSON-LD description starts lowercase")
+            elif name.endswith((".xml", ".csv", ".json", ".txt")):
+                errors.extend(blank_code_errors(text, rel))
+                errors.extend(duffle_claim_errors(text, rel))
+                for chunk in public_copy_chunks(name, text):
+                    for hit in sitewide_garble_hits(chunk):
+                        errors.append(f"{rel}: public copy has {hit}")
+                        break
             for title in OLD_HEAVY_LISTING_NAMES:
                 if title.lower() in surface.lower():
                     errors.append(f"{os.path.relpath(path, BASE_DIR)}: old listing name {title}")

@@ -1507,12 +1507,16 @@ section[aria-label="Featured gear checkout"] a {
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
 }
 .ProductCard__Media {
+  aspect-ratio: 3 / 4;
+  height: auto !important;
   overflow: hidden;
+  background: #f4f5f7;
 }
 .ProductCard__Media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
 }
 .Btn--BuyNow {
