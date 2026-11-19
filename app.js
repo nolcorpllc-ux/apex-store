@@ -365,10 +365,10 @@ function renderPills() {
 
 const SHORT = {
   "APC-C36": "Compromised Running",
-  "APC-C37": "1km Split",
-  "APC-C38": "Zone 5 Engine",
-  "APC-C40": "Push Heavy",
-  "APC-C41": "Roxzone Speed Dept.",
+  "APC-C37": "1km Split 6.1 oz Cotton Tee",
+  "APC-C38": "Zone 5 Engine 6.1 oz Cotton Tee",
+  "APC-C40": "Push Heavy 6.1 oz Cotton Tee",
+  "APC-C41": "Roxzone Speed Dept. 6.1 oz Cotton Tee",
   "APC-C16": "Apex Race City Heavyweight - Chicago Championship Division",
   "APC-C17": "Apex Race City Heavyweight - Dallas Turf & Threshold",
   "APC-C18": "Apex Race City Heavyweight - Anaheim SoCal Open Division",
