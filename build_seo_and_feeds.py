@@ -28,8 +28,32 @@ def xml_text(value):
     return html.escape("" if value is None else str(value), quote=True)
 
 
+def assert_no_trademark():
+    """Fail the build if a trademark mark appears anywhere in published text."""
+    mark = chr(8482)
+    escapes = (mark, "&" + "trade;", "&" + "#8482;", "&" + "#x2122;", "&" + "#X2122;", "\\" + "u2122")
+    skip = {".git", "__pycache__", "node_modules", "images"}
+    suffixes = {".html", ".json", ".xml", ".js", ".py", ".txt", ".csv", ".css", ".md"}
+    errors = []
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [name for name in dirnames if name not in skip]
+        for name in filenames:
+            if os.path.splitext(name)[1].lower() not in suffixes:
+                continue
+            path = os.path.join(dirpath, name)
+            try:
+                text = open(path, encoding="utf-8").read()
+            except (OSError, UnicodeError):
+                continue
+            if any(token in text for token in escapes):
+                errors.append(os.path.relpath(path, BASE_DIR))
+    if errors:
+        raise SystemExit("Trademark mark found:\n" + "\n".join(errors))
+
+
 def assert_published_xml_parses():
     """Fail the build if any published XML file does not parse."""
+    assert_no_trademark()
     import xml.etree.ElementTree as ET
     errors = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
@@ -2087,6 +2111,8 @@ def scrub_text(text):
         text = text.replace(f"Apex &quot;{name}&quot;", name)
         text = text.replace(f'Apex "{name}"', name)
         text = text.replace(f"Apex {name}", name)
+    text = text.replace(chr(8482), "")
+    text = text.replace("&" + "trade;", "").replace("&" + "#8482;", "").replace("&" + "#x2122;", "")
     text = re.sub(r"(?i)aeromesh", "Built For Heavy Legs", text)
     text = re.sub(r"(?i)coolcore", "Push Heavy", text)
     text = re.sub(r"(?i)venttech", "Zone 5 Engine", text)

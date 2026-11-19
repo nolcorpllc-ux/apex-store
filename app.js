@@ -1058,6 +1058,13 @@ function boot(data) {
   renderArticles();
   updateRaceSplitCalculator();
   const params = new URLSearchParams(window.location.search);
+  const urlQ = params.get("q") || "";
+  if (urlQ) {
+    query = urlQ;
+    const searchBox = document.getElementById("searchInput");
+    if (searchBox) searchBox.value = urlQ;
+    renderProducts();
+  }
   const urlPromo = params.get("promo") || params.get("discount") || params.get("code") || params.get("ref") || "";
   if (urlPromo) {
     setPromoCode(urlPromo, true);
@@ -1105,20 +1112,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } catch (_) {}
   document.body.addEventListener("click", onClick);
-  $("#searchForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    query = $("#searchInput").value;
-    renderProducts();
-    $("#apparel").scrollIntoView({ behavior: "smooth" });
-  });
-  $("#searchInput").addEventListener("input", (event) => {
-    query = event.target.value;
-    renderProducts();
-  });
-  $("#sortSelect").addEventListener("change", (event) => {
-    sort = event.target.value;
-    renderProducts();
-  });
+  const searchForm = $("#searchForm");
+  if (searchForm) {
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      query = $("#searchInput").value;
+      renderProducts();
+      const apparel = $("#apparel");
+      if (apparel) apparel.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+  const searchInput = $("#searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", (event) => {
+      query = event.target.value;
+      renderProducts();
+    });
+  }
+  const sortSelect = $("#sortSelect");
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (event) => {
+      sort = event.target.value;
+      renderProducts();
+    });
+  }
   ["calcTargetFinish", "calcDivision", "calcCity"].forEach((id) => {
     const node = document.getElementById(id);
     if (node) node.addEventListener("change", updateRaceSplitCalculator);

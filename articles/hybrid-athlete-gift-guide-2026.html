@@ -175,20 +175,49 @@
   </script>
 </head>
 <body>
-  <header class="TopHeader">
-    <div class="TopHeader__Main">
-      <div class="Container TopHeader__Inner">
-        <a href="../index.html" class="BrandLogo">
-          <span class="BrandLogo__Mark">APEX</span>
-          <span class="BrandLogo__Sub">HYBRID CO.</span>
-        </a>
-        <div style="margin-left:auto; display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-          <a href="../index.html#articles" style="color:#fff; font-size:13px; font-weight:700;">← All Buyer Guides</a>
-          <a href="https://apex-hybrid-co-shop.fourthwall.com/products/apex-heavyweight-hybrid-tee-porta-potty-line-pr" class="Btn Btn--BuyNow" style="width:auto; padding:8px 16px;">1-Click Buy Top Pick ($38.00)</a>
-        </div>
-      </div>
+<header class="SiteHead SiteHead--sub" style="top:0">
+  <div class="Wrap SiteHead__row">
+    <button class="MenuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <a class="Wordmark" href="../index.html"><span class="Wordmark__logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.5L21 20.5H16.6L12 11.2L7.4 20.5H3L12 2.5Z" fill="#14120b"/><path d="M8.8 15.8H15.2L16.7 18.8H7.3L8.8 15.8Z" fill="#0066ff"/></svg></span><span class="Wordmark__text"><strong>Apex</strong><span>Hybrid Co.</span></span></a>
+    <nav class="SiteNav" id="siteNav" aria-label="Primary">
+      <a href="../index.html?dept=Breathable%20Tech%20Shirts">Tech</a>
+      <a href="../index.html?dept=Race%20City%20Editions">Cities</a>
+      <a href="../index.html?dept=Tees%20%26%20Pump%20Covers">Street</a>
+      <a href="../collections/tees.html">Tees</a>
+      <a href="../collections/tanks.html">Tanks</a>
+      <a href="../collections/womens.html">Women's</a>
+      <a href="../index.html?dept=Hoodies">Hoodies</a>
+      <a href="../collections/windbreakers.html">Windbreakers</a>
+      <a href="../collections/race-day-windbreakers.html">Race Day Windbreakers</a>
+      <a href="../collections/new.html">New</a>
+      <a href="../collections/hyrx.html">HYRX</a>
+      <a href="../collections/tops.html">Tops</a>
+      <a href="../collections/accessories.html">Accessories</a>
+      <a href="../team_orders.html">Doubles &amp; Teams</a>
+      <a href="../gyms/index.html">Gym Finder</a>
+      <a href="../wristband.html">Pace Wristband</a>
+    </nav>
+    <div class="Tools">
+      <form class="Search" action="../index.html" method="get" role="search">
+        <input name="q" type="search" placeholder="Search graphic race tees, city crests, hoodies" aria-label="Search the catalog" />
+      </form>
+      <a class="BagBtn" href="../index.html">Bag</a>
     </div>
-  </header>
+  </div>
+</header>
+<script>
+(function() {
+  var btn = document.getElementById("menuBtn");
+  var nav = document.getElementById("siteNav");
+  if (!btn || !nav) return;
+  btn.addEventListener("click", function() {
+    var open = nav.classList.toggle("is-open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+})();
+</script>
+
+  
 
   <main class="Container" style="max-width:980px; padding:28px 20px 64px;">
     <article style="background:#fff; border:1px solid #e4e6eb; border-radius:12px; padding:32px;">
@@ -333,7 +362,7 @@
  <img src="../images/streetwear/apc-c07/01.jpg?v=20261119batch24" alt="Pre-Race Porta-Potty Line PR" style="width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;" loading="lazy" />
  </a>
  <div>
- <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"> · ★ 4.8 (53)</div>
+ <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"></div>
  <a href="../products/porta-potty-line-pr-pre-race-tee.html" style="font-size:16px;font-weight:800;color:#0f172a;text-decoration:none;display:block;margin:2px 0;">Pre-Race Porta-Potty Line PR</a>
  <div style="font-size:13px;color:#0e8345;font-weight:700;">$38.00 · ✓ Free US Shipping</div>
  </div>
@@ -354,7 +383,7 @@
  <img src="../images/streetwear/apc-c36-black.jpg?v=20261119heavylegs" alt="Built For Heavy Legs &quot;Built For Heavy Legs&quot;" style="width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;" loading="lazy" />
  </a>
  <div>
- <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"> · ★ 5.0 (218)</div>
+ <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"> · Free US shipping</div>
  <a href="../products/compromised-running.html" style="font-size:16px;font-weight:800;color:#0f172a;text-decoration:none;display:block;margin:2px 0;">Built For Heavy Legs &quot;Built For Heavy Legs&quot;</a>
  <div style="font-size:13px;color:#0e8345;font-weight:700;">$38.00 · ✓ Free US Shipping</div>
  </div>
@@ -384,7 +413,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C40</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/push-heavy.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Push Heavy &quot;Push Heavy. Run Fast.&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (159 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -398,7 +427,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C07</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/porta-potty-line-pr-pre-race-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Pre-Race Porta-Potty Line PR</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.8 (53 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -412,7 +441,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C28</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/run-station-repeat-sleeveless-race-day-muscle-tank.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Run. Station. Repeat. Winged Crest Race Day</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (182 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$32.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -426,7 +455,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C01</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/run-station-repeat-performance-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Run. Station. Repeat.</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (184 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -440,7 +469,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C16</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/chicago-championship-division-navy-pier-hybrid-race-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Chicago Championship Division - Navy Pier 8x1000m Club</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (164 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -454,7 +483,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C36</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/compromised-running.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Built For Heavy Legs &quot;Built For Heavy Legs&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (218 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -468,7 +497,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C22</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/8-runs-8-stations-zero-excuses-heavyweight-pump-cover-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">8 Runs. 8 Stations. Zero Excuses. Winged Crest</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (205 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -482,7 +511,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C31</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/100-wall-balls-unbroken-sleeveless-muscle-tank.html" style="color:#0052cc;font-weight:800;text-decoration:none;">100 Wall Balls Unbroken* Winged Crest</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (154 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$32.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -496,7 +525,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C42</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/apex-aeroshell-lightweight-race-warmup-jacket.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Apex &quot;8×1000M Start Corral&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (164 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$68.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -510,7 +539,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C14</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/apex-8-station-race-day-tactical-duffle.html" style="color:#0052cc;font-weight:800;text-decoration:none;">8-Station Haul</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (208 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$74.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -532,7 +561,7 @@
  <img src="../images/streetwear/apc-c42-black.png?v=20261026v3" alt="Apex &quot;8×1000M Start Corral&quot;" style="width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;" loading="lazy" />
  </a>
  <div>
- <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;">New Release · ★ 5.0 (164)</div>
+ <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;">New Release · Free US shipping</div>
  <a href="../products/apex-aeroshell-lightweight-race-warmup-jacket.html" style="font-size:16px;font-weight:800;color:#0f172a;text-decoration:none;display:block;margin:2px 0;">Apex &quot;8×1000M Start Corral&quot;</a>
  <div style="font-size:13px;color:#0e8345;font-weight:700;">$68.00 · ✓ Free US Shipping</div>
  </div>
@@ -553,7 +582,7 @@
  <img src="../images/streetwear/apc-c14-black.png?v=20261026v3" alt="8-Station Haul" style="width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;" loading="lazy" />
  </a>
  <div>
- <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"> · ★ 4.9 (208)</div>
+ <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"></div>
  <a href="../products/apex-8-station-race-day-tactical-duffle.html" style="font-size:16px;font-weight:800;color:#0f172a;text-decoration:none;display:block;margin:2px 0;">8-Station Haul</a>
  <div style="font-size:13px;color:#0e8345;font-weight:700;">$74.00 · ✓ Free US Shipping</div>
  </div>
@@ -583,7 +612,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C21</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/new-york-hudson-pier-metro-endurance-dept-race-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">New York Hudson Pier - NYC Metro Endurance Dept.</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (176 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -597,7 +626,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C30</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/compromised-running-club-breathable-race-tank.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Heavy Legs Run Club KM Heavy Legs Run Club 1000M</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.8 (119 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$32.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -611,7 +640,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C34</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/chicago-dallas-socal-world-series-prep-heavyweight-hoodie.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Chicago · Dallas · SoCal 2026/2027 World Series Prep Winged Crest</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (168 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$58.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -624,8 +653,8 @@
  <tr>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C35</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
- <a href="../products/8-station-functional-race-division-oversized-stealth-hoodie.html" style="color:#0052cc;font-weight:800;text-decoration:none;">8-Station Race Division Winged Crest Stealth</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (145 reviews) · FREE US Delivery</div>
+ <a href="../products/run-station-repeat-heavy-blend-hoodie.html" style="color:#0052cc;font-weight:800;text-decoration:none;">8-Station Race Division Winged Crest Stealth</a>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$68.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -639,7 +668,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C42</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/apex-aeroshell-lightweight-race-warmup-jacket.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Apex &quot;8×1000M Start Corral&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (164 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$68.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -653,7 +682,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C45</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/26-27-world-series-lightweight-warmup-jacket.html" style="color:#0052cc;font-weight:800;text-decoration:none;">26/27 World Series &quot;Chicago · Dallas · SoCal · NYC&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (188 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$68.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -667,7 +696,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C14</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/apex-8-station-race-day-tactical-duffle.html" style="color:#0052cc;font-weight:800;text-decoration:none;">8-Station Haul</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (208 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$74.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -681,7 +710,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C07</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/porta-potty-line-pr-pre-race-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Pre-Race Porta-Potty Line PR</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.8 (53 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -695,7 +724,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C36</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/compromised-running.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Built For Heavy Legs &quot;Built For Heavy Legs&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (218 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -717,7 +746,7 @@
  <img src="../images/streetwear/apc-c07/01.jpg?v=20261119batch24" alt="Pre-Race Porta-Potty Line PR" style="width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;" loading="lazy" />
  </a>
  <div>
- <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"> · ★ 4.8 (53)</div>
+ <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"></div>
  <a href="../products/porta-potty-line-pr-pre-race-tee.html" style="font-size:16px;font-weight:800;color:#0f172a;text-decoration:none;display:block;margin:2px 0;">Pre-Race Porta-Potty Line PR</a>
  <div style="font-size:13px;color:#0e8345;font-weight:700;">$38.00 · ✓ Free US Shipping</div>
  </div>
@@ -738,7 +767,7 @@
  <img src="../images/streetwear/apc-c36-black.jpg?v=20261119heavylegs" alt="Built For Heavy Legs &quot;Built For Heavy Legs&quot;" style="width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;" loading="lazy" />
  </a>
  <div>
- <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"> · ★ 5.0 (218)</div>
+ <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;"> · Free US shipping</div>
  <a href="../products/compromised-running.html" style="font-size:16px;font-weight:800;color:#0f172a;text-decoration:none;display:block;margin:2px 0;">Built For Heavy Legs &quot;Built For Heavy Legs&quot;</a>
  <div style="font-size:13px;color:#0e8345;font-weight:700;">$38.00 · ✓ Free US Shipping</div>
  </div>
@@ -759,7 +788,7 @@
  <img src="../images/streetwear/apc-c42-black.png?v=20261026v3" alt="Apex &quot;8×1000M Start Corral&quot;" style="width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;" loading="lazy" />
  </a>
  <div>
- <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;">New Release · ★ 5.0 (164)</div>
+ <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:#ff4d1c;">New Release · Free US shipping</div>
  <a href="../products/apex-aeroshell-lightweight-race-warmup-jacket.html" style="font-size:16px;font-weight:800;color:#0f172a;text-decoration:none;display:block;margin:2px 0;">Apex &quot;8×1000M Start Corral&quot;</a>
  <div style="font-size:13px;color:#0e8345;font-weight:700;">$68.00 · ✓ Free US Shipping</div>
  </div>
@@ -789,7 +818,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C18</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/anaheim-socal-open-division-pacific-coast-race-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Anaheim SoCal Open Division - Pacific Coast Race Series</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (192 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -803,7 +832,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C01</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/run-station-repeat-performance-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Run. Station. Repeat.</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (184 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -817,7 +846,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C02</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/wall-balls-bad-decisions-oversized-pump-cover.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Wall Balls &amp; Bad Decisions</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (142 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -831,7 +860,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C41</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/roxzone-speed-dept.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Roxzone Speed Dept. &quot;Roxzone Speed Dept.&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (188 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -845,7 +874,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C42</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/apex-aeroshell-lightweight-race-warmup-jacket.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Apex &quot;8×1000M Start Corral&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (164 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$68.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -859,7 +888,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C07</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/porta-potty-line-pr-pre-race-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Pre-Race Porta-Potty Line PR</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.8 (53 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -873,7 +902,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C17</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/dallas-lone-star-division-turf-threshold-hybrid-race-tee.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Dallas Turf &amp; Threshold - Lone Star 8-Station Classic</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (148 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -887,7 +916,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C36</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/compromised-running.html" style="color:#0052cc;font-weight:800;text-decoration:none;">Built For Heavy Legs &quot;Built For Heavy Legs&quot;</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 5.0 (218 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$38.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
@@ -901,7 +930,7 @@
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;">APC-C14</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">
  <a href="../products/apex-8-station-race-day-tactical-duffle.html" style="color:#0052cc;font-weight:800;text-decoration:none;">8-Station Haul</a>
- <div style="font-size:12px;color:#475569;margin-top:2px;">★ 4.9 (208 reviews) · FREE US Delivery</div>
+ <div style="font-size:12px;color:#475569;margin-top:2px;">Free US shipping</div>
  </td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;font-weight:800;font-size:15px;color:#0f172a;">$74.00</td>
  <td style="padding:10px;border-bottom:1px solid #e4e6eb;">

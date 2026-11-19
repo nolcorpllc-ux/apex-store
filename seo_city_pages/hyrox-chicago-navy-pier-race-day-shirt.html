@@ -175,20 +175,49 @@
   </script>
 </head>
 <body>
-  <header class="TopHeader">
-    <div class="TopHeader__Main">
-      <div class="Container TopHeader__Inner">
-        <a href="../index.html" class="BrandLogo">
-          <span class="BrandLogo__Mark">APEX</span>
-          <span class="BrandLogo__Sub">HYBRID CO.</span>
-        </a>
-        <div style="margin-left:auto; display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-          <a href="../index.html#articles" style="color:#fff; font-size:13px; font-weight:700;">← All Buyer Guides</a>
-          <a href="https://apex-hybrid-co-shop.fourthwall.com/products/apex-race-city-heavyweight-tee-chicago-championship-division" class="Btn Btn--BuyNow" style="width:auto; padding:8px 16px;">1-Click Buy Top Pick ($38.00)</a>
-        </div>
-      </div>
+<header class="SiteHead SiteHead--sub" style="top:0">
+  <div class="Wrap SiteHead__row">
+    <button class="MenuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <a class="Wordmark" href="../index.html"><span class="Wordmark__logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.5L21 20.5H16.6L12 11.2L7.4 20.5H3L12 2.5Z" fill="#14120b"/><path d="M8.8 15.8H15.2L16.7 18.8H7.3L8.8 15.8Z" fill="#0066ff"/></svg></span><span class="Wordmark__text"><strong>Apex</strong><span>Hybrid Co.</span></span></a>
+    <nav class="SiteNav" id="siteNav" aria-label="Primary">
+      <a href="../index.html?dept=Breathable%20Tech%20Shirts">Tech</a>
+      <a href="../index.html?dept=Race%20City%20Editions">Cities</a>
+      <a href="../index.html?dept=Tees%20%26%20Pump%20Covers">Street</a>
+      <a href="../collections/tees.html">Tees</a>
+      <a href="../collections/tanks.html">Tanks</a>
+      <a href="../collections/womens.html">Women's</a>
+      <a href="../index.html?dept=Hoodies">Hoodies</a>
+      <a href="../collections/windbreakers.html">Windbreakers</a>
+      <a href="../collections/race-day-windbreakers.html">Race Day Windbreakers</a>
+      <a href="../collections/new.html">New</a>
+      <a href="../collections/hyrx.html">HYRX</a>
+      <a href="../collections/tops.html">Tops</a>
+      <a href="../collections/accessories.html">Accessories</a>
+      <a href="../team_orders.html">Doubles &amp; Teams</a>
+      <a href="../gyms/index.html">Gym Finder</a>
+      <a href="../wristband.html">Pace Wristband</a>
+    </nav>
+    <div class="Tools">
+      <form class="Search" action="../index.html" method="get" role="search">
+        <input name="q" type="search" placeholder="Search graphic race tees, city crests, hoodies" aria-label="Search the catalog" />
+      </form>
+      <a class="BagBtn" href="../index.html">Bag</a>
     </div>
-  </header>
+  </div>
+</header>
+<script>
+(function() {
+  var btn = document.getElementById("menuBtn");
+  var nav = document.getElementById("siteNav");
+  if (!btn || !nav) return;
+  btn.addEventListener("click", function() {
+    var open = nav.classList.toggle("is-open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+})();
+</script>
+
+  
 
   <main class="Container" style="max-width:980px; padding:28px 20px 64px;">
     <article style="background:#fff; border:1px solid #e4e6eb; border-radius:12px; padding:32px;">
