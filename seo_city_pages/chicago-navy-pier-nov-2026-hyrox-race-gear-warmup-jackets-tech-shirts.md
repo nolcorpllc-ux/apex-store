@@ -1,9 +1,9 @@
-# Chicago Navy Pier Nov 2026 HYROX Race Gear, Lightweight Warmup Jackets & Breathable Tech Shirts
+# Chicago Navy Pier Feb 11–15, 2027 HYROX Race Gear, Lightweight Warmup Jackets & Breathable Tech Shirts
 
 - **Canonical Storefront URL:** https://www.apexhybridco.com/articles/chicago-navy-pier-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html
-- **Event / Venue:** Chicago Navy Pier (November 2026 · 41.8917° N, 87.6086° W)
-- **Category:** Chicago Nov 2026 Race City Guide (7 min read)
-- **Summary:** Racing Chicago Navy Pier in November 2026? Master Lake Michigan cold-corral layering with the Apex AeroShell Lightweight Race Warmup Jacket (APC-C42), 26/27 World Series Warmup Jacket (APC-C45), breathable Compromised Running breathable tech shirts (APC-C36), and Chicago 8x1000m Division tees (APC-C16).
+- **Event / Venue:** Chicago Navy Pier (Feb 11–15, 2027 · 41.8917° N, 87.6086° W)
+- **Category:** Chicago Feb 11–15, 2027 Race City Guide (7 min read)
+- **Summary:** Racing Chicago Navy Pier on Feb 11–15, 2027? Master Lake Michigan cold-corral layering with the Apex AeroShell Lightweight Race Warmup Jacket (APC-C42), 26/27 World Series Warmup Jacket (APC-C45), breathable Compromised Running breathable tech shirts (APC-C36), and Chicago 8x1000m Division tees (APC-C16).
 
 ## Direct Buy Now & Product Spec Links
 
@@ -23,7 +23,7 @@ Festival Hall at Chicago Navy Pier features fast multi-lap indoor running loops,
 Arrive at Navy Pier wearing the Apex AeroShell Lightweight Race Warmup Jacket (`APC-C42`) or the 26/27 World Series Lightweight Warmup Jacket (`APC-C45`) over your race kit. Strip your warmup shell 8 minutes before wave call after priming your diaphragm with 30 breaths on the AeroLung Dual-Valve Lung Trainer (`APC-E17`).
 
 ## 3. Frequently Asked Questions
-### Q: What should I wear for Chicago Navy Pier HYROX in November 2026?
+### Q: What should I wear for Chicago Navy Pier HYROX on Feb 11–15, 2027?
 Wear a lightweight breathable breathable tech shirt like the Compromised Running Tech Shirt (APC-C36) or Chicago Championship Division Tee (APC-C16) for the race itself, layered under the Apex AeroShell Lightweight Race Warmup Jacket (APC-C42) or 26/27 World Series Lightweight Warmup Jacket (APC-C45) for the cold Lake Michigan walk into Navy Pier.
 
 ### Q: Where can I buy the Chicago Navy Pier 8x1000m Championship Division shirt and warmup jacket?
