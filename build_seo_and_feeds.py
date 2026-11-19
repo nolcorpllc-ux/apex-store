@@ -15,6 +15,8 @@ import json
 import os
 import re
 import shutil
+import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1404,7 +1406,7 @@ OLD_HEAVY_LISTING_NAMES = (
 GUIDE_LINKS_REQUIRED = 6
 # Unique hyphenated tokens in published HTML, CSS, JS, JSON, XML, CSV, TXT, and MD,
 # including each file's path. The floor is that exact count, with a per-page baseline.
-SLUG_TOKEN_MINIMUM = 3375
+SLUG_TOKEN_MINIMUM = 3597
 SLUG_PAGE_BASELINE = {
     'a4b8c9d0e1f234567890abcdef123456.txt': 0,
     'a8f4c2e9d1b740639c5e2a1f8b3d7e90.txt': 0,
@@ -1481,20 +1483,20 @@ SLUG_PAGE_BASELINE = {
     'catalog.json': 1929,
     'collections/accessories.html': 46,
     'collections/hyrx.html': 79,
-    'collections/new.html': 85,
-    'collections/race-day-windbreakers.html': 47,
+    'collections/new.html': 78,
+    'collections/race-day-windbreakers.html': 44,
     'collections/shoes.html': 26,
     'collections/tanks.html': 37,
     'collections/tees.html': 117,
     'collections/tops.html': 29,
-    'collections/windbreakers.html': 70,
+    'collections/windbreakers.html': 55,
     'collections/womens.html': 32,
     'contact.html': 16,
     'directory.html': 271,
     'feed.xml': 449,
     'fourthwall_city_jacket_variants.json': 43,
     'fourthwall_feed_variants.json': 397,
-    'fourthwall_full_catalog_sync.json': 265,
+    'fourthwall_full_catalog_sync.json': 260,
     'gift-guide.html': 62,
     'google8a7e6d0a7e3acfb0.html': 4,
     'google_merchant_feed.xml': 1372,
@@ -1502,10 +1504,10 @@ SLUG_PAGE_BASELINE = {
     'google_shopping_feed_ghpages.xml': 1372,
     'gyms/gyms_directory.json': 68,
     'gyms/index.html': 271,
-    'index.html': 297,
+    'index.html': 266,
     'llms.txt': 421,
     'perks-bar.js': 7,
-    'pinterest_catalog_feed.csv': 1155,
+    'pinterest_catalog_feed.csv': 1151,
     'privacy.html': 17,
     'products/100-wall-balls-unbroken-sleeveless-muscle-tank.html': 177,
     'products/1km-split.html': 187,
@@ -1528,8 +1530,8 @@ SLUG_PAGE_BASELINE = {
     'products/apc-c06.html': 196,
     'products/apc-c07.html': 184,
     'products/apc-c08.html': 180,
-    'products/apc-c09.html': 180,
-    'products/apc-c10.html': 180,
+    'products/apc-c09.html': 179,
+    'products/apc-c10.html': 179,
     'products/apc-c100.html': 54,
     'products/apc-c101.html': 54,
     'products/apc-c102.html': 54,
@@ -1540,7 +1542,7 @@ SLUG_PAGE_BASELINE = {
     'products/apc-c107.html': 54,
     'products/apc-c108.html': 54,
     'products/apc-c109.html': 52,
-    'products/apc-c11.html': 185,
+    'products/apc-c11.html': 180,
     'products/apc-c110.html': 52,
     'products/apc-c111.html': 54,
     'products/apc-c112.html': 54,
@@ -1551,7 +1553,7 @@ SLUG_PAGE_BASELINE = {
     'products/apc-c117.html': 54,
     'products/apc-c118.html': 54,
     'products/apc-c119.html': 54,
-    'products/apc-c12.html': 181,
+    'products/apc-c12.html': 180,
     'products/apc-c120.html': 54,
     'products/apc-c121.html': 55,
     'products/apc-c122.html': 68,
@@ -1603,9 +1605,9 @@ SLUG_PAGE_BASELINE = {
     'products/apc-c29.html': 176,
     'products/apc-c30.html': 188,
     'products/apc-c31.html': 177,
-    'products/apc-c32.html': 180,
-    'products/apc-c33.html': 180,
-    'products/apc-c34.html': 181,
+    'products/apc-c32.html': 179,
+    'products/apc-c33.html': 179,
+    'products/apc-c34.html': 180,
     'products/apc-c35.html': 79,
     'products/apc-c36.html': 191,
     'products/apc-c37.html': 187,
@@ -1678,19 +1680,19 @@ SLUG_PAGE_BASELINE = {
     'products/atlanta-hyrx.html': 53,
     'products/atlanta-race-day-stitched.html': 182,
     'products/burpee-broad-jumps-build-character-tee.html': 194,
-    'products/burpee-broad-jumps-build-character-warmup-hoodie.html': 180,
+    'products/burpee-broad-jumps-build-character-warmup-hoodie.html': 178,
     'products/call-room.html': 53,
     'products/cancun-crest.html': 53,
     'products/cancun-hyrx.html': 53,
     'products/cancun-race-day-stitched.html': 184,
     'products/chicago-championship-division-navy-pier-hybrid-race-tee.html': 177,
     'products/chicago-crest.html': 53,
-    'products/chicago-dallas-socal-world-series-prep-heavyweight-hoodie.html': 181,
+    'products/chicago-dallas-socal-world-series-prep-heavyweight-hoodie.html': 179,
     'products/chicago-hyrx.html': 53,
     'products/chicago-race-day-stitched.html': 184,
     'products/circuit-cities.html': 53,
     'products/compromised-running-club-breathable-race-tank.html': 187,
-    'products/compromised-running-club-fleece-hoodie.html': 184,
+    'products/compromised-running-club-fleece-hoodie.html': 179,
     'products/compromised-running-club-tee.html': 52,
     'products/compromised-running-society-club-tee.html': 7,
     'products/compromised-running.html': 190,
@@ -1703,7 +1705,7 @@ SLUG_PAGE_BASELINE = {
     'products/dallas-race-day-stitched.html': 181,
     'products/dallas-race-day.html': 178,
     'products/defend-my-sled-push-dept-tee.html': 180,
-    'products/defend-my-sled-push-fleece-hoodie.html': 181,
+    'products/defend-my-sled-push-fleece-hoodie.html': 179,
     'products/denver-crest.html': 53,
     'products/denver-race-day-stitched.html': 181,
     'products/denver-race-day.html': 177,
@@ -1791,7 +1793,7 @@ SLUG_PAGE_BASELINE = {
     'products/push-heavy.html': 189,
     'products/roxzone-penalties-ruined-my-pr-athletic-race-tee.html': 181,
     'products/roxzone-speed-dept.html': 190,
-    'products/run-station-repeat-heavy-blend-hoodie.html': 180,
+    'products/run-station-repeat-heavy-blend-hoodie.html': 178,
     'products/run-station-repeat-performance-tee.html': 192,
     'products/run-station-repeat-sleeveless-race-day-muscle-tank.html': 178,
     'products/san-diego-crest.html': 51,
@@ -1803,7 +1805,7 @@ SLUG_PAGE_BASELINE = {
     'products/sleeve-seal.html': 55,
     'products/stem-type.html': 52,
     'products/sub-65-club-pace-pull-push-elite-division-tee.html': 184,
-    'products/the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie.html': 180,
+    'products/the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie.html': 178,
     'products/the-erg-doesnt-care-how-you-feel-tee.html': 195,
     'products/timing-gate.html': 52,
     'products/vancouver-crest.html': 53,
@@ -1811,7 +1813,7 @@ SLUG_PAGE_BASELINE = {
     'products/vancouver-race-day-stitched.html': 180,
     'products/vancouver-race-day.html': 177,
     'products/venttech-perforated-zone4-zone5-hybrid-training-shirt.html': 7,
-    'products/wall-balls-bad-decisions-hoodie.html': 180,
+    'products/wall-balls-bad-decisions-hoodie.html': 178,
     'products/wall-balls-bad-decisions-oversized-pump-cover.html': 193,
     'products/work-the-loop.html': 54,
     'products/zone-2-all-week-redline-all-weekend-performance-tee.html': 185,
@@ -2580,6 +2582,170 @@ def regression_errors(page, name="page"):
     return errors
 
 
+REDO_OLD_IMAGE_PATHS = (
+    "images/streetwear/apc-c01-black.jpg",
+    "images/streetwear/apc-c02-black.jpg",
+    "images/streetwear/apc-c03-black.jpg",
+    "images/streetwear/apc-c05-black.jpg",
+    "images/streetwear/apc-c06-black.jpg",
+    "images/streetwear/apc-c07/01.jpg",
+    "images/streetwear/compromised-running-club-tee/01.jpg",
+)
+WEARABLE_DEPTS = {
+    "Tees & Pump Covers",
+    "Hoodies",
+    "Windbreakers",
+    "Race City Editions",
+    "Muscle Tanks",
+    "Women's",
+    "Breathable Tech Shirts",
+    "Training Gear",
+}
+NON_WEARABLE_HANDLE_BITS = ("towel", "sack", "duffle", "shaker", "bottle")
+
+
+def is_wearable_product(product):
+    handle = (product.get("handle") or "").lower()
+    if any(bit in handle for bit in NON_WEARABLE_HANDLE_BITS):
+        return False
+    return product.get("dept") in WEARABLE_DEPTS
+
+
+def wearable_missing_model(products):
+    missing = []
+    for product in products:
+        if not is_wearable_product(product):
+            continue
+        if not product.get("model_primary"):
+            missing.append(product.get("id") or product.get("handle"))
+    return missing
+
+
+def old_redo_image_errors(text, name):
+    errors = []
+    for path in REDO_OLD_IMAGE_PATHS:
+        if path in text:
+            errors.append(f"{name}: old redo image {path}")
+    return errors
+
+
+WIND_SWITCH_SLUGS = (
+    "denver-race-day-stitched",
+    "anaheim-race-day-stitched",
+    "nashville-race-day-stitched",
+    "vancouver-race-day-stitched",
+    "dallas-race-day-stitched",
+    "phoenix-race-day-windbreaker",
+    "houston-race-day-windbreaker",
+    "las-vegas-race-day-windbreaker",
+    "miami-beach-race-day-windbreaker",
+    "atlanta-race-day-windbreaker",
+    "chicago-race-day-windbreaker",
+    "guadalajara-race-day-windbreaker",
+    "minneapolis-race-day-windbreaker",
+    "portland-race-day-windbreaker",
+    "monterrey-race-day-windbreaker",
+    "san-diego-race-day-windbreaker",
+    "london-race-day-windbreaker",
+    "paris-race-day-windbreaker",
+    "hong-kong-race-day-windbreaker",
+    "cancun-race-day-windbreaker",
+)
+FW_SHOP = "https://apex-hybrid-co-shop.fourthwall.com/products/"
+
+
+def windbreaker_switch_errors(switch=None, resolve=None, pages=None):
+    """The city card lists exactly Takis's 20 public windbreakers, and each Buy link resolves."""
+    errors = []
+    if switch is None:
+        switch = json.loads(open(os.path.join(BASE_DIR, "race-day-switcher.json"), encoding="utf-8").read())
+    if switch.get("jackets"):
+        errors.append("printed Race Day jackets are folded into the switcher")
+    rows = switch.get("windbreakers") or []
+    slugs = []
+    for row in rows:
+        url = (row.get("fourthwall") or "").rstrip("/")
+        if not url.startswith(FW_SHOP):
+            errors.append(f"{row.get('city')}: Buy link is not the shop product URL")
+            slugs.append("")
+            continue
+        slug = url[len(FW_SHOP):]
+        slugs.append(slug)
+        if row.get("slug") != slug:
+            errors.append(f"{slug}: slug field does not match the Buy link")
+        if row.get("label") != "Race Day Windbreaker":
+            errors.append(f"{slug}: label is not Race Day Windbreaker")
+        if row.get("price") != 60:
+            errors.append(f"{slug}: card price is not 60")
+    if slugs != list(WIND_SWITCH_SLUGS):
+        errors.append("switcher slugs are not the 20 published windbreakers")
+    if pages is None:
+        page_text = {}
+        for rel in ("index.html", "collections/windbreakers.html", "collections/race-day-windbreakers.html"):
+            page_text[rel] = open(os.path.join(BASE_DIR, rel), encoding="utf-8").read()
+    else:
+        page_text = pages
+    for rel, text in page_text.items():
+        if text.count('data-switch="windbreakers"') != 1:
+            errors.append(f"{rel}: expected one windbreaker switch")
+        if 'data-switch="jackets"' in text:
+            errors.append(f"{rel}: jacket switch is still on the page")
+        stitched_cards = len(re.findall(r'class="WBCard" href="[^"]*race-day-stitched', text))
+        if stitched_cards:
+            errors.append(f"{rel}: {stitched_cards} city windbreaker cards outside the switcher")
+    if "collections/windbreakers.html" in page_text and "Race Day Jacket" not in page_text["collections/windbreakers.html"]:
+        errors.append("printed Race Day Jackets were removed from the windbreakers collection")
+    if resolve is not None:
+        for row in rows:
+            code = resolve(row.get("fourthwall"))
+            if code != 200:
+                errors.append(f"{row.get('slug')}: Buy link returned {code}")
+    return errors
+
+
+HIDDEN_HOODIE_SLUGS = (
+    "run-station-repeat-heavyweight-fleece-warmup-hoodie",
+    "wall-balls-bad-decisions-brushed-fleece-pullover-hoodie",
+    "compromised-running-club-heavy-warmup-hoodie",
+    "sled-push-dept-the-footage-speaks-pullover-hoodie",
+    "burpee-broad-jumps-build-character-8-0-oz-warmup-hoodie",
+    "the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie",
+    "chicago-dallas-socal-2026-2027-world-series-prep-winged-hoodie",
+)
+NEW_HOODIE_SLUGS = (
+    "run-station-repeat",
+    "wall-balls-bad-decisions",
+    "heavy-legs-run-club-km",
+    "the-footage-speaks",
+    "build-character",
+    "erg-doesnt-care",
+    "world-series-prep",
+)
+
+
+def hidden_hoodie_link_errors(pages):
+    """Published files must not link a hoodie Fourthwall has hidden."""
+    errors = []
+    for name, text in pages:
+        for slug in HIDDEN_HOODIE_SLUGS:
+            if f"fourthwall.com/products/{slug}" in (text or ""):
+                errors.append(f"{name}: Buy link points at hidden hoodie {slug}")
+    return errors
+
+
+def published_hoodie_pages():
+    pages = []
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [item for item in dirnames if item not in {".git", "__pycache__", "node_modules"}]
+        for name in filenames:
+            if os.path.splitext(name)[1] not in {".html", ".xml", ".csv", ".json", ".js", ".md", ".txt"}:
+                continue
+            path = os.path.join(dirpath, name)
+            rel = os.path.relpath(path, BASE_DIR)
+            pages.append((rel, open(path, encoding="utf-8", errors="replace").read()))
+    return pages
+
+
 def assert_restored_sections():
     """Self-test the regression gates, then check guides, C36, slugs, and old names."""
     if not _lowercase_after_period("Wraps from front to back. quick-dry performance."):
@@ -2763,6 +2929,72 @@ def assert_restored_sections():
         generator_text_errors("sticky " + NEVER_DISPLAY_CODES[0] + " banner", "generator.py"),
         "contains",
     )
+    fail_check(
+        "old redo image",
+        old_redo_image_errors("src=\"images/streetwear/apc-c01-black.jpg\"", "redo"),
+        "apc-c01-black.jpg",
+    )
+    self_tests.append("current redo path passes")
+    if old_redo_image_errors("src=\"images/streetwear/hyrx-art/apc-c01-05.jpg\"", "redo"):
+        raise SystemExit("Old-image self-test flagged the renamed HYRX art")
+    fixture = [
+        {"id": "X", "handle": "peak-sign", "dept": "Tees & Pump Covers", "model_primary": False},
+        {"id": "Y", "handle": "stem-type", "dept": "Tees & Pump Covers", "model_primary": True},
+        {"id": "Z", "handle": "apex-hybrid-duffle", "dept": "Training Gear", "model_primary": False},
+    ]
+    fixture_missing = wearable_missing_model(fixture)
+    if fixture_missing != ["X"]:
+        raise SystemExit(f"Model-primary self-test returned {fixture_missing}")
+    self_tests.append("wearable missing a model primary is listed")
+    catalog = json.loads(open(os.path.join(BASE_DIR, "catalog.json"), encoding="utf-8").read())
+    live_missing = wearable_missing_model(catalog["products"])
+    print("Wearables still missing a model primary: " + ", ".join(live_missing))
+    for rel in ("catalog.json", "index.html", "collections/tees.html"):
+        text = open(os.path.join(BASE_DIR, rel), encoding="utf-8").read()
+        hits = old_redo_image_errors(text, rel)
+        if hits:
+            raise SystemExit("Old redo image path is still referenced: " + "; ".join(hits))
+    bad_switch = {"windbreakers": [{"city": "Denver", "slug": "denver-race-day-stitched", "label": "Race Day Windbreaker", "price": 60, "fourthwall": FW_SHOP + "denver-race-day-stitched"}], "jackets": [{"city": "Dallas"}]}
+    if not windbreaker_switch_errors(bad_switch, pages={"index.html": '<div data-switch="windbreakers"></div>', "collections/windbreakers.html": '<div data-switch="windbreakers"></div>Race Day Jacket', "collections/race-day-windbreakers.html": '<div data-switch="windbreakers"></div>'}):
+        raise SystemExit("Switcher self-test missed a short slug list")
+    self_tests.append("switcher slug list is exactly the 20")
+    good_rows = [{"city": s, "slug": s, "label": "Race Day Windbreaker", "price": 60, "fourthwall": FW_SHOP + s} for s in WIND_SWITCH_SLUGS]
+    good_pages = {
+        "index.html": '<div data-switch="windbreakers"></div>',
+        "collections/windbreakers.html": '<div data-switch="windbreakers"></div>Race Day Jacket',
+        "collections/race-day-windbreakers.html": '<div data-switch="windbreakers"></div>',
+    }
+    if windbreaker_switch_errors({"windbreakers": good_rows}, resolve=lambda url: 200, pages=good_pages):
+        raise SystemExit("Switcher self-test flagged the 20 published slugs")
+    if not windbreaker_switch_errors({"windbreakers": good_rows}, resolve=lambda url: 404, pages=good_pages):
+        raise SystemExit("Switcher self-test missed a Buy link that does not resolve")
+    self_tests.append("every windbreaker Buy link resolves")
+
+    def live_status(url):
+        req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "ApexStoreGate"})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return resp.status
+        except urllib.error.HTTPError as exc:
+            return exc.code
+
+    switch_hits = windbreaker_switch_errors(resolve=live_status)
+    if switch_hits:
+        raise SystemExit("Windbreaker switcher gate failed: " + "; ".join(switch_hits))
+    self_tests.append("one windbreaker switcher with the 20 city slugs")
+    hidden_sample = [("sample.html", "Buy https://apex-hybrid-co-shop.fourthwall.com/products/" + HIDDEN_HOODIE_SLUGS[0])]
+    if not hidden_hoodie_link_errors(hidden_sample):
+        raise SystemExit("Hidden-hoodie self-test missed a linked hidden slug")
+    self_tests.append("hidden hoodie slug is not linked")
+    if hidden_hoodie_link_errors([("sample.html", "Buy https://apex-hybrid-co-shop.fourthwall.com/products/" + NEW_HOODIE_SLUGS[0])]):
+        raise SystemExit("Hidden-hoodie self-test flagged a public hoodie slug")
+    hoodie_miss = [slug for slug in NEW_HOODIE_SLUGS if live_status(FW_SHOP + slug) != 200]
+    if hoodie_miss:
+        raise SystemExit("Public hoodie Buy link did not resolve: " + ", ".join(hoodie_miss))
+    self_tests.append("seven public hoodie slugs resolve")
+    hidden_live = hidden_hoodie_link_errors(published_hoodie_pages())
+    if hidden_live:
+        raise SystemExit("Hidden hoodie is still linked: " + "; ".join(hidden_live[:12]))
     assert_restored_sections.self_test_count = len(self_tests)
     folder = os.path.join(BASE_DIR, "products")
     guide_total = 0

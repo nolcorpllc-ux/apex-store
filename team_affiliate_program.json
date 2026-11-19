@@ -58,8 +58,8 @@
         "APC-C41"
       ],
       "default_sku": "APC-C36",
-      "image": "images/streetwear/apc-c36-black.jpg?v=20261119heavylegs",
-      "alt_image": "images/streetwear/apc-c36-black.jpg?v=20261119heavylegs",
+      "image": "images/streetwear/hyrx-art/apc-c36-01.jpg?v=20261119b",
+      "alt_image": "images/streetwear/hyrx-art/apc-c36-01.jpg?v=20261119b",
       "regular_unit_price": 38.0,
       "regular_total_price": 76.0,
       "bundle_price": 68.4,
@@ -151,8 +151,8 @@
         "APC-C34"
       ],
       "default_sku": "APC-C09",
-      "image": "images/streetwear/apc-c09/01.jpg?v=20261119hoodies",
-      "alt_image": "images/streetwear/apc-c09/01.jpg?v=20261119hoodies",
+      "image": "images/streetwear/run-station-repeat/01.jpg?v=20261119b",
+      "alt_image": "images/streetwear/run-station-repeat/01.jpg?v=20261119b",
       "regular_unit_price": 58.0,
       "regular_total_price": 116.0,
       "bundle_price": 104.4,
@@ -161,7 +161,7 @@
       "savings_pct": 10.0,
       "recommended_promo": "COACHSU10",
       "checkout_mode": "pair_sku",
-      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/run-station-repeat-heavyweight-fleece-warmup-hoodie"
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/run-station-repeat"
     },
     {
       "bundle_id": "BUNDLE-DBL-PRO-KIT",
@@ -180,7 +180,7 @@
       "secondary_sku": "APC-C42",
       "default_sku": "APC-C36",
       "image": "images/streetwear/apc-c42-black.png",
-      "alt_image": "images/streetwear/apc-c36-black.jpg?v=20261119heavylegs",
+      "alt_image": "images/streetwear/hyrx-art/apc-c36-01.jpg?v=20261119b",
       "regular_unit_price": 53.0,
       "regular_total_price": 212.0,
       "bundle_price": 190.8,
