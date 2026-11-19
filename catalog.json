@@ -8002,15 +8002,15 @@
       },
       "fourthwall_default_variant_id": "5aed23cc-dc15-4d00-bf95-f12169e205a1"
     },
-    {
+        {
       "id": "APC-C138",
       "handle": "hyrx-station-towel-black",
       "title": "HYRX Station Towel - Black",
       "seo_title": "HYRX Station Towel - Black",
       "dept": "Training Gear",
       "category": "Towels",
-      "retail_price": 50.0,
-      "list_price": 50.0,
+      "retail_price": 46.0,
+      "list_price": 46.0,
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/hyrx-station-towel-black/01.jpg?v=20261119hyrxacc",
@@ -8044,22 +8044,22 @@
       "product_page_url": "https://www.apexhybridco.com/products/hyrx-station-towel-black.html",
       "product_url": "https://www.apexhybridco.com/products/hyrx-station-towel-black.html",
       "fourthwall_variants": {
-        "White": {
+        "Black": {
           "30\" x 60\"": "3669ffea-c900-49da-be70-1a1a1a150aa8",
           "36\" x 72\"": "5ec97ff9-92f9-4e83-adca-8e3e130d2137"
         }
       },
       "fourthwall_default_variant_id": "3669ffea-c900-49da-be70-1a1a1a150aa8"
     },
-    {
+        {
       "id": "APC-C139",
       "handle": "hyrx-station-towel-deep-olive",
       "title": "HYRX Station Towel - Deep Olive",
       "seo_title": "HYRX Station Towel - Deep Olive",
       "dept": "Training Gear",
       "category": "Towels",
-      "retail_price": 50.0,
-      "list_price": 50.0,
+      "retail_price": 46.0,
+      "list_price": 46.0,
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/hyrx-station-towel-deep-olive/01.jpg?v=20261119hyrxacc",
@@ -8093,7 +8093,7 @@
       "product_page_url": "https://www.apexhybridco.com/products/hyrx-station-towel-deep-olive.html",
       "product_url": "https://www.apexhybridco.com/products/hyrx-station-towel-deep-olive.html",
       "fourthwall_variants": {
-        "White": {
+        "Deep Olive": {
           "30\" x 60\"": "b076de69-8d86-4141-aa16-b2a53655a67b",
           "36\" x 72\"": "488ab94b-5511-463e-8aeb-6d54606f06ac"
         }
