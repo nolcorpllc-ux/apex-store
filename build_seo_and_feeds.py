@@ -312,7 +312,7 @@ _MATERIAL_WORD = re.compile(
 # Handles that are not in the live Fourthwall catalog. Wording is the published blank.
 _FABRIC_BY_HANDLE = {
     "apex-athletic-shoe-black-pink": "Lightweight mesh upper, cushioned sole.",
-    "8-station-functional-race-division-oversized-stealth-hoodie": "Heavyweight ring-spun fleece with ribbed cuffs and waistband.",
+    "8-station-functional-race-division-oversized-stealth-hoodie": "80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit",
     "electrolyte-pacing-insulated-shaker-bottle": "Double-wall copper-lined vacuum-insulated stainless steel.",
 }
 
@@ -582,14 +582,10 @@ def scrub_fabric_text(text):
 def ensure_story(text, minimum=80):
     """A product description has to be a real sentence, not only the fabric line."""
     text = re.sub(r"\s{2,}", " ", (text or "")).strip()
-    for pad in (
-        "It is part of the Apex Hybrid Co. catalog.",
-        "Made to order for Apex Hybrid Co. athletes.",
-    ):
-        if len(text) >= minimum:
-            break
-        if pad.lower() not in text.lower():
-            text = (text + " " + pad).strip() if text else pad
+    text = re.sub(r"(?i)\s*It is part of the Apex Hybrid Co\. catalog\.?", "", text).strip()
+    pad = "Made to order for Apex Hybrid Co. athletes."
+    if len(text) < minimum and pad.lower() not in text.lower():
+        text = (text + " " + pad).strip() if text else pad
     return text
 
 
@@ -628,13 +624,30 @@ def _outside_fabric_text(page):
     return text
 
 
+def _marked_sentences(chunk, break_divs):
+    """Turn block endings into sentence breaks, then split on punctuation."""
+    chunk = re.sub(r"<br\s*/?>", ". ", chunk, flags=re.I)
+    chunk = re.sub(r"</(?:h[1-6]|li|p|summary)\s*>", ". ", chunk, flags=re.I)
+    if break_divs:
+        chunk = re.sub(r"</div\s*>", ". ", chunk, flags=re.I)
+    plain = re.sub(r"<[^>]+>", " ", chunk)
+    plain = re.sub(r"\s+", " ", html.unescape(plain))
+    return [part.strip(" .") for part in re.split(r"(?<=[.!?])\s+|\s+\.\s+", plain) if part.strip(" .")]
+
+
 def _body_sentences(page):
-    """Normalized sentences from the whole body, including divs and link text."""
+    """Sentences from the whole body. Product-column blocks break sentences before related cards."""
     match = re.search(r"<body\b[^>]*>(.*)</body>", page, flags=re.S | re.I)
     body = match.group(1) if match else page
-    plain = re.sub(r"<[^>]+>", " ", body)
-    plain = re.sub(r"\s+", " ", html.unescape(plain))
-    return [part.strip() for part in re.split(r"(?<=[.!?])\s+", plain) if part.strip()]
+    body = re.sub(r"<header\b[^>]*>.*?</header>", " ", body, flags=re.S | re.I)
+    body = re.sub(r"<nav\b[^>]*>.*?</nav>", " ", body, flags=re.S | re.I)
+    body = re.sub(r"<footer\b[^>]*>.*?</footer>", " ", body, flags=re.S | re.I)
+    cut = len(body)
+    for marker in ("Frequently Paired", "Related HYROX", 'class="ProductGrid"', "ProductCard__Category"):
+        at = body.find(marker)
+        if at != -1:
+            cut = min(cut, at)
+    return _marked_sentences(body[:cut], True) + _marked_sentences(body[cut:], False)
 
 
 def fabric_rule_errors(page, name="page"):
@@ -775,12 +788,164 @@ def assert_no_garbled_copy():
         raise SystemExit("Garbled copy:\n" + "\n".join(errors[:60]))
 
 
+# A Fabric bullet needs a real fiber or a measured weight. "fabric" by itself does not count.
+_FIBER_WORD = re.compile(
+    r"(?i)\b(?:cotton|polyester|nylon|elastane|spandex|fleece|acrylic|rayon|twill|poplin|"
+    r"microfiber|terry|eva|rubber|canvas|mesh|leather|polyurethane|stainless|oxford)\b"
+)
+_MEASURED_WEIGHT = re.compile(r"(?i)\d+(?:\.\d+)?\s*(?:oz|gsm)\b")
+
+
+def fabric_bullet_is_specific(bullet):
+    """True when a Fabric bullet names a fiber or a weight in oz or gsm."""
+    return bool(_FIBER_WORD.search(bullet or "") or _MEASURED_WEIGHT.search(bullet or ""))
+
+
+def _story_paragraphs(page):
+    copy = _product_copy_html(page)
+    chunks = []
+    for bit in re.findall(r"<p\b[^>]*>.*?</p>", copy, flags=re.S | re.I):
+        if re.search(r"\bid=[\"']usShipNote", bit) or re.search(r"<a\b", bit, re.I):
+            continue
+        if not re.search(r"font-size:\s*1[45]", bit):
+            continue
+        chunks.append(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(bit))).strip())
+    return [chunk for chunk in chunks if chunk]
+
+
+def _description_fields(page):
+    fields = []
+    meta = re.search(r'<meta name="description" content="([^"]*)"', page)
+    fields.append(("meta description", html.unescape(meta.group(1)) if meta else ""))
+    og = re.search(r'<meta property="og:description" content="([^"]*)"', page)
+    fields.append(("og:description", html.unescape(og.group(1)) if og else ""))
+    for match in re.finditer(
+        r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', page, flags=re.S | re.I
+    ):
+        for desc in re.finditer(r'"description"\s*:\s*"((?:\\.|[^"\\])*)"', match.group(1)):
+            fields.append(("JSON-LD description", json.loads('"' + desc.group(1) + '"')))
+    fields.append(("visible description", " ".join(_story_paragraphs(page))))
+    return fields
+
+
+def _starts_lowercase(text):
+    stripped = re.sub(r"^[\s\"'(\[]+", "", text or "")
+    return bool(stripped) and stripped[0].islower()
+
+
+def _percent_without_fiber(text):
+    for match in re.finditer(r"\d+(?:\.\d+)?\s*%", text or ""):
+        rest = text[match.end():]
+        if re.match(r"\s*(?:,|and\b|or\b)", rest, re.I):
+            return True
+        window = re.split(r"[.,;]", rest, maxsplit=1)[0]
+        if re.match(r"\s*off\b", window, re.I):
+            continue
+        if not _FIBER_WORD.search(window):
+            return True
+    return False
+
+
+def _own_titles(page):
+    titles = set()
+    h1 = re.search(r"<h1\b[^>]*>(.*?)</h1>", page, flags=re.S | re.I)
+    if h1:
+        titles.add(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(h1.group(1)))).strip().lower())
+    bought = re.search(r'data-buy="(APC-C\d+)"', page) or re.search(r'prodId = "(APC-C\d+)"', page)
+    pid = bought.group(1) if bought else ""
+    for prod in products:
+        if prod.get("id") == pid or (h1 and prod.get("title", "").strip().lower() in titles):
+            for key in ("title", "seo_title"):
+                name = (prod.get(key) or "").strip().lower()
+                if name:
+                    titles.add(name)
+    return titles
+
+
+def copy_quality_errors(page, name="page"):
+    """Filler, weak fabric bullets, lowercase openings, and another product's name."""
+    if re.search(r'http-equiv="refresh"', page, re.I) or "<h1" not in page.lower():
+        return []
+    errors = []
+    bullets = re.findall(r"<li\b[^>]*>\s*Fabric:\s*(.*?)</li>", page, flags=re.S | re.I)
+    for bullet in bullets:
+        plain = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(bullet))).strip()
+        if not fabric_bullet_is_specific(plain):
+            errors.append(f"{name}: Fabric bullet is not a material ({plain[:60]})")
+    fields = _description_fields(page)
+    for label, text in fields:
+        if label in ("meta description", "og:description", "visible description") and _starts_lowercase(text):
+            errors.append(f"{name}: {label} starts with a lowercase letter")
+        if ",," in text or re.search(r"(?<!\.)\.\.(?!\.)", text) or _percent_without_fiber(text):
+            errors.append(f"{name}: {label} has a broken percent or fragment")
+    own = _own_titles(page)
+    blob = " ".join(text for _, text in fields)
+    for prod in products:
+        for key in ("title", "seo_title"):
+            title = re.sub(r"\s+", " ", prod.get(key) or "").strip()
+            folded = title.lower()
+            if len(title) < 18 or folded in own:
+                continue
+            if any(folded in own_title or own_title in folded for own_title in own if len(own_title) >= 8):
+                continue
+            if re.search(r"(?i)(?<![A-Za-z0-9])" + re.escape(title) + r"(?![A-Za-z0-9])", blob):
+                errors.append(f"{name}: description names {title}")
+                return errors
+    return errors
+
+
+def assert_copy_quality():
+    """Self-test the copy gates, then scan every live product page."""
+    if fabric_bullet_is_specific("fabric") or fabric_bullet_is_specific("Black") or fabric_bullet_is_specific("See the product description"):
+        raise SystemExit("Fabric-bullet self-test failed: a bare word counted as a material")
+    if not fabric_bullet_is_specific("80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit"):
+        raise SystemExit("Fabric-bullet self-test failed: the 9 oz fleece line was rejected")
+    repeat = (
+        "<html><body><h1>Sample Tee</h1>"
+        "<p style=\"font-size:15px\">Soft-hand graphic ink that holds a print in the dryer</p>"
+        "<h2>Key Performance Specifications</h2>"
+        "<ul><li>Soft-hand graphic ink that holds a print in the dryer</li></ul>"
+        "</body></html>"
+    )
+    if not any("repeated sentence" in item for item in fabric_rule_errors(repeat, "repeat-fixture")):
+        raise SystemExit("Repeat self-test failed: a spec repeated after the heading did not fail")
+    lower = (
+        "<html><head>"
+        '<meta name="description" content="black hoodie with a sleeve seal.">'
+        '<meta property="og:description" content="black hoodie with a sleeve seal.">'
+        "</head><body><h1>Sample</h1>"
+        '<p style="font-size:15px">black hoodie with a sleeve seal.</p></body></html>'
+    )
+    if not any("lowercase" in item for item in copy_quality_errors(lower, "case-fixture")):
+        raise SystemExit("Lowercase self-test failed: a lowercase description did not fail")
+    foreign = (
+        "<html><head><meta name=\"description\" content=\"Also the Anaheim Race Day Windbreaker.\"></head>"
+        "<body><h1>Sample Tee</h1>"
+        '<p style="font-size:15px">Also the Anaheim Race Day Windbreaker.</p></body></html>'
+    )
+    if not any("Anaheim Race Day Windbreaker" in item for item in copy_quality_errors(foreign, "title-fixture")):
+        raise SystemExit("Title self-test failed: another product's name in the description did not fail")
+    broken = "80% and 20%,,"
+    if not (_percent_without_fiber("80% and") and ",," in broken and re.search(r"(?<!\.)\.\.(?!\.)", "Dept..") and not re.search(r"(?<!\.)\.\.(?!\.)", "Wait...")):
+        raise SystemExit("Fragment self-test failed: a bare percent, double comma, or double period was missed")
+    errors = []
+    folder = os.path.join(BASE_DIR, "products")
+    for name in sorted(os.listdir(folder)):
+        if not name.endswith(".html"):
+            continue
+        page = open(os.path.join(folder, name), encoding="utf-8", errors="replace").read()
+        errors.extend(copy_quality_errors(page, name))
+    if errors:
+        raise SystemExit("Copy quality failed:\n" + "\n".join(errors[:60]))
+
+
 def assert_published_xml_parses():
     """Fail the build if any published XML file does not parse."""
     assert_no_trademark()
     assert_listed_prices()
     assert_fabric_stated_once()
     assert_no_garbled_copy()
+    assert_copy_quality()
     import xml.etree.ElementTree as ET
     errors = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
