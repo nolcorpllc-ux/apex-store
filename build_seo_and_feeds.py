@@ -1556,12 +1556,12 @@ def strip_speed_claims(text):
         ("Quick-Ship ", ""),
         ("Zero-Lead-Time ", "Made-to-order "),
         (
-            "Roxzone Speed Dept. & Compromised Running breathable tech shirts (APC-C36..APC-C41)",
-            "Compromised Running (APC-C36) and the 6.1 oz heavyweight cotton tees 1km Split (APC-C37), Zone 5 Engine (APC-C38), Push Heavy (APC-C40), and Roxzone Speed Dept. (APC-C41)",
+            "Roxzone Speed Dept. & Built For Heavy Legs breathable tech shirts (APC-C36..APC-C41)",
+            "Built For Heavy Legs (APC-C36) and the 6.1 oz heavyweight cotton tees 1KM Split (APC-C37), Aerobic Engine (APC-C38), Push Heavy Run Fast (APC-C40), and Roxzone Speed Dept. (APC-C41)",
         ),
         (
-            "Roxzone Speed Dept. &amp; Compromised Running breathable tech shirts (APC-C36..APC-C41)",
-            "Compromised Running (APC-C36) and the 6.1 oz heavyweight cotton tees 1km Split (APC-C37), Zone 5 Engine (APC-C38), Push Heavy (APC-C40), and Roxzone Speed Dept. (APC-C41)",
+            "Roxzone Speed Dept. &amp; Built For Heavy Legs breathable tech shirts (APC-C36..APC-C41)",
+            "Built For Heavy Legs (APC-C36) and the 6.1 oz heavyweight cotton tees 1KM Split (APC-C37), Aerobic Engine (APC-C38), Push Heavy Run Fast (APC-C40), and Roxzone Speed Dept. (APC-C41)",
         ),
     ]
     for old, new in repls:
@@ -1954,7 +1954,7 @@ def inject_static_seo_into_index():
                         "name": "What are the best breathable HYROX shirts for race day?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Compromised Running (APC-C36) is the breathable tech shirt. 1km Split, Zone 5 Engine, Push Heavy, and Roxzone Speed Dept. are 6.1 oz heavyweight cotton tees in Tees & Pump Covers. Made to order. Free US shipping."
+                            "text": "Built For Heavy Legs (APC-C36) is a 6.1 oz heavyweight cotton tee. 1KM Split, Aerobic Engine, Push Heavy Run Fast, and Roxzone Speed Dept. are 6.1 oz heavyweight cotton tees in Tees & Pump Covers. Made to order. Free US shipping."
                         }
                     },
                     {
@@ -2087,7 +2087,7 @@ def scrub_text(text):
         text = text.replace(f"Apex &quot;{name}&quot;", name)
         text = text.replace(f'Apex "{name}"', name)
         text = text.replace(f"Apex {name}", name)
-    text = re.sub(r"(?i)aeromesh", "Compromised Running", text)
+    text = re.sub(r"(?i)aeromesh", "Built For Heavy Legs", text)
     text = re.sub(r"(?i)coolcore", "Push Heavy", text)
     text = re.sub(r"(?i)venttech", "Zone 5 Engine", text)
     text = re.sub(r"(?i)dry-pace", "1km Split", text)
