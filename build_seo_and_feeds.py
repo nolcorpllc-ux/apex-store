@@ -796,6 +796,436 @@ def assert_no_garbled_copy():
         raise SystemExit("Garbled copy:\n" + "\n".join(errors[:60]))
 
 
+_DOUBLED_PHRASE = re.compile(
+    r"\b((?:[A-Za-z0-9][A-Za-z0-9'.&]*\s+){2,}[A-Za-z0-9][A-Za-z0-9'.&]*)\s+\1\b"
+)
+_SITEWIDE_META_KEYS = {
+    "description",
+    "og:title",
+    "og:description",
+    "twitter:title",
+    "twitter:description",
+}
+
+
+def sitewide_garble_hits(text):
+    """Broken copy in one text node, title, meta, or JSON-LD block."""
+    if not text:
+        return []
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text:
+        return []
+    hits = []
+    if re.search(r"\(\s*\)", text):
+        hits.append("()")
+    if _DOUBLED_PHRASE.search(text):
+        hits.append("doubled")
+    if " , " in text:
+        hits.append(" , ")
+    if "code ." in text:
+        hits.append("code .")
+    if re.search(r"\bUS Free\b", text):
+        hits.append("US Free")
+    # Standalone "in and" (the missing-city fragment). Not "Austin and" or "check-in and".
+    if re.search(r"(?<![\w-])in and\b", text):
+        hits.append("in and")
+    return hits
+
+
+def _sitewide_copy_fields(page):
+    """Title, social meta, JSON-LD, and each visible text node. Scripts stay out."""
+    fields = []
+    title = re.search(r"<title>(.*?)</title>", page, flags=re.S | re.I)
+    if title:
+        fields.append(("title", html.unescape(re.sub(r"<[^>]+>", "", title.group(1)))))
+    for tag in re.finditer(r"<meta\b[^>]*>", page, flags=re.I):
+        raw = tag.group(0)
+        name = re.search(r'(?:name|property)="([^"]+)"', raw, flags=re.I)
+        content = re.search(r'content="([^"]*)"', raw, flags=re.I)
+        if not name or not content:
+            continue
+        key = name.group(1).lower()
+        if key in _SITEWIDE_META_KEYS:
+            fields.append((key, html.unescape(content.group(1))))
+    for match in re.finditer(
+        r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', page, flags=re.S | re.I
+    ):
+        fields.append(("JSON-LD", html.unescape(match.group(1))))
+    body = re.search(r"<body\b[^>]*>(.*)</body>", page, flags=re.S | re.I)
+    chunk = body.group(1) if body else page
+    chunk = re.sub(r"<header\b[^>]*>.*?</header>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<nav\b[^>]*>.*?</nav>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<footer\b[^>]*>.*?</footer>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<script\b[^>]*>.*?</script>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<style\b[^>]*>.*?</style>", " ", chunk, flags=re.S | re.I)
+    for node in re.findall(r">([^<]+)<", chunk):
+        if node.strip():
+            fields.append(("visible text", html.unescape(node)))
+    return fields
+
+
+def _catalog_title_map():
+    """Listing title for each product handle. Card text has to match this."""
+    titles = {}
+    for prod in products:
+        handle = prod.get("handle")
+        title = (prod.get("title") or "").strip()
+        if handle and title:
+            titles[handle] = title
+            seo = (prod.get("seo_title") or "").strip()
+            if seo:
+                titles.setdefault(handle + "\0seo", seo)
+    return titles
+
+
+def _handle_from_href(href):
+    match = re.search(r"(?:^|/)([a-z0-9][a-z0-9-]*)\.html$", href or "")
+    return match.group(1) if match else None
+
+
+def _plain_text(fragment):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", fragment or ""))).strip()
+
+
+def card_title_mismatches(page):
+    """Product card, shop-strip, spot, and featured-row titles that are not the catalog title."""
+    titles = _catalog_title_map()
+    mismatches = []
+
+    def check(label, handle, shown):
+        expected = titles.get(handle)
+        if not expected:
+            return
+        shown = _plain_text(shown)
+        seo = titles.get(handle + "\0seo", expected)
+        if shown and shown not in {expected, seo}:
+            mismatches.append((label, shown, expected))
+
+    def handles_in(block):
+        found = []
+        for href in re.findall(r'href="([^"]+)"', block):
+            handle = _handle_from_href(href)
+            if handle in titles:
+                found.append(handle)
+        return found
+
+    def title_handle(block):
+        titled = re.search(
+            r'class="[^"]*ProductCard__Title[^"]*"[^>]*>\s*<a\b[^>]*href="([^"]+)"',
+            block,
+            flags=re.S | re.I,
+        )
+        if titled:
+            handle = _handle_from_href(titled.group(1))
+            if handle in titles:
+                return handle
+        found = handles_in(block)
+        return found[0] if found else None
+
+    for pattern in (
+        r'<a\b[^>]*class="[^"]*\bProductCard\b[^"]*"[^>]*>.*?</a>',
+        r'<article\b[^>]*class="[^"]*\bProductCard\b[^"]*"[^>]*>.*?</article>',
+    ):
+        for block in re.finditer(pattern, page, flags=re.S | re.I):
+            chunk = block.group(0)
+            handle = title_handle(chunk)
+            title = re.search(
+                r'class="[^"]*ProductCard__Title[^"]*"[^>]*>(.*?)</(?:div|h2|h3)>',
+                chunk,
+                flags=re.S | re.I,
+            )
+            if handle and title:
+                check("ProductCard__Title", handle, title.group(1))
+    for block in re.finditer(
+        r'<article\b[^>]*class="[^"]*ShopStrip__card[^"]*"[^>]*>.*?</article>', page, flags=re.S | re.I
+    ):
+        heading = re.search(r"<h3>\s*<a\b[^>]*href=\"([^\"]+)\"[^>]*>(.*?)</a>", block.group(0), flags=re.S | re.I)
+        if heading:
+            check("ShopStrip", _handle_from_href(heading.group(1)), heading.group(2))
+    for block in re.finditer(
+        r'<a\b[^>]*class="[^"]*SpotCard[^"]*"[^>]*>.*?</a>', page, flags=re.S | re.I
+    ):
+        chunk = block.group(0)
+        href = re.search(r'href="([^"]+)"', chunk)
+        strong = re.search(r"<strong>(.*?)</strong>", chunk, flags=re.S | re.I)
+        if href and strong:
+            check("SpotCard", _handle_from_href(href.group(1)), strong.group(1))
+    for link in re.finditer(
+        r'<a\b[^>]*href="([^"]+)"[^>]*style="color:#fff;font-weight:\s*800[^"]*"[^>]*>(.*?)</a>',
+        page,
+        flags=re.S | re.I,
+    ):
+        shown = _plain_text(link.group(2))
+        if shown.lower().startswith("buy") or shown.startswith("+"):
+            continue
+        check("featured", _handle_from_href(link.group(1)), shown)
+    return mismatches
+
+
+def sitewide_garble_errors(page, name="page"):
+    """Every HTML file: broken phrases plus a card title that is not the catalog title."""
+    errors = []
+    for label, text in _sitewide_copy_fields(page):
+        hits = sitewide_garble_hits(text)
+        if hits:
+            errors.append(f"{name}: {label} has {', '.join(hits)}")
+    for label, shown, expected in card_title_mismatches(page):
+        errors.append(f"{name}: {label} {shown!r} != catalog {expected!r}")
+    return errors
+
+
+def assert_sitewide_garble():
+    """Fail the build on sitewide garble, including articles, directory, and index pages."""
+    dirty = {
+        "()": "<html><head><title>Relay Team Kits ()</title></head><body><h1>Guide</h1><p>Clean sentence here.</p></body></html>",
+        "doubled": "<html><head><title>Guide</title></head><body><h1>Guide</h1><p>Anaheim Dec 2026 Anaheim Dec 2026 race week.</p></body></html>",
+        " , ": "<html><head><title>Wear</title></head><body><h1>Wear</h1><p>wear a , top like this one today.</p></body></html>",
+        "code .": "<html><head><title>Dallas</title></head><body><h1>Dallas</h1><p>Save with code . today please.</p></body></html>",
+        "US Free": "<html><head><title>Ship</title></head><body><h1>Ship</h1><p>They ship from the US Free US shipping.</p></body></html>",
+        "in and": "<html><head><title>Gym</title></head><body><h1>Gym</h1><p>A gym in and Costa Mesa today.</p></body></html>",
+        "card": (
+            "<html><head><title>Card</title></head><body><h1>Card</h1>"
+            '<a class="ProductCard" href="zone-5-engine.html"><div class="ProductCard__Title">Zone 5 Engine</div></a>'
+            "</body></html>"
+        ),
+    }
+    for kind, page in dirty.items():
+        if not sitewide_garble_errors(page, "fixture"):
+            raise SystemExit(f"Sitewide garble self-test failed: {kind!r} was not caught")
+    clean = (
+        "<html><head><title>Aerobic Engine</title>"
+        '<meta name="description" content="Made to order. Ships from the US. Free US shipping.">'
+        '<meta property="og:title" content="Aerobic Engine">'
+        '<meta name="twitter:title" content="Aerobic Engine">'
+        "</head><body><h1>Aerobic Engine</h1>"
+        "<p>A gym in Irvine and Costa Mesa. Austin and Round Rock. They ship from the US. Free US shipping.</p>"
+        '<a class="ProductCard" href="zone-5-engine.html"><img alt="Aerobic Engine" />'
+        '<div class="ProductCard__Title">Aerobic Engine</div></a>'
+        "</body></html>"
+    )
+    clean_errors = sitewide_garble_errors(clean, "clean-fixture")
+    if clean_errors:
+        raise SystemExit("Sitewide garble self-test flagged a clean page:\n" + "\n".join(clean_errors))
+    if sitewide_garble_hits("Austin and Round Rock check-in and warmup"):
+        raise SystemExit("Sitewide garble self-test flagged Austin and or check-in and")
+    errors = []
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [name for name in dirnames if name not in {".git", "__pycache__"}]
+        for name in sorted(filenames):
+            if not name.endswith(".html"):
+                continue
+            path = os.path.join(dirpath, name)
+            rel = os.path.relpath(path, BASE_DIR)
+            page = open(path, encoding="utf-8", errors="replace").read()
+            errors.extend(sitewide_garble_errors(page, rel))
+    if errors:
+        raise SystemExit("Sitewide garbled copy:\n" + "\n".join(errors[:80]))
+
+
+def apply_copy_repairs(text):
+    """Repair the known garble strings so a later scrub cannot publish them again."""
+    if not text:
+        return text
+    replacements = (
+        ("Anaheim Dec 2026 Anaheim Dec 2026", "Anaheim Dec 2026"),
+        ("Relay Team Kits ()", "Relay Team Kits"),
+        ("Top 4 Heavyweight Hybrid Pump Covers ()", "Top 4 Hybrid Pump Covers"),
+        ("Yes! Apex Hybrid Co. is Made to order.", "Yes. Every Apex Hybrid Co. piece is made to order and ships from the US with free US shipping."),
+        ("Apex Hybrid Co. is Made to order.", "Yes. Every Apex Hybrid Co. piece is made to order and ships from the US with free US shipping."),
+        ("with code .", "with code DALLAS10."),
+        ("in  and Costa Mesa", "in Irvine and Costa Mesa"),
+        ("in  and costa mesa", "in Irvine and costa mesa"),
+        (" ( &amp; Costa Mesa)", " (Irvine &amp; Costa Mesa)"),
+        (" ( & Costa Mesa)", " (Irvine & Costa Mesa)"),
+        (" ( &amp; costa mesa)", " (Irvine &amp; costa mesa)"),
+        ("jog in and the photo", "jog in, and the photo"),
+        ("distance in and out", "distance into and out"),
+        ("check-in and warmup", "check-in, and warmup"),
+        ("check-in and corral", "check-in, and the corral"),
+        ("walk-in and the", "walk-in, and the"),
+        ("run-in and run-out", "run-in, and the run-out"),
+    )
+    for old, new in replacements:
+        text = text.replace(old, new)
+    text = re.sub(r"(?<!Irvine)(?<!Irvine )[ \t]*/[ \t]*Costa Mesa", " Irvine / Costa Mesa", text)
+    text = re.sub(r"(?<!Irvine)(?<!Irvine )[ \t]*/[ \t]*costa mesa", " Irvine / costa mesa", text)
+    text = text.replace("Irvine  Irvine / Costa Mesa", "Irvine / Costa Mesa")
+    text = text.replace("Irvine  Irvine / costa mesa", "Irvine / costa mesa")
+    text = text.replace("in  Irvine / Costa Mesa", "in Irvine / Costa Mesa")
+    text = text.replace("in  Irvine / costa mesa", "in Irvine / costa mesa")
+    text = text.replace('" Irvine / Costa Mesa', '"Irvine / Costa Mesa')
+    text = text.replace("( Irvine / Costa Mesa", "(Irvine / Costa Mesa")
+    text = text.replace("📍  Irvine / Costa Mesa", "📍 Irvine / Costa Mesa")
+    text = text.replace(")  Irvine / costa mesa", ") Irvine / costa mesa")
+    text = re.sub(r"\bUS\s+Free US shipping\b", "US. Free US shipping", text)
+    text = re.sub(
+        r"wear a\s*,\s*top like the\s+Built For Heavy Legs Breathable Tech Shirt \(APC-C36, \$38\) or the Run\. Station\. Repeat\. Sleeveless Muscle Tank \(APC-C28, \$32\), paired with a heavyweight pump cover or AeroShell Warmup Jacket \(APC-C42, \$68\)",
+        "wear a race top like the Built For Heavy Legs shirt (APC-C36, $38) or the Run. Station. Repeat. sleeveless tank (APC-C28, $32), with a pump cover or the AeroShell warmup jacket (APC-C42, $68)",
+        text,
+    )
+    text = re.sub(r"\s*<li>Water-resistant 900D high-density Oxford[^<]*</li>", "", text)
+    text = re.sub(r'\n\s*"Water-resistant 900D high-density Oxford[^"]*",', "", text)
+    return text
+
+
+def sync_card_titles(page):
+    """Write each product card's visible title and alt from catalog.json."""
+    titles = _catalog_title_map()
+
+    def retitle(block, handle):
+        title = titles.get(handle)
+        if not title:
+            return block
+        esc = html.escape(title)
+
+        def set_title(match):
+            inner = match.group(2)
+            shown = _plain_text(inner)
+            seo = titles.get(handle + "\0seo", title)
+            if shown in {title, seo}:
+                return match.group(0)
+            if re.search(r"<a\b", inner, flags=re.I):
+                inner = re.sub(
+                    r"(<a\b[^>]*>)(.*?)(</a>)",
+                    lambda anchor: anchor.group(1) + esc + anchor.group(3),
+                    inner,
+                    count=1,
+                    flags=re.S | re.I,
+                )
+            else:
+                inner = esc
+            return match.group(1) + inner + match.group(3)
+
+        block = re.sub(
+            r'(<(?:div|h2|h3)\b[^>]*class="[^"]*ProductCard__Title[^"]*"[^>]*>)(.*?)(</(?:div|h2|h3)>)',
+            set_title,
+            block,
+            count=1,
+            flags=re.S | re.I,
+        )
+        block = re.sub(
+            r"(<h3>\s*<a\b[^>]*>)(.*?)(</a>\s*</h3>)",
+            lambda match: match.group(0)
+            if _plain_text(match.group(2)) in {title, titles.get(handle + "\0seo", title)}
+            else match.group(1) + esc + match.group(3),
+            block,
+            count=1,
+            flags=re.S | re.I,
+        )
+        block = re.sub(
+            r"(<strong>)(.*?)(</strong>)",
+            lambda match: match.group(0)
+            if _plain_text(match.group(2)) in {title, titles.get(handle + "\0seo", title)}
+            else match.group(1) + esc + match.group(3),
+            block,
+            count=1,
+            flags=re.S | re.I,
+        )
+
+        def set_alt(match):
+            if html.unescape(match.group(2)) == title:
+                return match.group(0)
+            return match.group(1) + html.escape(title, quote=True) + match.group(3)
+
+        block = re.sub(r'(<img\b[^>]*\salt=")([^"]*)(")', set_alt, block, count=1)
+        return block
+
+    def card_sub(match):
+        block = match.group(0)
+        titled = re.search(
+            r'class="[^"]*ProductCard__Title[^"]*"[^>]*>\s*<a\b[^>]*href="([^"]+)"',
+            block,
+            flags=re.S | re.I,
+        )
+        handle = _handle_from_href(titled.group(1)) if titled else None
+        if handle not in titles:
+            href = re.search(r'href="([^"]+)"', block)
+            handle = _handle_from_href(href.group(1)) if href else None
+        if handle not in titles:
+            return block
+        return retitle(block, handle)
+
+    page = re.sub(
+        r'<a\b[^>]*class="[^"]*\bProductCard\b[^"]*"[^>]*>.*?</a>',
+        card_sub,
+        page,
+        flags=re.S | re.I,
+    )
+    page = re.sub(
+        r'<article\b[^>]*class="[^"]*\bProductCard\b[^"]*"[^>]*>.*?</article>',
+        card_sub,
+        page,
+        flags=re.S | re.I,
+    )
+    page = re.sub(
+        r'<article\b[^>]*class="[^"]*ShopStrip__card[^"]*"[^>]*>.*?</article>',
+        card_sub,
+        page,
+        flags=re.S | re.I,
+    )
+    page = re.sub(
+        r'<a\b[^>]*class="[^"]*SpotCard[^"]*"[^>]*>.*?</a>',
+        card_sub,
+        page,
+        flags=re.S | re.I,
+    )
+
+    def featured_name(match):
+        handle = _handle_from_href(match.group(1))
+        title = titles.get(handle)
+        shown = _plain_text(match.group(2))
+        if not title or shown.lower().startswith("buy") or shown.startswith("+"):
+            return match.group(0)
+        if shown in {title, titles.get(handle + "\0seo", title)}:
+            return match.group(0)
+        return match.group(0).replace(match.group(2), html.escape(title), 1)
+
+    page = re.sub(
+        r'<a\b[^>]*href="([^"]+)"[^>]*style="color:#fff;font-weight:\s*800[^"]*"[^>]*>(.*?)</a>',
+        featured_name,
+        page,
+        flags=re.S | re.I,
+    )
+
+    def linked_alt(match):
+        handle = _handle_from_href(match.group(2))
+        title = titles.get(handle)
+        if not title or html.unescape(match.group(3)) == title:
+            return match.group(0)
+        return match.group(1) + html.escape(title, quote=True) + match.group(4)
+
+    page = re.sub(
+        r'(<a\b[^>]*href="([^"]+)"[^>]*>\s*<img\b[^>]*\salt=")([^"]*)(")',
+        linked_alt,
+        page,
+        flags=re.S | re.I,
+    )
+    return page
+
+
+def repair_published_copy():
+    """Apply the garble repairs and catalog card titles to published HTML, JSON, and XML."""
+    changed = []
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        if ".git" in dirpath or "__pycache__" in dirpath:
+            continue
+        for name in filenames:
+            ext = os.path.splitext(name)[1].lower()
+            if ext not in {".html", ".json", ".xml"}:
+                continue
+            path = os.path.join(dirpath, name)
+            if os.path.abspath(path) == os.path.abspath(__file__):
+                continue
+            original = open(path, encoding="utf-8").read()
+            updated = apply_copy_repairs(original)
+            if ext == ".html":
+                updated = sync_card_titles(updated)
+            if updated != original:
+                open(path, "w", encoding="utf-8").write(updated)
+                changed.append(os.path.relpath(path, BASE_DIR))
+    return changed
+
+
 # A Fabric bullet needs a real fiber or a measured weight. "fabric" by itself does not count.
 _FIBER_WORD = re.compile(
     r"(?i)\b(?:cotton|polyester|nylon|elastane|spandex|fleece|acrylic|rayon|twill|poplin|"
@@ -1162,6 +1592,7 @@ def assert_published_xml_parses():
     assert_listed_prices()
     assert_fabric_stated_once()
     assert_no_garbled_copy()
+    assert_sitewide_garble()
     assert_copy_quality()
     assert_restored_sections()
     import xml.etree.ElementTree as ET
@@ -3338,8 +3769,8 @@ def scrub_text(text):
     text = text.replace(chr(8482), "")
     text = text.replace("&" + "trade;", "").replace("&" + "#8482;", "").replace("&" + "#x2122;", "")
     text = re.sub(r"(?i)aeromesh", "Built For Heavy Legs", text)
-    text = re.sub(r"(?i)coolcore", "Push Heavy", text)
-    text = re.sub(r"(?i)venttech", "Zone 5 Engine", text)
+    text = re.sub(r"(?i)coolcore", "Push Heavy Run Fast", text)
+    text = re.sub(r"(?i)venttech", "Aerobic Engine", text)
     text = re.sub(r"(?i)dry-pace", "1km Split", text)
     text = re.sub(r"(?i)hyperbreathe", "Roxzone Speed Dept.", text)
     text = re.sub(r"(?i)laser-vented", "breathable", text)
@@ -3367,7 +3798,7 @@ def scrub_text(text):
     text = re.sub(r"(?i)30-Day Trial &amp; Warranty", "", text)
     text = re.sub(r"(?i)30-Day Trial & Warranty", "", text)
     text = re.sub(r"(?i)30-day free exchanges", "Print errors and defects are replaced or refunded", text)
-    text = re.sub(r"(?i)\bIrvine\b", "", text)
+    text = re.sub(r"(?i)\bIrvine\b(?!\s*(?:and|&|/)\s*Costa)", "", text)
     text = re.sub(r"(?i)warehouse", "", text)
     text = re.sub(r"(?i)clinical", "", text)
     text = re.sub(r"(?i)30-day", "", text)
@@ -3437,7 +3868,7 @@ def scrub_text(text):
     text = text.replace("8-Station race duffle", "8-Station Haul")
     text = text.replace("8-Station Race Day bag", "8-Station Haul")
     text = text.replace("8-Station 50L bag", "8-Station Haul")
-    return text
+    return apply_copy_repairs(text)
 
 
 def scrub_published_files():
