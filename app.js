@@ -364,7 +364,7 @@ function renderPills() {
 }
 
 const SHORT = {
-  "APC-C36": "Compromised Running",
+  "APC-C36": "Built For Heavy Legs",
   "APC-C37": "1km Split 6.1 oz Cotton Tee",
   "APC-C38": "Zone 5 Engine 6.1 oz Cotton Tee",
   "APC-C40": "Push Heavy 6.1 oz Cotton Tee",
@@ -377,7 +377,7 @@ const SHORT = {
   "APC-C21": "Apex Race City Heavyweight - New York Hudson Pier Division",
   "APC-C28": "Run. Station. Repeat.",
   "APC-C29": "Sled Push Dept.",
-  "APC-C30": "1000m Stopwatch",
+  "APC-C30": "Heavy Legs Run Club 1000M",
   "APC-C31": "100 Wall Balls",
   "APC-C22": "Apex Heavyweight Hybrid - 8 Runs. 8 Stations. Zero Excuses.",
   "APC-C23": "Roxzone Penalties",
@@ -398,7 +398,7 @@ const SHORT = {
   "APC-C33": "Erg Doesn't Care",
   "APC-C09": "Run. Station. Repeat.",
   "APC-C10": "Bad Decisions",
-  "APC-C11": "Compromised Running Club",
+  "APC-C11": "Heavy Legs Run Club KM",
   "APC-C12": "The Footage Speaks",
   "APC-C42": "Apex Lightweight Race Warmup - Hybrid Division",
   "APC-C43": "Hybrid 8-Station",
@@ -827,7 +827,7 @@ function updateRaceSplitCalculator() {
     const cityPrice = cityProd ? money(cityProd.retail_price) : "$38";
     calcCta.innerHTML = `
       <button class="Btn Btn--cobalt" type="button" data-buy="${esc(city.sku)}" style="font-weight:800">Buy ${esc(city.name)} Race Tee (${cityPrice}) — Instant Checkout →</button>
-      <button class="Btn Btn--plain" type="button" data-buy="APC-C36">Buy Compromised Running ($42) →</button>
+      <button class="Btn Btn--plain" type="button" data-buy="APC-C36">Buy Built For Heavy Legs →</button>
       <a class="Btn Btn--ghost" href="team_orders.html" style="text-decoration:none">Doubles 2-Pack Bundles (15% Off) →</a>
     `;
   }

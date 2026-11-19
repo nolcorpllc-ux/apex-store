@@ -3,7 +3,7 @@
 - **Canonical Storefront URL:** https://www.apexhybridco.com/articles/new-york-pier-may-2027-warmup-jacket-breathable-hybrid-race-shirt-guide.html
 - **Event / Venue:** New York Hudson Pier 76 (May 2027 · 40.7685° N, 73.9935° W)
 - **Category:** NYC May 2027 & Warmup Jacket Guide (8 min read)
-- **Summary:** Racing Hudson River Pier 76 in May 2027 or looking for the ultimate lightweight warmup jacket and breathable hybrid race shirt? Compare our 4 new Lightweight Race Warmup Jackets (APC-C42..APC-C45), Roxzone Speed Dept. & Compromised Running breathable tech shirts (APC-C36..APC-C41), and NYC Metro Division gear (APC-C21).
+- **Summary:** Racing Hudson River Pier 76 in May 2027 or looking for the ultimate lightweight warmup jacket and breathable hybrid race shirt? Compare our 4 new Lightweight Race Warmup Jackets (APC-C42..APC-C45), Roxzone Speed Dept. & Built For Heavy Legs breathable tech shirts (APC-C36..APC-C41), and NYC Metro Division gear (APC-C21).
 
 ## Direct Buy Now & Product Spec Links
 
