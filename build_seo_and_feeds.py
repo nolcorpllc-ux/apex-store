@@ -51,9 +51,163 @@ def assert_no_trademark():
         raise SystemExit("Trademark mark found:\n" + "\n".join(errors))
 
 
+def _variant_ladders():
+    """Handle -> size prices from each canonical product page."""
+    ladders = {}
+    products = os.path.join(BASE_DIR, "products")
+    for name in os.listdir(products):
+        if not name.endswith(".html"):
+            continue
+        text = open(os.path.join(products, name), encoding="utf-8", errors="replace").read()
+        prices = re.search(r"var sizePrices = (\{.*?\});", text)
+        canonical = re.search(
+            r'rel="canonical" href="https://www\.apexhybridco\.com/products/([^"]+)\.html"',
+            text,
+        )
+        if not prices or not canonical or canonical.group(1) in ladders:
+            continue
+        sizes = {key: float(value) for key, value in json.loads(prices.group(1)).items()}
+        sku = re.search(r'var prodId = "(APC-C\d+)"', text)
+        ladders[canonical.group(1)] = {
+            "sizes": sizes,
+            "min": min(sizes.values()),
+            "sku": sku.group(1) if sku else "",
+        }
+    return ladders
+
+
+def _json_object_at(text, start):
+    opening = text.find("{", start)
+    depth = 0
+    in_string = False
+    escaped = False
+    for index in range(opening, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return opening, index + 1
+    raise ValueError("unbalanced JSON")
+
+
+def _product_nodes(node):
+    found = []
+    if isinstance(node, dict):
+        if node.get("@type") == "Product" and node.get("offers"):
+            found.append(node)
+        for value in node.values():
+            found.extend(_product_nodes(value))
+    elif isinstance(node, list):
+        for value in node:
+            found.extend(_product_nodes(value))
+    return found
+
+
+def assert_listed_prices():
+    """Fail when a shown from-price or size offer disagrees with the live ladder."""
+    ladders = _variant_ladders()
+    errors = []
+
+    def money(amount):
+        return float(amount)
+
+    for name in os.listdir(os.path.join(BASE_DIR, "products")):
+        if not name.endswith(".html"):
+            continue
+        path = os.path.join(BASE_DIR, "products", name)
+        text = open(path, encoding="utf-8", errors="replace").read()
+        canonical = re.search(
+            r'rel="canonical" href="https://www\.apexhybridco\.com/products/([^"]+)\.html"',
+            text,
+        )
+        if not canonical or canonical.group(1) not in ladders:
+            continue
+        ladder = ladders[canonical.group(1)]
+        meta = re.search(r'<meta property="product:price:amount" content="([^"]+)"', text)
+        if meta and abs(money(meta.group(1)) - ladder["min"]) > 0.001:
+            errors.append(f"{name}: product:price:amount {meta.group(1)} is not {ladder['min']:.2f}")
+        marker = text.find('<script type="application/ld+json">')
+        if marker < 0:
+            continue
+        start, end = _json_object_at(text, marker)
+        data = json.loads(text[start:end])
+        for product in _product_nodes(data):
+            offers = product.get("offers") or {}
+            if isinstance(offers, dict) and "lowPrice" in offers:
+                if abs(money(offers["lowPrice"]) - ladder["min"]) > 0.001:
+                    errors.append(f"{name}: lowPrice {offers['lowPrice']} is not {ladder['min']:.2f}")
+            listed = offers.get("offers") if isinstance(offers, dict) else None
+            if isinstance(offers, dict) and offers.get("@type") == "Offer":
+                listed = [offers]
+            found = {}
+            for offer in listed or []:
+                size = (offer.get("sku") or "").rsplit("-", 1)[-1]
+                if size in ladder["sizes"]:
+                    found[size] = money(offer.get("price"))
+                    if abs(found[size] - ladder["sizes"][size]) > 0.001:
+                        errors.append(f"{name}: {size} offer {offer.get('price')} is not {ladder['sizes'][size]:.2f}")
+            missing = [size for size in ladder["sizes"] if size not in found]
+            if missing:
+                errors.append(f"{name}: JSON-LD missing {', '.join(missing)}")
+
+    card_files = [os.path.join(BASE_DIR, "index.html")]
+    for folder in ("collections", "articles", "seo_city_pages"):
+        folder_path = os.path.join(BASE_DIR, folder)
+        if os.path.isdir(folder_path):
+            card_files.extend(
+                os.path.join(folder_path, name)
+                for name in os.listdir(folder_path)
+                if name.endswith(".html")
+            )
+    for path in card_files:
+        text = open(path, encoding="utf-8", errors="replace").read()
+        rel = os.path.relpath(path, BASE_DIR)
+        for match in re.finditer(
+            r'<a\b[^>]*href="[^"]*products/([a-z0-9-]+)\.html"[^>]*>(.*?)</a>',
+            text,
+            re.S,
+        ):
+            handle, inner = match.group(1), match.group(2)
+            if handle not in ladders or len(inner) > 2500:
+                continue
+            shown = re.search(r"<em>(?:from )?\$(\d+(?:\.\d{1,2})?)</em>", inner)
+            if shown and abs(money(shown.group(1)) - ladders[handle]["min"]) > 0.001:
+                errors.append(f"{rel}: {handle} card ${shown.group(1)} is not ${ladders[handle]['min']:.0f}")
+            for amount in re.findall(r"\$(\d+(?:\.\d{1,2})?)", inner):
+                value = money(amount)
+                allowed = set(ladders[handle]["sizes"].values())
+                if all(abs(value - price) > 0.001 for price in allowed):
+                    errors.append(f"{rel}: {handle} shows ${amount}, not a live size price")
+        for match in re.finditer(r'<article class="ShopStrip__card">(.*?)</article>', text, re.S):
+            block = match.group(1)
+            handle = re.search(r"products/([a-z0-9-]+)\.html", block)
+            price = re.search(r'ShopStrip__price">\$(\d+(?:\.\d{1,2})?)', block)
+            if not handle or not price or handle.group(1) not in ladders:
+                continue
+            if abs(money(price.group(1)) - ladders[handle.group(1)]["min"]) > 0.001:
+                errors.append(
+                    f"{rel}: {handle.group(1)} strip ${price.group(1)} is not ${ladders[handle.group(1)]['min']:.0f}"
+                )
+    if errors:
+        raise SystemExit("Listed prices disagree with the live size ladder:\n" + "\n".join(errors[:80]))
+
+
 def assert_published_xml_parses():
     """Fail the build if any published XML file does not parse."""
     assert_no_trademark()
+    assert_listed_prices()
     import xml.etree.ElementTree as ET
     errors = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):

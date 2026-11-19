@@ -458,7 +458,7 @@
       .Pin{background:linear-gradient(180deg,#0b0f17 0%,#111827 100%);color:#f8fafc;padding:22px 0 30px}
       .Pin__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center;min-width:0;max-width:100%}
       .Pin__img{display:flex;flex-direction:column;gap:10px;width:100%;min-width:0;max-width:100%;background:transparent;border:0;padding:0}
-      .Pin__hero{position:relative;display:block;width:100%;aspect-ratio:3/4;background:#e4e4e4;border-radius:16px;overflow:hidden;border:1px solid #1f2937}
+      .Pin__hero{position:relative;display:block;width:auto;max-width:100%;aspect-ratio:3/4;max-height:calc(100vh - var(--bar-h) - var(--header-h) - 160px);background:#e4e4e4;border-radius:16px;overflow:hidden;border:1px solid #1f2937;margin-inline:auto}
       .Pin__hero img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#e4e4e4}
       .Pin__hero span{position:absolute;left:12px;bottom:12px;background:rgba(11,15,23,.78);color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
       .Pin__chips{display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;max-width:100%;min-width:0;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:2px 0 10px;margin:0}
@@ -496,7 +496,7 @@
           <img src="images/streetwear/hyrx-finish/01.jpg?v=20261117hyrx" alt="HYRX Finish" width="48" height="60" style="width:48px;height:60px;object-fit:cover;border-radius:8px;background:#0f141d" />
           <img src="images/streetwear/peak-sign/01.jpg?v=20261117hyrx12" alt="Peak Sign" width="48" height="60" style="width:48px;height:60px;object-fit:cover;border-radius:8px;background:#0f141d" />
         </a>
-        <p style="flex:1;min-width:180px"><span class="RW__tag">HYRX</span><strong>HYRX designs</strong> · from $38<br /><span style="color:#cbd5e1">Free shipping on every order. Made to order.</span><br /><button type="button" class="RW__code" onclick="window.apexSetPromo&&apexSetPromo('DALLAS10');this.textContent='✓ DALLAS10 applied'" data-goatcounter-click="click-hyrx-code" data-goatcounter-title="HYRX code">Code <b>DALLAS10</b> · 10% off everything</button></p>
+        <p style="flex:1;min-width:180px"><span class="RW__tag">HYRX</span><strong>HYRX designs</strong> · from $33<br /><span style="color:#cbd5e1">Free shipping on every order. Made to order.</span><br /><button type="button" class="RW__code" onclick="window.apexSetPromo&&apexSetPromo('DALLAS10');this.textContent='✓ DALLAS10 applied'" data-goatcounter-click="click-hyrx-code" data-goatcounter-title="HYRX code">Code <b>DALLAS10</b> · 10% off everything</button></p>
         <a class="RW__link" href="collections/hyrx.html" data-goatcounter-click="click-hyrx-banner" data-goatcounter-title="HYRX banner" onclick="window.apexTrackHit&&apexTrackHit('click_hyrx_banner')">Shop HYRX →</a>
       </div>
     </section>
@@ -814,7 +814,7 @@
         .Spot__rail::-webkit-scrollbar{height:8px}
         .Spot__rail::-webkit-scrollbar-thumb{background:#334155;border-radius:99px}
         .SpotCard{flex:0 0 168px;scroll-snap-align:start;color:#fff;text-decoration:none}
-        .SpotCard img{width:100%;aspect-ratio:4/5;object-fit:cover;background:#0f141d;border-radius:12px;border:1px solid #1f2937}
+        .SpotCard img{width:100%;aspect-ratio:3/4;object-fit:contain;background:#fff;border-radius:12px;border:1px solid #1f2937}
         .SpotCard strong{display:block;margin-top:8px;font-size:14px;line-height:1.25}
         .SpotCard em{display:block;margin-top:2px;font-style:normal;font-weight:900}
         @media (max-width:760px){.SpotCard{flex-basis:46vw}}
