@@ -4663,6 +4663,234 @@
         }
       },
       "fourthwall_default_variant_id": "b8969b43-10c5-406c-a0e1-f43ef4be8873"
+    },
+    {
+      "id": "APC-C86",
+      "handle": "atlanta-race-day-stitched",
+      "title": "Atlanta Race Day Windbreaker",
+      "seo_title": "Atlanta Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/atlanta-race-day-stitched/01.jpg?v=20261119rdw",
+      "alt_image": "images/streetwear/atlanta-race-day-stitched/02.jpg?v=20261119rdw",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The Atlanta crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered Atlanta crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "atlanta-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/atlanta-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/atlanta-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/atlanta-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/atlanta-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "b287a777-589f-42c8-966b-dad86de048a1",
+          "M": "8bfb972f-49a9-471c-8cdd-f8d50794a2d8",
+          "L": "4b1a050c-1b8e-4115-9a81-a54ed65ca13e",
+          "XL": "874fcade-991f-4692-bd69-822756fa8b1b",
+          "2XL": "744148ca-c055-4ce1-9246-b64af23183d0"
+        }
+      },
+      "fourthwall_default_variant_id": "4b1a050c-1b8e-4115-9a81-a54ed65ca13e",
+      "extra_images": [
+        "images/streetwear/atlanta-race-day-stitched/03.jpg?v=20261119rdw",
+        "images/streetwear/atlanta-race-day-stitched/04.jpg?v=20261119rdw",
+        "images/streetwear/atlanta-race-day-stitched/05.jpg?v=20261119rdw",
+        "images/streetwear/atlanta-race-day-stitched/06.jpg?v=20261119rdw"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/atlanta-race-day-stitched.html"
+    },
+    {
+      "id": "APC-C87",
+      "handle": "houston-race-day-stitched",
+      "title": "Houston Race Day Windbreaker",
+      "seo_title": "Houston Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/houston-race-day-stitched/01.jpg?v=20261119rdw",
+      "alt_image": "images/streetwear/houston-race-day-stitched/02.jpg?v=20261119rdw",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The Houston crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered Houston crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "houston-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/houston-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/houston-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/houston-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/houston-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "86c0dd9a-25c8-4e4f-9db2-26eff2cbfaa7",
+          "M": "10803728-2e5c-46d8-b3f1-ef0140ff51ea",
+          "L": "47da30d4-31eb-4b70-8105-0d5f9d399169",
+          "XL": "4305787c-401e-474c-af09-4b891edeecda",
+          "2XL": "f0de39ed-a709-4b6c-8a1c-a362de6eb813"
+        }
+      },
+      "fourthwall_default_variant_id": "47da30d4-31eb-4b70-8105-0d5f9d399169",
+      "extra_images": [
+        "images/streetwear/houston-race-day-stitched/03.jpg?v=20261119rdw",
+        "images/streetwear/houston-race-day-stitched/04.jpg?v=20261119rdw",
+        "images/streetwear/houston-race-day-stitched/05.jpg?v=20261119rdw",
+        "images/streetwear/houston-race-day-stitched/06.jpg?v=20261119rdw"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/houston-race-day-stitched.html"
+    },
+    {
+      "id": "APC-C88",
+      "handle": "las-vegas-race-day-stitched",
+      "title": "Las Vegas Race Day Windbreaker",
+      "seo_title": "Las Vegas Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/las-vegas-race-day-stitched/01.jpg?v=20261119rdw",
+      "alt_image": "images/streetwear/las-vegas-race-day-stitched/02.jpg?v=20261119rdw",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The Las Vegas crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered Las Vegas crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "las-vegas-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/las-vegas-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/las-vegas-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/las-vegas-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/las-vegas-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "e3b8f27e-2647-4e4f-9947-62b1f9abd283",
+          "M": "943185f6-f723-4e33-852f-7bb3982ceabd",
+          "L": "72946e79-bc04-42e8-b9f9-31c5617c6416",
+          "XL": "cfab7980-dc4d-447b-99df-e25151e10564",
+          "2XL": "66274f95-6430-43c4-ba0b-b790e33510fe"
+        }
+      },
+      "fourthwall_default_variant_id": "72946e79-bc04-42e8-b9f9-31c5617c6416",
+      "extra_images": [
+        "images/streetwear/las-vegas-race-day-stitched/03.jpg?v=20261119rdw",
+        "images/streetwear/las-vegas-race-day-stitched/04.jpg?v=20261119rdw",
+        "images/streetwear/las-vegas-race-day-stitched/05.jpg?v=20261119rdw",
+        "images/streetwear/las-vegas-race-day-stitched/06.jpg?v=20261119rdw"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/las-vegas-race-day-stitched.html"
+    },
+    {
+      "id": "APC-C89",
+      "handle": "miami-beach-race-day-stitched",
+      "title": "Miami Beach Race Day Windbreaker",
+      "seo_title": "Miami Beach Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/miami-beach-race-day-stitched/01.jpg?v=20261119rdw",
+      "alt_image": "images/streetwear/miami-beach-race-day-stitched/02.jpg?v=20261119rdw",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The Miami Beach crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered Miami Beach crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "miami-beach-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/miami-beach-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/miami-beach-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/miami-beach-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/miami-beach-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "7f12e670-c3c7-4c10-b669-042fe315bb57",
+          "M": "b429755e-eea6-4cbb-8e1b-432d4ef33dab",
+          "L": "aad36a7d-6e50-43dd-bf7e-6cf4fa4de5e3",
+          "XL": "034c4ab1-c6fa-4a7e-95a3-c1c15d5861ff",
+          "2XL": "505dfb7c-716a-433f-8ab6-35d10e264960"
+        }
+      },
+      "fourthwall_default_variant_id": "aad36a7d-6e50-43dd-bf7e-6cf4fa4de5e3",
+      "extra_images": [
+        "images/streetwear/miami-beach-race-day-stitched/03.jpg?v=20261119rdw",
+        "images/streetwear/miami-beach-race-day-stitched/04.jpg?v=20261119rdw",
+        "images/streetwear/miami-beach-race-day-stitched/05.jpg?v=20261119rdw",
+        "images/streetwear/miami-beach-race-day-stitched/06.jpg?v=20261119rdw"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/miami-beach-race-day-stitched.html"
     }
   ],
   "guides": [
@@ -5434,16 +5662,16 @@
     },
     {
       "slug": "las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts",
-      "title": "Las Vegas Feb 2027 HYROX Race Gear, Lightweight Warmup Jackets & Breathable Tech Shirts",
-      "category": "Las Vegas Feb 2027 Race City Guide",
+      "title": "Las Vegas Mar 12–14, 2027 HYROX Race Gear, Lightweight Warmup Jackets & Breathable Tech Shirts",
+      "category": "Las Vegas Mar 12–14, 2027 Race City Guide",
       "read_time": "7 min read",
-      "summary": "Conquer dry Mojave Desert air and fast Championship Qualifier turf in Las Vegas (Feb 2027) with the Sin City Turf Club Tee (APC-C20), Apex AeroShell Lightweight Warmup Jackets (APC-C42), and travel recovery gear.",
+      "summary": "Conquer dry Mojave Desert air and fast Championship Qualifier turf in Las Vegas (Mar 12–14, 2027, Las Vegas Convention Center) with the Sin City Turf Club Tee (APC-C20), Apex AeroShell Lightweight Warmup Jackets (APC-C42), and travel recovery gear.",
       "recommended_skus": [
         "APC-C20",
         "APC-C42",
         "APC-C35"
       ],
-      "body_html": "<p>Whether you are lining up in the Open, Pro, Doubles, or Relay wave at <strong>Las Vegas Championship Qualifier (February 2027 · GPS 36.1318° N, 115.1516° W)</strong>, your clothing and recovery hardware directly dictate your heart-rate drift, thermoregulation, and transition speed across all eight 1,000-meter runs and eight workout stations.</p>\n\n <div style=\"margin:20px 0;padding:18px;background:#0f172a;color:#f8fafc;border-radius:10px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;\">\n <div>\n <div style=\"font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#ff6a3d;font-weight:800;\">February 2027 City Edition Apparel</div>\n <div style=\"font-size:18px;font-weight:800;margin-top:4px;\">Las Vegas Championship Qualifier - Sin City Turf Club (APC-C20) - $38.00</div>\n <div style=\"font-size:13px;color:#cbd5e1;margin-top:2px;\">Free US Shipping · Print errors and defects are replaced or refunded · Instant Stripe &amp; Apple Pay Checkout</div>\n </div>\n <div style=\"display:flex;gap:10px;flex-wrap:wrap;\">\n <a href=\"../index.html?buy=APC-C20\" class=\"Btn Btn--BuyNow\" style=\"width:auto;padding:10px 18px;text-decoration:none;\">Buy Now ($38.00)</a>\n <a href=\"../products/las-vegas-championship-qualifier-sin-city-turf-club-tee.html\" class=\"Btn Btn--QuickView\" style=\"width:auto;padding:10px 16px;background:#fff;color:#0f172a;text-decoration:none;\">View Full Specs →</a>\n </div>\n </div>\n\n <h4>1. Venue Course Conditions &amp; Turf Friction at Las Vegas Championship Qualifier</h4>\n <p>Las Vegas in February combines 45°F desert morning walks with ultra-dry 18% relative humidity inside the convention center - accelerating respiratory moisture loss and electrolyte depletion across all 8 stations.</p>\n\n <h4>2. Lightweight Warmup Jackets &amp; Corral Layering Protocol (APC-C42 to APC-C45)</h4>\n <p>Pack the Apex AeroShell Lightweight Race Warmup Jacket (`APC-C42`) and 8-Station Race Division Oversized Stealth Hoodie (`APC-C35`) for early-morning Strip walks, hydrate out of the 32oz HydroMetric Smart LED Thermal Flask, and race in the Las Vegas Sin City Turf Club Tee (`APC-C20`). Explore our 4 purpose-built lightweight warmup shells: <a href=\"../products/apex-aeroshell-lightweight-race-warmup-jacket.html\"><strong>Apex AeroShell Lightweight Race Warmup Jacket (APC-C42, $68)</strong></a>, <a href=\"../products/hybrid-8-station-windbreaker-track-jacket.html\"><strong>Hybrid 8-Station Windbreaker Track Jacket (APC-C43, $68)</strong></a>, <a href=\"../products/pro-division-lightweight-quarter-zip-race-shell.html\"><strong>Pro Division Lightweight Quarter-Zip Shell (APC-C44, $68)</strong></a>, and <a href=\"../products/26-27-world-series-lightweight-warmup-jacket.html\"><strong>26/27 World Series Lightweight Warmup Jacket (APC-C45, $68)</strong></a>.</p>\n\n <h4>3. Breathable Tech Shirts vs. Sleeveless Muscle Tanks for Station 1–8 (APC-C36 to APC-C41)</h4>\n <p>By Run 5 and the 1,000m Row, core body temperature peaks and standard cotton tees trap heat against your ribcage. Our <a href=\"../products/compromised-running.html\"><strong>Compromised Running Breathable Tech Shirt (APC-C36)</strong></a>, <a href=\"../products/1km-split.html\"><strong>1km Split (APC-C37)</strong></a>, <a href=\"../products/zone-5-engine.html\"><strong>Zone 5 Engine Zone 4/5 Shirt (APC-C38)</strong></a>, <a href=\"../products/push-heavy.html\"><strong>Push Heavy  Tech Shirt (APC-C40)</strong></a>, and <a href=\"../products/roxzone-speed-dept.html\"><strong>Roxzone Speed Dept. Conditioning Tee (APC-C41)</strong></a> eliminate sandbag shoulder chafing and dry 3x faster than standard gym shirts.</p>\n\n <h4>4. Complete Las Vegas Championship Qualifier (February 2027) Gear &amp; Recovery Checklist (Direct Checkout)</h4>\n <div style=\"overflow-x:auto;margin:16px 0 24px;\">\n <table style=\"width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border:1px solid #e4e6eb;\">\n <thead>\n <tr style=\"background:#f1f5f9;text-align:left;\">\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">SKU</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Product &amp; Spec Page</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Category</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Price</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Direct Checkout</th>\n </tr>\n </thead>\n <tbody>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C20</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/las-vegas-championship-qualifier-sin-city-turf-club-tee.html\" style=\"color:#0052cc;font-weight:700;\">Las Vegas Championship Qualifier - Sin City Turf Club</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">City Editions</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$38.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C20\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C42</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/apex-aeroshell-lightweight-race-warmup-jacket.html\" style=\"color:#0052cc;font-weight:700;\">Apex &quot;8×1000M Start Corral&quot;</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">Packable Windbreakers</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$68.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C42\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C35</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/8-station-functional-race-division-oversized-stealth-hoodie.html\" style=\"color:#0052cc;font-weight:700;\">8-Station Race Division Winged Crest Stealth</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">Hoodies &amp; Layers</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$68.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C35\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C30</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/compromised-running-club-breathable-race-tank.html\" style=\"color:#0052cc;font-weight:700;\">Compromised Running Club 1000m Stopwatch</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">Hoodies &amp; Layers</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$32.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C30\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n </tbody>\n </table>\n </div>\n\n <h4>5. Post-Race 72-Hour Recovery Stack (Hotel &amp; Home Lab)</h4>\n <p>Flushing venous lactate in the first 6 hours after crossing the finish line in Las Vegas Championship Qualifier cuts delayed-onset muscle soreness (DOMS) in half. Start with 15 minutes on the <strong>MorphRoll Collapsible Travel Foam Roller</strong> or <strong>ApexPulse Pro 3200 RPM Percussion Massager</strong>, followed by 25 minutes in the <strong>AirRecover Sequential Leg Air Compression Boots</strong> and a 50°F contrast plunge in the <strong>CryoPod 105-Gallon Portable Ice Bath Tub</strong>.</p>\n\n <h4>6. Frequently Asked Questions - Las Vegas Championship Qualifier (February 2027)</h4>\n <div style=\"margin-bottom:14px;padding:14px;background:#f8f9fb;border-radius:8px;border:1px solid #e4e6eb;\">\n <h4 style=\"margin:0 0 6px;font-size:15.5px;color:#0f172a;\">Q: How do I prepare for dry air at Las Vegas HYROX in February 2027?</h4>\n <p style=\"margin:0;font-size:14.5px;color:#334155;\">Train inspiratory and expiratory stamina for 4 weeks pre-race using the AeroLung Dual-Valve Lung Trainer and preload sodium electrolytes in the 24oz Insulated Stainless Shaker (APC-C15).</p>\n </div>\n <div style=\"margin-bottom:14px;padding:14px;background:#f8f9fb;border-radius:8px;border:1px solid #e4e6eb;\">\n <h4 style=\"margin:0 0 6px;font-size:15.5px;color:#0f172a;\">Q: What travel recovery gear fits in a Vegas carry-on bag?</h4>\n <p style=\"margin:0;font-size:14.5px;color:#334155;\">The MorphRoll Collapsible Foam Roller folds flat to 2 inches thick, and the NeuroStep EMS Foot Mat rolls into a laptop sleeve to flush calves in your hotel room.</p>\n </div>",
+      "body_html": "<p>Whether you are lining up in the Open, Pro, Doubles, or Relay wave at <strong>Las Vegas Championship Qualifier (Mar 12–14, 2027, Las Vegas Convention Center · GPS 36.1318° N, 115.1516° W)</strong>, your clothing and recovery hardware directly dictate your heart-rate drift, thermoregulation, and transition speed across all eight 1,000-meter runs and eight workout stations.</p>\n\n <div style=\"margin:20px 0;padding:18px;background:#0f172a;color:#f8fafc;border-radius:10px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;\">\n <div>\n <div style=\"font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#ff6a3d;font-weight:800;\">Mar 12–14, 2027 City Edition Apparel</div>\n <div style=\"font-size:18px;font-weight:800;margin-top:4px;\">Las Vegas Championship Qualifier - Sin City Turf Club (APC-C20) - $38.00</div>\n <div style=\"font-size:13px;color:#cbd5e1;margin-top:2px;\">Free US Shipping · Print errors and defects are replaced or refunded · Instant Stripe &amp; Apple Pay Checkout</div>\n </div>\n <div style=\"display:flex;gap:10px;flex-wrap:wrap;\">\n <a href=\"../index.html?buy=APC-C20\" class=\"Btn Btn--BuyNow\" style=\"width:auto;padding:10px 18px;text-decoration:none;\">Buy Now ($38.00)</a>\n <a href=\"../products/las-vegas-championship-qualifier-sin-city-turf-club-tee.html\" class=\"Btn Btn--QuickView\" style=\"width:auto;padding:10px 16px;background:#fff;color:#0f172a;text-decoration:none;\">View Full Specs →</a>\n </div>\n </div>\n\n <h4>1. Venue Course Conditions &amp; Turf Friction at Las Vegas Championship Qualifier</h4>\n <p>Las Vegas in February combines 45°F desert morning walks with ultra-dry 18% relative humidity inside the convention center - accelerating respiratory moisture loss and electrolyte depletion across all 8 stations.</p>\n\n <h4>2. Lightweight Warmup Jackets &amp; Corral Layering Protocol (APC-C42 to APC-C45)</h4>\n <p>Pack the Apex AeroShell Lightweight Race Warmup Jacket (`APC-C42`) and 8-Station Race Division Oversized Stealth Hoodie (`APC-C35`) for early-morning Strip walks, hydrate out of the 32oz HydroMetric Smart LED Thermal Flask, and race in the Las Vegas Sin City Turf Club Tee (`APC-C20`). Explore our 4 purpose-built lightweight warmup shells: <a href=\"../products/apex-aeroshell-lightweight-race-warmup-jacket.html\"><strong>Apex AeroShell Lightweight Race Warmup Jacket (APC-C42, $68)</strong></a>, <a href=\"../products/hybrid-8-station-windbreaker-track-jacket.html\"><strong>Hybrid 8-Station Windbreaker Track Jacket (APC-C43, $68)</strong></a>, <a href=\"../products/pro-division-lightweight-quarter-zip-race-shell.html\"><strong>Pro Division Lightweight Quarter-Zip Shell (APC-C44, $68)</strong></a>, and <a href=\"../products/26-27-world-series-lightweight-warmup-jacket.html\"><strong>26/27 World Series Lightweight Warmup Jacket (APC-C45, $68)</strong></a>.</p>\n\n <h4>3. Breathable Tech Shirts vs. Sleeveless Muscle Tanks for Station 1–8 (APC-C36 to APC-C41)</h4>\n <p>By Run 5 and the 1,000m Row, core body temperature peaks and standard cotton tees trap heat against your ribcage. Our <a href=\"../products/compromised-running.html\"><strong>Compromised Running Breathable Tech Shirt (APC-C36)</strong></a>, <a href=\"../products/1km-split.html\"><strong>1km Split (APC-C37)</strong></a>, <a href=\"../products/zone-5-engine.html\"><strong>Zone 5 Engine Zone 4/5 Shirt (APC-C38)</strong></a>, <a href=\"../products/push-heavy.html\"><strong>Push Heavy  Tech Shirt (APC-C40)</strong></a>, and <a href=\"../products/roxzone-speed-dept.html\"><strong>Roxzone Speed Dept. Conditioning Tee (APC-C41)</strong></a> eliminate sandbag shoulder chafing and dry 3x faster than standard gym shirts.</p>\n\n <h4>4. Complete Las Vegas Championship Qualifier (Mar 12–14, 2027, Las Vegas Convention Center) Gear &amp; Recovery Checklist (Direct Checkout)</h4>\n <div style=\"overflow-x:auto;margin:16px 0 24px;\">\n <table style=\"width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border:1px solid #e4e6eb;\">\n <thead>\n <tr style=\"background:#f1f5f9;text-align:left;\">\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">SKU</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Product &amp; Spec Page</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Category</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Price</th>\n <th style=\"padding:10px;border-bottom:2px solid #cbd5e1;\">Direct Checkout</th>\n </tr>\n </thead>\n <tbody>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C20</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/las-vegas-championship-qualifier-sin-city-turf-club-tee.html\" style=\"color:#0052cc;font-weight:700;\">Las Vegas Championship Qualifier - Sin City Turf Club</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">City Editions</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$38.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C20\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C42</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/apex-aeroshell-lightweight-race-warmup-jacket.html\" style=\"color:#0052cc;font-weight:700;\">Apex &quot;8×1000M Start Corral&quot;</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">Packable Windbreakers</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$68.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C42\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C35</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/8-station-functional-race-division-oversized-stealth-hoodie.html\" style=\"color:#0052cc;font-weight:700;\">8-Station Race Division Winged Crest Stealth</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">Hoodies &amp; Layers</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$68.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C35\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n <tr>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><strong>APC-C30</strong></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\"><a href=\"../products/compromised-running-club-breathable-race-tank.html\" style=\"color:#0052cc;font-weight:700;\">Compromised Running Club 1000m Stopwatch</a></td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">Hoodies &amp; Layers</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;font-weight:700;\">$32.00</td>\n <td style=\"padding:10px;border-bottom:1px solid #e4e6eb;\">\n <a href=\"../index.html?buy=APC-C30\" style=\"background:#ff4d1c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-block;\">Buy Now →</a>\n </td>\n </tr>\n </tbody>\n </table>\n </div>\n\n <h4>5. Post-Race 72-Hour Recovery Stack (Hotel &amp; Home Lab)</h4>\n <p>Flushing venous lactate in the first 6 hours after crossing the finish line in Las Vegas Championship Qualifier cuts delayed-onset muscle soreness (DOMS) in half. Start with 15 minutes on the <strong>MorphRoll Collapsible Travel Foam Roller</strong> or <strong>ApexPulse Pro 3200 RPM Percussion Massager</strong>, followed by 25 minutes in the <strong>AirRecover Sequential Leg Air Compression Boots</strong> and a 50°F contrast plunge in the <strong>CryoPod 105-Gallon Portable Ice Bath Tub</strong>.</p>\n\n <h4>6. Frequently Asked Questions - Las Vegas Championship Qualifier (Mar 12–14, 2027, Las Vegas Convention Center)</h4>\n <div style=\"margin-bottom:14px;padding:14px;background:#f8f9fb;border-radius:8px;border:1px solid #e4e6eb;\">\n <h4 style=\"margin:0 0 6px;font-size:15.5px;color:#0f172a;\">Q: How do I prepare for dry air at Las Vegas HYROX on Mar 12–14, 2027 at the Las Vegas Convention Center?</h4>\n <p style=\"margin:0;font-size:14.5px;color:#334155;\">Train inspiratory and expiratory stamina for 4 weeks pre-race using the AeroLung Dual-Valve Lung Trainer and preload sodium electrolytes in the 24oz Insulated Stainless Shaker (APC-C15).</p>\n </div>\n <div style=\"margin-bottom:14px;padding:14px;background:#f8f9fb;border-radius:8px;border:1px solid #e4e6eb;\">\n <h4 style=\"margin:0 0 6px;font-size:15.5px;color:#0f172a;\">Q: What travel recovery gear fits in a Vegas carry-on bag?</h4>\n <p style=\"margin:0;font-size:14.5px;color:#334155;\">The MorphRoll Collapsible Foam Roller folds flat to 2 inches thick, and the NeuroStep EMS Foot Mat rolls into a laptop sleeve to flush calves in your hotel room.</p>\n </div>",
       "faqs": []
     },
     {
@@ -5593,10 +5821,10 @@
     },
     {
       "slug": "hyrox-las-vegas-qualifier-shirt",
-      "title": "HYROX Las Vegas Qualifier Shirt (Feb 2027)  -  Sin City Turf Club Race Tee & Championship Prep Apparel",
+      "title": "HYROX Las Vegas Qualifier Shirt (Mar 12–14, 2027)  -  Sin City Turf Club Race Tee & Championship Prep Apparel",
       "category": "Las Vegas Race City Guide",
       "read_time": "6 min read",
-      "summary": "Shop the Las Vegas Championship Qualifier - Sin City Turf Club (APC-C20, $34), Zone 5 Engine Zone 4/Zone 5 perforated training shirts, and portable travel recovery gear for Vegas February 2027.",
+      "summary": "Shop the Las Vegas Championship Qualifier - Sin City Turf Club (APC-C20, $34), Zone 5 Engine Zone 4/Zone 5 perforated training shirts, and portable travel recovery gear for the Las Vegas Convention Center, Mar 12–14, 2027.",
       "recommended_skus": [
         "APC-C20",
         "APC-C38",
@@ -6172,6 +6400,6 @@
     "apparel_fulfillment": "Fourthwall US On-Demand Production & Direct Athlete Fulfillment (APC-C01 through APC-C45)",
     "equipment_fulfillment": "Fourthwall US Direct Fulfillment (APC-C01 through APC-C45)",
     "fourthwall_storefront_url": "https://apex-hybrid-co-shop.fourthwall.com",
-    "product_count": 80
+    "product_count": 84
   }
 }
