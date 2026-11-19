@@ -5,11 +5,11 @@
  <link rel="icon" href="/favicon.ico" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Nashville Crest | Apex Hybrid Co., operated by NolCorp LLC</title>
- <meta name="description" content="Black tee with the Nashville crest printed center chest. The back is plain. It is part of the Apex Hybrid Co. catalog." />
+ <meta name="description" content="Black tee with the Nashville crest printed center chest. The back is plain. Made to order. Free US shipping." />
  <link rel="canonical" href="https://www.apexhybridco.com/products/nashville-crest.html" />
  <meta property="og:type" content="product" />
  <meta property="og:title" content="Nashville Crest | Apex Hybrid Co." />
- <meta property="og:description" content="Black tee with the Nashville crest printed center chest. The back is plain. It is part of the Apex Hybrid Co. catalog." />
+ <meta property="og:description" content="Black tee with the Nashville crest printed center chest. The back is plain. Made to order. Free US shipping." />
  <meta property="og:url" content="https://www.apexhybridco.com/products/nashville-crest.html" />
  <meta property="og:image" content="https://www.apexhybridco.com/images/streetwear/nashville-crest/01.jpg?v=20261119crest10" />
  <meta property="product:price:amount" content="38.00" />
@@ -64,7 +64,7 @@
  "https://www.apexhybridco.com/images/streetwear/nashville-crest/11.jpg?v=20261119crest10",
  "https://www.apexhybridco.com/images/streetwear/nashville-crest/12.jpg?v=20261119crest10"
  ],
- "description": "Black tee with the Nashville crest printed center chest. The back is plain. It is part of the Apex Hybrid Co. catalog.",
+ "description": "Black tee with the Nashville crest printed center chest. The back is plain. Made to order. Free US shipping.",
  "brand": {
  "@type": "Brand",
  "name": "Apex Hybrid Co"
@@ -410,13 +410,13 @@
 </header>
 <script>
 (function() {
-  var btn = document.getElementById("menuBtn");
-  var nav = document.getElementById("siteNav");
-  if (!btn || !nav) return;
-  btn.addEventListener("click", function() {
-    var open = nav.classList.toggle("is-open");
-    btn.setAttribute("aria-expanded", open ? "true" : "false");
-  });
+ var btn = document.getElementById("menuBtn");
+ var nav = document.getElementById("siteNav");
+ if (!btn || !nav) return;
+ btn.addEventListener("click", function() {
+  var open = nav.classList.toggle("is-open");
+  btn.setAttribute("aria-expanded", open ? "true" : "false");
+ });
 })();
 </script>
 
@@ -433,7 +433,7 @@
  <div style="padding:12px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;margin-bottom:14px;">
  <span id="staticPrice" style="font-size:28px;font-weight:900;">$38.00</span>
  <p id="usShipNote" style="font-size:13.5px;color:#0f172a;font-weight:700;margin:8px 0 0;line-height:1.45;">Made to order. Ships from the US, UK, EU or Canada. Free US shipping.</p>
- <p style="margin:8px 0 0;font-size:14px;">Black tee with the Nashville crest printed center chest. The back is plain. It is part of the Apex Hybrid Co. catalog.</p>
+ <p style="margin:8px 0 0;font-size:14px;">Black tee with the Nashville crest printed center chest. The back is plain. Made to order. Free US shipping.</p>
  </div>
  
  <div style="font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;">Size <span id="staticSizeLabel" style="color:#0066ff;">L</span></div>
@@ -451,67 +451,67 @@
  </div></footer>
 
  <script>
-  (function(){
-    var prodId = "APC-C107";
-    var prodVariants = {"Black": {"S": "8410ca89-4a2a-4ba7-afcb-1a4038a15012", "M": "f931a7fa-682b-4352-bacb-3415c86aee34", "L": "620e93fd-4435-4eab-895a-460a22defc5a", "XL": "1ebc961f-0800-4c47-afce-1038b0a85842", "2XL": "ee0846d3-3bde-448d-850c-805d0848204c", "3XL": "01840c4a-650b-4a17-856e-6c8a3a76f070", "4XL": "e33293f0-b270-46a3-a6fb-06fce6ba1b6a"}};
-    var sizePrices = {"S": 38.0, "M": 38.0, "L": 38.0, "XL": 38.0, "2XL": 40.0, "3XL": 42.0, "4XL": 44.0};
-    var defaultVid = "620e93fd-4435-4eab-895a-460a22defc5a";
-    var fallbackUrl = "https://apex-hybrid-co-shop.fourthwall.com/products/nashville-crest";
-    var state = {size: "L"};
-    function sync(){
-      var price = sizePrices[state.size];
-      var priced = "$" + Number(price).toFixed(2);
-      var big = document.getElementById("staticPrice");
-      if (big) big.textContent = priced;
-      var buy = document.getElementById("staticBuyNowBtn");
-      if (buy) buy.textContent = "Buy now · " + priced;
-      var lbl = document.getElementById("staticSizeLabel");
-      if (lbl) lbl.textContent = state.size;
-      var btns = document.querySelectorAll(".StaticSizeBtn");
-      for (var i=0;i<btns.length;i++){
-        var on = btns[i].getAttribute("data-size")===state.size;
-        btns[i].style.background = on ? "#0f172a" : "#fff";
-        btns[i].style.color = on ? "#fff" : "#0f172a";
-        btns[i].style.border = on ? "2px solid #0f172a" : "1.5px solid #cbd5e1";
-      }
-    }
-    window.selectStaticSize = function(s){ state.size = s; sync(); };
-    function go(url){ window.location.href = url; }
-    window.launchStaticCheckout = function(btn){
-      var dest = fallbackUrl;
-      var left = false;
-      var watchdog = setTimeout(function(){ if(!left){ left=true; go(dest); } }, 5000);
-      var vid = (prodVariants.Black && prodVariants.Black[state.size]) || defaultVid;
-      if (!vid){ clearTimeout(watchdog); go(dest); return; }
-      var ctrl = new AbortController();
-      var timer = setTimeout(function(){ ctrl.abort(); }, 4000);
-      fetch("https://apex-hybrid-co-shop.fourthwall.com/cart/add.js", {
-        method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({items:[{id:vid, quantity:1}]}), signal: ctrl.signal
-      }).then(function(r){ clearTimeout(timer); return r.json(); }).then(function(d){
-        var cid = d && d.cart && d.cart.id;
-        if (!cid) throw new Error("no_cart");
-        var c2 = new AbortController();
-        var t2 = setTimeout(function(){ c2.abort(); }, 4000);
-        return fetch("https://apex-hybrid-co-shop.fourthwall.com/api/v2/checkout/cart", {
-          method:"POST", headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({cartId: cid, cartCurrency:"USD"}), signal: c2.signal
-        }).finally(function(){ clearTimeout(t2); });
-      }).then(function(r){ return r.json(); }).then(function(chk){
-        if (left) return;
-        left = true; clearTimeout(watchdog);
-        if (chk && chk.id) go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
-        else go(dest);
-      }).catch(function(){ if(!left){ left=true; clearTimeout(watchdog); go(dest); } });
-    };
-    document.addEventListener("click", function(ev){
-      var link = ev.target.closest && ev.target.closest("#staticBuyNowBtn");
-      if (!link) return;
-      ev.preventDefault();
-      window.launchStaticCheckout(link);
-    });
-  })();
-  </script>
+ (function(){
+  var prodId = "APC-C107";
+  var prodVariants = {"Black": {"S": "8410ca89-4a2a-4ba7-afcb-1a4038a15012", "M": "f931a7fa-682b-4352-bacb-3415c86aee34", "L": "620e93fd-4435-4eab-895a-460a22defc5a", "XL": "1ebc961f-0800-4c47-afce-1038b0a85842", "2XL": "ee0846d3-3bde-448d-850c-805d0848204c", "3XL": "01840c4a-650b-4a17-856e-6c8a3a76f070", "4XL": "e33293f0-b270-46a3-a6fb-06fce6ba1b6a"}};
+  var sizePrices = {"S": 38.0, "M": 38.0, "L": 38.0, "XL": 38.0, "2XL": 40.0, "3XL": 42.0, "4XL": 44.0};
+  var defaultVid = "620e93fd-4435-4eab-895a-460a22defc5a";
+  var fallbackUrl = "https://apex-hybrid-co-shop.fourthwall.com/products/nashville-crest";
+  var state = {size: "L"};
+  function sync(){
+   var price = sizePrices[state.size];
+   var priced = "$" + Number(price).toFixed(2);
+   var big = document.getElementById("staticPrice");
+   if (big) big.textContent = priced;
+   var buy = document.getElementById("staticBuyNowBtn");
+   if (buy) buy.textContent = "Buy now · " + priced;
+   var lbl = document.getElementById("staticSizeLabel");
+   if (lbl) lbl.textContent = state.size;
+   var btns = document.querySelectorAll(".StaticSizeBtn");
+   for (var i=0;i<btns.length;i++){
+    var on = btns[i].getAttribute("data-size")===state.size;
+    btns[i].style.background = on ? "#0f172a" : "#fff";
+    btns[i].style.color = on ? "#fff" : "#0f172a";
+    btns[i].style.border = on ? "2px solid #0f172a" : "1.5px solid #cbd5e1";
+   }
+  }
+  window.selectStaticSize = function(s){ state.size = s; sync(); };
+  function go(url){ window.location.href = url; }
+  window.launchStaticCheckout = function(btn){
+   var dest = fallbackUrl;
+   var left = false;
+   var watchdog = setTimeout(function(){ if(!left){ left=true; go(dest); } }, 5000);
+   var vid = (prodVariants.Black && prodVariants.Black[state.size]) || defaultVid;
+   if (!vid){ clearTimeout(watchdog); go(dest); return; }
+   var ctrl = new AbortController();
+   var timer = setTimeout(function(){ ctrl.abort(); }, 4000);
+   fetch("https://apex-hybrid-co-shop.fourthwall.com/cart/add.js", {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({items:[{id:vid, quantity:1}]}), signal: ctrl.signal
+   }).then(function(r){ clearTimeout(timer); return r.json(); }).then(function(d){
+    var cid = d && d.cart && d.cart.id;
+    if (!cid) throw new Error("no_cart");
+    var c2 = new AbortController();
+    var t2 = setTimeout(function(){ c2.abort(); }, 4000);
+    return fetch("https://apex-hybrid-co-shop.fourthwall.com/api/v2/checkout/cart", {
+     method:"POST", headers:{"Content-Type":"application/json"},
+     body: JSON.stringify({cartId: cid, cartCurrency:"USD"}), signal: c2.signal
+    }).finally(function(){ clearTimeout(t2); });
+   }).then(function(r){ return r.json(); }).then(function(chk){
+    if (left) return;
+    left = true; clearTimeout(watchdog);
+    if (chk && chk.id) go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
+    else go(dest);
+   }).catch(function(){ if(!left){ left=true; clearTimeout(watchdog); go(dest); } });
+  };
+  document.addEventListener("click", function(ev){
+   var link = ev.target.closest && ev.target.closest("#staticBuyNowBtn");
+   if (!link) return;
+   ev.preventDefault();
+   window.launchStaticCheckout(link);
+  });
+ })();
+ </script>
 
 <footer class="MerchantLinks" style="max-width:980px;margin:0 auto;padding:18px 20px 40px;font-size:14px;line-height:1.6;">
  <p><a href="../contact.html">Contact</a> · <a href="../about.html">About</a> · <a href="../shipping.html">Shipping</a> · <a href="../returns.html">Returns</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a></p>
