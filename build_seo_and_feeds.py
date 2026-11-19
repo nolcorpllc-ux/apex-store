@@ -2209,7 +2209,6 @@ CONFIRMED_PROMO_CODES = {
     "TEAM15": 15,
     "CLUB10": 10,
     "DOUBLES10": 10,
-    "HYROX10": 10,
     "DADBOD10": 10,
     "COACHSU10": 10,
 }
@@ -2217,6 +2216,43 @@ _CODE_TOKEN = re.compile(r"\b([A-Z][A-Z0-9]{2,}(?:10|15|25))\b")
 _BLANK_CODE_FORM = re.compile(
     r"(?i)(?:\bcode\s+for\b|\bcode\s{2,}for\b|\buse code for\b|\bcode\s*\(or\b|\bcode\s*\(e\.g\b|\bwith code\s*\+|\bcode\s+\)|(?<!\w)\(\s*\))"
 )
+
+
+NEVER_DISPLAY_CODES = ("HYROX10",)
+
+
+def never_display_errors(text, name="page"):
+    """Codes that exist at checkout but must never appear in a served file."""
+    if not text:
+        return []
+    return [f"{name}: never-display code {code}" for code in NEVER_DISPLAY_CODES if code in text]
+
+
+def duplicate_perk_code_errors(text, name="page"):
+    """A gym card shows exactly one athlete code."""
+    if not text or "Athlete Perks Code" not in text:
+        return []
+    errors = []
+    for match in re.finditer(r"Athlete Perks Code:(.*?)</span>", text, flags=re.S):
+        tokens = _CODE_TOKEN.findall(match.group(1))
+        if len(tokens) != 1:
+            shown = ", ".join(tokens) if tokens else "none"
+            errors.append(f"{name}: perk card must show one code ({shown})")
+    return errors
+
+
+def md_prose_errors(text, name="page"):
+    """Served markdown must not glue 'Made to order.' onto the previous sentence or use a double space."""
+    if not text:
+        return []
+    errors = []
+    for number, line in enumerate(text.splitlines(), 1):
+        core = line[:-2] if line.endswith("  ") else line
+        if re.search(r" {2,}", core):
+            errors.append(f"{name}:{number}: double space")
+        if re.search(r"(?<![.!?]) Made to order\.", core):
+            errors.append(f"{name}:{number}: Made to order run-on")
+    return errors
 
 
 def promo_code_errors(text, name="page"):
@@ -2509,6 +2545,23 @@ def assert_restored_sections():
     self_tests.append("confirmed TEAM15 passes")
     if promo_code_errors("Apply code TEAM15 for 15% off the entire order.", "promo"):
         raise SystemExit("Promo self-test flagged TEAM15")
+    fail_check(
+        "duplicate perk code",
+        duplicate_perk_code_errors("Athlete Perks Code: <strong>DALLAS10</strong> / <strong>DALLAS10</strong></span>", "gym"),
+        "one code",
+    )
+    self_tests.append("one perk code passes")
+    if duplicate_perk_code_errors("Athlete Perks Code: <strong>COACHSU10</strong></span>", "gym"):
+        raise SystemExit("Perk-code self-test flagged a single COACHSU10 card")
+    fail_check("never-display HYROX10", never_display_errors("<!-- Sticky HYROX10 wristband -->", "page"), "HYROX10")
+    self_tests.append("DALLAS10 may be displayed")
+    if never_display_errors("Apply code DALLAS10 for 10% off the entire order.", "page"):
+        raise SystemExit("Never-display self-test flagged DALLAS10")
+    fail_check("md run-on", md_prose_errors("Order at https://www.apexhybridco.com Made to order.", "city.md"), "run-on")
+    fail_check("md double space", md_prose_errors("Roxzone Speed Dept.  Tech Tee", "city.md"), "double space")
+    self_tests.append("clean markdown passes")
+    if md_prose_errors("Order at https://www.apexhybridco.com. Made to order.", "city.md"):
+        raise SystemExit("Markdown self-test flagged a finished sentence")
     assert_restored_sections.self_test_count = len(self_tests)
     folder = os.path.join(BASE_DIR, "products")
     guide_total = 0
@@ -2553,11 +2606,15 @@ def assert_restored_sections():
             text = open(path, encoding="utf-8", errors="replace").read()
             surface = _surface_text(text) if name.endswith(".html") else re.sub(r"https?://\S+", " ", text)
             rel = os.path.relpath(path, BASE_DIR)
+            if name.endswith(".js"):
+                errors.extend(never_display_errors(text, rel))
             if name.endswith(".html"):
                 errors.extend(twitter_garble_errors(text, rel))
                 errors.extend(og_repeat_errors(text, rel))
                 errors.extend(blank_code_errors(text, rel))
                 errors.extend(promo_code_errors(text, rel))
+                errors.extend(never_display_errors(text, rel))
+                errors.extend(duplicate_perk_code_errors(text, rel))
                 if rel.startswith("articles/"):
                     errors.extend(doubled_word_errors(text, rel))
                 for match in re.finditer(
@@ -2570,7 +2627,10 @@ def assert_restored_sections():
             elif name.endswith((".xml", ".csv", ".json", ".txt", ".md")):
                 errors.extend(blank_code_errors(text, rel))
                 errors.extend(promo_code_errors(text, rel))
+                errors.extend(never_display_errors(text, rel))
                 errors.extend(duffle_claim_errors(text, rel))
+                if name.endswith(".md"):
+                    errors.extend(md_prose_errors(text, rel))
                 for chunk in public_copy_chunks(name, text):
                     for hit in sitewide_garble_hits(chunk):
                         errors.append(f"{rel}: public copy has {hit}")
@@ -3118,7 +3178,6 @@ def generate_product_pages(only_ids=None):
       <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../contact.html">Contact</a> · <a href="../about.html">About</a> · <a href="../shipping.html">Shipping</a> · <a href="../returns.html">Returns</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="mailto:apexhybridco@gmail.com" style="color:#38bdf8;">apexhybridco@gmail.com</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
       <p style="font-size:11.5px; color:#94a3b8; margin-top:8px;">Apex Hybrid Co., operated by NolCorp LLC is an independent athletic &amp; recovery brand engineered for athletes competing in HYROX, DEKA, CrossFit, and functional fitness events. Not affiliated with or endorsed by HYROX World GmbH.</p>
     </div>
-  <!-- Sticky HYROX10 + Free Printable Split Wristband + Gym Directory Conversion Bar -->
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -3619,7 +3678,6 @@ def generate_article_pages():
     <div class="Container">
       <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../contact.html">Contact</a> · <a href="../about.html">About</a> · <a href="../shipping.html">Shipping</a> · <a href="../returns.html">Returns</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="mailto:apexhybridco@gmail.com" style="color:#38bdf8;">apexhybridco@gmail.com</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
     </div>
-  <!-- Sticky HYROX10 + Free Printable Split Wristband + Gym Directory Conversion Bar -->
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -3763,7 +3821,6 @@ def generate_article_pages():
       <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../contact.html">Contact</a> · <a href="../about.html">About</a> · <a href="../shipping.html">Shipping</a> · <a href="../returns.html">Returns</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../index.html" style="color:#38bdf8;">Return to Storefront</a></p>
       <p>Secure checkout and fulfillment by Fourthwall.</p>
     </div>
-  <!-- Sticky HYROX10 + Free Printable Split Wristband + Gym Directory Conversion Bar -->
   <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">

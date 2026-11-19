@@ -6,16 +6,40 @@
   "checkout_provider": "Fourthwall Official Storefront (https://apex-hybrid-co-shop.fourthwall.com)",
   "active_storefront_promo_codes": [
     {
-      "code": "COACHSU10",
+      "code": "DALLAS10",
       "discount_pct": 10,
       "live_on_fourthwall_checkout": true,
-      "use_case": "Coach Partner 10% off entire Fourthwall checkout order"
+      "use_case": "10% off the entire Fourthwall checkout order"
+    },
+    {
+      "code": "TEAM15",
+      "discount_pct": 15,
+      "live_on_fourthwall_checkout": true,
+      "use_case": "15% off the entire Fourthwall checkout order"
+    },
+    {
+      "code": "CLUB10",
+      "discount_pct": 10,
+      "live_on_fourthwall_checkout": true,
+      "use_case": "10% off the entire Fourthwall checkout order"
+    },
+    {
+      "code": "DOUBLES10",
+      "discount_pct": 10,
+      "live_on_fourthwall_checkout": true,
+      "use_case": "10% off the entire Fourthwall checkout order"
     },
     {
       "code": "DADBOD10",
       "discount_pct": 10,
       "live_on_fourthwall_checkout": true,
-      "use_case": "Creator Partner 10% off entire Fourthwall checkout order"
+      "use_case": "Creator partner 10% off the entire Fourthwall checkout order"
+    },
+    {
+      "code": "COACHSU10",
+      "discount_pct": 10,
+      "live_on_fourthwall_checkout": true,
+      "use_case": "Coach partner 10% off the entire Fourthwall checkout order"
     }
   ],
   "bundles": [
@@ -270,7 +294,7 @@
         "shirt_sales_bonus": "$25 bonus per 5 shirts sold",
         "perks": [
           "Free Race Shirt or Warmup Piece shipped in your size \u2014 no strings attached, just want your honest take",
-          "Custom 10%-off athlete promo code: COACHSU10 or DADBOD10",
+          "Custom athlete promo code on the entire order: TEAM15 (15%), or CLUB10, DOUBLES10, DADBOD10, or COACHSU10 (10%)",
           "$25 cash bonus for every 5 shirts sold + 15% partner commission",
           "Automatic bi-weekly payout after 14-day order settlement window"
         ]
