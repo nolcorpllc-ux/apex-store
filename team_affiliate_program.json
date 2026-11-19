@@ -22,7 +22,7 @@
     {
       "bundle_id": "BUNDLE-DBL-TECH-2PK",
       "title": "HYROX Doubles Breathable Tech Tee 2-Pack",
-      "subtitle": "2x Compromised Running 4.0 or 1km Split Perforated Race Tees (Mix & Match Partner A & B Sizes)",
+      "subtitle": "2x Built For Heavy Legs 4.0 or 1km Split Perforated Race Tees (Mix & Match Partner A & B Sizes)",
       "badge": "Most Popular Doubles Kit",
       "pack_size": 2,
       "category": "Doubles 2-Pack",
@@ -34,8 +34,8 @@
         "APC-C41"
       ],
       "default_sku": "APC-C36",
-      "image": "images/streetwear/apc-c36-black.png",
-      "alt_image": "images/streetwear/apc-c36-white.png",
+      "image": "images/streetwear/apc-c36-black.jpg?v=20261119heavylegs",
+      "alt_image": "images/streetwear/apc-c36-black.jpg?v=20261119heavylegs",
       "regular_unit_price": 38.0,
       "regular_total_price": 76.0,
       "bundle_price": 68.4,
@@ -156,7 +156,7 @@
       "secondary_sku": "APC-C42",
       "default_sku": "APC-C36",
       "image": "images/streetwear/apc-c42-black.png",
-      "alt_image": "images/streetwear/apc-c36-black.png",
+      "alt_image": "images/streetwear/apc-c36-black.jpg?v=20261119heavylegs",
       "regular_unit_price": 53.0,
       "regular_total_price": 212.0,
       "bundle_price": 190.8,
@@ -283,7 +283,7 @@
         "partner_commission_pct": 20,
         "shirt_sales_bonus": "$25 bonus per 5 shirts sold",
         "perks": [
-          "Free Coach Sample Kit (Compromised Running Tech Shirt or AeroShell Warmup Jacket) for the head coach/owner",
+          "Free Coach Sample Kit (Built For Heavy Legs Tech Shirt or AeroShell Warmup Jacket) for the head coach/owner",
           "Custom gym 10% off code + dedicated referral link",
           "$25 bonus per 5 shirts sold + up to 20% partner revenue share on crew bundles",
           "Priority access to 2026/2027 Race City Tees (Chicago, Dallas, Anaheim/SoCal, Miami, Vegas, NYC)"
