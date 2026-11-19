@@ -518,6 +518,8 @@ def _percent_without_material(text):
     for match in re.finditer(r"\d+(?:\.\d+)?\s*%", text):
         rest = text[match.end():]
         window = re.split(r"[.;]", rest, maxsplit=1)[0]
+        if re.match(r"\s*off\b", window, re.I):
+            continue
         material = _FABRIC_TERM.search(window)
         before = window[: material.start()] if material else window
         if "," in before or re.match(r"\s*(?:and|or)\b", before, re.I):
@@ -733,6 +735,12 @@ def _page_copy_fields(page):
     chunk = re.sub(r"<header\b[^>]*>.*?</header>", " ", chunk, flags=re.S | re.I)
     chunk = re.sub(r"<nav\b[^>]*>.*?</nav>", " ", chunk, flags=re.S | re.I)
     chunk = re.sub(r"<footer\b[^>]*>.*?</footer>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(
+        r"<section\b[^>]*>\s*<h2\b[^>]*>\s*Related HYROX.*?</section>",
+        " ",
+        chunk,
+        flags=re.S | re.I,
+    )
     chunk = re.sub(r"<script\b[^>]*>.*?</script>", " ", chunk, flags=re.S | re.I)
     chunk = re.sub(r"<style\b[^>]*>.*?</style>", " ", chunk, flags=re.S | re.I)
     chunk = re.sub(r"<[^>]+>", " ", chunk)
@@ -939,6 +947,215 @@ def assert_copy_quality():
         raise SystemExit("Copy quality failed:\n" + "\n".join(errors[:60]))
 
 
+# The 11 listing names Fourthwall no longer uses. Slugs and URLs may still contain "heavyweight".
+OLD_HEAVY_LISTING_NAMES = (
+    "Apex Heavyweight Hybrid - Run. Station. Repeat.",
+    "Apex Heavyweight Hybrid - Wall Balls & Bad Decisions",
+    "Apex Heavyweight Hybrid - Sled Push Enthusiast",
+    "Apex Heavyweight Hybrid - Burpee Broad Jumps",
+    "Apex Heavyweight Hybrid - The Erg Doesn't Care How You Feel",
+    "Apex Race City Heavyweight - Chicago Championship Division",
+    "Apex Race City Heavyweight - Dallas Turf & Threshold",
+    "Apex Race City Heavyweight - Anaheim SoCal Open Division",
+    "Apex Race City Heavyweight - Miami Beach Endurance Club",
+    "Apex Race City Heavyweight - Las Vegas Championship Qualifier",
+    "Apex Race City Heavyweight - New York Hudson Pier Division",
+)
+GUIDE_LINK_BASELINE = 822
+SLUG_TOKEN_MINIMUM = 3349
+_SLUG_TOKEN_RE = re.compile(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+){1,}")
+_DANGLING_PREP = re.compile(
+    r"(?i)\bfrom with\b|\bCut from\s+(?:with|for|to|of|on|in|at|by|into|over)\b"
+)
+_ABBREV = {"co", "u", "us", "dr", "mr", "mrs", "st", "no", "vs", "yd", "inc", "dept"}
+
+
+def _surface_text(page):
+    """Visible copy and meta, with URLs, scripts, and the cross-sell block removed."""
+    text = re.sub(r'<div\b[^>]*data-cross-sell="1"[^>]*>.*?</div>', " ", page, flags=re.S | re.I)
+    text = re.sub(r"<header\b[^>]*>.*?</header>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<nav\b[^>]*>.*?</nav>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<footer\b[^>]*>.*?</footer>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<script\b[^>]*>.*?</script>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<style\b[^>]*>.*?</style>", " ", text, flags=re.S | re.I)
+    metas = re.findall(
+        r'<meta\b[^>]*(?:name|property)="(?:description|og:description|og:title|twitter:title|twitter:description)"[^>]*content="([^"]*)"',
+        page,
+        flags=re.I,
+    )
+    text = re.sub(r"https?://\S+", " ", text)
+    text = re.sub(r"\s(?:href|src)=" + r'"[^"]*"', " ", text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    return html.unescape(re.sub(r"\s+", " ", text + " " + " ".join(metas)))
+
+
+def _lowercase_after_period(text):
+    for match in re.finditer(r"([A-Za-z]+)\.\s+([a-z])", text or ""):
+        if match.group(1).lower() in _ABBREV or len(match.group(1)) <= 1:
+            continue
+        return match.group(0)
+    return ""
+
+
+def _repeated_clauses(text):
+    """A capitalized name or clause of 12 or more characters used twice."""
+    plain = re.sub(r"\s+", " ", html.unescape(text or "")).strip()
+    phrases = re.findall(
+        r"(?:[A-Z][A-Za-z0-9+]*)(?:[ &-](?:[A-Z][A-Za-z0-9+]*|\d+))*",
+        plain,
+    )
+    counts = {}
+    for phrase in phrases:
+        if len(phrase) < 12:
+            continue
+        key = phrase.lower()
+        counts[key] = counts.get(key, 0) + 1
+        if counts[key] >= 2:
+            return phrase
+    return ""
+
+
+def _guide_link_count(page):
+    start = page.find("Related HYROX")
+    if start < 0:
+        return 0
+    end = page.find("</section>", start)
+    return len(re.findall(r'href="[^"]*articles/', page[start:end if end > 0 else start + 4000]))
+
+
+def slug_token_count():
+    """Unique hyphenated tokens in published text and filenames. URLs count as text, not as a separate exemption."""
+    tokens = set()
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [name for name in dirnames if name not in {".git", "__pycache__", "node_modules"}]
+        for name in filenames:
+            if not name.endswith((".html", ".js", ".json", ".xml", ".csv", ".txt", ".md")):
+                continue
+            path = os.path.join(dirpath, name)
+            tokens.update(_SLUG_TOKEN_RE.findall(path))
+            try:
+                tokens.update(_SLUG_TOKEN_RE.findall(open(path, encoding="utf-8", errors="replace").read()))
+            except OSError:
+                continue
+    return len(tokens)
+
+
+def regression_errors(page, name="page"):
+    if re.search(r'http-equiv="refresh"', page, re.I) or "<h1" not in page.lower():
+        return []
+    errors = []
+    fields = []
+    for label, pattern in (
+        ("meta description", r'<meta name="description" content="([^"]*)"'),
+        ("og:description", r'<meta property="og:description" content="([^"]*)"'),
+        ("twitter:description", r'<meta name="twitter:description" content="([^"]*)"'),
+    ):
+        match = re.search(pattern, page)
+        fields.append((label, html.unescape(match.group(1)) if match else ""))
+    for match in re.finditer(r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', page, flags=re.S | re.I):
+        for desc in re.finditer(r'"description"\s*:\s*"((?:\\.|[^"\\])*)"', match.group(1)):
+            fields.append(("JSON-LD description", json.loads('"' + desc.group(1) + '"')))
+    visible = " ".join(_story_paragraphs(page))
+    fields.append(("visible description", visible))
+    surface = _surface_text(page)
+    for label, text in fields:
+        if label == "twitter:description" and _starts_lowercase(text):
+            errors.append(f"{name}: twitter:description starts with a lowercase letter")
+        hit = _lowercase_after_period(text)
+        if hit:
+            errors.append(f"{name}: {label} has a lowercase sentence {hit!r}")
+        if "in./yd" in text or "It is part of the Apex Hybrid Co. catalog." in text:
+            errors.append(f"{name}: {label} has a broken unit or the catalog filler")
+        if label in ("og:description", "twitter:description"):
+            clause = _repeated_clauses(text)
+            if clause:
+                errors.append(f"{name}: {label} repeats {clause!r}")
+    if _DANGLING_PREP.search(surface):
+        errors.append(f"{name}: dangling preposition fragment")
+    for title in OLD_HEAVY_LISTING_NAMES:
+        if title.lower() in surface.lower():
+            errors.append(f"{name}: old listing name {title}")
+    return errors
+
+
+def assert_restored_sections():
+    """Self-test the regression gates, then check guides, C36, slugs, and old names."""
+    if not _lowercase_after_period("Wraps from front to back. quick-dry performance."):
+        raise SystemExit("Lowercase-sentence self-test failed")
+    if not _repeated_clauses("Comfort Colors 1717. Blank: Comfort Colors 1717."):
+        raise SystemExit("Repeated-clause self-test failed: Comfort Colors was not caught")
+    if not _repeated_clauses("Oversized black Bella+Canvas tee. Bella+Canvas oversized tee."):
+        raise SystemExit("Repeated-clause self-test failed: Bella+Canvas was not caught")
+    if not _DANGLING_PREP.search("Cut from with a soft brushed interior."):
+        raise SystemExit("Dangling-preposition self-test failed")
+    filler = '<html><head><meta name="twitter:description" content="black hoodie."></head><body><h1>X</h1><p style="font-size:15px">It is part of the Apex Hybrid Co. catalog.</p></body></html>'
+    fixture_errors = regression_errors(filler, "regression-fixture")
+    if not any("twitter:description starts" in item for item in fixture_errors):
+        raise SystemExit("Twitter lowercase self-test failed")
+    if not any("catalog filler" in item for item in fixture_errors):
+        raise SystemExit("Catalog-filler self-test failed")
+    old_name = '<html><body><h1>Sample</h1><p>Apex Heavyweight Hybrid - Run. Station. Repeat.</p></body></html>'
+    if not any("old listing name" in item for item in regression_errors(old_name, "name-fixture")):
+        raise SystemExit("Old-name self-test failed")
+    kept_url = '<html><body><h1>Sample</h1><a href="https://example.com/apex-heavyweight-hybrid-tee-run-station-repeat">Shop</a></body></html>'
+    if any("old listing name" in item for item in regression_errors(kept_url, "url-fixture")):
+        raise SystemExit("Old-name self-test flagged a URL slug")
+    folder = os.path.join(BASE_DIR, "products")
+    guide_total = 0
+    empty_guides = []
+    errors = []
+    for name in sorted(os.listdir(folder)):
+        if not name.endswith(".html"):
+            continue
+        page = open(os.path.join(folder, name), encoding="utf-8", errors="replace").read()
+        count = _guide_link_count(page)
+        guide_total += count
+        if "Related HYROX" in page and count == 0:
+            empty_guides.append(name)
+        errors.extend(regression_errors(page, name))
+    if empty_guides:
+        raise SystemExit("Guides list is empty:\n" + "\n".join(empty_guides[:20]))
+    if guide_total < int(GUIDE_LINK_BASELINE * 0.9):
+        raise SystemExit(f"Guide links fell below 90% of the ca1a8bf baseline ({guide_total} < {GUIDE_LINK_BASELINE})")
+    for name in ("compromised-running.html", "apc-c36.html"):
+        page = open(os.path.join(folder, name), encoding="utf-8").read()
+        for marker in (
+            "Frequently Paired",
+            "Related HYROX",
+            "team_orders.html",
+            "wristband.html",
+            "gyms/index.html",
+            "Add to Bag",
+            "Print errors and defects are replaced or refunded",
+            "Fabric: 100% ring-spun cotton, 6.1 oz, relaxed fit.",
+        ):
+            if marker not in page:
+                errors.append(f"{name}: missing section {marker}")
+    tokens = slug_token_count()
+    if tokens < SLUG_TOKEN_MINIMUM:
+        raise SystemExit(f"Slug-token count {tokens} is below {SLUG_TOKEN_MINIMUM}")
+    # The same names must not survive in articles, collection pages, or feeds.
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [item for item in dirnames if item not in {".git", "__pycache__", "node_modules"}]
+        for name in filenames:
+            if not name.endswith((".html", ".xml", ".csv", ".js", ".json", ".txt", ".md")):
+                continue
+            path = os.path.join(dirpath, name)
+            text = open(path, encoding="utf-8", errors="replace").read()
+            surface = _surface_text(text) if name.endswith(".html") else re.sub(r"https?://\S+", " ", text)
+            for title in OLD_HEAVY_LISTING_NAMES:
+                if title.lower() in surface.lower():
+                    errors.append(f"{os.path.relpath(path, BASE_DIR)}: old listing name {title}")
+            if _DANGLING_PREP.search(surface) and name.endswith(".html"):
+                errors.append(f"{os.path.relpath(path, BASE_DIR)}: dangling preposition fragment")
+            if "in./yd" in surface:
+                errors.append(f"{os.path.relpath(path, BASE_DIR)}: broken unit in./yd")
+            if "It is part of the Apex Hybrid Co. catalog." in surface:
+                errors.append(f"{os.path.relpath(path, BASE_DIR)}: catalog filler")
+    if errors:
+        raise SystemExit("Restored-section checks failed:\n" + "\n".join(errors[:60]))
+
+
 def assert_published_xml_parses():
     """Fail the build if any published XML file does not parse."""
     assert_no_trademark()
@@ -946,6 +1163,7 @@ def assert_published_xml_parses():
     assert_fabric_stated_once()
     assert_no_garbled_copy()
     assert_copy_quality()
+    assert_restored_sections()
     import xml.etree.ElementTree as ET
     errors = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
