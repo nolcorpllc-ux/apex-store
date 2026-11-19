@@ -24,7 +24,7 @@ December mornings in Orange County start around 50°F outside the plaza before w
 
 ## 3. Frequently Asked Questions
 ### Q: How long does Anaheim race gear take to arrive in Southern California?
-Because Apex Hybrid Co., operated by NolCorp LLC is Made to order.
+Every Apex Hybrid Co. piece is made to order and ships from the US with free US shipping.
 
 ### Q: What shirt prevents overheating during Anaheim's fast 1,000m laps?
 The Zone 5 Engine Perforated Hybrid Training Shirt (APC-C38) dumps heat across the upper thoracic spine during Zone 4/5 running laps.
