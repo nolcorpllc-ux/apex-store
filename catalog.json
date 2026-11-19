@@ -7597,10 +7597,10 @@
       "stock_status": "Made to order",
       "has_sizes": false,
       "has_colorways": true,
-      "short_desc": "A structured cap with one Apex HYRX lockup on the front panel above a light-blue underline. Clean enough for race day, easy enough for every day. 100% chino cotton twill. Green Camo color is 35% chino cotton twill, 65% polyester. One size fits most. Buckle Closure.",
+      "short_desc": "A structured cap with one Apex HYRX lockup on the front panel above a light-blue underline. Clean enough for race day, easy enough for every day. 100% chino cotton twill. One size fits most. Buckle Closure.",
       "highlights": [
         "100% chino cotton twill",
-        "Green Camo color is 35% chino cotton twill, 65% polyester",
+        "",
         "One size fits most",
         "Buckle Closure"
       ],
@@ -7609,7 +7609,7 @@
       "stripe_product_id": null,
       "stripe_price_id": null,
       "fulfillment_partner": "Fourthwall",
-      "fourthwall_blank": "100% chino cotton twill. Green Camo color is 35% chino cotton twill, 65% polyester. One size fits most. Buckle Closure",
+      "fourthwall_blank": "100% chino cotton twill. One size fits most. Buckle Closure",
       "fulfillment_method": "Free US shipping",
       "checkout_provider": "Fourthwall + Stripe Express Checkout",
       "fourthwall_status": "PUBLIC_LIVE",

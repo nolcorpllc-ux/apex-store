@@ -226,7 +226,33 @@ h1, h2, h3, p { margin: 0; }
   display: grid;
   place-items: center;
 }
-.MenuBtn { display: none; }
+.MenuBtn { display: none; align-items: center; justify-content: center; line-height: 1; }
+.NavMore { position: relative; }
+.NavMore summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.NavMore summary::-webkit-details-marker { display: none; }
+.NavMore > div {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  min-width: 190px;
+  background: #f4f1eb;
+  border: 1px solid #e4e0d8;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 12px 30px rgba(20, 18, 11, 0.12);
+}
+.NavMore[open] > div { display: flex; flex-direction: column; gap: 8px; }
+.NavMore a { font-size: 13px; font-weight: 550; }
+img#staticMainProdImg { background-color: #fff !important; }
 .SiteHead--sub { top: 0; color: #14120b; }
 .SiteHead--sub a { color: #14120b; }
 .SiteHead--sub .BagBtn,
@@ -1173,7 +1199,8 @@ section[aria-label="Featured gear checkout"] a {
 @media (max-width: 860px) {
   :root { --nav-h: 168px; --header-h: 116px; }
   .Wrap { width: min(1440px, calc(100% - 28px)); }
-  .MenuBtn { display: inline-flex; height: 40px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: white; }
+  .MenuBtn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: white; line-height: 1; }
+  .NavMore > div { position: static; box-shadow: none; border: 0; padding: 0; background: transparent; min-width: 0; }
   .SiteHead__row { grid-template-columns: auto 1fr auto; gap: 10px; padding: 10px 0; }
   .Tools { display: contents; }
   .Search { display: flex; width: auto; grid-column: 1 / -1; grid-row: 2; }
@@ -1241,8 +1268,8 @@ section[aria-label="Featured gear checkout"] a {
   .Pin { padding: 4px 0 8px !important; }
   .Pin__grid { display: flex !important; flex-direction: column !important; gap: 8px !important; }
   .Pin__img { order: 1; display: flex !important; flex-direction: column !important; gap: 8px; }
-  .Pin__hero { width: 100%; flex: none; max-height: 168px; aspect-ratio: 16/9; }
-  .Pin__hero img { max-height: 168px !important; width: 100% !important; max-width: 100%; margin: 0; object-fit: contain !important; object-position: center; }
+  .Pin__hero { width: 100%; flex: none; max-height: none; aspect-ratio: 3/4; background: #e4e4e4; }
+  .Pin__hero img { max-height: none !important; height: 100% !important; width: 100% !important; max-width: 100%; margin: 0; object-fit: contain !important; object-position: center; background: #e4e4e4; }
   .Pin__chips { order: 2; }
   .Pin h2 { font-size: 22px !important; line-height: 1.05; margin: 0 0 2px; }
   .Pin__price { font-size: 18px; margin: 0 0 6px; }

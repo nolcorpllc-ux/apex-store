@@ -1240,10 +1240,15 @@ def fourthwall_size_prices(prod):
     order = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "One Size", "One size"]
     sizes = [sz for sz in order if sz in variants]
     sizes += [sz for sz in variants if sz not in sizes]
+    sold_out = set()
+    snapshot = load_fourthwall_feed_variants().get(prod.get("id")) or {}
+    for variant in snapshot.get("variants") or []:
+        if variant.get("size") and variant.get("in_stock") is False:
+            sold_out.add(variant["size"])
     priced = []
     for size in sizes:
         info = variants.get(size) or {}
-        if info.get("price") is None:
+        if info.get("price") is None or size in sold_out:
             continue
         priced.append((size, float(info["price"])))
     return priced
