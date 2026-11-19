@@ -309,93 +309,287 @@ _MATERIAL_WORD = re.compile(
     r"|\d+(?:\.\d+)?\s*oz"
 )
 
-# One fabric line per blank. 6.1 oz tees never use the word heavyweight.
+# Handles that are not in the live Fourthwall catalog. Wording is the published blank.
 _FABRIC_BY_HANDLE = {
     "apex-athletic-shoe-black-pink": "Lightweight mesh upper, cushioned sole.",
-    "zone-2-engine-builder-embroidered-dad-hat": "100% bio-washed chino cotton twill (Yupoong 6245CM).",
-    "apex-8-station-race-day-tactical-duffle": "Water-resistant 900D high-density Oxford fabric.",
     "8-station-functional-race-division-oversized-stealth-hoodie": "Heavyweight ring-spun fleece with ribbed cuffs and waistband.",
     "electrolyte-pacing-insulated-shaker-bottle": "Double-wall copper-lined vacuum-insulated stainless steel.",
 }
 
+# Fourthwall "More details" material line. No extras that the listing does not state.
+# A 6.1 oz tee does not say heavyweight: that word next to 6.1 oz fails the build.
+_EXACT_FABRIC = {
+    '100-wall-balls-unbroken-sleeveless-muscle-tank': '100% airlume combed ring-spun cotton, lightweight fabric (4.2 oz), relaxed fit.',
+    '1km-split': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    '200m-farmer-carry-survivors-club-barbell-crest-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    '26-27-world-series-lightweight-warmup-jacket': '100% polyester micro poplin',
+    '8-runs-8-stations-zero-excuses-heavyweight-pump-cover-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'anaheim-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'anaheim-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'anaheim-race-day': '100% polyester, 2.21 oz, water-resistant',
+    'anaheim-race-day-stitched': '100% polyester micro poplin',
+    'anaheim-socal-open-division-pacific-coast-race-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'apex-8-station-race-day-tactical-duffle': '93% polyester, 7% nylon, UA Storm',
+    'apex-aeroshell-lightweight-race-warmup-jacket': '100% polyester micro poplin',
+    'atlanta-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'atlanta-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'atlanta-race-day-stitched': '100% polyester micro poplin',
+    'burpee-broad-jumps-build-character-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'burpee-broad-jumps-build-character-warmup-hoodie': '80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit',
+    'call-room': 'Heavyweight fabric (16.5 oz), 65% cotton, 35% recycled polyester, relaxed fit.',
+    'cancun-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'cancun-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'cancun-race-day-stitched': '100% polyester micro poplin',
+    'chicago-championship-division-navy-pier-hybrid-race-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'chicago-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'chicago-dallas-socal-world-series-prep-heavyweight-hoodie': '80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit',
+    'chicago-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'chicago-race-day-stitched': '100% polyester micro poplin',
+    'circuit-cities': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'compromised-running': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'compromised-running-club-breathable-race-tank': '100% airlume combed ring-spun cotton, lightweight fabric (4.2 oz), relaxed fit.',
+    'compromised-running-club-fleece-hoodie': '80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit',
+    'compromised-running-club-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'course-plate': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'dallas-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'dallas-lone-star-division-turf-threshold-hybrid-race-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'dallas-race-day': '100% polyester, 2.21 oz, water-resistant',
+    'dallas-race-day-printable': '100% polyester, 2.21 oz, water-resistant',
+    'dallas-race-day-stitched': '100% polyester micro poplin',
+    'defend-my-sled-push-dept-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'defend-my-sled-push-fleece-hoodie': '80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit',
+    'denver-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'denver-race-day': '100% polyester, 2.21 oz, water-resistant',
+    'denver-race-day-stitched': '100% polyester micro poplin',
+    'eight-marks': '100% carded cotton, heavyweight fabric (8.2 oz), relaxed fit.',
+    'engine-biker-shorts-black': '78% polyester, 22% elastane, heavyweight fabric (8.55 oz).',
+    'engine-biker-shorts-mint': '78% polyester, 22% elastane, heavyweight fabric (8.55 oz).',
+    'engine-sports-bra-black': '78% polyester, 22% elastane, heavyweight fabric (8.55 oz).',
+    'engine-sports-bra-mint': '78% polyester, 22% elastane, heavyweight fabric (8.55 oz).',
+    'engine-training-tank-black': '93% polyester, 7% elastane, 7.08 oz',
+    'engine-training-tank-mint': '93% polyester, 7% elastane, 7.08 oz',
+    'field-issue': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'guadalajara-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'guadalajara-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'guadalajara-race-day-stitched': '100% polyester micro poplin',
+    'hold-the-pace': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'hong-kong-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'hong-kong-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'hong-kong-race-day-stitched': '100% polyester micro poplin',
+    'houston-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'houston-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'houston-race-day-stitched': '100% polyester micro poplin',
+    'hybrid-8-station-windbreaker-track-jacket': '100% polyester micro poplin',
+    'hyrx-cuff-beanie-black': '100% Turbo acrylic',
+    'hyrx-cuff-beanie-heather-grey': '100% Turbo acrylic',
+    'hyrx-dad-cap': '100% chino cotton twill',
+    'hyrx-finish': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'hyrx-gym-sack-black': '100% polyester, 6.64 oz/yd² (225 g/m²)',
+    'hyrx-gym-sack-burgundy': '100% polyester, 6.64 oz/yd² (225 g/m²)',
+    'hyrx-low-cap': '100% cotton twill',
+    'hyrx-mid-cap': '65% polyester, 35% cotton',
+    'hyrx-pool-slide-black': 'Cushioned faux leather upper strap, lightweight polyurethane (PU) outsole.',
+    'hyrx-pool-slide-burgundy': 'Cushioned faux leather upper strap, lightweight polyurethane (PU) outsole.',
+    'hyrx-quarter-zip': '3-end fleece, 80% cotton, 20% recycled polyester, 8.25 oz, mock neck',
+    'hyrx-rib-beanie-black': '50% recycled polyester and 50% acrylic',
+    'hyrx-rib-beanie-light-blue': '50% recycled polyester and 50% acrylic',
+    'hyrx-run-5-panel-black': '100% polyester',
+    'hyrx-run-5-panel-light-blue-white': '100% polyester',
+    'hyrx-station-crew': '80% cotton and 20% polyester, heavyweight fabric (9 oz), regular fit.',
+    'hyrx-station-towel-black': '52% cotton, 48% polyester, 11.8 oz/yd² (400 g/m²)',
+    'hyrx-station-towel-deep-olive': '52% cotton, 48% polyester, 11.8 oz/yd² (400 g/m²)',
+    'hyrx-surf-5-panel': '100% recycled nylon, lightweight quick-dry fabric.',
+    'hyrx-trucker': '47% cotton, 28% nylon, 25% polyester, or 65% polyester, 35% cotton',
+    'hyrx-trucker-graphic': '60% cotton, 40% polyester',
+    'las-vegas-championship-qualifier-sin-city-turf-club-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'las-vegas-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'las-vegas-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'las-vegas-race-day-stitched': '100% polyester micro poplin',
+    'london-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'london-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'london-race-day-stitched': '100% polyester micro poplin',
+    'miami-beach-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'miami-beach-heat-block-south-florida-endurance-race-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'miami-beach-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'miami-beach-race-day-stitched': '100% polyester micro poplin',
+    'minneapolis-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'minneapolis-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'minneapolis-race-day-stitched': '100% polyester micro poplin',
+    'monterrey-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'monterrey-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'monterrey-race-day-stitched': '100% polyester micro poplin',
+    'nashville-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'nashville-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'nashville-race-day': '100% polyester, 2.21 oz, water-resistant',
+    'nashville-race-day-stitched': '100% polyester micro poplin',
+    'new-york-hudson-pier-metro-endurance-dept-race-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'outline-mark': '100% Airlume combed and ring-spun cotton, 6 oz, relaxed oversized fit with dropped shoulders.',
+    'paris-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'paris-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'paris-race-day-stitched': '100% polyester micro poplin',
+    'peak-sign': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'phoenix-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'phoenix-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'phoenix-race-day-stitched': '100% polyester micro poplin',
+    'porta-potty-line-pr-pre-race-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'portland-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'portland-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'portland-race-day-stitched': '100% polyester micro poplin',
+    'pro-division-lightweight-quarter-zip-race-shell': '100% polyester micro poplin',
+    'push-heavy': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'roxzone-penalties-ruined-my-pr-athletic-race-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'roxzone-speed-dept': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'run-station-repeat-heavy-blend-hoodie': '80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit',
+    'run-station-repeat-performance-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'run-station-repeat-sleeveless-race-day-muscle-tank': '100% airlume combed ring-spun cotton, lightweight fabric (4.2 oz), relaxed fit.',
+    'san-diego-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'san-diego-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'san-diego-race-day-stitched': '100% polyester micro poplin',
+    'sandbag-lunges-are-a-personal-attack-oversized-pump-cover': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'sled-push-dept-raw-armhole-conditioning-muscle-tank': '100% airlume combed ring-spun cotton, lightweight fabric (4.2 oz), relaxed fit.',
+    'sled-push-enthusiast-race-day-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'sleeve-seal': 'Heavyweight fabric (16.5 oz), 65% cotton, 35% recycled polyester, relaxed fit.',
+    'stem-type': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'sub-65-club-pace-pull-push-elite-division-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie': '80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit',
+    'the-erg-doesnt-care-how-you-feel-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'timing-gate': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'vancouver-crest': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'vancouver-hyrx': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'vancouver-race-day': '100% polyester, 2.21 oz, water-resistant',
+    'vancouver-race-day-stitched': '100% polyester micro poplin',
+    'wall-balls-bad-decisions-hoodie': '80% cotton, 20% polyester; 100% cotton face; 9 oz; regular fit',
+    'wall-balls-bad-decisions-oversized-pump-cover': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'work-the-loop': 'Heavyweight fabric (16.5 oz), 65% cotton, 35% recycled polyester, relaxed fit.',
+    'zone-2-all-week-redline-all-weekend-performance-tee': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+    'zone-2-engine-builder-embroidered-dad-hat': '100% chino cotton twill',
+    'zone-5-engine': '100% ring-spun cotton, 6.1 oz, relaxed fit.',
+}
+
 
 def fabric_bullet_for(prod, page_text=""):
-    """The single Fabric bullet for a product, from its published blank."""
+    """The single Fabric bullet, copied from the Fourthwall More details line."""
     handle = (prod or {}).get("handle") or ""
+    if handle in _EXACT_FABRIC:
+        return _EXACT_FABRIC[handle]
     if handle in _FABRIC_BY_HANDLE:
         return _FABRIC_BY_HANDLE[handle]
     blank = (prod or {}).get("fourthwall_blank") or ""
     low = blank.lower()
-    page = page_text or ""
     if "6.1" in blank:
         return "100% ring-spun cotton, 6.1 oz, relaxed fit."
+    if "7.08" in blank:
+        return "93% polyester, 7% elastane, 7.08 oz"
+    if "barnard" in low or "4.2" in blank:
+        return "100% airlume combed ring-spun cotton, lightweight fabric (4.2 oz), relaxed fit."
     if "airlume" in low or re.search(r"\b6\s*oz\b", low):
         return "100% Airlume combed and ring-spun cotton, 6 oz, relaxed oversized fit with dropped shoulders."
     if "8.2" in blank:
-        return "100% carded cotton, heavyweight fabric (8.2 oz), relaxed fit. Wide neck and cuff ribbing."
+        return "100% carded cotton, heavyweight fabric (8.2 oz), relaxed fit."
     if "16.5" in blank:
-        return "Heavyweight fabric (16.5 oz), 65% cotton and 35% recycled polyester, relaxed fit, raglan sleeves, kangaroo pocket."
+        return "Heavyweight fabric (16.5 oz), 65% cotton, 35% recycled polyester, relaxed fit."
     if "8.55" in blank:
-        return "78% polyester, 22% elastane. Heavyweight fabric (8.55 oz)."
+        return "78% polyester, 22% elastane, heavyweight fabric (8.55 oz)."
     if "8.25" in blank or "3-end fleece" in low:
-        return "3-end fleece, 80% cotton and 20% recycled polyester face, 8.25 oz."
-    if "prm4500" in low or "pigment-dyed fleece" in low:
-        return "Heavyweight ring-spun fleece with ribbed cuffs and waistband."
-    if "barnard" in low or "athletic tank" in low:
-        return "100% airlume combed ring-spun cotton, lightweight fabric (4.2 oz), relaxed fit."
-    if "quick-dry performance" in low:
-        return "Lightweight, quick-dry performance fabric."
+        return "3-end fleece, 80% cotton, 20% recycled polyester, 8.25 oz, mock neck"
     if "2.21" in blank:
-        return "100% polyester, lightweight water-resistant fabric (2.21 oz), regular fit."
-    if "micro poplin" in low:
-        return "100% polyester micro poplin, regular fit."
-    if "co200" in low or "micro-poplin shell" in low:
-        if "mesh lining" in page.lower():
-            return "Water-resistant micro-poplin shell, mesh lining, elastic cuffs, and a drawcord hem."
-        return "Water-resistant micro-poplin shell."
-    if "900d" in page.lower() or "oxford" in page.lower():
-        return "Water-resistant 900D high-density Oxford fabric."
-    if "yupoong" in page.lower() or "bio-washed chino" in page.lower():
-        return "100% bio-washed chino cotton twill (Yupoong 6245CM)."
+        return "100% polyester, 2.21 oz, water-resistant"
+    if "micro poplin" in low or "co200" in low:
+        return "100% polyester micro poplin"
     cleaned = re.sub(r"(?i)\s*\(?fulfilled via fourthwall[^)]*\)?", "", blank)
     cleaned = re.sub(r"(?i),?\s*fulfilled via fourthwall.*$", "", cleaned).strip(" .")
     return cleaned or "See the product description."
 
 
-def scrub_fabric_text(text):
-    """Drop fabric and weight wording from a description. Keep the product story."""
+def _split_sentences(text):
+    text = html.unescape(text or "")
+    text = re.sub(r"(?<!\.)\.\.(?!\.)", ".", text)
+    text = re.sub(r"\b(Co|U\.S|Dr|Mr|Mrs|St|No|vs|yd)\.", lambda m: m.group(0)[:-1] + "\x00", text)
+    parts = [part.strip() for part in re.split(r"(?<=[.!?])\s+", text.strip()) if part.strip()]
+    return [part.replace("\x00", ".") for part in parts]
+
+
+def _percent_without_material(text):
+    """True when a percentage is not followed by a material word.
+
+    A discount such as "15% Off" is not a stripped fabric fragment. "100%," and
+    "80% and" are: the material word is missing before the comma or the conjunction.
+    """
+    for match in re.finditer(r"\d+(?:\.\d+)?\s*%", text):
+        rest = text[match.end():]
+        window = re.split(r"[.;]", rest, maxsplit=1)[0]
+        material = _FABRIC_TERM.search(window)
+        before = window[: material.start()] if material else window
+        if "," in before or re.match(r"\s*(?:and|or)\b", before, re.I):
+            return True
+        if material:
+            continue
+        if not re.search(r"[A-Za-z]", window):
+            return True
+    return False
+
+
+def garble_hits(text):
+    """Broken-fragment markers. An ellipsis of three dots is allowed."""
     if not text:
-        return ""
-    text = html.unescape(text)
-    spec = re.compile(r"(?i)(100\s*%|\boz\b|blank as|relaxed fit|garment-dyed|ring-spun|airlume)")
+        return []
+    hits = []
+    if ",," in text:
+        hits.append(",,")
+    if re.search(r"(?<!\.)\.\.(?!\.)", text):
+        hits.append("..")
+    if _percent_without_material(text):
+        hits.append("percent")
+    if re.search(r"\b(?:and|or)\s*,", text, re.I):
+        hits.append("dangling")
+    if text.count("(") != text.count(")"):
+        hits.append("parens")
+    if re.search(r"\b\w+-\s", text):
+        hits.append("hyphen")
+    if re.search(r"\(\s*\)", text):
+        hits.append("empty-paren")
+    return hits
+
+
+def _story_sentence_ok(sentence):
+    """A description sentence that lost its material words is dropped whole."""
+    sentence = sentence.strip()
+    if not sentence:
+        return False
+    if _MATERIAL_WORD.search(sentence) or re.search(r"\d+(?:\.\d+)?\s*%", sentence):
+        return False
+    if garble_hits(sentence):
+        return False
+    if re.search(r"(?i)\b(?:relaxed fit|regular fit|blank as|fourthwall lists)\b", sentence):
+        return False
+    if len(re.sub(r"[^A-Za-z0-9]+", "", sentence)) < 12:
+        return False
+    return True
+
+
+def scrub_fabric_text(text):
+    """Drop a whole sentence that is fabric, weight, or a broken fragment."""
     kept = []
-    for sentence in re.split(r"(?<=[.!?])\s+", text.strip()):
-        sentence = sentence.strip()
-        if not sentence:
+    for sentence in _split_sentences(text):
+        if not _story_sentence_ok(sentence):
             continue
-        if _MATERIAL_WORD.search(sentence) and spec.search(sentence):
-            continue
-        cleaned = _MATERIAL_WORD.sub(" ", sentence)
-        cleaned = re.sub(r"\s{2,}", " ", cleaned)
-        cleaned = re.sub(r"\s+([,.;])", r"\1", cleaned)
-        cleaned = re.sub(r"\(\s*\)", "", cleaned)
-        cleaned = re.sub(r"\s{2,}", " ", cleaned).strip(" ,;")
-        if len(re.sub(r"[^A-Za-z0-9]+", "", cleaned)) < 8:
-            continue
-        if cleaned[-1] not in ".!?":
-            cleaned += "."
-        kept.append(cleaned)
+        if sentence[-1] not in ".!?":
+            sentence += "."
+        kept.append(sentence)
     return re.sub(r"\s{2,}", " ", " ".join(kept)).strip()
 
 
 def ensure_story(text, minimum=80):
     """A product description has to be a real sentence, not only the fabric line."""
     text = re.sub(r"\s{2,}", " ", (text or "")).strip()
-    pad = "Secure checkout and fulfillment by Fourthwall."
-    if pad.lower() not in text.lower():
-        text = (text.rstrip(".") + ". " + pad).strip() if text else pad
-    if len(text) < minimum:
-        text = (text.rstrip(".") + ". Made to order. Free US shipping.").strip()
+    for pad in (
+        "It is part of the Apex Hybrid Co. catalog.",
+        "Made to order for Apex Hybrid Co. athletes.",
+    ):
+        if len(text) >= minimum:
+            break
+        if pad.lower() not in text.lower():
+            text = (text + " " + pad).strip() if text else pad
     return text
 
 
@@ -509,11 +703,84 @@ def assert_fabric_stated_once():
         raise SystemExit("Fabric line is repeated:\n" + "\n".join(errors[:60]))
 
 
+def _page_copy_fields(page):
+    """Visible body text plus the description fields the garble gate reads."""
+    fields = []
+    meta = re.search(r'<meta name="description" content="([^"]*)"', page)
+    fields.append(("meta description", html.unescape(meta.group(1)) if meta else ""))
+    og = re.search(r'<meta property="og:description" content="([^"]*)"', page)
+    fields.append(("og:description", html.unescape(og.group(1)) if og else ""))
+    for match in re.finditer(
+        r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', page, flags=re.S | re.I
+    ):
+        for desc in re.finditer(r'"description"\s*:\s*"((?:\\.|[^"\\])*)"', match.group(1)):
+            fields.append(("JSON-LD description", json.loads('"' + desc.group(1) + '"')))
+    body = re.search(r"<body\b[^>]*>(.*)</body>", page, flags=re.S | re.I)
+    chunk = body.group(1) if body else page
+    chunk = re.sub(r"<header\b[^>]*>.*?</header>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<nav\b[^>]*>.*?</nav>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<footer\b[^>]*>.*?</footer>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<script\b[^>]*>.*?</script>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<style\b[^>]*>.*?</style>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<[^>]+>", " ", chunk)
+    fields.append(("visible text", re.sub(r"\s+", " ", html.unescape(chunk))))
+    return fields
+
+
+def garble_errors(page, name="page"):
+    """Broken fragments in the description fields and the visible page text."""
+    if re.search(r'http-equiv="refresh"', page, re.I) or "<h1" not in page.lower():
+        return []
+    errors = []
+    for label, text in _page_copy_fields(page):
+        hits = garble_hits(text)
+        if hits:
+            errors.append(f"{name}: {label} has {' '.join(hits)}")
+    return errors
+
+
+def assert_no_garbled_copy():
+    """Fail when a description kept a fragment after the fabric words were removed."""
+    samples = {
+        ",,": "100%,, relaxed fit.",
+        "..": "Roxzone Speed Dept..",
+        "percent": "80% and 20%.",
+        "dangling": "left and, right.",
+        "parens": "unbalanced (paren.",
+        "hyphen": "water-resistant micro- shell",
+        "empty-paren": "empty () parens.",
+    }
+    for kind, text in samples.items():
+        if kind not in garble_hits(text):
+            raise SystemExit(f"Garble self-test failed: {kind!r} was not caught in {text!r}")
+    if garble_hits("Wait...") or garble_hits("100% ring-spun cotton, 6.1 oz, relaxed fit.") or garble_hits("Shop Doubles 2-Packs (15% Off)"):
+        raise SystemExit("Garble self-test flagged a clean sentence, an ellipsis, or a discount")
+    fixture = (
+        "<!DOCTYPE html><html><head>"
+        '<meta name="description" content="100%,, relaxed fit.">'
+        '<meta property="og:description" content="100%,, relaxed fit.">'
+        '<script type="application/ld+json">{"@type":"Product","description":"100%,, relaxed fit."}</script>'
+        "</head><body><h1>Fixture</h1><p>100%,, relaxed fit.</p></body></html>"
+    )
+    if not garble_errors(fixture, "garble-fixture"):
+        raise SystemExit("Garble self-test failed: the fixture page did not fail the build")
+    errors = []
+    products = os.path.join(BASE_DIR, "products")
+    for name in sorted(os.listdir(products)):
+        if not name.endswith(".html"):
+            continue
+        page = open(os.path.join(products, name), encoding="utf-8", errors="replace").read()
+        errors.extend(garble_errors(page, name))
+    if errors:
+        raise SystemExit("Garbled copy:\n" + "\n".join(errors[:60]))
+
+
 def assert_published_xml_parses():
     """Fail the build if any published XML file does not parse."""
     assert_no_trademark()
     assert_listed_prices()
     assert_fabric_stated_once()
+    assert_no_garbled_copy()
     import xml.etree.ElementTree as ET
     errors = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
@@ -707,9 +974,10 @@ def generate_product_pages(only_ids=None):
             lowered = (item or "").lower()
             if lowered.startswith("blank quality") or lowered.startswith("blank options") or lowered.startswith("fabric:"):
                 continue
-            if _MATERIAL_WORD.search(item or "") and len(scrub_fabric_text(item)) < 20:
+            cleaned = scrub_fabric_text(item)
+            if not cleaned:
                 continue
-            highlights.append(scrub_fabric_text(item) or item)
+            highlights.append(cleaned)
         highlights.insert(0, f"Fabric: {fabric}")
         short_desc = ensure_story(scrub_fabric_text(raw_desc))
         dept = prod["dept"]
