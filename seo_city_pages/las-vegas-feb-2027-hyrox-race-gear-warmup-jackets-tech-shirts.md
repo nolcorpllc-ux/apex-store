@@ -1,9 +1,9 @@
-# Las Vegas Feb 2027 HYROX Race Gear, Lightweight Warmup Jackets & Breathable Tech Shirts
+# Las Vegas Mar 12–14, 2027 HYROX Race Gear, Lightweight Warmup Jackets & Breathable Tech Shirts
 
 - **Canonical Storefront URL:** https://www.apexhybridco.com/articles/las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html
-- **Event / Venue:** Las Vegas Championship Qualifier (February 2027 · 36.1318° N, 115.1516° W)
-- **Category:** Las Vegas Feb 2027 Race City Guide (7 min read)
-- **Summary:** Conquer dry Mojave Desert air and fast Championship Qualifier turf in Las Vegas (Feb 2027) with the Sin City Turf Club Tee (APC-C20), Apex AeroShell Lightweight Warmup Jackets (APC-C42), and travel recovery gear.
+- **Event / Venue:** Las Vegas Championship Qualifier (Mar 12–14, 2027, Las Vegas Convention Center · 36.1318° N, 115.1516° W)
+- **Category:** Las Vegas Mar 12–14, 2027 Race City Guide (7 min read)
+- **Summary:** Conquer dry Mojave Desert air and fast Championship Qualifier turf in Las Vegas (Mar 12–14, 2027, Las Vegas Convention Center) with the Sin City Turf Club Tee (APC-C20), Apex AeroShell Lightweight Warmup Jackets (APC-C42), and travel recovery gear.
 
 ## Direct Buy Now & Product Spec Links
 
@@ -22,7 +22,7 @@ Las Vegas in February combines 45°F desert morning walks with ultra-dry 18% rel
 Pack the Apex AeroShell Lightweight Race Warmup Jacket (`APC-C42`) and 8-Station Race Division Oversized Stealth Hoodie (`APC-C35`) for early-morning Strip walks, hydrate out of the 32oz HydroMetric Smart LED Thermal Flask (`APC-E11`), and race in the Las Vegas Sin City Turf Club Tee (`APC-C20`).
 
 ## 3. Frequently Asked Questions
-### Q: How do I prepare for dry air at Las Vegas HYROX in February 2027?
+### Q: How do I prepare for dry air at Las Vegas HYROX on Mar 12–14, 2027 at the Las Vegas Convention Center?
 Train inspiratory and expiratory stamina for 4 weeks pre-race using the AeroLung Dual-Valve Lung Trainer (APC-E17) and preload sodium electrolytes in the 24oz Insulated Stainless Shaker (APC-C15).
 
 ### Q: What travel recovery gear fits in a Vegas carry-on bag?
