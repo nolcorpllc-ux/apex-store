@@ -21,8 +21,8 @@
     .WBPage .dek{color:#cbd5e1;max-width:680px;line-height:1.5;margin:0 0 22px}
     .WBGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
     .WBCard{color:#fff;text-decoration:none;display:flex;flex-direction:column;gap:8px}
-    .WBCard__media{position:relative;background:#f4f4f5;border-radius:12px;overflow:hidden;aspect-ratio:1/1}
-    .WBCard__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .WBCard__media{position:relative;background:#f4f4f5;border-radius:12px;overflow:hidden;aspect-ratio:3/4}
+    .WBCard__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
     .WBCard__media .back{opacity:0}
     .WBCard:hover .back,.WBCard:focus-visible .back{opacity:1}
     .WBCard strong{font-size:15px;line-height:1.25}
@@ -48,10 +48,7 @@
       <a href="../collections/new.html">New</a>
       <a href="../collections/hyrx.html">HYRX</a>
       <a href="../collections/tops.html">Tops</a>
-      <a href="../collections/accessories.html">Accessories</a>
-      <a href="../team_orders.html">Doubles &amp; Teams</a>
-      <a href="../gyms/index.html">Gym Finder</a>
-      <a href="../wristband.html">Pace Wristband</a>
+      <details class="NavMore"><summary>More</summary><div><a href="../collections/accessories.html">Accessories</a><a href="../team_orders.html">Doubles &amp; Teams</a><a href="../gyms/index.html">Gym Finder</a><a href="../wristband.html">Pace Wristband</a></div></details>
     </nav>
     <div class="Tools">
       <form class="Search" action="../index.html" method="get" role="search">

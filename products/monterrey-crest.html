@@ -398,10 +398,7 @@
       <a href="../collections/new.html">New</a>
       <a href="../collections/hyrx.html">HYRX</a>
       <a href="../collections/tops.html">Tops</a>
-      <a href="../collections/accessories.html">Accessories</a>
-      <a href="../team_orders.html">Doubles &amp; Teams</a>
-      <a href="../gyms/index.html">Gym Finder</a>
-      <a href="../wristband.html">Pace Wristband</a>
+      <details class="NavMore"><summary>More</summary><div><a href="../collections/accessories.html">Accessories</a><a href="../team_orders.html">Doubles &amp; Teams</a><a href="../gyms/index.html">Gym Finder</a><a href="../wristband.html">Pace Wristband</a></div></details>
     </nav>
     <div class="Tools">
       <form class="Search" action="../index.html" method="get" role="search">
@@ -438,7 +435,7 @@
           <p id="usShipNote" style="font-size:13.5px;color:#0f172a;font-weight:700;margin:8px 0 0;line-height:1.45;">Made to order. Ships from the US, UK, EU or Canada. Free US shipping.</p>
         </div>
         <p style="font-size:15px;line-height:1.55;color:#1e293b;">Black heavyweight tee with the Monterrey skyline crest centered on the chest. The back is plain. 100% ring-spun cotton, heavyweight fabric (6.1 oz), relaxed fit.</p>
-        <p style="font-size:14px;line-height:1.5;color:#334155;">100% ring-spun cotton, heavyweight fabric (6.1 oz), relaxed fit. Black only.</p>
+        <p style="font-size:14px;line-height:1.5;color:#334155;">Black only.</p>
         <div style="font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;">Size <span id="staticSizeLabel" style="color:#0066ff;">L</span></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;"><button type="button" class="StaticSizeBtn" data-size="S" onclick="window.selectStaticSize('S')" style="cursor:pointer;min-width:44px;padding:8px 12px;border-radius:6px;border:1.5px solid #cbd5e1;background:#fff;color:#0f172a;font-weight:800;font-size:13px;">S</button><button type="button" class="StaticSizeBtn" data-size="M" onclick="window.selectStaticSize('M')" style="cursor:pointer;min-width:44px;padding:8px 12px;border-radius:6px;border:1.5px solid #cbd5e1;background:#fff;color:#0f172a;font-weight:800;font-size:13px;">M</button><button type="button" class="StaticSizeBtn" data-size="L" onclick="window.selectStaticSize('L')" style="cursor:pointer;min-width:44px;padding:8px 12px;border-radius:6px;border:2px solid #0f172a;background:#0f172a;color:#fff;font-weight:800;font-size:13px;">L</button><button type="button" class="StaticSizeBtn" data-size="XL" onclick="window.selectStaticSize('XL')" style="cursor:pointer;min-width:44px;padding:8px 12px;border-radius:6px;border:1.5px solid #cbd5e1;background:#fff;color:#0f172a;font-weight:800;font-size:13px;">XL</button><button type="button" class="StaticSizeBtn" data-size="2XL" onclick="window.selectStaticSize('2XL')" style="cursor:pointer;min-width:44px;padding:8px 12px;border-radius:6px;border:1.5px solid #cbd5e1;background:#fff;color:#0f172a;font-weight:800;font-size:13px;">2XL</button><button type="button" class="StaticSizeBtn" data-size="3XL" onclick="window.selectStaticSize('3XL')" style="cursor:pointer;min-width:44px;padding:8px 12px;border-radius:6px;border:1.5px solid #cbd5e1;background:#fff;color:#0f172a;font-weight:800;font-size:13px;">3XL</button><button type="button" class="StaticSizeBtn" data-size="4XL" onclick="window.selectStaticSize('4XL')" style="cursor:pointer;min-width:44px;padding:8px 12px;border-radius:6px;border:1.5px solid #cbd5e1;background:#fff;color:#0f172a;font-weight:800;font-size:13px;">4XL</button></div>
         <a id="staticBuyNowBtn" data-buy="APC-C79" href="https://apex-hybrid-co-shop.fourthwall.com/products/monterrey-crest" class="Btn Btn--BuyNow" style="display:inline-flex;justify-content:center;min-width:220px;padding:14px 20px;font-size:15px;font-weight:900;text-decoration:none;">Buy now · $38.00</a>
@@ -459,7 +456,7 @@
     var prodId = "APC-C79";
     var prodVariants = {"Black": {"S": "cd9fa074-be5c-4f9b-a4ea-dad89f296f18", "M": "76d24107-0d70-4cac-8337-d00dead9f4c8", "L": "35764db1-da47-48a6-bd16-28da889eda44", "XL": "15e199d7-711b-4fba-a328-844ef0bf19dd", "2XL": "ab2759dd-0db9-49ce-8159-1c06f41a3b0a", "3XL": "9781b51a-57b1-402b-b15d-0077a66d1d8e", "4XL": "3475fb42-84e0-48b3-b27e-6b09137dd3c8"}};
     var sizePrices = {"S": 38.0, "M": 38.0, "L": 38.0, "XL": 38.0, "2XL": 40.0, "3XL": 42.0, "4XL": 44.0};
-    var defaultVid = "73fd73d9-6ba7-448d-a0d0-fe0d2e4ccf7f";
+    var defaultVid = "35764db1-da47-48a6-bd16-28da889eda44";
     var fallbackUrl = "https://apex-hybrid-co-shop.fourthwall.com/products/monterrey-crest";
     var state = {size: "L"};
     function sync(){
