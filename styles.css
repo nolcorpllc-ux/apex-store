@@ -649,6 +649,7 @@ section[aria-label="Featured gear checkout"] a {
   object-position: center center;
   transition: transform 220ms ease;
 }
+.Card__img--model, .Card__img--b.Card__img--model { object-position: center top; }
 @media (hover: hover) and (pointer: fine) {
   .Card:hover .Card__img:not(.Card__img--b) {
     transform: scale(1.03);
@@ -750,13 +751,20 @@ section[aria-label="Featured gear checkout"] a {
   letter-spacing: -0.03em;
   font-weight: 580;
   line-height: 1.2;
+  min-height: 2.4em;
 }
 .Card h3 button {
   text-align: left;
   padding: 0;
   font: inherit;
   letter-spacing: inherit;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
+.Card__kind { min-height: 14px; margin: 2px 0 0; font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #0066ff; }
+.Card .Rating { min-height: 16px; }
 .Price { display: flex; gap: 8px; align-items: baseline; font-weight: 620; flex: 0 0 auto; letter-spacing: -0.03em; }
 .Price s { color: var(--muted); font-weight: 500; font-size: 13px; }
 .Sizes { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -1271,7 +1279,7 @@ section[aria-label="Featured gear checkout"] a {
   .Pin__grid { display: flex !important; flex-direction: column !important; gap: 8px !important; }
   .Pin__img { order: 1; display: flex !important; flex-direction: column !important; gap: 8px; }
   .Pin__hero { width: 100%; flex: none; max-height: none; aspect-ratio: 3/4; background: #e4e4e4; }
-  .Pin__hero img { max-height: none !important; height: 100% !important; width: 100% !important; max-width: 100%; margin: 0; object-fit: contain !important; object-position: center; background: #e4e4e4; }
+  .Pin__hero img { max-height: none !important; height: 100% !important; width: 100% !important; max-width: 100%; margin: 0; object-fit: cover !important; object-position: center top; background: #e4e4e4; }
   .Pin__chips { order: 2; }
   .Pin h2 { font-size: 22px !important; line-height: 1.05; margin: 0 0 2px; }
   .Pin__price { font-size: 18px; margin: 0 0 6px; }
@@ -1333,7 +1341,7 @@ section[aria-label="Featured gear checkout"] a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center top;
 }
 .Card__media {
   aspect-ratio: 4 / 5;
@@ -1343,7 +1351,7 @@ section[aria-label="Featured gear checkout"] a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center center;
 }
 .Train__grid button {
   aspect-ratio: 4 / 5;
@@ -1368,7 +1376,7 @@ section[aria-label="Featured gear checkout"] a {
 }
 .CityCard img {
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center top;
 }
 .ProductLayout__photo {
   background: #f1f0ec;
@@ -1507,7 +1515,7 @@ section[aria-label="Featured gear checkout"] a {
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
 }
 .ProductCard__Media {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   height: auto !important;
   overflow: hidden;
   background: #f4f5f7;
@@ -1515,8 +1523,8 @@ section[aria-label="Featured gear checkout"] a {
 .ProductCard__Media img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: center top;
   display: block;
 }
 .Btn--BuyNow {
