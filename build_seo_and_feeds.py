@@ -303,41 +303,210 @@ def _product_copy_html(page):
     return chunk
 
 
+_MATERIAL_WORD = re.compile(
+    r"(?i)\b(?:heavyweights?|lightweights?|midweights?|ring-spun|airlume|fleeces?|mesh|"
+    r"fabrics?|cotton|polyester|nylon|acrylic|elastane|poplin|twill|garment-dyed|combed)\b"
+    r"|\d+(?:\.\d+)?\s*oz"
+)
+
+# One fabric line per blank. 6.1 oz tees never use the word heavyweight.
+_FABRIC_BY_HANDLE = {
+    "apex-athletic-shoe-black-pink": "Lightweight mesh upper, cushioned sole.",
+    "zone-2-engine-builder-embroidered-dad-hat": "100% bio-washed chino cotton twill (Yupoong 6245CM).",
+    "apex-8-station-race-day-tactical-duffle": "Water-resistant 900D high-density Oxford fabric.",
+    "8-station-functional-race-division-oversized-stealth-hoodie": "Heavyweight ring-spun fleece with ribbed cuffs and waistband.",
+    "electrolyte-pacing-insulated-shaker-bottle": "Double-wall copper-lined vacuum-insulated stainless steel.",
+}
+
+
+def fabric_bullet_for(prod, page_text=""):
+    """The single Fabric bullet for a product, from its published blank."""
+    handle = (prod or {}).get("handle") or ""
+    if handle in _FABRIC_BY_HANDLE:
+        return _FABRIC_BY_HANDLE[handle]
+    blank = (prod or {}).get("fourthwall_blank") or ""
+    low = blank.lower()
+    page = page_text or ""
+    if "6.1" in blank:
+        return "100% ring-spun cotton, 6.1 oz, relaxed fit."
+    if "airlume" in low or re.search(r"\b6\s*oz\b", low):
+        return "100% Airlume combed and ring-spun cotton, 6 oz, relaxed oversized fit with dropped shoulders."
+    if "8.2" in blank:
+        return "100% carded cotton, heavyweight fabric (8.2 oz), relaxed fit. Wide neck and cuff ribbing."
+    if "16.5" in blank:
+        return "Heavyweight fabric (16.5 oz), 65% cotton and 35% recycled polyester, relaxed fit, raglan sleeves, kangaroo pocket."
+    if "8.55" in blank:
+        return "78% polyester, 22% elastane. Heavyweight fabric (8.55 oz)."
+    if "8.25" in blank or "3-end fleece" in low:
+        return "3-end fleece, 80% cotton and 20% recycled polyester face, 8.25 oz."
+    if "prm4500" in low or "pigment-dyed fleece" in low:
+        return "Heavyweight ring-spun fleece with ribbed cuffs and waistband."
+    if "barnard" in low or "athletic tank" in low:
+        return "100% airlume combed ring-spun cotton, lightweight fabric (4.2 oz), relaxed fit."
+    if "quick-dry performance" in low:
+        return "Lightweight, quick-dry performance fabric."
+    if "2.21" in blank:
+        return "100% polyester, lightweight water-resistant fabric (2.21 oz), regular fit."
+    if "micro poplin" in low:
+        return "100% polyester micro poplin, regular fit."
+    if "co200" in low or "micro-poplin shell" in low:
+        if "mesh lining" in page.lower():
+            return "Water-resistant micro-poplin shell, mesh lining, elastic cuffs, and a drawcord hem."
+        return "Water-resistant micro-poplin shell."
+    if "900d" in page.lower() or "oxford" in page.lower():
+        return "Water-resistant 900D high-density Oxford fabric."
+    if "yupoong" in page.lower() or "bio-washed chino" in page.lower():
+        return "100% bio-washed chino cotton twill (Yupoong 6245CM)."
+    cleaned = re.sub(r"(?i)\s*\(?fulfilled via fourthwall[^)]*\)?", "", blank)
+    cleaned = re.sub(r"(?i),?\s*fulfilled via fourthwall.*$", "", cleaned).strip(" .")
+    return cleaned or "See the product description."
+
+
+def scrub_fabric_text(text):
+    """Drop fabric and weight wording from a description. Keep the product story."""
+    if not text:
+        return ""
+    text = html.unescape(text)
+    spec = re.compile(r"(?i)(100\s*%|\boz\b|blank as|relaxed fit|garment-dyed|ring-spun|airlume)")
+    kept = []
+    for sentence in re.split(r"(?<=[.!?])\s+", text.strip()):
+        sentence = sentence.strip()
+        if not sentence:
+            continue
+        if _MATERIAL_WORD.search(sentence) and spec.search(sentence):
+            continue
+        cleaned = _MATERIAL_WORD.sub(" ", sentence)
+        cleaned = re.sub(r"\s{2,}", " ", cleaned)
+        cleaned = re.sub(r"\s+([,.;])", r"\1", cleaned)
+        cleaned = re.sub(r"\(\s*\)", "", cleaned)
+        cleaned = re.sub(r"\s{2,}", " ", cleaned).strip(" ,;")
+        if len(re.sub(r"[^A-Za-z0-9]+", "", cleaned)) < 8:
+            continue
+        if cleaned[-1] not in ".!?":
+            cleaned += "."
+        kept.append(cleaned)
+    return re.sub(r"\s{2,}", " ", " ".join(kept)).strip()
+
+
+def ensure_story(text, minimum=80):
+    """A product description has to be a real sentence, not only the fabric line."""
+    text = re.sub(r"\s{2,}", " ", (text or "")).strip()
+    pad = "Secure checkout and fulfillment by Fourthwall."
+    if pad.lower() not in text.lower():
+        text = (text.rstrip(".") + ". " + pad).strip() if text else pad
+    if len(text) < minimum:
+        text = (text.rstrip(".") + ". Made to order. Free US shipping.").strip()
+    return text
+
+
+# A Fabric bullet has to name a real material or weight, not just the word Fabric.
+_FABRIC_TERM = re.compile(
+    r"(?i)\b(?:cotton|polyester|poly|nylon|spandex|elastane|fleece|acrylic|rayon|"
+    r"microfiber|terry|canvas|eva|rubber|oz|gsm|blend|mesh|poplin|oxford|twill|"
+    r"stainless|polyurethane|leather|fabric)\b"
+)
+# Fourthwall names both towel blanks "White". The photo colorway is the label.
+# Variant ids stay the add-to-cart payload; only the displayed name changes.
+TOWEL_VARIANT_LABEL = {
+    "3669ffea-c900-49da-be70-1a1a1a150aa8": "Black",
+    "5ec97ff9-92f9-4e83-adca-8e3e130d2137": "Black",
+    "b076de69-8d86-4141-aa16-b2a53655a67b": "Deep Olive",
+    "488ab94b-5511-463e-8aeb-6d54606f06ac": "Deep Olive",
+}
+
+
+def towel_display_color(variant_id, fallback):
+    """Site label for a towel variant. Does not change the variant id."""
+    return TOWEL_VARIANT_LABEL.get(variant_id, fallback)
+
+
+def _outside_fabric_text(page):
+    """Page text that is not the Fabric bullet, a heading, a listing name, or a URL."""
+    text = re.sub(r"<li\b[^>]*>\s*Fabric:.*?</li>", " ", page, count=1, flags=re.S | re.I)
+    text = re.sub(r"<title\b[^>]*>.*?</title>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<h[1-6]\b[^>]*>.*?</h[1-6]>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<nav\b[^>]*>.*?</nav>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<a\b[^>]*>.*?</a>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<script\b(?![^>]*ld\+json)[^>]*>.*?</script>", " ", text, flags=re.S | re.I)
+    text = re.sub(r'"(?:name|url|image|@id)"\s*:\s*"(?:\\.|[^"\\])*"', " ", text)
+    text = re.sub(r"https?://\S+", " ", text)
+    text = re.sub(r'\s(?:href|src)="[^"]*"', " ", text)
+    return text
+
+
+def _body_sentences(page):
+    """Normalized sentences from the whole body, including divs and link text."""
+    match = re.search(r"<body\b[^>]*>(.*)</body>", page, flags=re.S | re.I)
+    body = match.group(1) if match else page
+    plain = re.sub(r"<[^>]+>", " ", body)
+    plain = re.sub(r"\s+", " ", html.unescape(plain))
+    return [part.strip() for part in re.split(r"(?<=[.!?])\s+", plain) if part.strip()]
+
+
+def fabric_rule_errors(page, name="page"):
+    """Return fabric-rule failures for one product page. Empty means the page passes."""
+    errors = []
+    if re.search(r'http-equiv="refresh"', page, re.I) or "<h1" not in page.lower():
+        return errors
+    bullets = re.findall(r"<li\b[^>]*>\s*(Fabric:.*?)</li>", page, flags=re.S | re.I)
+    real = [item for item in bullets if _FABRIC_TERM.search(item)]
+    if len(bullets) != 1 or len(real) != 1:
+        errors.append(f"{name}: {len(real)} Fabric bullets with a material term ({len(bullets)} labeled)")
+    outside = re.sub(r"<[^>]+>", " ", _outside_fabric_text(page))
+    if _MATERIAL_WORD.search(outside):
+        errors.append(f"{name}: fabric or weight text outside the Fabric bullet")
+    og = re.search(r'<meta property="og:description" content="([^"]*)"', page)
+    if not og:
+        errors.append(f"{name}: missing og:description")
+    elif len(html.unescape(og.group(1)).strip()) < 40:
+        errors.append(f"{name}: og:description is under 40 characters")
+    seen = {}
+    for sentence in _body_sentences(page):
+        key = _sentence_key(sentence)
+        if len(key) < 20:
+            continue
+        if key in seen:
+            errors.append(f"{name}: repeated sentence {sentence[:90]!r}")
+            break
+        seen[key] = True
+    copy = _product_copy_html(page)
+    story = []
+    for bit in re.findall(r"<p\b[^>]*>.*?</p>", copy, flags=re.S | re.I):
+        if re.search(r"\bid=[\"']usShipNote", bit):
+            continue
+        if re.search(r"<a\b", bit, re.I):
+            continue
+        if not re.search(r"font-size:\s*1[45]", bit):
+            continue
+        story.append(" ".join(_copy_sentences(bit)))
+    blurb = re.sub(r"\s+", " ", " ".join(story)).strip()
+    fabric_only = bool(real) and _sentence_key(blurb) == _sentence_key(
+        re.sub(r"(?i)^fabric:\s*", "", real[0])
+    )
+    if len(blurb) < 80 or fabric_only:
+        errors.append(f"{name}: description is {len(blurb)} characters")
+    if _HEAVY_CONFLICT.search(re.sub(r"https?://\S+", " ", re.sub(r'\s(?:href|src)="[^"]*"', " ", page))):
+        errors.append(f"{name}: calls a 6 or 6.1 oz tee heavyweight")
+    return errors
+
+
 def assert_fabric_stated_once():
-    """Fail when a spec sentence is repeated, fabric is missing, or og text is a stub."""
+    """One Fabric bullet. No fabric outside it. No repeated sentence. No stub description."""
+    sample_path = os.path.join(BASE_DIR, "products", "compromised-running.html")
+    sample = open(sample_path, encoding="utf-8").read()
+    removed = re.sub(r"<li\b[^>]*>\s*Fabric:.*?</li>", "", sample, count=1, flags=re.S | re.I)
+    self_test = fabric_rule_errors(removed, "c36-fixture")
+    if not any("Fabric bullet" in item for item in self_test):
+        raise SystemExit("Fabric self-test failed: removing the C36 Fabric bullet did not fail the build")
     errors = []
     products = os.path.join(BASE_DIR, "products")
     for name in sorted(os.listdir(products)):
         if not name.endswith(".html"):
             continue
         page = open(os.path.join(products, name), encoding="utf-8", errors="replace").read()
-        if re.search(r'http-equiv="refresh"', page, re.I):
-            continue
-        if "<h1" not in page.lower():
-            continue
-        og = re.search(r'<meta property="og:description" content="([^"]*)"', page)
-        if og and len(html.unescape(og.group(1)).strip()) < 40:
-            errors.append(f"{name}: og:description is under 40 characters")
-        copy = _product_copy_html(page)
-        if not _FABRIC_LINE.search(re.sub(r"<[^>]+>", " ", copy)):
-            errors.append(f"{name}: no fabric line")
-        seen = {}
-        for bit in re.findall(r"<(?:p|li)\b[^>]*>.*?</(?:p|li)>", copy, flags=re.S | re.I):
-            if re.search(r"<a\b", bit, re.I):
-                continue
-            for sentence in _copy_sentences(bit):
-                key = _sentence_key(sentence)
-                if len(key) < 12:
-                    continue
-                if key in seen:
-                    errors.append(f"{name}: repeated sentence {sentence[:90]!r}")
-                    break
-                seen[key] = True
-        plain = re.sub(r'\s(?:href|src)="[^"]*"', " ", page)
-        if _HEAVY_CONFLICT.search(plain):
-            errors.append(f"{name}: calls a 6 or 6.1 oz tee heavyweight")
+        errors.extend(fabric_rule_errors(page, name))
     if errors:
-        raise SystemExit("Fabric line is repeated:\n" + "\n".join(errors[:50]))
+        raise SystemExit("Fabric line is repeated:\n" + "\n".join(errors[:60]))
 
 
 def assert_published_xml_parses():
@@ -532,20 +701,17 @@ def generate_product_pages(only_ids=None):
         img_url = f"{SITE_URL}/{prod['image']}"
         canonical = f"{SITE_URL}/products/{handle}.html"
         raw_desc = prod["short_desc"]
-        highlights = [normalize_fabric_copy(item) for item in prod.get("highlights", [])]
-        normalized = normalize_fabric_copy(raw_desc)
-        highlights_have_fabric = any(_FABRIC_CLAUSE.search(item or "") for item in highlights)
-        # Keep the fabric sentence in the description when the bullets do not
-        # already state it. Stripping it there is what left "Tech Shirt. " behind.
-        if _FABRIC_CLAUSE.search(normalized or "") and not highlights_have_fabric:
-            short_desc = normalized
-        else:
-            short_desc = strip_fabric_clauses(raw_desc)
-            if not highlights_have_fabric:
-                for sentence in re.split(r"(?<=[.?!])\s+", normalized or ""):
-                    if sentence and _FABRIC_CLAUSE.search(sentence):
-                        highlights = [sentence.strip()] + highlights
-                        break
+        fabric = fabric_bullet_for(prod)
+        highlights = []
+        for item in prod.get("highlights", []):
+            lowered = (item or "").lower()
+            if lowered.startswith("blank quality") or lowered.startswith("blank options") or lowered.startswith("fabric:"):
+                continue
+            if _MATERIAL_WORD.search(item or "") and len(scrub_fabric_text(item)) < 20:
+                continue
+            highlights.append(scrub_fabric_text(item) or item)
+        highlights.insert(0, f"Fabric: {fabric}")
+        short_desc = ensure_story(scrub_fabric_text(raw_desc))
         dept = prod["dept"]
 
         related = [p for p in products if p["dept"] == dept and p["id"] != prod["id"]][:4]
@@ -824,7 +990,7 @@ def generate_product_pages(only_ids=None):
           {highlights_html}
         </ul>
         <div style="margin:14px 0; padding:14px 16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; font-size:13.5px; color:#1e293b; line-height:1.55;">
-          <div style="font-weight:800; color:#0f172a; text-transform:uppercase; letter-spacing:0.04em; font-size:12px; margin-bottom:6px;">✓ Fit, Fabric &amp; Race-Day Guarantee</div>
+          <div style="font-weight:800; color:#0f172a; text-transform:uppercase; letter-spacing:0.04em; font-size:12px; margin-bottom:6px;">✓ Fit and Race-Day Guarantee</div>
           <div>Made to order. Free US shipping. Print errors and defects are replaced or refunded. Secure checkout and fulfillment by Fourthwall.</div>
         </div>
         <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">

@@ -62,9 +62,15 @@ def main():
             m = re.search(r"variant=([0-9a-f-]{36})", o.get("url") or "")
             if m:
                 vid = m.group(1)
-            # The station towels are sublimated on a blank Fourthwall names "White".
-            if pid in {"APC-C138", "APC-C139"} and color.strip().lower() == "white":
-                color = "Black" if pid == "APC-C138" else "Deep Olive"
+            # Fourthwall calls both towel blanks White. The photo colorway is the label.
+            towel_label = {
+                "3669ffea-c900-49da-be70-1a1a1a150aa8": "Black",
+                "5ec97ff9-92f9-4e83-adca-8e3e130d2137": "Black",
+                "b076de69-8d86-4141-aa16-b2a53655a67b": "Deep Olive",
+                "488ab94b-5511-463e-8aeb-6d54606f06ac": "Deep Olive",
+            }
+            if vid in towel_label:
+                color = towel_label[vid]
             variants.append({
                 "color": color.strip(),
                 "size": size.strip(),
