@@ -639,7 +639,8 @@
  </div>
  </div>
  </footer>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var prodId = "APC-C40";
     var prodVariants = {"Black": {"S": "7448050c-3c2d-4e56-bbf8-c52c338e61a1", "M": "fce65b02-47b6-438b-9d20-103498d70f21", "L": "57e27a95-8741-4b00-8fc7-670a7c91b6a0", "XL": "d92261de-1f9d-421e-aaf6-ec27f4d7ce9f", "2XL": "aa6d646a-5495-47ef-816b-834d5eb2ef5a", "3XL": "b16d2ed1-b884-4cdb-a969-bccd1bbb850f", "4XL": "54a99075-2070-42fe-92ad-3269aae5a44f"}};
@@ -723,7 +724,7 @@
     function redirectFourthwallVariant(vid, triggerEl, fbHref) {
       try { hit("checkout_clicks_total"); hit("checkout_" + prodId); } catch (e) {}
       if (!vid) {
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         return;
       }
       var prevText = triggerEl ? triggerEl.textContent : "";
@@ -745,16 +746,16 @@
         });
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (chk && chk.id) {
-          window.location.href = "https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id);
+          apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         } else {
-          window.location.href = fbHref || fallbackUrl;
+          window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         }
       }).catch(function(){
         if (triggerEl) {
           triggerEl.textContent = prevText;
           triggerEl.style.opacity = "1";
         }
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
       });
     }
     window.launchStaticCheckout = function(btn) {

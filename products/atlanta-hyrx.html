@@ -451,7 +451,8 @@
  <p><strong>Apex Hybrid Co., operated by NolCorp LLC</strong> · <a href="../contact.html">Contact</a> · <a href="mailto:apexhybridco@gmail.com">apexhybridco@gmail.com</a></p>
  </div></footer>
 
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var prodId = "APC-C114";
     var prodVariants = {"Black": {"S": "197f0cec-8dd5-4410-85b5-097826d20cce", "M": "49edfc5b-6ebd-4b52-98df-23d8f793c19e", "L": "6c49bf9b-74b9-4532-89cc-ca1392bc5955", "XL": "aea1f98d-ae86-417e-8bc2-bfd7c00a0472", "2XL": "99ec3352-607d-4fbc-9767-c8b82f7238f9", "3XL": "590f991f-53c5-492b-a0c8-e53592635d82", "4XL": "6566b7f6-d1a4-4d8c-a186-593cb3a8d402"}};
@@ -477,7 +478,7 @@
       }
     }
     window.selectStaticSize = function(s){ state.size = s; sync(); };
-    function go(url){ window.location.href = url; }
+    function go(url){ window.location.href = apexPromoUrl(url); }
     window.launchStaticCheckout = function(btn){
       var dest = fallbackUrl;
       var left = false;
@@ -501,7 +502,7 @@
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (left) return;
         left = true; clearTimeout(watchdog);
-        if (chk && chk.id) go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
+        if (chk && chk.id) apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         else go(dest);
       }).catch(function(){ if(!left){ left=true; clearTimeout(watchdog); go(dest); } });
     };

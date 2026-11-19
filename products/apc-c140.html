@@ -515,7 +515,8 @@
  </div>
  </div>
  </main>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var variants = {"Black": {"6.5": "3870797f-e731-4ff5-8b51-4cb669563c31", "7": "61b4954f-4144-430e-909f-aa5374806f4f", "8": "e3c41930-5fa4-4454-a930-f113973853cb", "8.5": "567a2584-26fc-4958-940a-d48bb891e492", "9.5": "0e88edb8-93f9-4065-9f77-996d498acd09", "10": "8dd58a29-e02e-4c7a-8e35-3fac56723386", "11": "160b69b6-3d00-4c7f-9990-f1090d92ea07", "11.5": "8fda91d3-246b-45ff-a175-4fdca4d63f6f", "12.5": "83480ac2-6fe0-4c85-839e-9267ff6fba3d"}};
     var prices = {"Black": {"6.5": 55.0, "7": 55.0, "8": 55.0, "8.5": 55.0, "9.5": 55.0, "10": 55.0, "11": 55.0, "11.5": 55.0, "12.5": 55.0}};
@@ -555,7 +556,7 @@
     document.querySelectorAll(".StaticSizeBtn").forEach(function(btn){
       btn.addEventListener("click", function(){ state.size = btn.getAttribute("data-size"); sync(); });
     });
-    function go(url){ window.location.href = url; }
+    function go(url){ window.location.href = apexPromoUrl(url); }
     document.getElementById("staticBuyNowBtn").addEventListener("click", function(ev){
       ev.preventDefault();
       var dest = fallbackUrl;
@@ -578,7 +579,7 @@
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (left) return;
         left = true; clearTimeout(watchdog);
-        if (chk && chk.id) go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
+        if (chk && chk.id) apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         else go(dest);
       }).catch(function(){ if(!left){ left=true; clearTimeout(watchdog); go(dest); } });
     });

@@ -178,7 +178,8 @@
  </div>
  </div>
  </main>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var variants = {"All-Over Print": {"15\" x 17\"": "5aed23cc-dc15-4d00-bf95-f12169e205a1"}};
     var prices = {"All-Over Print": {"15\" x 17\"": 32.0}};
@@ -218,7 +219,7 @@
     document.querySelectorAll(".StaticSizeBtn").forEach(function(btn){
       btn.addEventListener("click", function(){ state.size = btn.getAttribute("data-size"); sync(); });
     });
-    function go(url){ window.location.href = url; }
+    function go(url){ window.location.href = apexPromoUrl(url); }
     document.getElementById("staticBuyNowBtn").addEventListener("click", function(ev){
       ev.preventDefault();
       var dest = fallbackUrl;
@@ -241,7 +242,7 @@
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (left) return;
         left = true; clearTimeout(watchdog);
-        if (chk && chk.id) go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
+        if (chk && chk.id) apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         else go(dest);
       }).catch(function(){ if(!left){ left=true; clearTimeout(watchdog); go(dest); } });
     });

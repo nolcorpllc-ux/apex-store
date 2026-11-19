@@ -684,7 +684,7 @@
               </div>
             </div>
             <div>
-              <label for="calcPromoInput">6. Active Partner Promo Code (10% Off at Checkout)</label>
+              <label for="calcPromoInput">6. Enter your team code</label>
               <input id="calcPromoInput" type="text" value="COACHSU10" placeholder="COACHSU10, DADBOD10, CLUB10, DOUBLES10, DALLAS10, or TEAM15" style="width:100%;margin-top:6px;text-transform:uppercase;" />
             </div>
           </div>
@@ -1084,16 +1084,15 @@
 
     async function submitItemsToFourthwallCart(items, promoCode, label) {
       if (!items || !items.length) return;
-      const cleanPromo = (promoCode || "COACHSU10").trim().toUpperCase();
-      const promoPct = CHECKOUT_CODES[cleanPromo];
-      if (!promoPct) {
+      const cleanPromo = String(promoCode || "").trim().toUpperCase();
+      if (cleanPromo && !CHECKOUT_CODES[cleanPromo]) {
         showToast(`Promo code "${cleanPromo}" is not valid`);
         return;
       }
       if (navigator.clipboard && cleanPromo) {
         navigator.clipboard.writeText(cleanPromo).catch(() => {});
       }
-      showToast(`Building your live checkout for ${label} (${promoPct}% code ${cleanPromo} applied)…`);
+      showToast(cleanPromo ? `Checking code ${cleanPromo}…` : `Building your live checkout for ${label}…`);
 
       try {
         fetch("https://abacus.jasoncameron.dev/hit/apexhybridco.com/checkout_clicks_total", { mode: "cors", keepalive: true }).catch(() => {});
@@ -1121,6 +1120,11 @@
         if (!chkRes.ok) throw new Error("checkout_create_failed");
         const chkData = await chkRes.json();
         if (chkData && chkData.id) {
+          const dest = `https://apex-hybrid-co-shop.fourthwall.com/checkout/${encodeURIComponent(chkData.id)}`;
+          if (!cleanPromo) {
+            window.location.href = dest;
+            return;
+          }
           let accepted = false;
           try {
             const codeRes = await fetch(`https://apex-hybrid-co-shop.fourthwall.com/api/v2/checkout/${encodeURIComponent(chkData.id)}/code`, {
@@ -1135,13 +1139,18 @@
           if (!accepted) {
             showToast(`Fourthwall did not accept code ${cleanPromo}. Checkout will open without that discount.`);
             await new Promise((resolve) => setTimeout(resolve, 1600));
+            window.location.href = dest;
+            return;
           }
-          window.location.href = `https://apex-hybrid-co-shop.fourthwall.com/checkout/${encodeURIComponent(chkData.id)}?discount=${encodeURIComponent(cleanPromo)}`;
+          showToast(`Code ${cleanPromo} applied.`);
+          await new Promise((resolve) => setTimeout(resolve, 600));
+          window.location.href = `${dest}?promo=${encodeURIComponent(cleanPromo)}`;
           return;
         }
         throw new Error("no_checkout_id");
       } catch (err) {
-        window.location.href = `${fallbackUrl}?discount=${encodeURIComponent(cleanPromo)}`;
+        const promoQuery = cleanPromo ? `?promo=${encodeURIComponent(cleanPromo)}` : "";
+        window.location.href = `${fallbackUrl}${promoQuery}`;
       }
     }
 
@@ -1181,7 +1190,7 @@
       }
       if (prePromo) {
         const up = prePromo.toUpperCase();
-        document.getElementById("calcPromoInput").value = CHECKOUT_CODES[up] ? up : "COACHSU10";
+        if (CHECKOUT_CODES[up]) document.getElementById("calcPromoInput").value = up;
       }
 
       const initialBundle = BUNDLES.find(x => x.bundle_id === sel.value) || BUNDLES[0];
@@ -1266,13 +1275,13 @@
       const bundleId = document.getElementById("calcBundleSelect").value;
       const b = BUNDLES.find(x => x.bundle_id === bundleId) || BUNDLES[0];
       const qty = Math.max(1, parseInt(document.getElementById("calcQtyInput").value || "1", 10));
-      const promo = (document.getElementById("calcPromoInput").value || "COACHSU10").trim().toUpperCase();
+      const promo = (document.getElementById("calcPromoInput").value || "").trim().toUpperCase();
       const chosenSku = document.getElementById("calcCitySelect").value || b.default_sku;
       const sizeA = document.getElementById("calcSizeA").value || "L";
       const sizeB = document.getElementById("calcSizeB").value || "M";
 
       const items = computeBundleCartItems(b, chosenSku, sizeA, sizeB, qty);
-      if (!CHECKOUT_CODES[promo]) {
+      if (promo && !CHECKOUT_CODES[promo]) {
         showToast(`Promo code "${promo}" is not valid`);
         return;
       }
@@ -1337,5 +1346,6 @@
   </script>
 <script src="/utm.js"></script>
 <script data-goatcounter="https://apexhybridco.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script src="/checkout-code.js"></script>
 </body>
 </html>

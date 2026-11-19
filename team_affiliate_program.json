@@ -15,7 +15,7 @@
       "code": "TEAM15",
       "discount_pct": 15,
       "live_on_fourthwall_checkout": true,
-      "use_case": "15% off the entire Fourthwall checkout order"
+      "use_case": "15% off the entire Fourthwall checkout order with code TEAM15"
     },
     {
       "code": "CLUB10",

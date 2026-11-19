@@ -583,7 +583,7 @@
  <h2 style="font-size:18px; margin-bottom:12px;">Related HYROX Training, Pacing &amp; Recovery Buyer Guides</h2>
  <ul style="padding-left:20px; line-height:1.9; font-size:14px;">
  <li><a href="../articles/48-hour-post-race-recovery-protocol-cold-plunge-compression-red-light.html" style="color:#0066ff; font-weight:700;">The 48-Hour Post-Race Recovery Protocol: Cold Plunge, Compression Boots &amp; Cupping Timing</a>  -  <span style="color:#475569;">Post-Race Recovery Science (8 min read)</span></li>
-<li><a href="../articles/matching-hyrox-doubles-team-shirts-2026.html" style="color:#0066ff; font-weight:700;">Matching HYROX Doubles Team Shirts 2026/2027  -  Men&#x27;s, Women&#x27;s &amp; Mixed Doubles Race Tops (15% Off 2-Shirt Bundle)</a>  -  <span style="color:#475569;">Doubles Team Apparel Guide (6 min read)</span></li>
+<li><a href="../articles/matching-hyrox-doubles-team-shirts-2026.html" style="color:#0066ff; font-weight:700;">Matching HYROX Doubles Team Shirts 2026/2027  -  Men&#x27;s, Women&#x27;s &amp; Mixed Doubles Race Tops (15% off your entire order with code TEAM15)</a>  -  <span style="color:#475569;">Doubles Team Apparel Guide (6 min read)</span></li>
 <li><a href="../articles/best-hyrox-shirts-breathable-race-tops-and-training-apparel-guide.html" style="color:#0066ff; font-weight:700;">Best HYROX Shirts (2026–2027): Built For Heavy Legs Cotton Tees, City Editions &amp; Pump Covers</a>  -  <span style="color:#475569;">HYROX Apparel Buyer&#x27;s Guide (6 min read)</span></li>
 <li><a href="../articles/2026-2027-north-america-hybrid-race-calendar-course-and-turf-guide.html" style="color:#0066ff; font-weight:700;">2026–2027 North America Functional Race Calendar: Dallas, Chicago, Anaheim &amp; Miami Turf Pacing Guide</a>  -  <span style="color:#475569;">2026/2027 Race Calendar &amp; News (7 min read)</span></li>
 <li><a href="../articles/cold-plunge-and-red-light-recovery-routine-for-endurance-runners.html" style="color:#0066ff; font-weight:700;">The Contrast &amp; Red-Light Recovery Protocol for Hybrid Runners</a>  -  <span style="color:#475569;">Recovery Protocol (5 min read)</span></li>
@@ -613,7 +613,8 @@
  </div>
  </div>
  </footer>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var prodId = "APC-C16";
     var prodVariants = {"Black": {"S": "c16f2888-d87c-4c3f-87d9-e2bd83dc0100", "M": "08e0595f-274a-40ec-8785-c9ea0f5de0cd", "L": "fcb679ba-d57a-43d9-a0be-2b2cbcdc383c", "XL": "faa26a24-2e4b-4c5c-b74e-6467f3e121ab", "2XL": "ee60d9cb-bc4f-4d18-b48f-02a28c447acc", "3XL": "1bfd9e68-dfcd-4711-9e20-85d32e25b5b1", "4XL": "84a3ff32-39eb-4fe1-8671-31b1944c796c"}};
@@ -697,7 +698,7 @@
     function redirectFourthwallVariant(vid, triggerEl, fbHref) {
       try { hit("checkout_clicks_total"); hit("checkout_" + prodId); } catch (e) {}
       if (!vid) {
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         return;
       }
       var prevText = triggerEl ? triggerEl.textContent : "";
@@ -719,16 +720,16 @@
         });
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (chk && chk.id) {
-          window.location.href = "https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id);
+          apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         } else {
-          window.location.href = fbHref || fallbackUrl;
+          window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         }
       }).catch(function(){
         if (triggerEl) {
           triggerEl.textContent = prevText;
           triggerEl.style.opacity = "1";
         }
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
       });
     }
     window.launchStaticCheckout = function(btn) {

@@ -521,7 +521,8 @@
  </div>
  </div>
  </footer>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var prodId = "APC-C89";
     var prodVariants = {"Black": {"S": "7f12e670-c3c7-4c10-b669-042fe315bb57", "M": "b429755e-eea6-4cbb-8e1b-432d4ef33dab", "L": "aad36a7d-6e50-43dd-bf7e-6cf4fa4de5e3", "XL": "034c4ab1-c6fa-4a7e-95a3-c1c15d5861ff", "2XL": "505dfb7c-716a-433f-8ab6-35d10e264960"}};
@@ -639,7 +640,7 @@
         }).finally(function(){ clearTimeout(timer2); });
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (chk && chk.id) {
-          go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
+          apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         } else {
           go(dest);
         }

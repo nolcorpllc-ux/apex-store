@@ -219,7 +219,8 @@
  </div>
  </div>
  </main>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var variants = {"Black": {"30\" x 60\"": "3669ffea-c900-49da-be70-1a1a1a150aa8", "36\" x 72\"": "5ec97ff9-92f9-4e83-adca-8e3e130d2137"}};
     var prices = {"Black": {"30\" x 60\"": 46.0, "36\" x 72\"": 49.0}};
@@ -260,7 +261,7 @@
     document.querySelectorAll(".StaticSizeBtn").forEach(function(btn){
       btn.addEventListener("click", function(){ state.size = btn.getAttribute("data-size"); sync(); });
     });
-    function go(url){ window.location.href = url; }
+    function go(url){ window.location.href = apexPromoUrl(url); }
     document.getElementById("staticBuyNowBtn").addEventListener("click", function(ev){
       ev.preventDefault();
       var dest = fallbackUrl;
@@ -283,7 +284,7 @@
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (left) return;
         left = true; clearTimeout(watchdog);
-        if (chk && chk.id) go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
+        if (chk && chk.id) apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         else go(dest);
       }).catch(function(){ if(!left){ left=true; clearTimeout(watchdog); go(dest); } });
     });
