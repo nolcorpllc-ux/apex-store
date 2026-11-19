@@ -5233,6 +5233,177 @@
         "images/streetwear/san-diego-race-day-stitched/06.jpg?v=20261119rdw6"
       ],
       "product_url": "https://www.apexhybridco.com/products/san-diego-race-day-stitched.html"
+    },
+    {
+      "id": "APC-C96",
+      "handle": "london-race-day-stitched",
+      "title": "London Race Day Windbreaker",
+      "seo_title": "London Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/london-race-day-stitched/01.jpg?v=20261119eu",
+      "alt_image": "images/streetwear/london-race-day-stitched/02.jpg?v=20261119eu",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The London crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered London crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "london-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/london-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/london-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/london-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/london-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "ea4ebd0c-53db-4040-887f-ab7103e27221",
+          "M": "a07747e0-c54b-425b-97be-34cc5cabe700",
+          "L": "8e540e63-e2e6-4e6d-80c0-bf85dbe35d25",
+          "XL": "c6872589-3c97-4f9d-b54c-21290e2b0771",
+          "2XL": "0514cc6d-5b3f-489e-aa08-c5eac28320a5"
+        }
+      },
+      "fourthwall_default_variant_id": "8e540e63-e2e6-4e6d-80c0-bf85dbe35d25",
+      "extra_images": [
+        "images/streetwear/london-race-day-stitched/03.jpg?v=20261119eu",
+        "images/streetwear/london-race-day-stitched/04.jpg?v=20261119eu",
+        "images/streetwear/london-race-day-stitched/05.jpg?v=20261119eu",
+        "images/streetwear/london-race-day-stitched/06.jpg?v=20261119eu"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/london-race-day-stitched.html"
+    },
+    {
+      "id": "APC-C97",
+      "handle": "paris-race-day-stitched",
+      "title": "Paris Race Day Windbreaker",
+      "seo_title": "Paris Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/paris-race-day-stitched/01.jpg?v=20261119eu",
+      "alt_image": "images/streetwear/paris-race-day-stitched/02.jpg?v=20261119eu",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The Paris crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered Paris crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "paris-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/paris-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/paris-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/paris-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/paris-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "2749d6b2-fd67-4e96-8240-8488c373258d",
+          "M": "5746eb32-844b-4995-b48f-a826b42ca61b",
+          "L": "304f0dd3-2e04-4ce4-b231-15bd8d191b45",
+          "XL": "7049617e-48e6-419b-8424-f6a71f105204",
+          "2XL": "f90139bb-ef3e-427c-ab1b-15d07951c738"
+        }
+      },
+      "fourthwall_default_variant_id": "304f0dd3-2e04-4ce4-b231-15bd8d191b45",
+      "extra_images": [
+        "images/streetwear/paris-race-day-stitched/03.jpg?v=20261119eu",
+        "images/streetwear/paris-race-day-stitched/04.jpg?v=20261119eu",
+        "images/streetwear/paris-race-day-stitched/05.jpg?v=20261119eu",
+        "images/streetwear/paris-race-day-stitched/06.jpg?v=20261119eu"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/paris-race-day-stitched.html"
+    },
+    {
+      "id": "APC-C98",
+      "handle": "hong-kong-race-day-stitched",
+      "title": "Hong Kong Race Day Windbreaker",
+      "seo_title": "Hong Kong Race Day Windbreaker",
+      "dept": "Windbreakers",
+      "category": "Packable Windbreakers",
+      "retail_price": 68.0,
+      "list_price": 68.0,
+      "rating": 0,
+      "reviews": 0,
+      "image": "images/streetwear/hong-kong-race-day-stitched/01.jpg?v=20261119eu",
+      "alt_image": "images/streetwear/hong-kong-race-day-stitched/02.jpg?v=20261119eu",
+      "badge": "New",
+      "ship_time": "Ships from the US or Canada. Free US shipping.",
+      "stock_status": "Made to order",
+      "has_sizes": true,
+      "has_colorways": false,
+      "short_desc": "Black packable windbreaker. The Hong Kong crest is embroidered on the left chest. The back is plain.",
+      "highlights": [
+        "Embroidered Hong Kong crest on the left chest",
+        "Plain back",
+        "100% polyester micro poplin, regular fit",
+        "Ships from the US or Canada. Free US shipping."
+      ],
+      "review_quote": "",
+      "stripe_account_id": null,
+      "stripe_product_id": null,
+      "stripe_price_id": null,
+      "fulfillment_partner": "Fourthwall",
+      "fourthwall_blank": "100% polyester micro poplin, super lightweight, regular fit.",
+      "fulfillment_method": "Ships from the US or Canada",
+      "checkout_provider": "Fourthwall + Stripe Express Checkout",
+      "fourthwall_status": "PUBLIC_LIVE",
+      "fourthwall_handle": "hong-kong-race-day-windbreaker",
+      "fourthwall_product_url": "https://apex-hybrid-co-shop.fourthwall.com/products/hong-kong-race-day-windbreaker",
+      "fourthwall_checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/hong-kong-race-day-windbreaker",
+      "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/hong-kong-race-day-windbreaker",
+      "product_page_url": "https://www.apexhybridco.com/products/hong-kong-race-day-stitched.html",
+      "fourthwall_variants": {
+        "Black": {
+          "S": "13969f0e-3247-4ae1-b424-9a5225660bed",
+          "M": "e3ca04c9-715d-44bc-99d1-7d370b8532e6",
+          "L": "5226c7f7-01ea-4736-bd65-61a9b9c6764c",
+          "XL": "38cf14e6-24f2-4be7-8020-f1192d670fca",
+          "2XL": "776923ab-9033-40da-87e2-f45493d4293c"
+        }
+      },
+      "fourthwall_default_variant_id": "5226c7f7-01ea-4736-bd65-61a9b9c6764c",
+      "extra_images": [
+        "images/streetwear/hong-kong-race-day-stitched/03.jpg?v=20261119eu",
+        "images/streetwear/hong-kong-race-day-stitched/04.jpg?v=20261119eu",
+        "images/streetwear/hong-kong-race-day-stitched/05.jpg?v=20261119eu",
+        "images/streetwear/hong-kong-race-day-stitched/06.jpg?v=20261119eu"
+      ],
+      "product_url": "https://www.apexhybridco.com/products/hong-kong-race-day-stitched.html"
     }
   ],
   "guides": [
@@ -6742,6 +6913,6 @@
     "apparel_fulfillment": "Fourthwall US On-Demand Production & Direct Athlete Fulfillment (APC-C01 through APC-C45)",
     "equipment_fulfillment": "Fourthwall US Direct Fulfillment (APC-C01 through APC-C45)",
     "fourthwall_storefront_url": "https://apex-hybrid-co-shop.fourthwall.com",
-    "product_count": 90
+    "product_count": 93
   }
 }
