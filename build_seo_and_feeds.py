@@ -138,6 +138,8 @@ def generate_product_pages(only_ids=None):
             handling["minValue"] = 10
             handling["maxValue"] = 14
         priced_for_schema = fourthwall_size_prices(prod)
+        if prod.get("id") in {"APC-C37", "APC-C38", "APC-C40", "APC-C41"}:
+            json_ld["@graph"][1]["material"] = "6.1 oz heavyweight cotton"
         if len({amount for _, amount in priced_for_schema}) > 1:
             base_offer = json_ld["@graph"][1]["offers"]
             schema_offers = []
@@ -1333,6 +1335,10 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
     lines.extend([
         f"      <g:google_product_category>{html.escape(g_cat)}</g:google_product_category>",
         f"      <g:product_type>{html.escape(prod['dept'])} &gt; {html.escape(prod['category'])}</g:product_type>",
+    ])
+    if prod.get("id") in {"APC-C37", "APC-C38", "APC-C40", "APC-C41"}:
+        lines.append("      <g:material>6.1 oz heavyweight cotton</g:material>")
+    lines.extend([
         "      <g:shipping>",
         "        <g:country>US</g:country>",
         "        <g:service>Standard Ground</g:service>",
@@ -1872,7 +1878,7 @@ def inject_static_seo_into_index():
                         "name": "What are the best breathable HYROX shirts for race day?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Compromised Running (APC-C36), 1km Split (APC-C37), and the sleeveless tank (APC-C28) are made to order. Free US shipping. Secure checkout and fulfillment by Fourthwall."
+                            "text": "Compromised Running (APC-C36) is the breathable tech shirt. 1km Split, Zone 5 Engine, Push Heavy, and Roxzone Speed Dept. are 6.1 oz heavyweight cotton tees in Tees & Pump Covers. Made to order. Free US shipping."
                         }
                     },
                     {
