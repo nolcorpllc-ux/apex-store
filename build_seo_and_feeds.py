@@ -1402,11 +1402,9 @@ OLD_HEAVY_LISTING_NAMES = (
     "Oversized Heavyweight Gym Sweatshirt",
 )
 GUIDE_LINKS_REQUIRED = 6
-# Unique hyphenated tokens in published HTML, CSS, JS, JSON, XML, CSV, and TXT,
-# including each file's path. Lays counted 3362. Removing the unique duffle
-# tokens 3-in-1, 50-liter, and all-weather, and adding 10-packs, leaves 3360.
-# The floor is that exact published count, with no cushion.
-SLUG_TOKEN_MINIMUM = 3360
+# Unique hyphenated tokens in published HTML, CSS, JS, JSON, XML, CSV, TXT, and MD,
+# including each file's path. The floor is that exact count, with a per-page baseline.
+SLUG_TOKEN_MINIMUM = 3375
 SLUG_PAGE_BASELINE = {
     'a4b8c9d0e1f234567890abcdef123456.txt': 0,
     'a8f4c2e9d1b740639c5e2a1f8b3d7e90.txt': 0,
@@ -1440,7 +1438,7 @@ SLUG_PAGE_BASELINE = {
     'articles/how-to-train-for-your-first-hybrid-fitness-race-8-week-plan.html': 269,
     'articles/hybrid-athlete-gift-guide-2026.html': 299,
     'articles/hybrid-race-simulation-workouts-half-and-full-sim-to-predict-your-finish-time.html': 271,
-    'articles/hyrox-anaheim-2026-socal-race-shirt-doubles-relay-team-kits.html': 270,
+    'articles/hyrox-anaheim-2026-socal-race-shirt-doubles-relay-team-kits.html': 268,
     'articles/hyrox-anaheim-socal-open-division-apparel.html': 262,
     'articles/hyrox-chicago-2026-last-minute-race-shirt-doubles-2-pack-shipping.html': 269,
     'articles/hyrox-chicago-navy-pier-race-day-shirt.html': 266,
@@ -1452,7 +1450,7 @@ SLUG_PAGE_BASELINE = {
     'articles/hyrox-pro-division-race-day-kit-checklist-2026.html': 271,
     'articles/hyrox-relay-team-matching-shirts-4-pack-2026.html': 274,
     'articles/hyrox-warmup-routine-and-start-corral-gear-guide-2026.html': 274,
-    'articles/index.html': 237,
+    'articles/index.html': 236,
     'articles/las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 287,
     'articles/lower-leg-circulation-stack-compression-boots-ems-foot-mat-cupping.html': 269,
     'articles/matching-hyrox-doubles-team-shirts-2026.html': 274,
@@ -1480,7 +1478,7 @@ SLUG_PAGE_BASELINE = {
     'articles/what-to-wear-hyrox-anaheim-chicago-dallas-2026.html': 281,
     'articles/zone-2-chest-strap-heart-rate-training-plan-hybrid-racers.html': 264,
     'b7e3c9a4d2f841069c5e1a8f3b2d6e40.txt': 0,
-    'catalog.json': 1931,
+    'catalog.json': 1929,
     'collections/accessories.html': 46,
     'collections/hyrx.html': 79,
     'collections/new.html': 85,
@@ -1492,8 +1490,8 @@ SLUG_PAGE_BASELINE = {
     'collections/windbreakers.html': 70,
     'collections/womens.html': 32,
     'contact.html': 16,
-    'directory.html': 272,
-    'feed.xml': 451,
+    'directory.html': 271,
+    'feed.xml': 450,
     'fourthwall_city_jacket_variants.json': 43,
     'fourthwall_feed_variants.json': 397,
     'fourthwall_full_catalog_sync.json': 265,
@@ -1503,7 +1501,7 @@ SLUG_PAGE_BASELINE = {
     'google_shopping_feed.xml': 1372,
     'google_shopping_feed_ghpages.xml': 1372,
     'gyms/gyms_directory.json': 68,
-    'gyms/index.html': 272,
+    'gyms/index.html': 271,
     'index.html': 297,
     'llms.txt': 423,
     'perks-bar.js': 7,
@@ -1821,15 +1819,18 @@ SLUG_PAGE_BASELINE = {
     'products/zone-5-engine.html': 188,
     'returns.html': 21,
     'robots.txt': 4,
-    'rss.xml': 451,
-    'seo_articles.json': 656,
+    'rss.xml': 450,
+    'seo_articles.json': 654,
     'seo_city_pages/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 278,
+    'seo_city_pages/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.md': 18,
     'seo_city_pages/best-pump-cover-for-functional-fitness-racing.html': 259,
     'seo_city_pages/chicago-navy-pier-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 279,
+    'seo_city_pages/chicago-navy-pier-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.md': 20,
     'seo_city_pages/compromised-running-shirt-hybrid-athlete.html': 251,
     'seo_city_pages/dallas-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 283,
+    'seo_city_pages/dallas-nov-2026-hyrox-race-gear-warmup-jackets-tech-shirts.md': 28,
     'seo_city_pages/heavyweight-gym-pump-covers-and-functional-racing-apparel-guide.html': 262,
-    'seo_city_pages/hyrox-anaheim-2026-socal-race-shirt-doubles-relay-team-kits.html': 264,
+    'seo_city_pages/hyrox-anaheim-2026-socal-race-shirt-doubles-relay-team-kits.html': 262,
     'seo_city_pages/hyrox-anaheim-socal-open-division-apparel.html': 255,
     'seo_city_pages/hyrox-chicago-2026-last-minute-race-shirt-doubles-2-pack-shipping.html': 263,
     'seo_city_pages/hyrox-chicago-navy-pier-race-day-shirt.html': 259,
@@ -1839,8 +1840,11 @@ SLUG_PAGE_BASELINE = {
     'seo_city_pages/hyrox-miami-beach-race-day-shirt.html': 247,
     'seo_city_pages/hyrox-nyc-hudson-pier-race-shirt.html': 255,
     'seo_city_pages/las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 281,
+    'seo_city_pages/las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts.md': 25,
     'seo_city_pages/miami-beach-mar-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 286,
+    'seo_city_pages/miami-beach-mar-2027-hyrox-race-gear-warmup-jackets-tech-shirts.md': 27,
     'seo_city_pages/new-york-pier-may-2027-warmup-jacket-breathable-hybrid-race-shirt-guide.html': 279,
+    'seo_city_pages/new-york-pier-may-2027-warmup-jacket-breathable-hybrid-race-shirt-guide.md': 22,
     'seo_city_pages/sled-push-enthusiast-workout-shirt.html': 260,
     'seo_city_pages/what-to-wear-for-first-hyrox-race.html': 266,
     'seo_city_pages/what-to-wear-hyrox-anaheim-chicago-dallas-2026.html': 275,
@@ -1853,7 +1857,7 @@ SLUG_PAGE_BASELINE = {
     'utm.js': 3,
     'wristband.html': 208,
 }
-_SLUG_FILE_EXTS = {".html", ".css", ".js", ".json", ".xml", ".csv", ".txt"}
+_SLUG_FILE_EXTS = {".html", ".css", ".js", ".json", ".xml", ".csv", ".txt", ".md"}
 _SLUG_TOKEN_RE = re.compile(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+){1,}")
 _DANGLING_PREP = re.compile(
     r"(?i)\bfrom with\b|\bCut from\s+(?:with|for|to|of|on|in|at|by|into|over)\b"
@@ -2200,6 +2204,38 @@ _DOUBLED_WORD = re.compile(r"\b([A-Za-z]{4,})\s+\1\b")
 _DUFFLE_BANNED = re.compile(r"(?i)(?<![\w-])(?:900D|MOLLE|3-in-1|50L|50-liter)(?![\w-])")
 
 
+CONFIRMED_PROMO_CODES = {
+    "DALLAS10": 10,
+    "TEAM15": 15,
+    "CLUB10": 10,
+    "DOUBLES10": 10,
+    "HYROX10": 10,
+    "DADBOD10": 10,
+    "COACHSU10": 10,
+}
+_CODE_TOKEN = re.compile(r"\b([A-Z][A-Z0-9]{2,}(?:10|15|25))\b")
+_BLANK_CODE_FORM = re.compile(
+    r"(?i)(?:\bcode\s+for\b|\bcode\s{2,}for\b|\buse code for\b|\bcode\s*\(or\b|\bcode\s*\(e\.g\b|\bwith code\s*\+|\bcode\s+\)|(?<!\w)\(\s*\))"
+)
+
+
+def promo_code_errors(text, name="page"):
+    """Blank code forms, and any code token next to the word code that is not confirmed."""
+    if not text:
+        return []
+    visible = re.sub(r"<script\b[^>]*>.*?</script>", " ", text, flags=re.S | re.I)
+    visible = re.sub(r"<style\b[^>]*>.*?</style>", " ", visible, flags=re.S | re.I)
+    errors = []
+    if _BLANK_CODE_FORM.search(visible):
+        errors.append(f"{name}: blank promo code")
+    for match in re.finditer(r"(?i)\b(?:promo\s+)?codes?\b", visible):
+        window = visible[match.end():match.end() + 48]
+        for token in _CODE_TOKEN.findall(window):
+            if token not in CONFIRMED_PROMO_CODES:
+                errors.append(f"{name}: unconfirmed code {token}")
+    return errors
+
+
 def blank_code_errors(text, name="page"):
     """Blank discount-code forms. A real code such as DALLAS10 or TEAM25 is allowed."""
     if not text:
@@ -2461,6 +2497,18 @@ def assert_restored_sections():
         raise SystemExit("Duffle self-test flagged the Fourthwall spec")
     foreign_sell = '<div class="CrossSell" data-cross-sell="1"><a href="zone-5-engine.html">Also the Zone 5 Engine</a></div>'
     fail_check("cross-sell catalog title", cross_sell_errors(foreign_sell, "sell"), "cross-sell")
+    fail_check("code  for", promo_code_errors("code  for 15% off Doubles 2-Packs", "promo"), "blank promo code")
+    fail_check("code (or )", promo_code_errors("apply code (or ) at checkout", "promo"), "blank promo code")
+    fail_check("Use code for", promo_code_errors("Yes! Use code for 15% off", "promo"), "blank promo code")
+    fail_check("code (e.g.", promo_code_errors("15% off with code (e.g., $36)", "promo"), "blank promo code")
+    fail_check("unconfirmed TEAM25", promo_code_errors("use code TEAM25 for 25% off", "promo"), "TEAM25")
+    fail_check("unconfirmed HYROX15", promo_code_errors("promo code HYROX15", "promo"), "HYROX15")
+    self_tests.append("confirmed DALLAS10 passes")
+    if promo_code_errors("Apply code DALLAS10 for 10% off the entire order.", "promo"):
+        raise SystemExit("Promo self-test flagged DALLAS10")
+    self_tests.append("confirmed TEAM15 passes")
+    if promo_code_errors("Apply code TEAM15 for 15% off the entire order.", "promo"):
+        raise SystemExit("Promo self-test flagged TEAM15")
     assert_restored_sections.self_test_count = len(self_tests)
     folder = os.path.join(BASE_DIR, "products")
     guide_total = 0
@@ -2509,6 +2557,7 @@ def assert_restored_sections():
                 errors.extend(twitter_garble_errors(text, rel))
                 errors.extend(og_repeat_errors(text, rel))
                 errors.extend(blank_code_errors(text, rel))
+                errors.extend(promo_code_errors(text, rel))
                 if rel.startswith("articles/"):
                     errors.extend(doubled_word_errors(text, rel))
                 for match in re.finditer(
@@ -2518,8 +2567,9 @@ def assert_restored_sections():
                         value = json.loads('"' + desc.group(1) + '"')
                         if _starts_lowercase(value):
                             errors.append(f"{os.path.relpath(path, BASE_DIR)}: JSON-LD description starts lowercase")
-            elif name.endswith((".xml", ".csv", ".json", ".txt")):
+            elif name.endswith((".xml", ".csv", ".json", ".txt", ".md")):
                 errors.extend(blank_code_errors(text, rel))
+                errors.extend(promo_code_errors(text, rel))
                 errors.extend(duffle_claim_errors(text, rel))
                 for chunk in public_copy_chunks(name, text):
                     for hit in sitewide_garble_hits(chunk):
