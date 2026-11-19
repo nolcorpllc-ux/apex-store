@@ -1494,6 +1494,14 @@ def strip_speed_claims(text):
         ("Guaranteed US Delivery for ", ""),
         ("Quick-Ship ", ""),
         ("Zero-Lead-Time ", "Made-to-order "),
+        (
+            "Roxzone Speed Dept. & Compromised Running breathable tech shirts (APC-C36..APC-C41)",
+            "Compromised Running (APC-C36) and the 6.1 oz heavyweight cotton tees 1km Split (APC-C37), Zone 5 Engine (APC-C38), Push Heavy (APC-C40), and Roxzone Speed Dept. (APC-C41)",
+        ),
+        (
+            "Roxzone Speed Dept. &amp; Compromised Running breathable tech shirts (APC-C36..APC-C41)",
+            "Compromised Running (APC-C36) and the 6.1 oz heavyweight cotton tees 1km Split (APC-C37), Zone 5 Engine (APC-C38), Push Heavy (APC-C40), and Roxzone Speed Dept. (APC-C41)",
+        ),
     ]
     for old, new in repls:
         text = text.replace(old, new)
