@@ -45,6 +45,43 @@ def assert_published_xml_parses():
     if errors:
         raise SystemExit("XML parse failed:\n" + "\n".join(errors))
 
+
+PRICE_FIELD_RE = re.compile(r"^\d+\.\d{2} USD$")
+IMAGE_LINK_RE = re.compile(r"^https?://\S+$")
+
+
+def assert_published_csv_feeds():
+    """Fail the build if a CSV feed row is the wrong width or has a bad price or image."""
+    errors = []
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [name for name in dirnames if name not in {".git", "__pycache__"}]
+        for name in filenames:
+            if not name.endswith(".csv"):
+                continue
+            path = os.path.join(dirpath, name)
+            rel = os.path.relpath(path, BASE_DIR)
+            with open(path, newline="", encoding="utf-8") as handle:
+                rows = list(csv.reader(handle))
+            if not rows:
+                errors.append(f"{rel}: empty CSV")
+                continue
+            header = rows[0]
+            width = len(header)
+            price_at = header.index("price") if "price" in header else None
+            image_at = header.index("image_link") if "image_link" in header else None
+            if "feed" in name.lower() and (price_at is None or image_at is None):
+                errors.append(f"{rel}: header is missing price or image_link")
+            for line_no, row in enumerate(rows[1:], start=2):
+                if len(row) != width:
+                    errors.append(f"{rel}:{line_no}: {len(row)} columns, header has {width}")
+                    continue
+                if price_at is not None and not PRICE_FIELD_RE.fullmatch(row[price_at].strip()):
+                    errors.append(f"{rel}:{line_no}: malformed price {row[price_at]!r}")
+                if image_at is not None and not IMAGE_LINK_RE.fullmatch(row[image_at].strip()):
+                    errors.append(f"{rel}:{line_no}: malformed image_link {row[image_at]!r}")
+    if errors:
+        raise SystemExit("CSV feed check failed:\n" + "\n".join(errors))
+
 with open(os.path.join(BASE_DIR, "catalog.json"), "r", encoding="utf-8") as f:
     catalog = json.load(f)
 
@@ -1629,7 +1666,12 @@ def generate_pinterest_csv_feed():
         "size",
     ]
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fieldnames,
+            quoting=csv.QUOTE_MINIMAL,
+            lineterminator="\r\n",
+        )
         writer.writeheader()
         for prod in products:
             priced = fourthwall_size_prices(prod)
@@ -1654,7 +1696,7 @@ def generate_pinterest_csv_feed():
                 row["price"] = f"{amount:.2f} USD"
                 row["size"] = size
                 writer.writerow(row)
-
+    assert_published_csv_feeds()
 
 
 def generate_returns_page():
@@ -2177,5 +2219,6 @@ if __name__ == "__main__":
     enforce_delisted_noindex()
     scrub_published_files()
     assert_published_xml_parses()
+    assert_published_csv_feeds()
     # inject_static_seo_into_index() disabled to preserve clean index.html
     print(f"Successfully generated {len(products)} product pages, {len(guides)} SEO articles, Shopping XML/CSV feeds, and sitemap.xml")
