@@ -2915,7 +2915,7 @@
       },
       "fourthwall_default_variant_id": "05d3d05b-848a-4432-9c1e-0e7a9e1af7b5"
     },
-    {
+        {
       "id": "APC-C34",
       "handle": "chicago-dallas-socal-world-series-prep-heavyweight-hoodie",
       "title": "World Series Prep",
@@ -2926,18 +2926,17 @@
       "list_price": 58.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c34-black.jpg?v=20261105h",
-      "alt_image": "images/streetwear/apc-c34-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c34/01.jpg?v=20261119hoodies",
+      "alt_image": "images/streetwear/apc-c34/02.jpg?v=20261119hoodies",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
       "has_sizes": true,
-      "short_desc": "Your 5:30 AM garage warmup and post-race recovery layer. Cut from heavyweight ring-spun fleece with a soft brushed interior, double-lined hood, and durable soft-hand cured graphics that hold up season after season.",
+      "short_desc": "World Series Prep. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
       "highlights": [
-        "Blank Quality: Heavyweight ring-spun fleece with ribbed cuffs and waistband",
-        "Fit & Sizing: Structured athletic hoodie fit that layers cleanly over your race tee or singlet",
-        "Durable Cured Print: Soft-hand graphic ink that holds a print in the dryer",
-        "Fulfillment: Made to order. Free US shipping."
+        "World Series Prep. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
+        "Color: Pigment Black. XS–XL $58. 2XL and 3XL $63.",
+        "Print: center chest. The back stays plain."
       ],
       "review_quote": "",
       "stripe_account_id": "acct_1UUawuRsZaeIoAJJ",
@@ -2955,7 +2954,7 @@
       "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/chicago-dallas-socal-2026-2027-world-series-prep-winged-hoodie",
       "product_page_url": "https://www.apexhybridco.com/products/chicago-dallas-socal-world-series-prep-heavyweight-hoodie.html",
       "fourthwall_variants": {
-        "Black": {
+        "Pigment Black": {
           "XS": "85bb4f83-bff1-4998-9f68-b8a23b08dfb0",
           "S": "dc53f607-5617-474d-abff-3eac666aee20",
           "M": "9a69d869-5c34-440a-b058-fe89ca39a209",
@@ -2965,7 +2964,11 @@
           "3XL": "31b5b1e2-256e-48cb-b2d3-fb8eadbba363"
         }
       },
-      "fourthwall_default_variant_id": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b"
+      "fourthwall_default_variant_id": "b7d4593e-9ba1-4f1d-8d17-b09f3a69f59b",
+      "extra_images": [
+        "images/streetwear/apc-c34/03.jpg?v=20261119hoodies",
+        "images/streetwear/apc-c34/04.jpg?v=20261119hoodies"
+      ]
     },
         {
       "id": "APC-C37",
@@ -3397,29 +3400,28 @@
         "images/streetwear/apc-c31/10.jpg?v=20261119batch24"
       ]
     },
-    {
+        {
       "id": "APC-C32",
       "handle": "burpee-broad-jumps-build-character-warmup-hoodie",
-      "title": "Burpee Broad Jumps",
-      "seo_title": "Burpee Broad Jumps",
+      "title": "Build Character",
+      "seo_title": "Build Character",
       "dept": "Hoodies",
       "category": "Hoodies & Layers",
       "retail_price": 58.0,
       "list_price": 58.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c32-black.jpg?v=20261105h",
-      "alt_image": "images/streetwear/apc-c32-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c32/01.jpg?v=20261119hoodies",
+      "alt_image": "images/streetwear/apc-c32/02.jpg?v=20261119hoodies",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
       "has_sizes": true,
-      "short_desc": "Your 5:30 AM garage warmup and post-race recovery layer. Cut from heavyweight ring-spun fleece with a soft brushed interior, double-lined hood, and durable soft-hand cured graphics that hold up season after season.",
+      "short_desc": "Build Character. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
       "highlights": [
-        "Blank Quality: Heavyweight ring-spun fleece with ribbed cuffs and waistband",
-        "Fit & Sizing: Structured athletic hoodie fit that layers cleanly over your race tee or singlet",
-        "Durable Cured Print: Soft-hand graphic ink that holds a print in the dryer",
-        "Fulfillment: Made to order. Free US shipping."
+        "Build Character. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
+        "Color: Pigment Black. XS–XL $58. 2XL and 3XL $63.",
+        "Print: center chest. The back stays plain."
       ],
       "review_quote": "",
       "stripe_account_id": "acct_1UUawuRsZaeIoAJJ",
@@ -3437,7 +3439,7 @@
       "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/burpee-broad-jumps-build-character-8-0-oz-warmup-hoodie",
       "product_page_url": "https://www.apexhybridco.com/products/burpee-broad-jumps-build-character-warmup-hoodie.html",
       "fourthwall_variants": {
-        "Black": {
+        "Pigment Black": {
           "XS": "5add8ab6-c9a0-4c43-8bfe-1771842a5461",
           "S": "6193f3d6-fccc-481d-b493-8c06b68d4d9d",
           "M": "151176d5-13a0-4afb-81a4-3edf6f740222",
@@ -3447,9 +3449,13 @@
           "3XL": "1c0ca70a-8ef9-4d9f-9d69-4ea136a3bb45"
         }
       },
-      "fourthwall_default_variant_id": "ed173816-a15c-43e1-b1fa-0630825c49bb"
+      "fourthwall_default_variant_id": "ed173816-a15c-43e1-b1fa-0630825c49bb",
+      "extra_images": [
+        "images/streetwear/apc-c32/03.jpg?v=20261119hoodies",
+        "images/streetwear/apc-c32/04.jpg?v=20261119hoodies"
+      ]
     },
-    {
+        {
       "id": "APC-C33",
       "handle": "the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie",
       "title": "Erg Doesn't Care",
@@ -3460,18 +3466,17 @@
       "list_price": 58.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c33-black.jpg?v=20261105h",
-      "alt_image": "images/streetwear/apc-c33-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c33/01.jpg?v=20261119hoodies",
+      "alt_image": "images/streetwear/apc-c33/02.jpg?v=20261119hoodies",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
       "has_sizes": true,
-      "short_desc": "Your 5:30 AM garage warmup and post-race recovery layer. Cut from heavyweight ring-spun fleece with a soft brushed interior, double-lined hood, and durable soft-hand cured graphics that hold up season after season.",
+      "short_desc": "Erg Doesn't Care. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
       "highlights": [
-        "Blank Quality: Heavyweight ring-spun fleece with ribbed cuffs and waistband",
-        "Fit & Sizing: Structured athletic hoodie fit that layers cleanly over your race tee or singlet",
-        "Durable Cured Print: Soft-hand graphic ink that holds a print in the dryer",
-        "Fulfillment: Made to order. Free US shipping."
+        "Erg Doesn't Care. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
+        "Color: Pigment Black. XS–XL $58. 2XL and 3XL $63.",
+        "Print: center chest. The back stays plain."
       ],
       "review_quote": "",
       "stripe_account_id": "acct_1UUawuRsZaeIoAJJ",
@@ -3489,7 +3494,7 @@
       "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie",
       "product_page_url": "https://www.apexhybridco.com/products/the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie.html",
       "fourthwall_variants": {
-        "Black": {
+        "Pigment Black": {
           "XS": "2313798a-5651-4821-91d0-81ed4775ed72",
           "S": "10959ca1-dbff-4df4-8713-ffbbcd6df723",
           "M": "ff7ea849-58da-42fb-b9b2-033bcfb6efdc",
@@ -3499,37 +3504,40 @@
           "3XL": "281e8326-b981-41e2-9869-642ce8f84a20"
         }
       },
-      "fourthwall_default_variant_id": "78f1465a-6d25-45ed-b287-548e93135679"
+      "fourthwall_default_variant_id": "78f1465a-6d25-45ed-b287-548e93135679",
+      "extra_images": [
+        "images/streetwear/apc-c33/03.jpg?v=20261119hoodies",
+        "images/streetwear/apc-c33/04.jpg?v=20261119hoodies"
+      ]
     },
-    {
+        {
       "id": "APC-C09",
       "handle": "run-station-repeat-heavy-blend-hoodie",
-      "title": "Run. Station. Repeat.",
+      "title": "Run Station Repeat",
       "dept": "Hoodies",
       "category": "Hoodies & Layers",
       "retail_price": 58.0,
       "list_price": 58.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c09-black.jpg?v=20261105h",
-      "alt_image": "images/streetwear/apc-c09-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c09/01.jpg?v=20261119hoodies",
+      "alt_image": "images/streetwear/apc-c09/02.jpg?v=20261119hoodies",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
       "has_sizes": true,
-      "short_desc": "Your 5:30 AM garage warmup and post-race recovery layer. Cut from heavyweight ring-spun fleece with a soft brushed interior, double-lined hood, and durable soft-hand cured graphics that hold up season after season.",
+      "short_desc": "Run Station Repeat. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
       "highlights": [
-        "Blank Quality: Heavyweight ring-spun fleece with ribbed cuffs and waistband",
-        "Fit & Sizing: Structured athletic hoodie fit that layers cleanly over your race tee or singlet",
-        "Durable Cured Print: Soft-hand graphic ink that holds a print in the dryer",
-        "Fulfillment: Made to order. Free US shipping."
+        "Run Station Repeat. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
+        "Color: Pigment Black. XS–XL $58. 2XL and 3XL $63.",
+        "Print: center chest. The back stays plain."
       ],
       "review_quote": "",
       "stripe_account_id": "acct_1UUawuRsZaeIoAJJ",
       "stripe_product_id": "APC-C09",
       "stripe_price_id": "price_1UUb91Rut88O8nG2E5Q24Zi0",
       "product_url": "https://apexhybridco.com/products/run-station-repeat-heavy-blend-hoodie.html",
-      "seo_title": "Run. Station. Repeat.",
+      "seo_title": "Run Station Repeat",
       "has_colorways": false,
       "fulfillment_partner": "Fourthwall",
       "fourthwall_blank": "Independent Trading Co. PRM4500 ( heavyweight pigment-dyed fleece hoodie, fulfilled via Fourthwall)",
@@ -3542,7 +3550,7 @@
       "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/run-station-repeat-heavyweight-fleece-warmup-hoodie",
       "product_page_url": "https://www.apexhybridco.com/products/run-station-repeat-heavy-blend-hoodie.html",
       "fourthwall_variants": {
-        "Black": {
+        "Pigment Black": {
           "XS": "7d1b0e76-e17e-493c-8a79-23d4a9129316",
           "S": "8dae9001-7052-4aba-ad20-57680b7e7508",
           "M": "6caec690-8afd-44bb-8566-e232270d856b",
@@ -3552,37 +3560,40 @@
           "3XL": "29defe28-d413-4fdd-9e2f-84ee97266dfd"
         }
       },
-      "fourthwall_default_variant_id": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b"
+      "fourthwall_default_variant_id": "5e0986ef-ebc2-48d2-801b-1727d6e5e66b",
+      "extra_images": [
+        "images/streetwear/apc-c09/03.jpg?v=20261119hoodies",
+        "images/streetwear/apc-c09/04.jpg?v=20261119hoodies"
+      ]
     },
-    {
+        {
       "id": "APC-C10",
       "handle": "wall-balls-bad-decisions-hoodie",
-      "title": "Bad Decisions",
+      "title": "Wall Balls & Bad Decisions",
       "dept": "Hoodies",
       "category": "Hoodies & Layers",
       "retail_price": 58.0,
       "list_price": 58.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c10-black.jpg?v=20261105h",
-      "alt_image": "images/streetwear/apc-c10-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c10/01.jpg?v=20261119hoodies",
+      "alt_image": "images/streetwear/apc-c10/02.jpg?v=20261119hoodies",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
       "has_sizes": true,
-      "short_desc": "Your 5:30 AM garage warmup and post-race recovery layer. Cut from heavyweight ring-spun fleece with a soft brushed interior, double-lined hood, and durable soft-hand cured graphics that hold up season after season.",
+      "short_desc": "Wall Balls & Bad Decisions. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
       "highlights": [
-        "Blank Quality: Heavyweight ring-spun fleece with ribbed cuffs and waistband",
-        "Fit & Sizing: Structured athletic hoodie fit that layers cleanly over your race tee or singlet",
-        "Durable Cured Print: Soft-hand graphic ink that holds a print in the dryer",
-        "Fulfillment: Made to order. Free US shipping."
+        "Wall Balls & Bad Decisions. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
+        "Color: Pigment Black. XS–XL $58. 2XL and 3XL $63.",
+        "Print: center chest. The back stays plain."
       ],
       "review_quote": "",
       "stripe_account_id": "acct_1UUawuRsZaeIoAJJ",
       "stripe_product_id": "APC-C10",
       "stripe_price_id": "price_1UUb93Rut88O8nG2nfdQBibQ",
       "product_url": "https://apexhybridco.com/products/wall-balls-bad-decisions-hoodie.html",
-      "seo_title": "Bad Decisions",
+      "seo_title": "Wall Balls & Bad Decisions",
       "has_colorways": false,
       "fulfillment_partner": "Fourthwall",
       "fourthwall_blank": "Independent Trading Co. PRM4500 ( heavyweight pigment-dyed fleece hoodie, fulfilled via Fourthwall)",
@@ -3595,7 +3606,7 @@
       "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/wall-balls-bad-decisions-brushed-fleece-pullover-hoodie",
       "product_page_url": "https://www.apexhybridco.com/products/wall-balls-bad-decisions-hoodie.html",
       "fourthwall_variants": {
-        "Black": {
+        "Pigment Black": {
           "XS": "9dcb8fc2-40f2-44e8-a248-6e966b632807",
           "S": "7545a9f0-3169-4918-8107-c6caa0aa559b",
           "M": "4b60582b-d219-4491-a543-b42fb2b7e40d",
@@ -3605,7 +3616,11 @@
           "3XL": "87f73a63-de61-4270-b9ac-c1af04661b8c"
         }
       },
-      "fourthwall_default_variant_id": "06660872-edb1-47b0-9ade-6b3d31fa98f8"
+      "fourthwall_default_variant_id": "06660872-edb1-47b0-9ade-6b3d31fa98f8",
+      "extra_images": [
+        "images/streetwear/apc-c10/03.jpg?v=20261119hoodies",
+        "images/streetwear/apc-c10/04.jpg?v=20261119hoodies"
+      ]
     },
     {
       "id": "APC-C11",
@@ -3664,7 +3679,7 @@
       },
       "fourthwall_default_variant_id": "e7bc46ab-f42f-45c6-aebb-ed1bad633116"
     },
-    {
+        {
       "id": "APC-C12",
       "handle": "defend-my-sled-push-fleece-hoodie",
       "title": "The Footage Speaks",
@@ -3674,18 +3689,17 @@
       "list_price": 58.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c12-black.jpg?v=20261105h",
-      "alt_image": "images/streetwear/apc-c12-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c12/01.jpg?v=20261119hoodies",
+      "alt_image": "images/streetwear/apc-c12/02.jpg?v=20261119hoodies",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
       "has_sizes": true,
-      "short_desc": "Your 5:30 AM garage warmup and post-race recovery layer. Cut from heavyweight ring-spun fleece with a soft brushed interior, double-lined hood, and durable soft-hand cured graphics that hold up season after season.",
+      "short_desc": "The Footage Speaks. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
       "highlights": [
-        "Blank Quality: Heavyweight ring-spun fleece with ribbed cuffs and waistband",
-        "Fit & Sizing: Structured athletic hoodie fit that layers cleanly over your race tee or singlet",
-        "Durable Cured Print: Soft-hand graphic ink that holds a print in the dryer",
-        "Fulfillment: Made to order. Free US shipping."
+        "The Footage Speaks. Pigment Black heavyweight fleece hoodie with a center-chest print. The back stays plain. XS–XL $58, 2XL and 3XL $63.",
+        "Color: Pigment Black. XS–XL $58. 2XL and 3XL $63.",
+        "Print: center chest. The back stays plain."
       ],
       "review_quote": "",
       "stripe_account_id": "acct_1UUawuRsZaeIoAJJ",
@@ -3705,7 +3719,7 @@
       "checkout_url": "https://apex-hybrid-co-shop.fourthwall.com/products/sled-push-dept-the-footage-speaks-pullover-hoodie",
       "product_page_url": "https://www.apexhybridco.com/products/defend-my-sled-push-fleece-hoodie.html",
       "fourthwall_variants": {
-        "Black": {
+        "Pigment Black": {
           "XS": "c2c4b556-38b3-45fe-8671-f7c3098d9877",
           "S": "b368c389-dad2-4166-8bdf-ec6c646b0e16",
           "M": "7c04c499-643c-4f2c-8b59-995d4b9060e9",
@@ -3715,7 +3729,11 @@
           "3XL": "7cc96662-1bc1-4a72-ada2-8e6a350b1425"
         }
       },
-      "fourthwall_default_variant_id": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c"
+      "fourthwall_default_variant_id": "b46ab63e-edcf-4be1-9821-a6b73dcc8a8c",
+      "extra_images": [
+        "images/streetwear/apc-c12/03.jpg?v=20261119hoodies",
+        "images/streetwear/apc-c12/04.jpg?v=20261119hoodies"
+      ]
     },
     {
       "id": "APC-C43",

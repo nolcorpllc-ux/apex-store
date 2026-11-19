@@ -127,8 +127,8 @@
         "APC-C34"
       ],
       "default_sku": "APC-C09",
-      "image": "images/streetwear/apc-c09-black.png",
-      "alt_image": "images/streetwear/apc-c09-white.png",
+      "image": "images/streetwear/apc-c09/01.jpg?v=20261119hoodies",
+      "alt_image": "images/streetwear/apc-c09/01.jpg?v=20261119hoodies",
       "regular_unit_price": 58.0,
       "regular_total_price": 116.0,
       "bundle_price": 104.4,
