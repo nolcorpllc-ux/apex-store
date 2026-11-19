@@ -729,7 +729,8 @@
  </div>
  </div>
  </main>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var variants = {"Pigment Black": {"XS": "573cbf4f-7970-4d71-a97b-27d5f66a9d70", "S": "9bd03e9b-5aa6-4340-b9ac-bd8d2e8b23df", "M": "27b508de-636d-487c-b950-19834a4f2fe5", "L": "44538ed3-29de-492b-8df4-bc4ce380148f", "XL": "2548684e-43fd-4695-9cb3-8c3f2be511ea", "2XL": "c4e40d42-d16a-44dc-a82a-bfbaa98b3d90", "3XL": "98a2be8b-2894-40c9-8723-c556749df853"}, "Pigment Slate Blue": {"XS": "12ab1678-b85f-4383-b857-7c35ed7eb812", "S": "3c21fd60-c0bd-4e87-b8de-4345e09f3921", "M": "cb125ef6-78f5-40e6-9293-b43ec7042e95", "L": "827b8cc7-2c36-40fe-8797-9411bb6a9336", "XL": "12250a26-a5c9-40ce-90dd-3ac7993cf808", "2XL": "911344c2-e6b3-4e33-b789-acf0270870c5", "3XL": "aae47095-744d-4278-b352-d71041de9a2e"}};
     var prices = {"Pigment Black": {"XS": 63.0, "S": 63.0, "M": 63.0, "L": 63.0, "XL": 63.0, "2XL": 66.0, "3XL": 66.0}, "Pigment Slate Blue": {"XS": 63.0, "S": 63.0, "M": 63.0, "L": 63.0, "XL": 63.0, "2XL": 66.0, "3XL": 66.0}};
@@ -769,7 +770,7 @@
     document.querySelectorAll(".StaticSizeBtn").forEach(function(btn){
       btn.addEventListener("click", function(){ state.size = btn.getAttribute("data-size"); sync(); });
     });
-    function go(url){ window.location.href = url; }
+    function go(url){ window.location.href = apexPromoUrl(url); }
     document.getElementById("staticBuyNowBtn").addEventListener("click", function(ev){
       ev.preventDefault();
       var dest = fallbackUrl;
@@ -792,7 +793,7 @@
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (left) return;
         left = true; clearTimeout(watchdog);
-        if (chk && chk.id) go("https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id));
+        if (chk && chk.id) apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         else go(dest);
       }).catch(function(){ if(!left){ left=true; clearTimeout(watchdog); go(dest); } });
     });

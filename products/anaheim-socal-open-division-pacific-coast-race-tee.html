@@ -582,7 +582,7 @@
  <section style="margin-top:36px; background:#fff; border:1px solid #e4e6eb; border-radius:12px; padding:24px;">
  <h2 style="font-size:18px; margin-bottom:12px;">Related HYROX Training, Pacing &amp; Recovery Buyer Guides</h2>
  <ul style="padding-left:20px; line-height:1.9; font-size:14px;">
- <li><a href="../articles/matching-hyrox-doubles-team-shirts-2026.html" style="color:#0066ff; font-weight:700;">Matching HYROX Doubles Team Shirts 2026/2027  -  Men&#x27;s, Women&#x27;s &amp; Mixed Doubles Race Tops (15% Off 2-Shirt Bundle)</a>  -  <span style="color:#475569;">Doubles Team Apparel Guide (6 min read)</span></li>
+ <li><a href="../articles/matching-hyrox-doubles-team-shirts-2026.html" style="color:#0066ff; font-weight:700;">Matching HYROX Doubles Team Shirts 2026/2027  -  Men&#x27;s, Women&#x27;s &amp; Mixed Doubles Race Tops (15% off your entire order with code TEAM15)</a>  -  <span style="color:#475569;">Doubles Team Apparel Guide (6 min read)</span></li>
 <li><a href="../articles/2026-2027-north-america-hybrid-race-calendar-course-and-turf-guide.html" style="color:#0066ff; font-weight:700;">2026–2027 North America Functional Race Calendar: Dallas, Chicago, Anaheim &amp; Miami Turf Pacing Guide</a>  -  <span style="color:#475569;">2026/2027 Race Calendar &amp; News (7 min read)</span></li>
 <li><a href="../articles/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html" style="color:#0066ff; font-weight:700;">Anaheim SoCal Dec 2026 HYROX Race Gear, Lightweight Warmup Jackets &amp; Breathable Tech Shirts</a>  -  <span style="color:#475569;">Anaheim Dec 2026 Race City Guide (7 min read)</span></li>
 <li><a href="../articles/hyrox-anaheim-socal-open-division-apparel.html" style="color:#0066ff; font-weight:700;">HYROX Anaheim SoCal Open Division Apparel (Dec 2026)  -  Pacific Coast Race Tee, Muscle Tank &amp; Warmup Shell</a>  -  <span style="color:#475569;">Anaheim Race City Guide (6 min read)</span></li>
@@ -613,7 +613,8 @@
  </div>
  </div>
  </footer>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var prodId = "APC-C18";
     var prodVariants = {"Black": {"S": "5b4995a6-f354-4919-874f-bc293c0015cd", "M": "12168372-2f3b-4ce2-88df-258fd652cb78", "L": "a2cf7e4e-5cdf-40fe-a1b7-141fdc023187", "XL": "c62d440a-181a-4c58-b5e0-c8d605957801", "2XL": "773832b9-b959-4606-a608-1a093ff09318", "3XL": "4795338c-29bd-4c89-a3ca-b341b1fd77a5", "4XL": "7ebaf79b-e154-4880-8895-64f872e0b30c"}};
@@ -697,7 +698,7 @@
     function redirectFourthwallVariant(vid, triggerEl, fbHref) {
       try { hit("checkout_clicks_total"); hit("checkout_" + prodId); } catch (e) {}
       if (!vid) {
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         return;
       }
       var prevText = triggerEl ? triggerEl.textContent : "";
@@ -719,16 +720,16 @@
         });
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (chk && chk.id) {
-          window.location.href = "https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id);
+          apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         } else {
-          window.location.href = fbHref || fallbackUrl;
+          window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         }
       }).catch(function(){
         if (triggerEl) {
           triggerEl.textContent = prevText;
           triggerEl.style.opacity = "1";
         }
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
       });
     }
     window.launchStaticCheckout = function(btn) {

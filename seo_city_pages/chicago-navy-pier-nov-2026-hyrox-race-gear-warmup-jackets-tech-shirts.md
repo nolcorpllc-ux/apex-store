@@ -12,7 +12,7 @@
 | `APC-C16` | **Chicago Championship Division Tee — Navy Pier 8x1000m Club** | Race City Tees | **$34.00** | [Product Page](https://www.apexhybridco.com/products/chicago-championship-division-navy-pier-hybrid-race-tee.html) | [Buy Now ($34.00)](https://www.apexhybridco.com/?buy=APC-C16) |
 | `APC-C42` | **Apex AeroShell Lightweight Race Warmup Jacket — '8×1000M Start Corral'** | Lightweight Jackets | **$64.00** | [Product Page](https://www.apexhybridco.com/products/apex-aeroshell-lightweight-race-warmup-jacket.html) | [Buy Now ($64.00)](https://www.apexhybridco.com/?buy=APC-C42) |
 | `APC-C45` | **26/27 World Series Lightweight Warmup Jacket — 'Chicago · Dallas · SoCal · NYC'** | Lightweight Jackets | **$68.00** | [Product Page](https://www.apexhybridco.com/products/26-27-world-series-lightweight-warmup-jacket.html) | [Buy Now ($68.00)](https://www.apexhybridco.com/?buy=APC-C45) |
-| `APC-C36` | **Built For Heavy Legs breathable Breathable Tech Shirt — 'Built For Heavy Legs'** | Breathable Tech Tees | **$36.00** | [Product Page](https://www.apexhybridco.com/products/compromised-running.html) | [Buy Now ($36.00)](https://www.apexhybridco.com/?buy=APC-C36) |
+| `APC-C36` | **Built For Heavy Legs breathable Tech Shirt — 'Built For Heavy Legs'** | Breathable Tech Tees | **$36.00** | [Product Page](https://www.apexhybridco.com/products/compromised-running.html) | [Buy Now ($36.00)](https://www.apexhybridco.com/?buy=APC-C36) |
 | `APC-C34` | **Chicago · Dallas · SoCal 2026/2027 World Series Prep Winged Hoodie** | Warmup Hoodies | **$58.00** | [Product Page](https://www.apexhybridco.com/products/chicago-dallas-socal-world-series-prep-heavyweight-hoodie.html) | [Buy Now ($58.00)](https://www.apexhybridco.com/?buy=APC-C34) |
 | `APC-E12` | **AirRecover Full-Leg Sequential Pneumatic Compression Recovery Boots** | Percussion & Compression | **$139.00** | [Product Page](https://www.apexhybridco.com/products/rechargeable-pneumatic-calf-shin-compression-sleeves.html) | [Buy Now ($139.00)](https://www.apexhybridco.com/?buy=APC-E12) |
 
@@ -24,7 +24,7 @@ Arrive at Navy Pier wearing the Apex AeroShell Lightweight Race Warmup Jacket (`
 
 ## 3. Frequently Asked Questions
 ### Q: What should I wear for Chicago Navy Pier HYROX on Feb 11–15, 2027?
-Wear a lightweight breathable breathable tech shirt like the Built For Heavy Legs Tech Shirt (APC-C36) or Chicago Championship Division Tee (APC-C16) for the race itself, layered under the Apex AeroShell Lightweight Race Warmup Jacket (APC-C42) or 26/27 World Series Lightweight Warmup Jacket (APC-C45) for the cold Lake Michigan walk into Navy Pier.
+Wear a lightweight breathable tech shirt like the Built For Heavy Legs Tech Shirt (APC-C36) or Chicago Championship Division Tee (APC-C16) for the race itself, layered under the Apex AeroShell Lightweight Race Warmup Jacket (APC-C42) or 26/27 World Series Lightweight Warmup Jacket (APC-C45) for the cold Lake Michigan walk into Navy Pier.
 
 ### Q: Where can I buy the Chicago Navy Pier 8x1000m Championship Division shirt and warmup jacket?
 Order the Chicago Championship Division Tee (APC-C16) and Apex AeroShell Lightweight Race Warmup Jacket (APC-C42) directly at Apex Hybrid Co., operated by NolCorp LLC (https://www.apexhybridco.com). Made to order. Ships from the US and arrives in about 7–10 business days. Free US shipping.

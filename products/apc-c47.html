@@ -606,7 +606,8 @@
  </div>
  </div>
  </footer>
- <script>
+ <script src="/checkout-code.js"></script>
+<script>
   (function(){
     var prodId = "APC-C47";
     var prodVariants = {"XS": {"id": "d18be3b5-e1c0-41db-9c6e-4af872a0656e", "price": 68.0}, "S": {"id": "b4bb75cd-7351-41d2-8c5b-edb645c79901", "price": 68.0}, "M": {"id": "49a70789-ff66-4530-8883-b775102487c9", "price": 68.0}, "L": {"id": "04d6fe08-b677-455d-8f0b-34da2541ffbc", "price": 68.0}, "XL": {"id": "284b13ab-b857-4849-bfe9-f8437e23e0eb", "price": 68.0}, "2XL": {"id": "609497f7-f428-4269-b954-ce8b2975082e", "price": 70.0}, "3XL": {"id": "784f7aee-911e-4cbf-8a50-fc3955d0c9ed", "price": 72.0}};
@@ -690,7 +691,7 @@
     function redirectFourthwallVariant(vid, triggerEl, fbHref) {
       try { hit("checkout_clicks_total"); hit("checkout_" + prodId); } catch (e) {}
       if (!vid) {
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         return;
       }
       var prevText = triggerEl ? triggerEl.textContent : "";
@@ -712,16 +713,16 @@
         });
       }).then(function(r){ return r.json(); }).then(function(chk){
         if (chk && chk.id) {
-          window.location.href = "https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id);
+          apexFinishCheckout(chk.id, function (url) { window.location.href = url; });
         } else {
-          window.location.href = fbHref || fallbackUrl;
+          window.location.href = apexPromoUrl(fbHref || fallbackUrl);
         }
       }).catch(function(){
         if (triggerEl) {
           triggerEl.textContent = prevText;
           triggerEl.style.opacity = "1";
         }
-        window.location.href = fbHref || fallbackUrl;
+        window.location.href = apexPromoUrl(fbHref || fallbackUrl);
       });
     }
     window.launchStaticCheckout = function(btn) {

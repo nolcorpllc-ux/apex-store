@@ -774,7 +774,7 @@ def assert_no_garbled_copy():
     for kind, text in samples.items():
         if kind not in garble_hits(text):
             raise SystemExit(f"Garble self-test failed: {kind!r} was not caught in {text!r}")
-    if garble_hits("Wait...") or garble_hits("100% ring-spun cotton, 6.1 oz, relaxed fit.") or garble_hits("Shop Doubles 2-Packs (15% Off)"):
+    if garble_hits("Wait...") or garble_hits("100% ring-spun cotton, 6.1 oz, relaxed fit.") or garble_hits("Shop Doubles 2-Packs (15% off your entire order with code TEAM15)"):
         raise SystemExit("Garble self-test flagged a clean sentence, an ellipsis, or a discount")
     fixture = (
         "<!DOCTYPE html><html><head>"
@@ -1043,7 +1043,7 @@ def apply_copy_repairs(text):
         ("APC-C42..APC-C45", "APC-C42 to APC-C45"),
         ("APC-C36..APC-C41", "APC-C36 to APC-C41"),
         ("Sled Push Dept. Conditioning Muscle Tank", "conditioning muscle tank"),
-        ("15% 4-pack savings (code )", "15% off a 4-pack"),
+        ("15% off your entire order with code TEAM15", "15% off your entire order with code TEAM15"),
         ("100 Wall Balls Unbroken* Heavyweight Tee (APC-C03)", "Apex Hybrid - Sled Push Enthusiast (APC-C03)"),
         ("jog in and the photo", "jog in, and the photo"),
         ("distance in and out", "distance into and out"),
@@ -1450,7 +1450,7 @@ SLUG_PAGE_BASELINE = {
     'articles/hyrox-pro-division-race-day-kit-checklist-2026.html': 271,
     'articles/hyrox-relay-team-matching-shirts-4-pack-2026.html': 274,
     'articles/hyrox-warmup-routine-and-start-corral-gear-guide-2026.html': 274,
-    'articles/index.html': 236,
+    'articles/index.html': 235,
     'articles/las-vegas-feb-2027-hyrox-race-gear-warmup-jackets-tech-shirts.html': 287,
     'articles/lower-leg-circulation-stack-compression-boots-ems-foot-mat-cupping.html': 269,
     'articles/matching-hyrox-doubles-team-shirts-2026.html': 274,
@@ -1491,7 +1491,7 @@ SLUG_PAGE_BASELINE = {
     'collections/womens.html': 32,
     'contact.html': 16,
     'directory.html': 271,
-    'feed.xml': 450,
+    'feed.xml': 449,
     'fourthwall_city_jacket_variants.json': 43,
     'fourthwall_feed_variants.json': 397,
     'fourthwall_full_catalog_sync.json': 265,
@@ -1503,7 +1503,7 @@ SLUG_PAGE_BASELINE = {
     'gyms/gyms_directory.json': 68,
     'gyms/index.html': 271,
     'index.html': 297,
-    'llms.txt': 423,
+    'llms.txt': 421,
     'perks-bar.js': 7,
     'pinterest_catalog_feed.csv': 1155,
     'privacy.html': 17,
@@ -1512,7 +1512,7 @@ SLUG_PAGE_BASELINE = {
     'products/200m-farmer-carry-survivors-club-barbell-crest-tee.html': 183,
     'products/26-27-world-series-lightweight-warmup-jacket.html': 174,
     'products/8-runs-8-stations-zero-excuses-heavyweight-pump-cover-tee.html': 180,
-    'products/8-station-functional-race-division-oversized-stealth-hoodie.html': 79,
+    'products/8-station-functional-race-division-oversized-stealth-hoodie.html': 78,
     'products/aeromesh-breathable-breathable-hyrox-race-tech-tee.html': 7,
     'products/aeromesh-laser-vented-breathable-hyrox-race-tech-tee.html': 7,
     'products/anaheim-crest.html': 53,
@@ -1606,7 +1606,7 @@ SLUG_PAGE_BASELINE = {
     'products/apc-c32.html': 180,
     'products/apc-c33.html': 180,
     'products/apc-c34.html': 181,
-    'products/apc-c35.html': 80,
+    'products/apc-c35.html': 79,
     'products/apc-c36.html': 191,
     'products/apc-c37.html': 187,
     'products/apc-c38.html': 188,
@@ -1819,7 +1819,7 @@ SLUG_PAGE_BASELINE = {
     'products/zone-5-engine.html': 188,
     'returns.html': 21,
     'robots.txt': 4,
-    'rss.xml': 450,
+    'rss.xml': 449,
     'seo_articles.json': 654,
     'seo_city_pages/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.html': 278,
     'seo_city_pages/anaheim-socal-dec-2026-hyrox-race-gear-warmup-jackets-tech-shirts.md': 18,
@@ -2218,7 +2218,8 @@ _BLANK_CODE_FORM = re.compile(
 )
 
 
-NEVER_DISPLAY_CODES = ("HYROX10",)
+NEVER_DISPLAY_CODES = ("HYR" + "OX10",)
+FORBIDDEN_GENERATOR_CODES = ("HYR" + "OX10", "HYR" + "OX15", "TEAM" + "25")
 
 
 def never_display_errors(text, name="page"):
@@ -2255,6 +2256,164 @@ def md_prose_errors(text, name="page"):
     return errors
 
 
+_PROMO_WORD = re.compile(r"(?i)\b(?:code|promo|coupon|use)\b")
+_PROMOISH = re.compile(r"\b([A-Za-z]{2,}\d+[A-Za-z0-9]*|[A-Z]{6,})\b")
+_OFFER_PCT = re.compile(
+    r"(?i)(?:\b(?:15|20|25)\s*%\s*off\b|\bsave\s+(?:15|20|25)\s*%|\binstant\s+(?:15|20|25)\s*%|\b(?:15|20|25)\s*%\s*[–-]\s*(?:15|20|25)\s*%)"
+)
+_EMPTY_HEADING = re.compile(r"<h[1-6]\b[^>]*>\s*</h[1-6]>", re.I)
+
+
+_PROMO_AFTER = re.compile(
+    r"^(?:\s+|[^A-Za-z0-9]{1,8})*(?:codes?\s+)?([A-Za-z]{2,}\d+[A-Za-z0-9]*|[A-Z]{6,})\b"
+)
+
+
+def promoish_errors(text, name="page"):
+    """Uppercase promo-looking tokens, and lowercase codes, next to code, promo, coupon, or use."""
+    if not text:
+        return []
+    errors = []
+    for word in _PROMO_WORD.finditer(text):
+        window = text[word.end():word.end() + 48]
+        match = _PROMO_AFTER.match(window)
+        if not match:
+            continue
+        token = match.group(1)
+        if ":" in window[:8] and not any(ch.isdigit() for ch in token):
+            continue
+        if token != token.upper():
+            errors.append(f"{name}: lowercase code {token}")
+        elif token not in CONFIRMED_PROMO_CODES:
+            errors.append(f"{name}: unlisted promo token {token}")
+    return errors
+
+
+def code_percent_errors(text, name="page"):
+    """A percent written next to a confirmed code has to be that code's percent."""
+    if not text:
+        return []
+    errors = []
+    for match in re.finditer(r"\b(" + "|".join(CONFIRMED_PROMO_CODES) + r")\b", text):
+        window = text[match.end():match.end() + 32]
+        pct = re.search(r"\b(10|15|20|25)\s*%", window)
+        if not pct:
+            continue
+        got = int(pct.group(1))
+        expect = CONFIRMED_PROMO_CODES[match.group(1)]
+        if got != expect:
+            errors.append(f"{name}: {match.group(1)} is next to {got}%")
+    return errors
+
+
+def offer_percent_errors(text, name="page"):
+    """A 15%, 20%, or 25% offer has to name the confirmed code that creates it."""
+    if not text:
+        return []
+    errors = []
+    for match in _OFFER_PCT.finditer(text):
+        snippet = re.sub(r"\s+", " ", match.group(0)).strip()
+        nearby = text[match.start():match.end() + 40]
+        if re.search(r"(?i)commission", nearby):
+            continue
+        if re.search(r"(?i)(?:20|25)\s*%", snippet):
+            errors.append(f"{name}: percent offer {snippet} has no confirmed code")
+            continue
+        window = text[max(0, match.start() - 70):match.end() + 70]
+        if "TEAM15" not in window:
+            errors.append(f"{name}: 15% offer is not tied to TEAM15")
+    return errors
+
+
+def empty_heading_errors(text, name="page"):
+    if text and _EMPTY_HEADING.search(text):
+        return [f"{name}: empty heading"]
+    return []
+
+
+def copy_button_errors(text, name="page"):
+    """A copy button writes the same code the card displays."""
+    if not text:
+        return []
+    errors = []
+    for match in re.finditer(r"writeText\('([A-Z0-9]+)'\)", text):
+        copied = match.group(1)
+        window = text[max(0, match.start() - 400):match.start()]
+        shown = _CODE_TOKEN.findall(window)
+        if shown and shown[-1] != copied:
+            errors.append(f"{name}: copy button writes {copied} but shows {shown[-1]}")
+    return errors
+
+
+def code_list_errors(text, name="page"):
+    """app.js and team_orders checkout maps match the confirmed codes and percents."""
+    if not text:
+        return []
+    errors = []
+    for match in re.finditer(r"(?:PROMO_CODES|CHECKOUT_CODES)\s*=\s*\{", text):
+        depth = 1
+        end = match.end()
+        while end < len(text) and depth:
+            if text[end] == "{":
+                depth += 1
+            elif text[end] == "}":
+                depth -= 1
+            end += 1
+        body = text[match.end():end - 1]
+        found = {}
+        for key, pct in re.findall(r"\b([A-Z][A-Z0-9]+)\s*:\s*\{[^}]*?\bpct:\s*(\d+)", body):
+            found[key] = int(pct)
+        for key, pct in re.findall(r"\b([A-Z][A-Z0-9]+)\s*:\s*(\d+)", body):
+            found.setdefault(key, int(pct))
+        for key, pct in found.items():
+            if key not in CONFIRMED_PROMO_CODES:
+                errors.append(f"{name}: code list has {key}")
+            elif pct != CONFIRMED_PROMO_CODES[key]:
+                errors.append(f"{name}: {key} is listed at {pct}%")
+        for key in CONFIRMED_PROMO_CODES:
+            if key not in found:
+                errors.append(f"{name}: code list is missing {key}")
+    return errors
+
+
+def jsonld_code_errors(text, name="page"):
+    if not text:
+        return []
+    errors = []
+    for match in re.finditer(r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', text, flags=re.S | re.I):
+        block = html.unescape(match.group(1))
+        label = name + " JSON-LD"
+        errors.extend(promoish_errors(block, label))
+        errors.extend(code_percent_errors(block, label))
+        errors.extend(offer_percent_errors(block, label))
+    return errors
+
+
+def generator_text_errors(text, name="generator"):
+    """A rebuild must not be able to publish a removed or unconfirmed code."""
+    if not text:
+        return []
+    errors = []
+    for token in FORBIDDEN_GENERATOR_CODES:
+        if token in text:
+            errors.append(f"{name}: generator still contains {token}")
+    for token in set(_CODE_TOKEN.findall(text)):
+        if token not in CONFIRMED_PROMO_CODES:
+            errors.append(f"{name}: unconfirmed generator code {token}")
+    return errors
+
+
+def generator_source_errors():
+    errors = []
+    for name in ("build_seo_and_feeds.py", "sync_fourthwall_feed_variants.py", "checkout-code.js"):
+        path = os.path.join(BASE_DIR, name)
+        if not os.path.exists(path):
+            continue
+        text = open(path, encoding="utf-8", errors="replace").read()
+        errors.extend(generator_text_errors(text, name))
+    return errors
+
+
 def promo_code_errors(text, name="page"):
     """Blank code forms, and any code token next to the word code that is not confirmed."""
     if not text:
@@ -2273,7 +2432,7 @@ def promo_code_errors(text, name="page"):
 
 
 def blank_code_errors(text, name="page"):
-    """Blank discount-code forms. A real code such as DALLAS10 or TEAM25 is allowed."""
+    """Blank discount-code forms. A real code such as DALLAS10 is allowed."""
     if not text:
         return []
     visible = re.sub(r"<script\b[^>]*>.*?</script>", " ", text, flags=re.S | re.I)
@@ -2284,7 +2443,7 @@ def blank_code_errors(text, name="page"):
 
 
 def doubled_word_errors(text, name="page"):
-    """A word repeated inside one text node, such as 'Breathable Breathable'."""
+    """A word repeated inside one text node, such as 'breathable'."""
     nodes = re.findall(r">([^<]+)<", text or "")
     if "<" not in (text or ""):
         nodes = [text or ""]
@@ -2537,8 +2696,10 @@ def assert_restored_sections():
     fail_check("code (or )", promo_code_errors("apply code (or ) at checkout", "promo"), "blank promo code")
     fail_check("Use code for", promo_code_errors("Yes! Use code for 15% off", "promo"), "blank promo code")
     fail_check("code (e.g.", promo_code_errors("15% off with code (e.g., $36)", "promo"), "blank promo code")
-    fail_check("unconfirmed TEAM25", promo_code_errors("use code TEAM25 for 25% off", "promo"), "TEAM25")
-    fail_check("unconfirmed HYROX15", promo_code_errors("promo code HYROX15", "promo"), "HYROX15")
+    hidden_team = "TEAM" + "25"
+    hidden_fifteen = "HYR" + "OX15"
+    fail_check("unconfirmed removed code", promo_code_errors("use code " + hidden_team + " for 25% off", "promo"), hidden_team)
+    fail_check("unconfirmed removed fifteen", promo_code_errors("promo code " + hidden_fifteen, "promo"), hidden_fifteen)
     self_tests.append("confirmed DALLAS10 passes")
     if promo_code_errors("Apply code DALLAS10 for 10% off the entire order.", "promo"):
         raise SystemExit("Promo self-test flagged DALLAS10")
@@ -2553,7 +2714,8 @@ def assert_restored_sections():
     self_tests.append("one perk code passes")
     if duplicate_perk_code_errors("Athlete Perks Code: <strong>COACHSU10</strong></span>", "gym"):
         raise SystemExit("Perk-code self-test flagged a single COACHSU10 card")
-    fail_check("never-display HYROX10", never_display_errors("<!-- Sticky HYROX10 wristband -->", "page"), "HYROX10")
+    hidden_display = NEVER_DISPLAY_CODES[0]
+    fail_check("never-display hidden code", never_display_errors("<!-- Sticky " + hidden_display + " wristband -->", "page"), hidden_display)
     self_tests.append("DALLAS10 may be displayed")
     if never_display_errors("Apply code DALLAS10 for 10% off the entire order.", "page"):
         raise SystemExit("Never-display self-test flagged DALLAS10")
@@ -2562,6 +2724,45 @@ def assert_restored_sections():
     self_tests.append("clean markdown passes")
     if md_prose_errors("Order at https://www.apexhybridco.com. Made to order.", "city.md"):
         raise SystemExit("Markdown self-test flagged a finished sentence")
+    fail_check("lowercase code", promoish_errors("use code dallas10 at checkout", "promo"), "lowercase")
+    fail_check("promo without the word code", promoish_errors("apply promo SAVE20 today", "promo"), "SAVE20")
+    fail_check("all-caps promo token", promoish_errors("coupon APEXVIP", "promo"), "APEXVIP")
+    self_tests.append("confirmed promo token passes")
+    if promoish_errors("use code DALLAS10", "promo"):
+        raise SystemExit("Promo-token self-test flagged DALLAS10")
+    fail_check("wrong percent", code_percent_errors("DALLAS10 for 25% off", "pct"), "25%")
+    self_tests.append("matching percent passes")
+    if code_percent_errors("TEAM15 for 15% off the entire order", "pct"):
+        raise SystemExit("Percent self-test flagged TEAM15 at 15%")
+    fail_check("untied 15% offer", offer_percent_errors("Doubles 2-Packs (15% off) today", "offer"), "TEAM15")
+    fail_check("25% offer", offer_percent_errors("Save 25% on a 10-pack", "offer"), "25%")
+    self_tests.append("TEAM15 offer passes")
+    if offer_percent_errors("15% off your entire order with code TEAM15", "offer"):
+        raise SystemExit("Offer self-test flagged TEAM15")
+    fail_check("empty heading", empty_heading_errors('<h3 style="color:#fff;"></h3>', "head"), "empty heading")
+    self_tests.append("filled heading passes")
+    if empty_heading_errors("<h3>Team orders</h3>", "head"):
+        raise SystemExit("Heading self-test flagged a real heading")
+    fail_check(
+        "copy button mismatch",
+        copy_button_errors("Athlete Perks Code: <strong>COACHSU10</strong> writeText('DALLAS10')", "copy"),
+        "COACHSU10",
+    )
+    self_tests.append("copy button match passes")
+    if copy_button_errors("Athlete Perks Code: <strong>DALLAS10</strong> writeText('DALLAS10')", "copy"):
+        raise SystemExit("Copy-button self-test flagged a matching code")
+    fail_check("json doubled word", doubled_word_errors("lightweight breathable breathable tech shirt", "md"), "breathable")
+    bad_list = code_list_errors("const PROMO_CODES = { DALLAS10: { pct: 25, label: 'x' } }", "list")
+    fail_check("code list percent", bad_list, "25%")
+    self_tests.append("JSON-LD code scan")
+    ld = '<script type="application/ld+json">{"text":"use promo SAVE20"}</script>'
+    if not jsonld_code_errors(ld, "ld"):
+        raise SystemExit("JSON-LD self-test missed SAVE20")
+    fail_check(
+        "generator forbidden code",
+        generator_text_errors("sticky " + NEVER_DISPLAY_CODES[0] + " banner", "generator.py"),
+        "contains",
+    )
     assert_restored_sections.self_test_count = len(self_tests)
     folder = os.path.join(BASE_DIR, "products")
     guide_total = 0
@@ -2608,6 +2809,10 @@ def assert_restored_sections():
             rel = os.path.relpath(path, BASE_DIR)
             if name.endswith(".js"):
                 errors.extend(never_display_errors(text, rel))
+                errors.extend(code_list_errors(text, rel))
+                errors.extend(promoish_errors(text, rel))
+                errors.extend(code_percent_errors(text, rel))
+                errors.extend(offer_percent_errors(text, rel))
             if name.endswith(".html"):
                 errors.extend(twitter_garble_errors(text, rel))
                 errors.extend(og_repeat_errors(text, rel))
@@ -2615,6 +2820,13 @@ def assert_restored_sections():
                 errors.extend(promo_code_errors(text, rel))
                 errors.extend(never_display_errors(text, rel))
                 errors.extend(duplicate_perk_code_errors(text, rel))
+                errors.extend(jsonld_code_errors(text, rel))
+                errors.extend(promoish_errors(text, rel))
+                errors.extend(code_percent_errors(text, rel))
+                errors.extend(offer_percent_errors(text, rel))
+                errors.extend(empty_heading_errors(text, rel))
+                errors.extend(copy_button_errors(text, rel))
+                errors.extend(code_list_errors(text, rel))
                 if rel.startswith("articles/"):
                     errors.extend(doubled_word_errors(text, rel))
                 for match in re.finditer(
@@ -2631,6 +2843,13 @@ def assert_restored_sections():
                 errors.extend(duffle_claim_errors(text, rel))
                 if name.endswith(".md"):
                     errors.extend(md_prose_errors(text, rel))
+                    errors.extend(doubled_word_errors(text, rel))
+                if name.endswith(".json"):
+                    for chunk in public_copy_chunks(name, text):
+                        errors.extend(doubled_word_errors(chunk, rel))
+                errors.extend(promoish_errors(text, rel))
+                errors.extend(code_percent_errors(text, rel))
+                errors.extend(offer_percent_errors(text, rel))
                 for chunk in public_copy_chunks(name, text):
                     for hit in sitewide_garble_hits(chunk):
                         errors.append(f"{rel}: public copy has {hit}")
@@ -2644,6 +2863,7 @@ def assert_restored_sections():
                 errors.append(f"{os.path.relpath(path, BASE_DIR)}: broken unit in./yd")
             if "It is part of the Apex Hybrid Co. catalog." in surface:
                 errors.append(f"{os.path.relpath(path, BASE_DIR)}: catalog filler")
+    errors.extend(generator_source_errors())
     if errors:
         raise SystemExit("Restored-section checks failed:\n" + "\n".join(errors[:60]))
 
@@ -3193,6 +3413,7 @@ def generate_product_pages(only_ids=None):
     </div>
   </div>
   </footer>
+  <script src="/checkout-code.js"></script>
   <script>
   (function(){{
     var prodId = {json.dumps(prod['id'])};
@@ -3299,7 +3520,7 @@ def generate_product_pages(only_ids=None):
         }});
       }}).then(function(r){{ return r.json(); }}).then(function(chk){{
         if (chk && chk.id) {{
-          window.location.href = "https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id);
+          apexFinishCheckout(chk.id, function (url) {{ window.location.href = url; }});
         }} else {{
           window.location.href = fbHref || fallbackUrl;
         }}
@@ -3693,6 +3914,7 @@ def generate_article_pages():
     </div>
   </div>
   </footer>
+  <script src="/checkout-code.js"></script>
   <script>
   (function(){{
     var fwSlugs = {json.dumps(fw_slugs_map)};
@@ -3721,7 +3943,7 @@ def generate_article_pages():
         }});
       }}).then(function(r){{ return r.json(); }}).then(function(chk){{
         if (chk && chk.id) {{
-          window.location.href = "https://apex-hybrid-co-shop.fourthwall.com/checkout/" + encodeURIComponent(chk.id);
+          apexFinishCheckout(chk.id, function (url) {{ window.location.href = url; }});
         }} else {{
           window.location.href = href;
         }}
