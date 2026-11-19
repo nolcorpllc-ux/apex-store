@@ -300,7 +300,55 @@ function visibleProducts() {
   if (sort === "price-asc") list.sort((a, b) => a.retail_price - b.retail_price);
   else if (sort === "price-desc") list.sort((a, b) => b.retail_price - a.retail_price);
   else if (sort === "rating") list.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
+  else if (!q) list = mixShelf(list);
   return list;
+}
+
+const HYRX_HANDLES = new Set(["call-room","circuit-cities","course-plate","eight-marks","field-issue","hold-the-pace","hyrx-finish","outline-mark","peak-sign","sleeve-seal","stem-type","timing-gate","work-the-loop"]);
+const RACE_DAY_JACKETS = new Set(["APC-C46","APC-C47","APC-C48","APC-C49","APC-C50","APC-C75"]);
+
+function isOuterwear(p) {
+  return p.dept === "Windbreakers";
+}
+
+function shelfKind(p) {
+  if (isOuterwear(p)) return "outer";
+  if (HYRX_HANDLES.has(p.handle)) return "hyrx";
+  if (p.dept === "Women's") return "women";
+  if (p.dept === "Muscle Tanks") return "tank";
+  if (p.dept === "Hoodies") return "hoodie";
+  if (p.dept === "Training Gear") return "gear";
+  return "tee";
+}
+
+function mixShelf(list) {
+  const buckets = { tee: [], tank: [], hyrx: [], women: [], hoodie: [], gear: [], outer: [] };
+  list.forEach((p) => buckets[shelfKind(p)].push(p));
+  const order = ["tee", "tank", "hyrx", "women", "hoodie", "gear"];
+  const rest = [];
+  let added = true;
+  while (added) {
+    added = false;
+    order.forEach((key) => {
+      if (buckets[key].length) {
+        rest.push(buckets[key].shift());
+        added = true;
+      }
+    });
+  }
+  const outer = buckets.outer;
+  if (!outer.length || !rest.length) return list;
+  const out = [];
+  let ri = 0;
+  let oi = 0;
+  while (oi < outer.length || ri < rest.length) {
+    for (let n = 0; n < 2 && ri < rest.length; n++) out.push(rest[ri++]);
+    if (oi < outer.length && ri < rest.length) out.push(outer[oi++]);
+    else if (oi < outer.length && ri >= rest.length) break;
+  }
+  while (ri < rest.length) out.push(rest[ri++]);
+  while (oi < outer.length) out.push(outer[oi++]);
+  return out;
 }
 
 function collectionName() {
@@ -415,6 +463,7 @@ function renderProducts() {
         <div class="Card__body">
           <div class="Card__top">
             <h3><button type="button" data-quick="${p.id}">${esc(shortTitle(p))}</button></h3>
+            ${RACE_DAY_JACKETS.has(p.id) ? `<p style="margin:2px 0 0;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0066ff">Race Day Jacket</p>` : ""}
             <div class="Price"><span>${money(p.retail_price)}</span>${was}</div>
           </div>
           ${ratingMarkup(p)}

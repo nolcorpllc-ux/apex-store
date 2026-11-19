@@ -33,7 +33,7 @@
   <meta name="twitter:description" content="Engineered for 8-station hybrid racing: breathable Compromised Running tech shirts, 2026/2027 race-city tees, 8-station split calculator, and recovery hardware." />
   <meta name="twitter:image" content="https://www.apexhybridco.com/images/streetwear/apc-c36-black.jpg?v=20261028v1" />
 
-  <link rel="stylesheet" href="styles.css?v=20261117buy" />
+  <link rel="stylesheet" href="styles.css?v=20261119home" />
   <script type="application/ld+json" id="seoSchemaJsonLd">
 {
   "@context": "https://schema.org",
@@ -452,151 +452,129 @@
       .Pin__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
       .Pin__img{display:flex;flex-direction:column;gap:10px;width:100%;background:transparent;border:0;padding:0}
       .Pin__hero{position:relative;display:block;width:100%;aspect-ratio:4/3;background:#0f141d;border-radius:16px;overflow:hidden;border:1px solid #1f2937}
-      .Pin__hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;background:#0f141d}
+      .Pin__hero img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#0f141d}
       .Pin__hero span{position:absolute;left:12px;bottom:12px;background:rgba(11,15,23,.78);color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
-      .Pin__tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-      .Pin__tiles button{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;border:0;background:transparent;color:#cbd5e1;cursor:pointer;font:inherit;text-align:center}
-      .Pin__tiles button img{display:block;width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;object-position:center top;background:#0f141d;border-radius:10px;border:1px solid #1f2937}
-      .Pin__tiles button span{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-      .Pin__tiles button:hover span,.Pin__tiles button:focus-visible span{color:#fff}
-      .Pin__tiles button:hover img,.Pin__tiles button:focus-visible img{border-color:#fff}
+      .Pin__chips{display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:2px 0 10px;margin:0}
+      .Pin__chips::-webkit-scrollbar{height:6px}
+      .Pin__chips::-webkit-scrollbar-thumb{background:#334155;border-radius:99px}
+      .Pin__chips button{flex:0 0 auto;scroll-snap-align:start;border:1px solid #475569;background:transparent;color:#fff;font:inherit;font-weight:800;font-size:13px;border-radius:999px;padding:8px 12px;white-space:nowrap;cursor:pointer}
+      .Pin__chips button[aria-pressed="true"]{background:#fff;color:#0b0f17;border-color:#fff}
+      .Pin__chips button:hover,.Pin__chips button:focus-visible{border-color:#fff}
       .Pin__eyebrow{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#38bdf8;margin:0 0 8px}
       .Pin h2{font-size:clamp(28px,4vw,44px);line-height:1.02;letter-spacing:-0.04em;margin:0 0 10px;color:#fff}
       .Pin__price{font-size:22px;font-weight:900;margin:0 0 4px;color:#fff}
       .Pin__price small{font-size:13px;font-weight:700;color:#94a3b8;margin-left:6px}
       .Pin__dek{color:#cbd5e1;font-size:14.5px;line-height:1.5;margin:8px 0 14px}
-      .Pin__sizes{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
-      .Pin__sizes button{min-width:48px;height:44px;border-radius:8px;border:1px solid #475569;background:transparent;color:#fff;font-weight:800;font-size:14px;cursor:pointer}
-      .Pin__sizes a{display:inline-flex;align-items:center;padding:0 14px;height:44px;border-radius:8px;border:1px solid #475569;color:#fff;font-weight:800;font-size:14px}.Pin__sizes a:hover{background:#fff;color:#0b0f17}
-      .Pin__sizes button[aria-pressed="true"]{background:#fff;color:#0b0f17;border-color:#fff}
       .Pin__cta{display:flex;gap:10px;flex-wrap:wrap}
-      .Pin__cta .Btn{flex:1 1 160px;justify-content:center;text-align:center;font-weight:900;min-height:50px}
+      .Pin__cta .Btn{flex:1 1 140px;justify-content:center;text-align:center;font-weight:900;min-height:44px}
       .Pin__trust{list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;padding:0;margin:14px 0 0;font-size:12.5px;color:#94a3b8}
       .Pin__trust li::before{content:"✓ ";color:#38bdf8;font-weight:900}
-      @media (max-width:760px){.RW__link{width:100%;text-align:center}.Pin__tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+      @media (max-width:760px){
+        .RW__link{width:100%;text-align:center}
+        .Pin{padding:12px 0 14px}
+        .Pin__grid{display:flex;flex-direction:column;gap:8px}
+        .Pin__img{display:contents}
+        .Pin__hero{order:1;aspect-ratio:16/9;max-height:168px}
+        .Pin__chips{order:2}
+        .Pin__grid > div:last-child{order:3}
+        .Pin h2{font-size:24px;margin:0 0 4px}
+        .Pin__dek{margin:4px 0 8px}
+        .Pin__trust{display:none}
+        .Pin__cta{flex-wrap:nowrap}
+      }
     </style>
-    <section class="RW" aria-label="Dallas race dates">
+    <section class="RW" aria-label="HYRX designs">
       <div class="Wrap RW__bar">
-        <p><span class="RW__tag">Dates</span><strong>HYROX Dallas · Nov 18–22</strong> · <span class="RW__count" id="rwCount">Dallas races Nov 18–22</span><br /><span style="color:#cbd5e1">Free shipping on every order. Made to order.</span><br /><a href="gift-guide.html" style="color:#38bdf8;font-weight:800;">Holiday gift guide →</a><br /><button type="button" class="RW__code" onclick="window.apexSetPromo&&apexSetPromo('DALLAS10');this.textContent='✓ DALLAS10 applied'" data-goatcounter-click="click-dallas10-banner">Code <b>DALLAS10</b> · 10% off everything</button></p>
-        <a class="RW__link" href="products/dallas-lone-star-division-turf-threshold-hybrid-race-tee.html" data-goatcounter-click="click-dallas-banner" data-goatcounter-title="Dallas banner" onclick="window.apexTrackHit&&apexTrackHit('click_dallas_banner')">Shop the Dallas tee →</a>
+        <a href="collections/hyrx.html" style="display:flex;gap:8px;flex:none" data-goatcounter-click="click-hyrx-banner" data-goatcounter-title="HYRX banner" onclick="window.apexTrackHit&&apexTrackHit('click_hyrx_banner')">
+          <img src="images/streetwear/hyrx-finish/01.jpg?v=20261117hyrx" alt="HYRX Finish" width="48" height="60" style="width:48px;height:60px;object-fit:cover;border-radius:8px;background:#0f141d" />
+          <img src="images/streetwear/peak-sign/01.jpg?v=20261117hyrx12" alt="Peak Sign" width="48" height="60" style="width:48px;height:60px;object-fit:cover;border-radius:8px;background:#0f141d" />
+        </a>
+        <p style="flex:1;min-width:180px"><span class="RW__tag">HYRX</span><strong>HYRX designs</strong> · from $38<br /><span style="color:#cbd5e1">Free shipping on every order. Made to order.</span><br /><button type="button" class="RW__code" onclick="window.apexSetPromo&&apexSetPromo('DALLAS10');this.textContent='✓ DALLAS10 applied'" data-goatcounter-click="click-hyrx-code" data-goatcounter-title="HYRX code">Code <b>DALLAS10</b> · 10% off everything</button></p>
+        <a class="RW__link" href="collections/hyrx.html" data-goatcounter-click="click-hyrx-banner" data-goatcounter-title="HYRX banner" onclick="window.apexTrackHit&&apexTrackHit('click_hyrx_banner')">Shop HYRX →</a>
       </div>
     </section>
     <section class="Pin" aria-label="Race Day Windbreakers">
       <div class="Wrap Pin__grid">
         <div class="Pin__img">
-          <a class="Pin__hero" id="pinHero" href="products/anaheim-race-day-stitched.html" data-city="Anaheim">
-            <img src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261119skyline" alt="Model wearing the Anaheim Race Day Windbreaker, front crest visible" fetchpriority="high" decoding="async" width="1536" height="1152" />
-            <span aria-hidden="true">Anaheim</span>
+          <a class="Pin__hero" id="pinHero" href="products/dallas-race-day-stitched.html">
+            <img id="pinPhoto" src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261119skyline" alt="Dallas Race Day Windbreaker" fetchpriority="high" decoding="async" width="1200" height="1600" />
+            <span id="pinBadge" aria-hidden="true">Dallas</span>
           </a>
-          <div class="Pin__tiles" role="group" aria-label="Show another city">
-            <button type="button" data-city="Dallas" data-href="products/dallas-race-day-stitched.html" data-src="images/streetwear/dallas-race-day-stitched/03.jpg?v=20261119skyline" data-sku="APC-C51" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/dallas-race-day-stitched" aria-label="Show the Dallas windbreaker"><img src="images/streetwear/dallas-race-day-stitched/03.jpg?v=20261119skyline" alt="" decoding="async" /><span aria-hidden="true">Dallas</span></button>
-            <button type="button" data-city="Denver" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261119skyline" data-sku="APC-C52" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/denver-race-day-stitched" aria-label="Show the Denver windbreaker"><img src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261119skyline" alt="" decoding="async" /><span aria-hidden="true">Denver</span></button>
-            <button type="button" data-city="Nashville" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261119skyline" data-sku="APC-C54" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/nashville-race-day-stitched" aria-label="Show the Nashville windbreaker"><img src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261119skyline" alt="" decoding="async" /><span aria-hidden="true">Nashville</span></button>
-            <button type="button" data-city="Vancouver" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261119skyline" data-sku="APC-C55" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/vancouver-race-day-stitched" aria-label="Show the Vancouver windbreaker"><img src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261119skyline" alt="" decoding="async" /><span aria-hidden="true">Vancouver</span></button>
-            <button type="button" data-city="Cancún" data-href="products/cancun-race-day-stitched.html" data-src="images/streetwear/cancun-race-day-stitched/03.jpg?v=20261119skyline" data-sku="APC-C57" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/cancun-race-day-windbreaker" aria-label="Show the Cancún windbreaker"><img src="images/streetwear/cancun-race-day-stitched/03.jpg?v=20261119skyline" alt="" decoding="async" /><span aria-hidden="true">Cancún</span></button>
-                        <button type="button" data-city="Atlanta" data-href="products/atlanta-race-day-stitched.html" data-src="images/streetwear/atlanta-race-day-stitched/03.jpg?v=20261119rdw" data-sku="APC-C86" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/atlanta-race-day-windbreaker" aria-label="Show the Atlanta windbreaker"><img src="images/streetwear/atlanta-race-day-stitched/03.jpg?v=20261119rdw" alt="" decoding="async" /><span aria-hidden="true">Atlanta</span></button>
-            <button type="button" data-city="Houston" data-href="products/houston-race-day-stitched.html" data-src="images/streetwear/houston-race-day-stitched/03.jpg?v=20261119rdw" data-sku="APC-C87" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/houston-race-day-windbreaker" aria-label="Show the Houston windbreaker"><img src="images/streetwear/houston-race-day-stitched/03.jpg?v=20261119rdw" alt="" decoding="async" /><span aria-hidden="true">Houston</span></button>
-            <button type="button" data-city="Las Vegas" data-href="products/las-vegas-race-day-stitched.html" data-src="images/streetwear/las-vegas-race-day-stitched/03.jpg?v=20261119rdw" data-sku="APC-C88" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/las-vegas-race-day-windbreaker" aria-label="Show the Las Vegas windbreaker"><img src="images/streetwear/las-vegas-race-day-stitched/03.jpg?v=20261119rdw" alt="" decoding="async" /><span aria-hidden="true">Las Vegas</span></button>
-            <button type="button" data-city="Miami Beach" data-href="products/miami-beach-race-day-stitched.html" data-src="images/streetwear/miami-beach-race-day-stitched/03.jpg?v=20261119rdw" data-sku="APC-C89" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/miami-beach-race-day-windbreaker" aria-label="Show the Miami Beach windbreaker"><img src="images/streetwear/miami-beach-race-day-stitched/03.jpg?v=20261119rdw" alt="" decoding="async" /><span aria-hidden="true">Miami Beach</span></button>
-            <button type="button" data-city="Phoenix" data-href="products/phoenix-race-day-stitched.html" data-src="images/streetwear/phoenix-race-day-stitched/03.jpg?v=20261117phoenix" data-sku="APC-C70" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/phoenix-race-day-windbreaker" aria-label="Show the Phoenix windbreaker"><img src="images/streetwear/phoenix-race-day-stitched/03.jpg?v=20261117phoenix" alt="" decoding="async" /><span aria-hidden="true">Phoenix</span></button>
-            <button type="button" data-city="Chicago" data-href="products/chicago-race-day-stitched.html" data-src="images/streetwear/chicago-race-day-stitched/03.jpg?v=20261119rdw6" data-sku="APC-C90" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/chicago-race-day-windbreaker" aria-label="Show the Chicago windbreaker"><img src="images/streetwear/chicago-race-day-stitched/03.jpg?v=20261119rdw6" alt="" decoding="async" /><span aria-hidden="true">Chicago</span></button>
-            <button type="button" data-city="Guadalajara" data-href="products/guadalajara-race-day-stitched.html" data-src="images/streetwear/guadalajara-race-day-stitched/03.jpg?v=20261119rdw6" data-sku="APC-C91" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/guadalajara-race-day-windbreaker" aria-label="Show the Guadalajara windbreaker"><img src="images/streetwear/guadalajara-race-day-stitched/03.jpg?v=20261119rdw6" alt="" decoding="async" /><span aria-hidden="true">Guadalajara</span></button>
-            <button type="button" data-city="Minneapolis" data-href="products/minneapolis-race-day-stitched.html" data-src="images/streetwear/minneapolis-race-day-stitched/03.jpg?v=20261119rdw6" data-sku="APC-C92" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/minneapolis-race-day-windbreaker" aria-label="Show the Minneapolis windbreaker"><img src="images/streetwear/minneapolis-race-day-stitched/03.jpg?v=20261119rdw6" alt="" decoding="async" /><span aria-hidden="true">Minneapolis</span></button>
-            <button type="button" data-city="Monterrey" data-href="products/monterrey-race-day-stitched.html" data-src="images/streetwear/monterrey-race-day-stitched/03.jpg?v=20261119rdw6" data-sku="APC-C93" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/monterrey-race-day-windbreaker" aria-label="Show the Monterrey windbreaker"><img src="images/streetwear/monterrey-race-day-stitched/03.jpg?v=20261119rdw6" alt="" decoding="async" /><span aria-hidden="true">Monterrey</span></button>
-            <button type="button" data-city="Portland" data-href="products/portland-race-day-stitched.html" data-src="images/streetwear/portland-race-day-stitched/03.jpg?v=20261119rdw6" data-sku="APC-C94" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/portland-race-day-windbreaker" aria-label="Show the Portland windbreaker"><img src="images/streetwear/portland-race-day-stitched/03.jpg?v=20261119rdw6" alt="" decoding="async" /><span aria-hidden="true">Portland</span></button>
-            <button type="button" data-city="San Diego" data-href="products/san-diego-race-day-stitched.html" data-src="images/streetwear/san-diego-race-day-stitched/03.jpg?v=20261119rdw6" data-sku="APC-C95" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/san-diego-race-day-windbreaker" aria-label="Show the San Diego windbreaker"><img src="images/streetwear/san-diego-race-day-stitched/03.jpg?v=20261119rdw6" alt="" decoding="async" /><span aria-hidden="true">San Diego</span></button>
-            <button type="button" data-city="London" data-href="products/london-race-day-stitched.html" data-src="images/streetwear/london-race-day-stitched/03.jpg?v=20261119eu" data-sku="APC-C96" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/london-race-day-windbreaker" aria-label="Show the London windbreaker"><img src="images/streetwear/london-race-day-stitched/03.jpg?v=20261119eu" alt="" decoding="async" /><span aria-hidden="true">London</span></button>
-            <button type="button" data-city="Paris" data-href="products/paris-race-day-stitched.html" data-src="images/streetwear/paris-race-day-stitched/03.jpg?v=20261119eu" data-sku="APC-C97" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/paris-race-day-windbreaker" aria-label="Show the Paris windbreaker"><img src="images/streetwear/paris-race-day-stitched/03.jpg?v=20261119eu" alt="" decoding="async" /><span aria-hidden="true">Paris</span></button>
-            <button type="button" data-city="Hong Kong" data-href="products/hong-kong-race-day-stitched.html" data-src="images/streetwear/hong-kong-race-day-stitched/03.jpg?v=20261119eu" data-sku="APC-C98" data-buy-href="https://apex-hybrid-co-shop.fourthwall.com/products/hong-kong-race-day-windbreaker" aria-label="Show the Hong Kong windbreaker"><img src="images/streetwear/hong-kong-race-day-stitched/03.jpg?v=20261119eu" alt="" decoding="async" /><span aria-hidden="true">Hong Kong</span></button>
-
-
+                    <div class="Pin__chips" id="pinChips" role="group" aria-label="Choose a Race Day city">
+            <button type="button" aria-pressed="false" data-city="Denver" data-when="Nov 12–15, 2026" data-venue="National Western" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/01.jpg?v=20261119skyline">Denver</button>
+            <button type="button" aria-pressed="true" data-city="Dallas" data-when="Nov 18–22, 2026" data-venue="Kay Bailey Center" data-href="products/dallas-race-day-stitched.html" data-src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261119skyline">Dallas</button>
+            <button type="button" aria-pressed="false" data-city="London" data-when="Dec 2–6, 2026" data-venue="ExCeL London" data-href="products/london-race-day-stitched.html" data-src="images/streetwear/london-race-day-stitched/01.jpg?v=20261119eu">London</button>
+            <button type="button" aria-pressed="false" data-city="Anaheim" data-when="Dec 3–6, 2026" data-venue="Anaheim Conv Center" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/01.jpg?v=20261119skyline">Anaheim</button>
+            <button type="button" aria-pressed="false" data-city="Nashville" data-when="Dec 9–13, 2026" data-venue="Music City Center" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/01.jpg?v=20261119skyline">Nashville</button>
+            <button type="button" aria-pressed="false" data-city="Paris" data-when="Dec 12–20, 2026" data-venue="Paris Expo" data-href="products/paris-race-day-stitched.html" data-src="images/streetwear/paris-race-day-stitched/01.jpg?v=20261119eu">Paris</button>
+            <button type="button" aria-pressed="false" data-city="Vancouver" data-when="Dec 17–20, 2026" data-venue="Canada Place" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/01.jpg?v=20261119skyline">Vancouver</button>
+            <button type="button" aria-pressed="false" data-city="Hong Kong" data-when="Jan 7–10, 2027" data-venue="AsiaWorld-Expo" data-href="products/hong-kong-race-day-stitched.html" data-src="images/streetwear/hong-kong-race-day-stitched/01.jpg?v=20261119eu">Hong Kong</button>
+            <button type="button" aria-pressed="false" data-city="Chicago" data-when="Feb 11–15, 2027" data-venue="Navy Pier" data-href="products/chicago-race-day-stitched.html" data-src="images/streetwear/chicago-race-day-stitched/01.jpg?v=20261119rdw6">Chicago</button>
+            <button type="button" aria-pressed="false" data-city="Cancún" data-when="Feb 18, 2027" data-venue="Malecón Tajamar" data-href="products/cancun-race-day-stitched.html" data-src="images/streetwear/cancun-race-day-stitched/01.jpg?v=20261119skyline">Cancún</button>
+            <button type="button" aria-pressed="false" data-city="Phoenix" data-when="Feb 25–28, 2027" data-venue="State Farm Stadium" data-href="products/phoenix-race-day-stitched.html" data-src="images/streetwear/phoenix-race-day-stitched/01.jpg?v=20261117phoenix">Phoenix</button>
+            <button type="button" aria-pressed="false" data-city="Las Vegas" data-when="Mar 12–14, 2027" data-venue="Las Vegas Conv Ctr" data-href="products/las-vegas-race-day-stitched.html" data-src="images/streetwear/las-vegas-race-day-stitched/01.jpg?v=20261119rdw">Las Vegas</button>
+            <button type="button" aria-pressed="false" data-city="Guadalajara" data-when="Mar 19–21, 2027" data-venue="Expo Guadalajara" data-href="products/guadalajara-race-day-stitched.html" data-src="images/streetwear/guadalajara-race-day-stitched/01.jpg?v=20261119rdw6">Guadalajara</button>
+            <button type="button" aria-pressed="false" data-city="Miami Beach" data-when="Mar 26–28, 2027" data-venue="Miami Beach Ctr" data-href="products/miami-beach-race-day-stitched.html" data-src="images/streetwear/miami-beach-race-day-stitched/01.jpg?v=20261119rdw">Miami Beach</button>
+            <button type="button" aria-pressed="false" data-city="Houston" data-when="Apr 1–4, 2027" data-venue="NRG Park" data-href="products/houston-race-day-stitched.html" data-src="images/streetwear/houston-race-day-stitched/01.jpg?v=20261119rdw">Houston</button>
+            <button type="button" aria-pressed="false" data-city="Monterrey" data-when="Apr 16–18, 2027" data-venue="Cintermex" data-href="products/monterrey-race-day-stitched.html" data-src="images/streetwear/monterrey-race-day-stitched/01.jpg?v=20261119rdw6">Monterrey</button>
+            <button type="button" aria-pressed="false" data-city="Atlanta" data-when="Apr 23–25, 2027" data-venue="World Congress Ctr" data-href="products/atlanta-race-day-stitched.html" data-src="images/streetwear/atlanta-race-day-stitched/01.jpg?v=20261119rdw">Atlanta</button>
+            <button type="button" aria-pressed="false" data-city="Minneapolis" data-when="May 7–9, 2027" data-venue="US Bank Stadium" data-href="products/minneapolis-race-day-stitched.html" data-src="images/streetwear/minneapolis-race-day-stitched/01.jpg?v=20261119rdw6">Minneapolis</button>
+            <button type="button" aria-pressed="false" data-city="San Diego" data-when="May 13–16, 2027" data-venue="San Diego Conv Ctr" data-href="products/san-diego-race-day-stitched.html" data-src="images/streetwear/san-diego-race-day-stitched/01.jpg?v=20261119rdw6">San Diego</button>
+            <button type="button" aria-pressed="false" data-city="Portland" data-when="May 21–23, 2027" data-venue="Oregon Conv Ctr" data-href="products/portland-race-day-stitched.html" data-src="images/streetwear/portland-race-day-stitched/01.jpg?v=20261119rdw6">Portland</button>
           </div>
         </div>
         <div>
-          <p class="Pin__eyebrow" id="pinEyebrow">Anaheim Race Day — Featured</p>
+          <p class="Pin__eyebrow" id="pinEyebrow">Nov 18–22, 2026 · Kay Bailey Center</p>
           <h2><a href="collections/race-day-windbreakers.html" style="color:inherit;text-decoration:none">Race Day Windbreakers</a></h2>
-          <p class="Pin__price">$68 <small>Black · Ships from the US or Canada · Free US shipping</small></p>
-          <p class="Pin__dek">Made to order. Ships from the US or Canada. Free US shipping.</p>
-          <div class="Pin__sizes" role="group" aria-label="Choose city">
-            <a href="products/anaheim-race-day-stitched.html" style="text-decoration:none">Anaheim</a>
-            <a href="products/dallas-race-day-stitched.html" style="text-decoration:none">Dallas</a>
-            <a href="products/denver-race-day-stitched.html" style="text-decoration:none">Denver</a>
-            <a href="products/nashville-race-day-stitched.html" style="text-decoration:none">Nashville</a>
-            <a href="products/vancouver-race-day-stitched.html" style="text-decoration:none">Vancouver</a>
-            <a href="products/cancun-race-day-stitched.html" style="text-decoration:none">Cancún</a>
-            <a href="products/phoenix-race-day-stitched.html" style="text-decoration:none">Phoenix</a>
-            <a href="products/chicago-race-day-stitched.html" style="text-decoration:none">Chicago</a>
-            <a href="products/guadalajara-race-day-stitched.html" style="text-decoration:none">Guadalajara</a>
-            <a href="products/minneapolis-race-day-stitched.html" style="text-decoration:none">Minneapolis</a>
-            <a href="products/monterrey-race-day-stitched.html" style="text-decoration:none">Monterrey</a>
-            <a href="products/portland-race-day-stitched.html" style="text-decoration:none">Portland</a>
-            <a href="products/san-diego-race-day-stitched.html" style="text-decoration:none">San Diego</a>
-            <a href="products/london-race-day-stitched.html" style="text-decoration:none">London</a>
-            <a href="products/paris-race-day-stitched.html" style="text-decoration:none">Paris</a>
-            <a href="products/hong-kong-race-day-stitched.html" style="text-decoration:none">Hong Kong</a>
-            <a href="products/atlanta-race-day-stitched.html" style="text-decoration:none">Atlanta</a>
-            <a href="products/houston-race-day-stitched.html" style="text-decoration:none">Houston</a>
-            <a href="products/las-vegas-race-day-stitched.html" style="text-decoration:none">Las Vegas</a>
-            <a href="products/miami-beach-race-day-stitched.html" style="text-decoration:none">Miami Beach</a>
-          </div>
+          <p class="Pin__price" id="pinPrice">from $68 <small>Black · Free US shipping</small></p>
+          <p class="Pin__dek" id="pinCaption">Dallas Race Day Windbreaker</p>
           <div class="Pin__cta">
-            <a class="Btn Btn--cobalt" id="pinBuy" href="https://apex-hybrid-co-shop.fourthwall.com/products/anaheim-race-day-stitched" data-buy="APC-C53" data-goatcounter-click="click-pinned-raceday-buy">Buy Anaheim $68</a>
+            <a class="Btn Btn--cobalt" id="pinBuy" href="products/dallas-race-day-stitched.html">Shop Dallas</a>
             <a class="Btn Btn--ghost" href="collections/race-day-windbreakers.html" style="color:#fff;border-color:#475569">Shop all twenty</a>
           </div>
-          <ul class="Pin__trust"><li>Free US shipping, no minimum</li><li>Made to order. Free US shipping</li><li>Secure checkout</li></ul>
+
         </div>
       </div>
     </section>
     <script>
       (function(){
         try{
-          var d=Math.ceil((new Date("2026-11-18T08:00:00-06:00")-new Date())/86400000),el=document.getElementById("rwCount");
-          if(el){el.textContent="Dallas races Nov 18–22";}
-          var g=document.querySelectorAll('.Pin__sizes button');
-          g.forEach(function(b){b.addEventListener('click',function(){g.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});var p=document.querySelector('.Pin__price');if(p)p.firstChild.nodeValue=(b.dataset.size==='2XL'?'$40 ':'$38 ');var c=document.querySelector('.Pin__cta [data-buy]');if(c)c.textContent='Buy now · '+(b.dataset.size==='2XL'?'$40':'$38')+' →';});});
-          document.addEventListener('DOMContentLoaded',function(){var m=document.querySelector('.Pin__sizes [aria-pressed="true"]');if(m)m.click();});
+          var chips=document.getElementById("pinChips");
           var hero=document.getElementById("pinHero");
-          var heroImg=hero&&hero.querySelector("img");
-          var heroLabel=hero&&hero.querySelector("span");
-          var tileGroup=document.querySelector(".Pin__tiles");
+          var photo=document.getElementById("pinPhoto");
+          var badge=document.getElementById("pinBadge");
+          var eye=document.getElementById("pinEyebrow");
+          var cap=document.getElementById("pinCaption");
           var buy=document.getElementById("pinBuy");
-          var eyebrow=document.getElementById("pinEyebrow");
-          function featureLine(city){
-            return city==="Anaheim" ? "Anaheim Race Day — Featured" : "Built for "+city+" race day";
+          function preload(src){ if(!src) return; var im=new Image(); im.src=src; }
+          function select(btn){
+            var city=btn.getAttribute("data-city");
+            var href=btn.getAttribute("data-href");
+            var src=btn.getAttribute("data-src");
+            var when=btn.getAttribute("data-when");
+            var venue=btn.getAttribute("data-venue");
+            var all=chips.querySelectorAll("button");
+            for(var i=0;i<all.length;i++) all[i].setAttribute("aria-pressed", all[i]===btn ? "true" : "false");
+            if(hero) hero.setAttribute("href", href);
+            if(photo){ photo.setAttribute("src", src); photo.setAttribute("alt", city+" Race Day Windbreaker"); }
+            if(badge) badge.textContent=city;
+            if(eye) eye.textContent=when+" · "+venue;
+            if(cap) cap.textContent=city+" Race Day Windbreaker";
+            if(buy){ buy.setAttribute("href", href); buy.textContent="Shop "+city; }
           }
-          if(hero&&heroImg&&tileGroup&&buy){
-            tileGroup.addEventListener("click",function(ev){
-              var btn=ev.target.closest("button");
-              if(!btn||!tileGroup.contains(btn))return;
-              var img=btn.querySelector("img");
-              var label=btn.querySelector("span");
-              var nextCity=btn.getAttribute("data-city");
-              var nextHref=btn.getAttribute("data-href");
-              var nextSrc=btn.getAttribute("data-src");
-              var nextSku=btn.getAttribute("data-sku");
-              var nextBuy=btn.getAttribute("data-buy-href");
-              var prevCity=hero.getAttribute("data-city")||"Anaheim";
-              var prevHref=hero.getAttribute("href");
-              var prevSrc=heroImg.getAttribute("src");
-              var prevSku=buy.getAttribute("data-buy");
-              var prevBuy=buy.getAttribute("href");
-              hero.setAttribute("data-city",nextCity);
-              hero.setAttribute("href",nextHref);
-              heroImg.setAttribute("src",nextSrc);
-              heroImg.setAttribute("alt","Model wearing the "+nextCity+" Race Day Windbreaker, front crest visible");
-              if(heroLabel)heroLabel.textContent=nextCity;
-              if(eyebrow)eyebrow.textContent=featureLine(nextCity);
-              buy.textContent="Buy "+nextCity+" $68";
-              buy.setAttribute("href",nextBuy);
-              buy.setAttribute("data-buy",nextSku);
-              btn.setAttribute("data-city",prevCity);
-              btn.setAttribute("data-href",prevHref);
-              btn.setAttribute("data-src",prevSrc);
-              btn.setAttribute("data-sku",prevSku);
-              btn.setAttribute("data-buy-href",prevBuy);
-              if(img)img.setAttribute("src",prevSrc);
-              if(label)label.textContent=prevCity;
-              btn.setAttribute("aria-label","Show the "+prevCity+" windbreaker");
+          if(chips){
+            chips.addEventListener("click", function(ev){
+              var btn=ev.target.closest && ev.target.closest("button");
+              if(!btn || !chips.contains(btn)) return;
+              select(btn);
+            });
+            chips.addEventListener("mouseover", function(ev){
+              var btn=ev.target.closest && ev.target.closest("button");
+              if(btn) preload(btn.getAttribute("data-src"));
+            });
+            chips.addEventListener("focusin", function(ev){
+              var btn=ev.target.closest && ev.target.closest("button");
+              if(btn) preload(btn.getAttribute("data-src"));
             });
           }
         }catch(e){}
@@ -755,6 +733,283 @@
             <img src="images/streetwear/apc-c34-black.jpg?v=20261028v1" alt="World Series winged crest design" loading="lazy" decoding="async" />
             <span><small>Fleece</small>Hoodies</span>
           </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="Spot" aria-label="Race Day tees and new products">
+      <style>
+        .Spot{background:#0b0f17;color:#f8fafc;padding:28px 0 10px;border-bottom:1px solid #1f2937;width:100%;max-width:100%;overflow:hidden}
+        .Spot .Wrap{min-width:0;max-width:100%}
+        .Spot__block{margin:0 0 22px;min-width:0}
+        .Spot__rail{min-width:0;width:100%}
+        .Spot__head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:0 0 12px;flex-wrap:wrap}
+        .Spot__kicker{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#38bdf8;margin:0 0 4px}
+        .Spot h2{font-size:clamp(22px,3vw,32px);letter-spacing:-0.03em;color:#fff;margin:0}
+        .Spot__links{display:flex;gap:8px;flex-wrap:wrap}
+        .Spot__links a{color:#fff;font-weight:800;font-size:13px;border:1px solid #475569;border-radius:8px;padding:8px 12px}
+        .Spot__links a:hover{border-color:#fff}
+        .Spot__rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 14px;-webkit-overflow-scrolling:touch;min-width:0;max-width:100%}
+        .Spot__rail::-webkit-scrollbar{height:8px}
+        .Spot__rail::-webkit-scrollbar-thumb{background:#334155;border-radius:99px}
+        .SpotCard{flex:0 0 168px;scroll-snap-align:start;color:#fff;text-decoration:none}
+        .SpotCard img{width:100%;aspect-ratio:4/5;object-fit:cover;background:#0f141d;border-radius:12px;border:1px solid #1f2937}
+        .SpotCard strong{display:block;margin-top:8px;font-size:14px;line-height:1.25}
+        .SpotCard em{display:block;margin-top:2px;font-style:normal;font-weight:900}
+        @media (max-width:760px){.SpotCard{flex-basis:46vw}}
+      </style>
+      <div class="Wrap">
+        <div class="Spot__block">
+          <div class="Spot__head">
+            <div>
+              <p class="Spot__kicker">City crests and printed race tees</p>
+              <h2>Race Day tees</h2>
+            </div>
+            <div class="Spot__links">
+              <a href="collections/tees.html">All tees</a>
+            </div>
+          </div>
+          <div class="Spot__rail">
+          <a class="SpotCard" href="products/phoenix-crest.html">
+            <img src="images/streetwear/phoenix-crest/01.jpg?v=20261117phoenix" alt="Phoenix Crest" loading="lazy" decoding="async" />
+            <strong>Phoenix Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/london-crest.html">
+            <img src="images/streetwear/london-crest/01.jpg?v=20261119crest5" alt="London Crest" loading="lazy" decoding="async" />
+            <strong>London Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/paris-crest.html">
+            <img src="images/streetwear/paris-crest/01.jpg?v=20261119crest5" alt="Paris Crest" loading="lazy" decoding="async" />
+            <strong>Paris Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/hong-kong-crest.html">
+            <img src="images/streetwear/hong-kong-crest/01.jpg?v=20261119crest5" alt="Hong Kong Crest" loading="lazy" decoding="async" />
+            <strong>Hong Kong Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/chicago-crest.html">
+            <img src="images/streetwear/chicago-crest/01.jpg?v=20261119crest5" alt="Chicago Crest" loading="lazy" decoding="async" />
+            <strong>Chicago Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/cancun-crest.html">
+            <img src="images/streetwear/cancun-crest/01.jpg?v=20261119crest5" alt="Cancún Crest" loading="lazy" decoding="async" />
+            <strong>Cancún Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/dallas-crest.html">
+            <img src="images/streetwear/dallas-crest/01.jpg?v=20261119crest10" alt="Dallas Crest" loading="lazy" decoding="async" />
+            <strong>Dallas Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/denver-crest.html">
+            <img src="images/streetwear/denver-crest/01.jpg?v=20261119crest10" alt="Denver Crest" loading="lazy" decoding="async" />
+            <strong>Denver Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/anaheim-crest.html">
+            <img src="images/streetwear/anaheim-crest/01.jpg?v=20261119crest10" alt="Anaheim Crest" loading="lazy" decoding="async" />
+            <strong>Anaheim Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/nashville-crest.html">
+            <img src="images/streetwear/nashville-crest/01.jpg?v=20261119crest10" alt="Nashville Crest" loading="lazy" decoding="async" />
+            <strong>Nashville Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/vancouver-crest.html">
+            <img src="images/streetwear/vancouver-crest/01.jpg?v=20261119crest10" alt="Vancouver Crest" loading="lazy" decoding="async" />
+            <strong>Vancouver Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/las-vegas-crest.html">
+            <img src="images/streetwear/las-vegas-crest/01.jpg?v=20261117public" alt="Las Vegas Crest" loading="lazy" decoding="async" />
+            <strong>Las Vegas Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/guadalajara-crest.html">
+            <img src="images/streetwear/guadalajara-crest/01.jpg?v=20261117public" alt="Guadalajara Crest" loading="lazy" decoding="async" />
+            <strong>Guadalajara Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/miami-beach-crest.html">
+            <img src="images/streetwear/miami-beach-crest/01.jpg?v=20261117city7" alt="Miami Beach Crest" loading="lazy" decoding="async" />
+            <strong>Miami Beach Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/houston-crest.html">
+            <img src="images/streetwear/houston-crest/01.jpg?v=20261117city7" alt="Houston Crest" loading="lazy" decoding="async" />
+            <strong>Houston Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/monterrey-crest.html">
+            <img src="images/streetwear/monterrey-crest/01.jpg?v=20261117city7" alt="Monterrey Crest" loading="lazy" decoding="async" />
+            <strong>Monterrey Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/atlanta-crest.html">
+            <img src="images/streetwear/atlanta-crest/01.jpg?v=20261117city7" alt="Atlanta Crest" loading="lazy" decoding="async" />
+            <strong>Atlanta Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/minneapolis-crest.html">
+            <img src="images/streetwear/minneapolis-crest/01.jpg?v=20261117city7" alt="Minneapolis Crest" loading="lazy" decoding="async" />
+            <strong>Minneapolis Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/san-diego-crest.html">
+            <img src="images/streetwear/san-diego-crest/01.jpg?v=20261117city7" alt="San Diego Crest" loading="lazy" decoding="async" />
+            <strong>San Diego Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/portland-crest.html">
+            <img src="images/streetwear/portland-crest/01.jpg?v=20261117city7" alt="Portland Crest" loading="lazy" decoding="async" />
+            <strong>Portland Crest</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/chicago-championship-division-navy-pier-hybrid-race-tee.html">
+            <img src="images/streetwear/apex-race-city-heavyweight-tee-chicago-championship-division/01.jpg?v=20261117hyrxtee" alt="Chicago Race Tee" loading="lazy" decoding="async" />
+            <strong>Chicago Race Tee</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/dallas-lone-star-division-turf-threshold-hybrid-race-tee.html">
+            <img src="images/streetwear/apex-race-city-heavyweight-tee-dallas-turf-threshold/01.jpg?v=20261117hyrxtee" alt="Dallas Race Tee" loading="lazy" decoding="async" />
+            <strong>Dallas Race Tee</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/anaheim-socal-open-division-pacific-coast-race-tee.html">
+            <img src="images/streetwear/apex-race-city-heavyweight-tee-anaheim-socal-open-division/01.jpg?v=20261117hyrxtee" alt="Anaheim Race Tee" loading="lazy" decoding="async" />
+            <strong>Anaheim Race Tee</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/miami-beach-heat-block-south-florida-endurance-race-tee.html">
+            <img src="images/streetwear/apex-race-city-heavyweight-tee-miami-beach-endurance-club/01.jpg?v=20261117hyrxtee" alt="Miami Race Tee" loading="lazy" decoding="async" />
+            <strong>Miami Race Tee</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/las-vegas-championship-qualifier-sin-city-turf-club-tee.html">
+            <img src="images/streetwear/apex-race-city-heavyweight-tee-las-vegas-championship-qualifier/01.jpg?v=20261117hyrxtee" alt="Las Vegas Race Tee" loading="lazy" decoding="async" />
+            <strong>Las Vegas Race Tee</strong>
+            <em>from $38</em>
+          </a>
+          <a class="SpotCard" href="products/new-york-hudson-pier-metro-endurance-dept-race-tee.html">
+            <img src="images/streetwear/apex-race-city-heavyweight-tee-new-york-hudson-pier-division/01.jpg?v=20261117hyrxtee" alt="New York Race Tee" loading="lazy" decoding="async" />
+            <strong>New York Race Tee</strong>
+            <em>from $38</em>
+          </a>
+          </div>
+        </div>
+        <div class="Spot__block">
+          <div class="Spot__head">
+            <div>
+              <p class="Spot__kicker">Engine and Race Day windbreakers</p>
+              <h2>New arrivals</h2>
+            </div>
+            <div class="Spot__links">
+              <a href="collections/new.html">Shop new</a>
+              <a href="collections/race-day-windbreakers.html">Race Day windbreakers</a>
+            </div>
+          </div>
+          <div class="Spot__rail">
+          <a class="SpotCard" href="products/engine-sports-bra-black.html">
+            <img src="images/streetwear/engine-sports-bra-black/01.jpg?v=20261119engine" alt="Engine Sports Bra – Black" loading="lazy" decoding="async" />
+            <strong>Engine Sports Bra – Black</strong>
+            <em>$43</em>
+          </a>
+          <a class="SpotCard" href="products/engine-sports-bra-mint.html">
+            <img src="images/streetwear/engine-sports-bra-mint/01.jpg?v=20261119engine" alt="Engine Sports Bra – Mint" loading="lazy" decoding="async" />
+            <strong>Engine Sports Bra – Mint</strong>
+            <em>$43</em>
+          </a>
+          <a class="SpotCard" href="products/engine-biker-shorts-black.html">
+            <img src="images/streetwear/engine-biker-shorts-black/01.jpg?v=20261119engine" alt="Engine Biker Shorts – Black" loading="lazy" decoding="async" />
+            <strong>Engine Biker Shorts – Black</strong>
+            <em>$38</em>
+          </a>
+          <a class="SpotCard" href="products/engine-biker-shorts-mint.html">
+            <img src="images/streetwear/engine-biker-shorts-mint/01.jpg?v=20261119engine" alt="Engine Biker Shorts – Mint" loading="lazy" decoding="async" />
+            <strong>Engine Biker Shorts – Mint</strong>
+            <em>$38</em>
+          </a>
+          <a class="SpotCard" href="products/engine-training-tank-black.html">
+            <img src="images/streetwear/engine-training-tank-black/01.jpg?v=20261118tank" alt="Engine Training Tank – Black" loading="lazy" decoding="async" />
+            <strong>Engine Training Tank – Black</strong>
+            <em>$33</em>
+          </a>
+          <a class="SpotCard" href="products/engine-training-tank-mint.html">
+            <img src="images/streetwear/engine-training-tank-mint/01.jpg?v=20261118tank" alt="Engine Training Tank – Mint" loading="lazy" decoding="async" />
+            <strong>Engine Training Tank – Mint</strong>
+            <em>$33</em>
+          </a>
+          <a class="SpotCard" href="products/atlanta-race-day-stitched.html">
+            <img src="images/streetwear/atlanta-race-day-stitched/01.jpg?v=20261119rdw" alt="Atlanta Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Atlanta Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/houston-race-day-stitched.html">
+            <img src="images/streetwear/houston-race-day-stitched/01.jpg?v=20261119rdw" alt="Houston Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Houston Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/las-vegas-race-day-stitched.html">
+            <img src="images/streetwear/las-vegas-race-day-stitched/01.jpg?v=20261119rdw" alt="Las Vegas Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Las Vegas Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/miami-beach-race-day-stitched.html">
+            <img src="images/streetwear/miami-beach-race-day-stitched/01.jpg?v=20261119rdw" alt="Miami Beach Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Miami Beach Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/chicago-race-day-stitched.html">
+            <img src="images/streetwear/chicago-race-day-stitched/01.jpg?v=20261119rdw6" alt="Chicago Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Chicago Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/guadalajara-race-day-stitched.html">
+            <img src="images/streetwear/guadalajara-race-day-stitched/01.jpg?v=20261119rdw6" alt="Guadalajara Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Guadalajara Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/minneapolis-race-day-stitched.html">
+            <img src="images/streetwear/minneapolis-race-day-stitched/01.jpg?v=20261119rdw6" alt="Minneapolis Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Minneapolis Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/monterrey-race-day-stitched.html">
+            <img src="images/streetwear/monterrey-race-day-stitched/01.jpg?v=20261119rdw6" alt="Monterrey Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Monterrey Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/portland-race-day-stitched.html">
+            <img src="images/streetwear/portland-race-day-stitched/01.jpg?v=20261119rdw6" alt="Portland Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Portland Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/san-diego-race-day-stitched.html">
+            <img src="images/streetwear/san-diego-race-day-stitched/01.jpg?v=20261119rdw6" alt="San Diego Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>San Diego Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/london-race-day-stitched.html">
+            <img src="images/streetwear/london-race-day-stitched/01.jpg?v=20261119eu" alt="London Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>London Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/paris-race-day-stitched.html">
+            <img src="images/streetwear/paris-race-day-stitched/01.jpg?v=20261119eu" alt="Paris Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Paris Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          <a class="SpotCard" href="products/hong-kong-race-day-stitched.html">
+            <img src="images/streetwear/hong-kong-race-day-stitched/01.jpg?v=20261119eu" alt="Hong Kong Race Day Windbreaker" loading="lazy" decoding="async" />
+            <strong>Hong Kong Race Day Windbreaker</strong>
+            <em>from $68</em>
+          </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1016,20 +1271,16 @@
   </div>
 
   <div class="Toast" id="toast" role="status"></div>
-  <script src="app.js?v=20261117hyrx"></script>
+  <script src="app.js?v=20261119home"></script>
 <!-- STICKY_PROMO_BAR_START -->
-  <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:linear-gradient(90deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);color:#f8fafc;border-top:2px solid #0066ff;padding:9px 14px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
-    <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:12.5px;">
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span style="background:#0066ff;color:#fff;font-weight:900;font-size:10.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.07em;">Shipping</span>
-        <span>Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
-        
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <a href="wristband.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:5px 11px;border-radius:6px;font-weight:800;font-size:12px;">⏱️ Free Printable Split Wristband →</a>
-        <a href="gyms/index.html" style="background:#1e293b;border:1px solid #475569;color:#e2e8f0;text-decoration:none;padding:5px 11px;border-radius:6px;font-weight:700;font-size:12px;">🏋️ HYROX Gym Directory (72 Hubs)</a>
-        <a href="team_orders.html" style="color:#38bdf8;text-decoration:none;font-weight:800;font-size:12px;">Doubles 2-Packs →</a>
-      </div>
+  <div id="apexStickyPromoBar" style="position:fixed;bottom:0;left:0;right:0;z-index:90;background:#0b0f17;color:#f8fafc;border-top:2px solid #0066ff;padding:8px 12px;box-shadow:0 -6px 24px rgba(0,0,0,0.38);font-family:system-ui,-apple-system,sans-serif;">
+    <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px 12px;font-size:12.5px;">
+      <a href="collections/hyrx.html" style="display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;min-width:0" data-goatcounter-click="click-hyrx-sticky" data-goatcounter-title="HYRX sticky" onclick="window.apexTrackHit&&apexTrackHit('click_hyrx_sticky')">
+        <img src="images/streetwear/hyrx-finish/01.jpg?v=20261117hyrx" alt="" width="36" height="44" style="width:36px;height:44px;object-fit:cover;border-radius:6px;background:#111827;flex:none" />
+        <span style="font-weight:800;line-height:1.25">HYRX designs · from $38</span>
+      </a>
+      <span style="color:#cbd5e1;line-height:1.3">Free US shipping. Secure checkout and fulfillment by Fourthwall.</span>
+      <a href="collections/hyrx.html" style="background:#0066ff;color:#fff;text-decoration:none;padding:6px 10px;border-radius:6px;font-weight:800;font-size:12px;white-space:nowrap" data-goatcounter-click="click-hyrx-sticky" data-goatcounter-title="HYRX sticky" onclick="window.apexTrackHit&&apexTrackHit('click_hyrx_sticky')">Shop HYRX</a>
     </div>
   </div>
 <!-- STICKY_PROMO_BAR_END -->
