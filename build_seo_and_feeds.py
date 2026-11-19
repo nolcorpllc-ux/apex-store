@@ -153,7 +153,7 @@ def assert_listed_prices():
                 listed = [offers]
             found = {}
             for offer in listed or []:
-                size = (offer.get("sku") or "").rsplit("-", 1)[-1]
+                size = _offer_size(offer, ladder["sizes"])
                 if size in ladder["sizes"]:
                     found[size] = money(offer.get("price"))
                     if abs(found[size] - ladder["sizes"][size]) > 0.001:
@@ -200,14 +200,112 @@ def assert_listed_prices():
                 errors.append(
                     f"{rel}: {handle.group(1)} strip ${price.group(1)} is not ${ladders[handle.group(1)]['min']:.0f}"
                 )
+    floor = hyrx_design_minimum()
+    label = f"{floor:.0f}" if abs(floor - round(floor)) < 0.001 else f"{floor:.2f}"
+    index = open(os.path.join(BASE_DIR, "index.html"), encoding="utf-8").read()
+    for phrase in (
+        f"HYRX designs</strong> · from ${label}",
+        f"HYRX designs · from ${label}",
+    ):
+        if index.count(phrase) != 1:
+            errors.append(f"index.html: {phrase} appears {index.count(phrase)} times, expected once")
     if errors:
         raise SystemExit("Listed prices disagree with the live size ladder:\n" + "\n".join(errors[:80]))
+
+
+def _offer_size(offer, sizes):
+    """Match a JSON-LD offer to a sizePrices key, including towel sizes in the name."""
+    sku_size = (offer.get("sku") or "").rsplit("-", 1)[-1]
+    if sku_size in sizes:
+        return sku_size
+    name = offer.get("name") or ""
+    for key in sizes:
+        if key and key in name:
+            return key
+    return sku_size
+
+
+def _page_variant_min(text):
+    """Lowest size price on a product page, from sizePrices or the checkout map."""
+    for marker in ("var sizePrices = ", "var prices = "):
+        start = text.find(marker)
+        if start < 0:
+            continue
+        brace = text.find("{", start)
+        try:
+            data, _ = json.JSONDecoder().raw_decode(text, brace)
+        except json.JSONDecodeError:
+            continue
+        values = []
+
+        def walk(node):
+            if isinstance(node, dict):
+                for value in node.values():
+                    walk(value)
+            elif isinstance(node, (int, float)) and not isinstance(node, bool):
+                values.append(float(node))
+
+        walk(data)
+        if values:
+            return min(values)
+    return None
+
+
+def hyrx_design_minimum():
+    """Cheapest live variant on the HYRX collection."""
+    coll = open(os.path.join(BASE_DIR, "collections", "hyrx.html"), encoding="utf-8").read()
+    handles = list(dict.fromkeys(re.findall(r"products/([a-z0-9-]+)\.html", coll)))
+    prices = []
+    for handle in handles:
+        path = os.path.join(BASE_DIR, "products", handle + ".html")
+        if not os.path.exists(path):
+            continue
+        amount = _page_variant_min(open(path, encoding="utf-8").read())
+        if amount is not None:
+            prices.append(amount)
+    if not prices:
+        raise SystemExit("HYRX collection has no variant prices")
+    return min(prices)
+
+
+def assert_fabric_stated_once():
+    """Fail if fabric or weight is stated more than once outside the bullets."""
+    mention = re.compile(
+        r"(?i)(?:\d+(?:\.\d+)?\s+oz|heavyweight\s+fabric|lightweight\s+fabric|"
+        r"midweight\s+fabric|ring-spun|airlume|heavyweight\s+tee\b|heavyweight\s+cotton)"
+    )
+    conflict = re.compile(
+        r"(?i)(?<!\d)6(?:\.1)?\s+oz.{0,48}heavyweight|heavyweight.{0,48}(?<!\d)6(?:\.1)?\s+oz"
+    )
+    errors = []
+    products = os.path.join(BASE_DIR, "products")
+    for name in sorted(os.listdir(products)):
+        if not name.endswith(".html"):
+            continue
+        html = open(os.path.join(products, name), encoding="utf-8", errors="replace").read()
+        visible = re.sub(
+            r"<script\b(?![^>]*ld\+json)[^>]*>.*?</script>", " ", html, flags=re.S | re.I
+        )
+        visible = re.sub(r"<style\b[^>]*>.*?</style>", " ", visible, flags=re.S | re.I)
+        visible = re.sub(r"<li\b[^>]*>.*?</li>", " ", visible, flags=re.S | re.I)
+        visible = re.sub(r"<title\b[^>]*>.*?</title>", " ", visible, flags=re.S | re.I)
+        visible = re.sub(r'\s(?:href|src)="[^"]*"', " ", visible)
+        text = re.sub(r"<[^>]+>", " ", visible)
+        hits = mention.findall(text)
+        if len(hits) > 1:
+            errors.append(f"{name}: fabric or weight mentioned {len(hits)} times outside the bullets")
+        plain = re.sub(r'\s(?:href|src)="[^"]*"', " ", html)
+        if conflict.search(plain):
+            errors.append(f"{name}: calls a 6 or 6.1 oz tee heavyweight")
+    if errors:
+        raise SystemExit("Fabric line is repeated:\n" + "\n".join(errors[:40]))
 
 
 def assert_published_xml_parses():
     """Fail the build if any published XML file does not parse."""
     assert_no_trademark()
     assert_listed_prices()
+    assert_fabric_stated_once()
     import xml.etree.ElementTree as ET
     errors = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
@@ -301,6 +399,88 @@ def google_category_for(prod):
     return "Health & Beauty > Health Care > Massage & Relaxation"
 
 
+# Fourthwall names the sublimation blank "White". These towels are not white.
+BLANK_COLOR_OVERRIDE = {
+    "APC-C138": "Black",
+    "APC-C139": "Deep Olive",
+}
+RETIRED_CART_IDS = {"APC-C15", "APC-C35"}
+
+_FABRIC_CLAUSE = re.compile(
+    r"(?i)(?:\d+(?:\.\d+)?\s+oz|heavyweight\s+fabric|lightweight\s+fabric|"
+    r"midweight\s+fabric|ring-spun|airlume)"
+)
+
+
+def normalize_fabric_copy(text):
+    """Use the real fabric, and never call a 6.1 oz tee heavyweight."""
+    if not text:
+        return text
+    text = text.replace(
+        "100% ring-spun cotton, heavyweight fabric (6.1 oz), relaxed fit",
+        "100% ring-spun cotton, 6.1 oz, relaxed fit",
+    )
+    text = text.replace(
+        "100% ring-spun cotton. Heavyweight fabric (6.1 oz). Relaxed fit.",
+        "100% ring-spun cotton, 6.1 oz, relaxed fit.",
+    )
+    text = re.sub(r"(?i)heavyweight fabric \(6\.1 oz\)", "6.1 oz ring-spun cotton", text)
+    text = re.sub(r"(?i)6\.1 oz heavyweight", "6.1 oz", text)
+    text = re.sub(r"(?i)heavyweight fabric \(6 oz\)", "6 oz", text)
+    text = re.sub(r"(?i)\bBlack heavyweight tee\b", "Black tee", text)
+    text = re.sub(r"(?i)\bA heavyweight tee\b", "A tee", text)
+    return text
+
+
+def strip_fabric_clauses(text):
+    """Remove fabric and weight sentences so the bullets can state them once."""
+    text = normalize_fabric_copy(text)
+    if not text:
+        return ""
+    kept = [
+        part
+        for part in re.split(r"(?<=[.?!])\s+", text)
+        if part and not _FABRIC_CLAUSE.search(part)
+    ]
+    return re.sub(r"\s{2,}", " ", " ".join(kept)).strip()
+
+
+def published_variant_map(prod):
+    """Variant map for a product page. Towel blanks named White use the real color."""
+    variants = prod.get("fourthwall_variants") or {}
+    if not isinstance(variants, dict):
+        return {}
+    override = BLANK_COLOR_OVERRIDE.get(prod.get("id"))
+    if override:
+        sizes = variants.get(override) or variants.get("White") or variants.get("Black")
+        if isinstance(sizes, dict):
+            return {override: sizes}
+        return {}
+    return black_only_variant_map(variants)
+
+
+def strip_retired_cart_script(html):
+    """Retired pages keep their note. They do not keep a cart or a fallback product."""
+
+    def repl(match):
+        block = match.group(0)
+        if "var prodVariants" not in block and "fallbackUrl" not in block and "syncAddLink" not in block:
+            return block
+        pid = re.search(r'var prodId = "([^"]+)"', block)
+        pid = pid.group(1) if pid else ""
+        return (
+            "<script>\n  (function(){\n    try {\n"
+            '      var isBot = /bot|crawl|spider|slurp|headless|lighthouse/i.test(navigator.userAgent || "");\n'
+            "      if (isBot) return;\n"
+            '      var ns = "https://abacus.jasoncameron.dev/hit/apexhybridco.com";\n'
+            f'      ["pageviews_total","product_views_total","view_{pid}"].forEach(function(k){{\n'
+            '        fetch(ns + "/" + k, {method:"GET", mode:"cors", keepalive:true, cache:"no-store"}).catch(function(){});\n'
+            "      });\n    } catch (e) {}\n  })();\n  </script>"
+        )
+
+    return re.sub(r"<script>\s*\(function\(\)\{.*?\}\)\(\);\s*</script>", repl, html, flags=re.S)
+
+
 def generate_product_pages(only_ids=None):
     for prod in products:
         if only_ids is not None and prod["id"] not in only_ids:
@@ -312,8 +492,14 @@ def generate_product_pages(only_ids=None):
         list_price = f"{(prod.get('list_price') or prod['retail_price']):.2f}"
         img_url = f"{SITE_URL}/{prod['image']}"
         canonical = f"{SITE_URL}/products/{handle}.html"
-        short_desc = prod["short_desc"]
-        highlights = prod.get("highlights", [])
+        raw_desc = prod["short_desc"]
+        highlights = [normalize_fabric_copy(item) for item in prod.get("highlights", [])]
+        short_desc = strip_fabric_clauses(raw_desc)
+        if not any(_FABRIC_CLAUSE.search(item or "") for item in highlights):
+            for sentence in re.split(r"(?<=[.?!])\s+", normalize_fabric_copy(raw_desc)):
+                if sentence and _FABRIC_CLAUSE.search(sentence):
+                    highlights = [sentence.strip()] + highlights
+                    break
         dept = prod["dept"]
 
         related = [p for p in products if p["dept"] == dept and p["id"] != prod["id"]][:4]
@@ -340,7 +526,7 @@ def generate_product_pages(only_ids=None):
                     "image": [img_url]
                     + ([f"{SITE_URL}/{prod['alt_image']}"] if prod.get("alt_image") else [])
                     + [f"{SITE_URL}/{extra}" for extra in (prod.get("extra_images") or [])],
-                    "description": short_desc + " " + " ".join(highlights),
+                    "description": short_desc,
                     "keywords": f"HYROX shirts, breathable HYROX race shirt, {title}, {dept}, hybrid athlete apparel, 8-station functional fitness gear",
                     "brand": {"@type": "Brand", "name": "Apex Hybrid Co"},
                     "category": dept,
@@ -376,8 +562,6 @@ def generate_product_pages(only_ids=None):
             handling["minValue"] = 10
             handling["maxValue"] = 14
         priced_for_schema = fourthwall_size_prices(prod)
-        if prod.get("id") in {"APC-C37", "APC-C38", "APC-C40", "APC-C41"}:
-            json_ld["@graph"][1]["material"] = "6.1 oz heavyweight cotton"
         if len({amount for _, amount in priced_for_schema}) > 1:
             base_offer = json_ld["@graph"][1]["offers"]
             schema_offers = []
@@ -657,13 +841,13 @@ def generate_product_pages(only_ids=None):
   <script>
   (function(){{
     var prodId = {json.dumps(prod['id'])};
-    var prodVariants = {json.dumps(black_only_variant_map(prod.get('fourthwall_variants', {})))};
+    var prodVariants = {json.dumps(published_variant_map(prod))};
     var sizePrices = {json.dumps(size_price_map)};
     var defaultVid = {json.dumps(prod.get('fourthwall_default_variant_id', ''))};
     var fallbackUrl = {json.dumps(buy_href)};
     var fwSlugs = {json.dumps(fw_slugs_map)};
     var state = {{
-      color: "Black",
+      color: {json.dumps(BLANK_COLOR_OVERRIDE.get(prod["id"], "Black"))},
       size: {json.dumps("L" if prod.get("has_sizes") else "One Size")},
       blank: "Black"
     }};
@@ -819,6 +1003,8 @@ def generate_product_pages(only_ids=None):
 </body>
 </html>
 """
+        if prod["id"] in RETIRED_CART_IDS:
+            page_html = strip_retired_cart_script(page_html)
         with open(os.path.join(BASE_DIR, "products", f"{handle}.html"), "w", encoding="utf-8") as out:
             out.write(page_html)
         sku_lower = prod["id"].lower()
@@ -1364,6 +1550,17 @@ def catalog_size_variant_ids(prod):
     fv = prod.get("fourthwall_variants") or {}
     if not isinstance(fv, dict) or not fv:
         return {}
+    override = BLANK_COLOR_OVERRIDE.get(prod.get("id"))
+    if override:
+        sizes = fv.get(override) or fv.get("White") or fv.get("Black")
+        if isinstance(sizes, dict):
+            ids = {}
+            for size, val in sizes.items():
+                if isinstance(val, str) and val:
+                    ids[size] = val
+                elif isinstance(val, dict) and val.get("id"):
+                    ids[size] = val["id"]
+            return ids
     if all(isinstance(v, dict) and v.get("id") for v in fv.values()):
         return {size: info["id"] for size, info in fv.items()}
     black = fv.get("Black")
@@ -1580,7 +1777,7 @@ def merchant_item_xml(prod, *, item_id, title, price, sale_price, apparel=None):
         f"      <g:product_type>{xml_text(prod['dept'])} &gt; {xml_text(prod['category'])}</g:product_type>",
     ])
     if prod.get("id") in {"APC-C37", "APC-C38", "APC-C40", "APC-C41"}:
-        lines.append("      <g:material>6.1 oz heavyweight cotton</g:material>")
+        lines.append("      <g:material>6.1 oz ring-spun cotton</g:material>")
     lines.extend([
         "      <g:shipping>",
         "        <g:country>US</g:country>",
@@ -1647,7 +1844,7 @@ def generate_google_shopping_feed():
                     title=variant_title,
                     price=price,
                     sale_price=sale,
-                    apparel={**offer, "color": FEED_COLOR},
+                    apparel={**offer, "color": BLANK_COLOR_OVERRIDE.get(prod["id"], FEED_COLOR)},
                 ))
             continue
         gaps.append(f"{prod['id']}: not in fourthwall_feed_variants.json; fell back to catalog variants")
@@ -1668,7 +1865,7 @@ def generate_google_shopping_feed():
         if not offers:
             gaps.append(f"{prod['id']}: apparel omitted; no verified sold sizes")
             continue
-        color = sold_color(prod)
+        color = BLANK_COLOR_OVERRIDE.get(prod["id"]) or sold_color(prod)
         if not color:
             gaps.append(f"{prod['id']}: color omitted; no black image or black-only description")
         apparel_products.append(prod["id"])
@@ -1740,11 +1937,11 @@ def strip_speed_claims(text):
         ("Zero-Lead-Time ", "Made-to-order "),
         (
             "Roxzone Speed Dept. & Built For Heavy Legs breathable tech shirts (APC-C36..APC-C41)",
-            "Built For Heavy Legs (APC-C36) and the 6.1 oz heavyweight cotton tees 1KM Split (APC-C37), Aerobic Engine (APC-C38), Push Heavy Run Fast (APC-C40), and Roxzone Speed Dept. (APC-C41)",
+            "Built For Heavy Legs (APC-C36) and the 6.1 oz ring-spun cotton tees 1KM Split (APC-C37), Aerobic Engine (APC-C38), Push Heavy Run Fast (APC-C40), and Roxzone Speed Dept. (APC-C41)",
         ),
         (
             "Roxzone Speed Dept. &amp; Built For Heavy Legs breathable tech shirts (APC-C36..APC-C41)",
-            "Built For Heavy Legs (APC-C36) and the 6.1 oz heavyweight cotton tees 1KM Split (APC-C37), Aerobic Engine (APC-C38), Push Heavy Run Fast (APC-C40), and Roxzone Speed Dept. (APC-C41)",
+            "Built For Heavy Legs (APC-C36) and the 6.1 oz ring-spun cotton tees 1KM Split (APC-C37), Aerobic Engine (APC-C38), Push Heavy Run Fast (APC-C40), and Roxzone Speed Dept. (APC-C41)",
         ),
     ]
     for old, new in repls:
@@ -1799,6 +1996,8 @@ def generate_editorial_rss_feeds():
             prod_url = f"{SITE_URL}/products/{prod['handle']}.html"
             fw_url = prod.get("fourthwall_product_url") or prod.get("checkout_url") or f"{SITE_URL}/?buy={prod['id']}"
             desc = f"{prod['short_desc']}  -  Price: ${prod['retail_price']:.2f} USD ({prod['ship_time']}). Direct Checkout: {fw_url}"
+            if prod["id"] in BLANK_COLOR_OVERRIDE:
+                desc = re.sub(r"\bWhite\b", BLANK_COLOR_OVERRIDE[prod["id"]], desc)
             items_xml.append(
                 f"""    <item>
       <title>{xml_text(prod.get('seo_title', prod['title']))} (${prod['retail_price']:.2f})</title>
@@ -1871,6 +2070,9 @@ def generate_pinterest_csv_feed():
                 "product_type": f"{prod['dept']} > {prod['category']}",
                 "brand": "Apex Hybrid Co., operated by NolCorp LLC",
             }
+            if prod["id"] in BLANK_COLOR_OVERRIDE:
+                base["description"] = re.sub(r"\bWhite\b", BLANK_COLOR_OVERRIDE[prod["id"]], base["description"])
+                base["title"] = re.sub(r"\bWhite\b", BLANK_COLOR_OVERRIDE[prod["id"]], base["title"])
             multi = len(priced) > 1
             for size, amount in priced:
                 row = dict(base)
@@ -2137,7 +2339,7 @@ def inject_static_seo_into_index():
                         "name": "What are the best breathable HYROX shirts for race day?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Built For Heavy Legs (APC-C36) is a 6.1 oz heavyweight cotton tee. 1KM Split, Aerobic Engine, Push Heavy Run Fast, and Roxzone Speed Dept. are 6.1 oz heavyweight cotton tees in Tees & Pump Covers. Made to order. Free US shipping."
+                            "text": "Built For Heavy Legs (APC-C36) is a 6.1 oz ring-spun cotton tee. 1KM Split, Aerobic Engine, Push Heavy Run Fast, and Roxzone Speed Dept. are 6.1 oz ring-spun cotton tees in Tees & Pump Covers. Made to order. Free US shipping."
                         }
                     },
                     {
@@ -2355,7 +2557,7 @@ def scrub_text(text):
     text = re.sub(r"(?i)6\.0\s+to\s+6\.5\s*oz(?:/yd²|/yd\u00b2)?", "", text)
     text = re.sub(
         r"(?i)sweat-wicking\s+60/40 combed ringspun cotton/poly performance blend",
-        "100% ring-spun cotton, heavyweight fabric (6.1 oz)",
+        "100% ring-spun cotton, 6.1 oz",
         text,
     )
     text = text.replace("Heavyweight ring-spun cotton/poly brushed warmup fleece", "Heavyweight ring-spun fleece")
