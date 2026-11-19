@@ -449,12 +449,12 @@
       .RW__link{color:#fff;font-weight:800;font-size:13px;text-decoration:none;border:1px solid #475569;border-radius:8px;padding:8px 12px;white-space:nowrap}
       .RW__link:hover{border-color:#0066ff}
       .Pin{background:linear-gradient(180deg,#0b0f17 0%,#111827 100%);color:#f8fafc;padding:22px 0 30px}
-      .Pin__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
-      .Pin__img{display:flex;flex-direction:column;gap:10px;width:100%;background:transparent;border:0;padding:0}
-      .Pin__hero{position:relative;display:block;width:100%;aspect-ratio:4/3;background:#0f141d;border-radius:16px;overflow:hidden;border:1px solid #1f2937}
-      .Pin__hero img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#0f141d}
+      .Pin__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center;min-width:0;max-width:100%}
+      .Pin__img{display:flex;flex-direction:column;gap:10px;width:100%;min-width:0;max-width:100%;background:transparent;border:0;padding:0}
+      .Pin__hero{position:relative;display:block;width:100%;aspect-ratio:4/3;background:#f3f4f6;border-radius:16px;overflow:hidden;border:1px solid #1f2937}
+      .Pin__hero img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#f3f4f6}
       .Pin__hero span{position:absolute;left:12px;bottom:12px;background:rgba(11,15,23,.78);color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
-      .Pin__chips{display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:2px 0 10px;margin:0}
+      .Pin__chips{display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;max-width:100%;min-width:0;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding:2px 0 10px;margin:0}
       .Pin__chips::-webkit-scrollbar{height:6px}
       .Pin__chips::-webkit-scrollbar-thumb{background:#334155;border-radius:99px}
       .Pin__chips button{flex:0 0 auto;scroll-snap-align:start;border:1px solid #475569;background:transparent;color:#fff;font:inherit;font-weight:800;font-size:13px;border-radius:999px;padding:8px 12px;white-space:nowrap;cursor:pointer}
@@ -496,40 +496,40 @@
     <section class="Pin" aria-label="Race Day Windbreakers">
       <div class="Wrap Pin__grid">
         <div class="Pin__img">
-          <a class="Pin__hero" id="pinHero" href="products/dallas-race-day-stitched.html">
-            <img id="pinPhoto" src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261119skyline" alt="Dallas Race Day Windbreaker" fetchpriority="high" decoding="async" width="1200" height="1600" />
-            <span id="pinBadge" aria-hidden="true">Dallas</span>
+          <a class="Pin__hero" id="pinHero" href="products/anaheim-race-day-stitched.html">
+            <img id="pinPhoto" src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261119skyline" alt="Anaheim Race Day Windbreaker" fetchpriority="high" decoding="async" width="1200" height="1600" />
+            <span id="pinBadge" aria-hidden="true">Anaheim</span>
           </a>
                     <div class="Pin__chips" id="pinChips" role="group" aria-label="Choose a Race Day city">
-            <button type="button" aria-pressed="false" data-city="Denver" data-when="Nov 12–15, 2026" data-venue="National Western" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/01.jpg?v=20261119skyline">Denver</button>
-            <button type="button" aria-pressed="true" data-city="Dallas" data-when="Nov 18–22, 2026" data-venue="Kay Bailey Center" data-href="products/dallas-race-day-stitched.html" data-src="images/streetwear/dallas-race-day-stitched/01.jpg?v=20261119skyline">Dallas</button>
-            <button type="button" aria-pressed="false" data-city="London" data-when="Dec 2–6, 2026" data-venue="ExCeL London" data-href="products/london-race-day-stitched.html" data-src="images/streetwear/london-race-day-stitched/01.jpg?v=20261119eu">London</button>
-            <button type="button" aria-pressed="false" data-city="Anaheim" data-when="Dec 3–6, 2026" data-venue="Anaheim Conv Center" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/01.jpg?v=20261119skyline">Anaheim</button>
-            <button type="button" aria-pressed="false" data-city="Nashville" data-when="Dec 9–13, 2026" data-venue="Music City Center" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/01.jpg?v=20261119skyline">Nashville</button>
-            <button type="button" aria-pressed="false" data-city="Paris" data-when="Dec 12–20, 2026" data-venue="Paris Expo" data-href="products/paris-race-day-stitched.html" data-src="images/streetwear/paris-race-day-stitched/01.jpg?v=20261119eu">Paris</button>
-            <button type="button" aria-pressed="false" data-city="Vancouver" data-when="Dec 17–20, 2026" data-venue="Canada Place" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/01.jpg?v=20261119skyline">Vancouver</button>
-            <button type="button" aria-pressed="false" data-city="Hong Kong" data-when="Jan 7–10, 2027" data-venue="AsiaWorld-Expo" data-href="products/hong-kong-race-day-stitched.html" data-src="images/streetwear/hong-kong-race-day-stitched/01.jpg?v=20261119eu">Hong Kong</button>
-            <button type="button" aria-pressed="false" data-city="Chicago" data-when="Feb 11–15, 2027" data-venue="Navy Pier" data-href="products/chicago-race-day-stitched.html" data-src="images/streetwear/chicago-race-day-stitched/01.jpg?v=20261119rdw6">Chicago</button>
-            <button type="button" aria-pressed="false" data-city="Cancún" data-when="Feb 18, 2027" data-venue="Malecón Tajamar" data-href="products/cancun-race-day-stitched.html" data-src="images/streetwear/cancun-race-day-stitched/01.jpg?v=20261119skyline">Cancún</button>
-            <button type="button" aria-pressed="false" data-city="Phoenix" data-when="Feb 25–28, 2027" data-venue="State Farm Stadium" data-href="products/phoenix-race-day-stitched.html" data-src="images/streetwear/phoenix-race-day-stitched/01.jpg?v=20261117phoenix">Phoenix</button>
-            <button type="button" aria-pressed="false" data-city="Las Vegas" data-when="Mar 12–14, 2027" data-venue="Las Vegas Conv Ctr" data-href="products/las-vegas-race-day-stitched.html" data-src="images/streetwear/las-vegas-race-day-stitched/01.jpg?v=20261119rdw">Las Vegas</button>
-            <button type="button" aria-pressed="false" data-city="Guadalajara" data-when="Mar 19–21, 2027" data-venue="Expo Guadalajara" data-href="products/guadalajara-race-day-stitched.html" data-src="images/streetwear/guadalajara-race-day-stitched/01.jpg?v=20261119rdw6">Guadalajara</button>
-            <button type="button" aria-pressed="false" data-city="Miami Beach" data-when="Mar 26–28, 2027" data-venue="Miami Beach Ctr" data-href="products/miami-beach-race-day-stitched.html" data-src="images/streetwear/miami-beach-race-day-stitched/01.jpg?v=20261119rdw">Miami Beach</button>
-            <button type="button" aria-pressed="false" data-city="Houston" data-when="Apr 1–4, 2027" data-venue="NRG Park" data-href="products/houston-race-day-stitched.html" data-src="images/streetwear/houston-race-day-stitched/01.jpg?v=20261119rdw">Houston</button>
-            <button type="button" aria-pressed="false" data-city="Monterrey" data-when="Apr 16–18, 2027" data-venue="Cintermex" data-href="products/monterrey-race-day-stitched.html" data-src="images/streetwear/monterrey-race-day-stitched/01.jpg?v=20261119rdw6">Monterrey</button>
-            <button type="button" aria-pressed="false" data-city="Atlanta" data-when="Apr 23–25, 2027" data-venue="World Congress Ctr" data-href="products/atlanta-race-day-stitched.html" data-src="images/streetwear/atlanta-race-day-stitched/01.jpg?v=20261119rdw">Atlanta</button>
-            <button type="button" aria-pressed="false" data-city="Minneapolis" data-when="May 7–9, 2027" data-venue="US Bank Stadium" data-href="products/minneapolis-race-day-stitched.html" data-src="images/streetwear/minneapolis-race-day-stitched/01.jpg?v=20261119rdw6">Minneapolis</button>
-            <button type="button" aria-pressed="false" data-city="San Diego" data-when="May 13–16, 2027" data-venue="San Diego Conv Ctr" data-href="products/san-diego-race-day-stitched.html" data-src="images/streetwear/san-diego-race-day-stitched/01.jpg?v=20261119rdw6">San Diego</button>
-            <button type="button" aria-pressed="false" data-city="Portland" data-when="May 21–23, 2027" data-venue="Oregon Conv Ctr" data-href="products/portland-race-day-stitched.html" data-src="images/streetwear/portland-race-day-stitched/01.jpg?v=20261119rdw6">Portland</button>
+            <button type="button" aria-pressed="false" data-city="Dallas" data-end="2026-11-22" data-when="Nov 18–22, 2026" data-venue="Kay Bailey Center" data-href="products/dallas-race-day-stitched.html" data-src="images/streetwear/dallas-race-day-stitched/03.jpg?v=20261119skyline">Dallas</button>
+            <button type="button" aria-pressed="false" data-city="London" data-end="2026-12-06" data-when="Dec 2–6, 2026" data-venue="ExCeL London" data-href="products/london-race-day-stitched.html" data-src="images/streetwear/london-race-day-stitched/03.jpg?v=20261119eu">London</button>
+            <button type="button" aria-pressed="true" data-city="Anaheim" data-end="2026-12-06" data-when="Dec 3–6, 2026" data-venue="Anaheim Conv Center" data-href="products/anaheim-race-day-stitched.html" data-src="images/streetwear/anaheim-race-day-stitched/03.jpg?v=20261119skyline">Anaheim</button>
+            <button type="button" aria-pressed="false" data-city="Nashville" data-end="2026-12-13" data-when="Dec 9–13, 2026" data-venue="Music City Center" data-href="products/nashville-race-day-stitched.html" data-src="images/streetwear/nashville-race-day-stitched/03.jpg?v=20261119skyline">Nashville</button>
+            <button type="button" aria-pressed="false" data-city="Paris" data-end="2026-12-20" data-when="Dec 12–20, 2026" data-venue="Paris Expo" data-href="products/paris-race-day-stitched.html" data-src="images/streetwear/paris-race-day-stitched/03.jpg?v=20261119eu">Paris</button>
+            <button type="button" aria-pressed="false" data-city="Vancouver" data-end="2026-12-20" data-when="Dec 17–20, 2026" data-venue="Canada Place" data-href="products/vancouver-race-day-stitched.html" data-src="images/streetwear/vancouver-race-day-stitched/03.jpg?v=20261119skyline">Vancouver</button>
+            <button type="button" aria-pressed="false" data-city="Hong Kong" data-end="2027-01-10" data-when="Jan 7–10, 2027" data-venue="AsiaWorld-Expo" data-href="products/hong-kong-race-day-stitched.html" data-src="images/streetwear/hong-kong-race-day-stitched/03.jpg?v=20261119eu">Hong Kong</button>
+            <button type="button" aria-pressed="false" data-city="Chicago" data-end="2027-02-15" data-when="Feb 11–15, 2027" data-venue="Navy Pier" data-href="products/chicago-race-day-stitched.html" data-src="images/streetwear/chicago-race-day-stitched/03.jpg?v=20261119rdw6">Chicago</button>
+            <button type="button" aria-pressed="false" data-city="Cancún" data-end="2027-02-18" data-when="Feb 18, 2027" data-venue="Malecón Tajamar" data-href="products/cancun-race-day-stitched.html" data-src="images/streetwear/cancun-race-day-stitched/03.jpg?v=20261119skyline">Cancún</button>
+            <button type="button" aria-pressed="false" data-city="Phoenix" data-end="2027-02-28" data-when="Feb 25–28, 2027" data-venue="State Farm Stadium" data-href="products/phoenix-race-day-stitched.html" data-src="images/streetwear/phoenix-race-day-stitched/03.jpg?v=20261117phoenix">Phoenix</button>
+            <button type="button" aria-pressed="false" data-city="Las Vegas" data-end="2027-03-14" data-when="Mar 12–14, 2027" data-venue="Las Vegas Conv Ctr" data-href="products/las-vegas-race-day-stitched.html" data-src="images/streetwear/las-vegas-race-day-stitched/03.jpg?v=20261119rdw">Las Vegas</button>
+            <button type="button" aria-pressed="false" data-city="Guadalajara" data-end="2027-03-21" data-when="Mar 19–21, 2027" data-venue="Expo Guadalajara" data-href="products/guadalajara-race-day-stitched.html" data-src="images/streetwear/guadalajara-race-day-stitched/03.jpg?v=20261119rdw6">Guadalajara</button>
+            <button type="button" aria-pressed="false" data-city="Miami Beach" data-end="2027-03-28" data-when="Mar 26–28, 2027" data-venue="Miami Beach Ctr" data-href="products/miami-beach-race-day-stitched.html" data-src="images/streetwear/miami-beach-race-day-stitched/03.jpg?v=20261119rdw">Miami Beach</button>
+            <button type="button" aria-pressed="false" data-city="Houston" data-end="2027-04-04" data-when="Apr 1–4, 2027" data-venue="NRG Park" data-href="products/houston-race-day-stitched.html" data-src="images/streetwear/houston-race-day-stitched/03.jpg?v=20261119rdw">Houston</button>
+            <button type="button" aria-pressed="false" data-city="Monterrey" data-end="2027-04-18" data-when="Apr 16–18, 2027" data-venue="Cintermex" data-href="products/monterrey-race-day-stitched.html" data-src="images/streetwear/monterrey-race-day-stitched/03.jpg?v=20261119rdw6">Monterrey</button>
+            <button type="button" aria-pressed="false" data-city="Atlanta" data-end="2027-04-25" data-when="Apr 23–25, 2027" data-venue="World Congress Ctr" data-href="products/atlanta-race-day-stitched.html" data-src="images/streetwear/atlanta-race-day-stitched/03.jpg?v=20261119rdw">Atlanta</button>
+            <button type="button" aria-pressed="false" data-city="Minneapolis" data-end="2027-05-09" data-when="May 7–9, 2027" data-venue="US Bank Stadium" data-href="products/minneapolis-race-day-stitched.html" data-src="images/streetwear/minneapolis-race-day-stitched/03.jpg?v=20261119rdw6">Minneapolis</button>
+            <button type="button" aria-pressed="false" data-city="San Diego" data-end="2027-05-16" data-when="May 13–16, 2027" data-venue="San Diego Conv Ctr" data-href="products/san-diego-race-day-stitched.html" data-src="images/streetwear/san-diego-race-day-stitched/03.jpg?v=20261119rdw6">San Diego</button>
+            <button type="button" aria-pressed="false" data-city="Portland" data-end="2027-05-23" data-when="May 21–23, 2027" data-venue="Oregon Conv Ctr" data-href="products/portland-race-day-stitched.html" data-src="images/streetwear/portland-race-day-stitched/03.jpg?v=20261119rdw6">Portland</button>
+            <button type="button" aria-pressed="false" data-city="Denver" data-end="2026-11-15" data-when="Nov 12–15, 2026" data-venue="National Western" data-href="products/denver-race-day-stitched.html" data-src="images/streetwear/denver-race-day-stitched/03.jpg?v=20261119skyline">Denver</button>
           </div>
         </div>
         <div>
-          <p class="Pin__eyebrow" id="pinEyebrow">Nov 18–22, 2026 · Kay Bailey Center</p>
+          <p class="Pin__eyebrow" id="pinEyebrow">Dec 3–6, 2026 · Anaheim Conv Center</p>
           <h2><a href="collections/race-day-windbreakers.html" style="color:inherit;text-decoration:none">Race Day Windbreakers</a></h2>
           <p class="Pin__price" id="pinPrice">from $68 <small>Black · Free US shipping</small></p>
-          <p class="Pin__dek" id="pinCaption">Dallas Race Day Windbreaker</p>
+          <p class="Pin__dek" id="pinCaption">Anaheim Race Day Windbreaker</p>
           <div class="Pin__cta">
-            <a class="Btn Btn--cobalt" id="pinBuy" href="products/dallas-race-day-stitched.html">Shop Dallas</a>
+            <a class="Btn Btn--cobalt" id="pinBuy" href="products/anaheim-race-day-stitched.html">Shop Anaheim</a>
             <a class="Btn Btn--ghost" href="collections/race-day-windbreakers.html" style="color:#fff;border-color:#475569">Shop all twenty</a>
           </div>
 
@@ -562,7 +562,44 @@
             if(cap) cap.textContent=city+" Race Day Windbreaker";
             if(buy){ buy.setAttribute("href", href); buy.textContent="Shop "+city; }
           }
+          function laToday(){
+            try{
+              return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Los_Angeles",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+            }catch(err){
+              var d=new Date();
+              function two(n){ return (n<10?"0":"")+n; }
+              return d.getFullYear()+"-"+two(d.getMonth()+1)+"-"+two(d.getDate());
+            }
+          }
+          function arrange(){
+            if(!chips) return;
+            var today=laToday();
+            var buttons=Array.prototype.slice.call(chips.querySelectorAll("button"));
+            buttons.forEach(function(btn, i){ btn._pinIndex=i; });
+            buttons.sort(function(a,b){
+              var ae=a.getAttribute("data-end")||"";
+              var be=b.getAttribute("data-end")||"";
+              var ap=ae<today;
+              var bp=be<today;
+              if(ap!==bp) return ap?1:-1;
+              if(ae<be) return -1;
+              if(ae>be) return 1;
+              return a._pinIndex-b._pinIndex;
+            });
+            buttons.forEach(function(btn){ chips.appendChild(btn); });
+            var next=null;
+            for(var i=0;i<buttons.length;i++){
+              if((buttons[i].getAttribute("data-end")||"")>=today){ next=buttons[i]; break; }
+            }
+            if(!next && buttons.length) next=buttons[buttons.length-1];
+            if(next){
+              select(next);
+              var edge=next.offsetLeft-(chips.offsetLeft||0);
+              chips.scrollLeft=Math.max(0, edge-8);
+            }
+          }
           if(chips){
+            arrange();
             chips.addEventListener("click", function(ev){
               var btn=ev.target.closest && ev.target.closest("button");
               if(!btn || !chips.contains(btn)) return;
