@@ -2805,6 +2805,23 @@ def list_near_black_primaries(products, threshold=NEAR_BLACK_LUMINANCE):
     return listed
 
 
+def visible_printable_errors(text, name="page"):
+    """Visible copy must not say Printable. Slugs and the split-wristband tool may."""
+    cleaned = re.sub(r"<!--.*?-->", " ", text or "", flags=re.S)
+    cleaned = re.sub(r"https?://[^\s\"'<>]+", " ", cleaned)
+    cleaned = re.sub(
+        r"[\w./-]*printable[\w./-]*",
+        lambda match: " " if "dallas-race-day-printable" in match.group(0).lower() or "apex-dallas-race-day-printable" in match.group(0).lower() else match.group(0),
+        cleaned,
+        flags=re.I,
+    )
+    for allowed in ("Printable Split Wristband", "Printable HYROX", "Printable Wristband"):
+        cleaned = cleaned.replace(allowed, " ")
+    if re.search(r"Printable", cleaned):
+        return [f"{name}: visible Printable"]
+    return []
+
+
 def assert_restored_sections():
     """Self-test the regression gates, then check guides, C36, slugs, and old names."""
     if not _lowercase_after_period("Wraps from front to back. quick-dry performance."):
@@ -3075,6 +3092,28 @@ def assert_restored_sections():
     if skipped:
         raise SystemExit("Near-black primary skipped a lighter frame: " + "; ".join(skipped))
     print("Near-black primaries with no lighter frame: " + ", ".join(list_near_black_primaries(catalog["products"])))
+    if not visible_printable_errors("Dallas Race Day Printable", "title"):
+        raise SystemExit("Printable self-test missed a visible Printable title")
+    if visible_printable_errors("Dallas Race Day Jacket", "title"):
+        raise SystemExit("Printable self-test flagged Dallas Race Day Jacket")
+    if visible_printable_errors('<a href="products/dallas-race-day-printable.html">Dallas Race Day Jacket</a>', "link"):
+        raise SystemExit("Printable self-test flagged the kept slug")
+    if visible_printable_errors("Free Printable Split Wristband", "wristband"):
+        raise SystemExit("Printable self-test flagged the split wristband")
+    if visible_printable_errors("Printable Wristband + 10% Code", "nav"):
+        raise SystemExit("Printable self-test flagged the wristband link")
+    self_tests.append("visible Printable is rejected")
+    printable_hits = []
+    for dirpath, dirnames, filenames in os.walk(BASE_DIR):
+        dirnames[:] = [item for item in dirnames if item not in {".git", "__pycache__", "node_modules"}]
+        for name in filenames:
+            if os.path.splitext(name)[1] not in {".html", ".json", ".xml", ".csv", ".js", ".md", ".txt"}:
+                continue
+            rel = os.path.relpath(os.path.join(dirpath, name), BASE_DIR)
+            page = open(os.path.join(dirpath, name), encoding="utf-8", errors="replace").read()
+            printable_hits.extend(visible_printable_errors(page, rel))
+    if printable_hits:
+        raise SystemExit("Visible Printable remains: " + "; ".join(printable_hits[:12]))
     assert_restored_sections.self_test_count = len(self_tests)
     folder = os.path.join(BASE_DIR, "products")
     guide_total = 0
