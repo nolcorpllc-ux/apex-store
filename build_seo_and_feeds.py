@@ -268,37 +268,76 @@ def hyrx_design_minimum():
     return min(prices)
 
 
+_FABRIC_LINE = re.compile(
+    r"(?i)(?:\d+(?:\.\d+)?\s*oz|ring-spun|airlume|fleece|mesh|fabric|cotton|polyester|"
+    r"heavyweight|lightweight|midweight|nylon|acrylic|leather)"
+)
+_HEAVY_CONFLICT = re.compile(
+    r"(?i)(?<!\d)6(?:\.1)?\s+oz.{0,48}heavyweight|heavyweight.{0,48}(?<!\d)6(?:\.1)?\s+oz"
+)
+
+
+def _sentence_key(sentence):
+    text = re.sub(r"\s+", " ", html.unescape(sentence)).strip().lower()
+    return text.rstrip(".!?")
+
+
+def _copy_sentences(fragment):
+    plain = re.sub(r"<[^>]+>", " ", fragment)
+    plain = re.sub(r"\s+", " ", html.unescape(plain)).strip()
+    return [part.strip() for part in re.split(r"(?<=[.!?])\s+", plain) if part.strip()]
+
+
+def _product_copy_html(page):
+    """Description, spec list, and bullets. Not related products or the footer."""
+    match = re.search(r"<main\b.*?</main>", page, flags=re.S | re.I)
+    chunk = match.group(0) if match else page
+    start = chunk.lower().find("<h1")
+    if start == -1:
+        return ""
+    chunk = chunk[start:]
+    for marker in ("Frequently Paired", "Related HYROX", 'class="ProductGrid"', "<footer"):
+        at = chunk.find(marker)
+        if at != -1:
+            chunk = chunk[:at]
+    return chunk
+
+
 def assert_fabric_stated_once():
-    """Fail if fabric or weight is stated more than once outside the bullets."""
-    mention = re.compile(
-        r"(?i)(?:\d+(?:\.\d+)?\s+oz|heavyweight\s+fabric|lightweight\s+fabric|"
-        r"midweight\s+fabric|ring-spun|airlume|heavyweight\s+tee\b|heavyweight\s+cotton)"
-    )
-    conflict = re.compile(
-        r"(?i)(?<!\d)6(?:\.1)?\s+oz.{0,48}heavyweight|heavyweight.{0,48}(?<!\d)6(?:\.1)?\s+oz"
-    )
+    """Fail when a spec sentence is repeated, fabric is missing, or og text is a stub."""
     errors = []
     products = os.path.join(BASE_DIR, "products")
     for name in sorted(os.listdir(products)):
         if not name.endswith(".html"):
             continue
-        html = open(os.path.join(products, name), encoding="utf-8", errors="replace").read()
-        visible = re.sub(
-            r"<script\b(?![^>]*ld\+json)[^>]*>.*?</script>", " ", html, flags=re.S | re.I
-        )
-        visible = re.sub(r"<style\b[^>]*>.*?</style>", " ", visible, flags=re.S | re.I)
-        visible = re.sub(r"<li\b[^>]*>.*?</li>", " ", visible, flags=re.S | re.I)
-        visible = re.sub(r"<title\b[^>]*>.*?</title>", " ", visible, flags=re.S | re.I)
-        visible = re.sub(r'\s(?:href|src)="[^"]*"', " ", visible)
-        text = re.sub(r"<[^>]+>", " ", visible)
-        hits = mention.findall(text)
-        if len(hits) > 1:
-            errors.append(f"{name}: fabric or weight mentioned {len(hits)} times outside the bullets")
-        plain = re.sub(r'\s(?:href|src)="[^"]*"', " ", html)
-        if conflict.search(plain):
+        page = open(os.path.join(products, name), encoding="utf-8", errors="replace").read()
+        if re.search(r'http-equiv="refresh"', page, re.I):
+            continue
+        if "<h1" not in page.lower():
+            continue
+        og = re.search(r'<meta property="og:description" content="([^"]*)"', page)
+        if og and len(html.unescape(og.group(1)).strip()) < 40:
+            errors.append(f"{name}: og:description is under 40 characters")
+        copy = _product_copy_html(page)
+        if not _FABRIC_LINE.search(re.sub(r"<[^>]+>", " ", copy)):
+            errors.append(f"{name}: no fabric line")
+        seen = {}
+        for bit in re.findall(r"<(?:p|li)\b[^>]*>.*?</(?:p|li)>", copy, flags=re.S | re.I):
+            if re.search(r"<a\b", bit, re.I):
+                continue
+            for sentence in _copy_sentences(bit):
+                key = _sentence_key(sentence)
+                if len(key) < 12:
+                    continue
+                if key in seen:
+                    errors.append(f"{name}: repeated sentence {sentence[:90]!r}")
+                    break
+                seen[key] = True
+        plain = re.sub(r'\s(?:href|src)="[^"]*"', " ", page)
+        if _HEAVY_CONFLICT.search(plain):
             errors.append(f"{name}: calls a 6 or 6.1 oz tee heavyweight")
     if errors:
-        raise SystemExit("Fabric line is repeated:\n" + "\n".join(errors[:40]))
+        raise SystemExit("Fabric line is repeated:\n" + "\n".join(errors[:50]))
 
 
 def assert_published_xml_parses():
@@ -494,12 +533,19 @@ def generate_product_pages(only_ids=None):
         canonical = f"{SITE_URL}/products/{handle}.html"
         raw_desc = prod["short_desc"]
         highlights = [normalize_fabric_copy(item) for item in prod.get("highlights", [])]
-        short_desc = strip_fabric_clauses(raw_desc)
-        if not any(_FABRIC_CLAUSE.search(item or "") for item in highlights):
-            for sentence in re.split(r"(?<=[.?!])\s+", normalize_fabric_copy(raw_desc)):
-                if sentence and _FABRIC_CLAUSE.search(sentence):
-                    highlights = [sentence.strip()] + highlights
-                    break
+        normalized = normalize_fabric_copy(raw_desc)
+        highlights_have_fabric = any(_FABRIC_CLAUSE.search(item or "") for item in highlights)
+        # Keep the fabric sentence in the description when the bullets do not
+        # already state it. Stripping it there is what left "Tech Shirt. " behind.
+        if _FABRIC_CLAUSE.search(normalized or "") and not highlights_have_fabric:
+            short_desc = normalized
+        else:
+            short_desc = strip_fabric_clauses(raw_desc)
+            if not highlights_have_fabric:
+                for sentence in re.split(r"(?<=[.?!])\s+", normalized or ""):
+                    if sentence and _FABRIC_CLAUSE.search(sentence):
+                        highlights = [sentence.strip()] + highlights
+                        break
         dept = prod["dept"]
 
         related = [p for p in products if p["dept"] == dept and p["id"] != prod["id"]][:4]
