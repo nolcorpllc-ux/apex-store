@@ -157,6 +157,13 @@ for path in Path(".").rglob("*"):
     if "apc-c13-black" in body or "apc-c14-black" in body:
         old_low.append(str(path))
 check(not old_low, "old 800px cap and bag files are not referenced")
+gallery_js = Path("gallery.js").read_text()
+check("setAttribute(\"srcset\"" in gallery_js and "closest(\"picture\")" in gallery_js and "querySelectorAll(\"source\")" in gallery_js, "shared gallery script updates srcset and picture sources")
+unwired = [p.name for p in Path("products").glob("*.html") if 'id="staticMainProdImg"' in p.read_text() and "/gallery.js" not in p.read_text()]
+check(not unwired, "every product page loads the shared gallery script" + (": " + ", ".join(unwired[:6]) if unwired else ""))
+jacket_fn = app.split("function jacketCardHtml")[1].split("function bindJacketCard")[0]
+check('data-role="hover"' in jacket_fn and "Card__img--b" in jacket_fn, "jacket card renders a hover layer")
+check("hover.src = hoverSrc" in app, "jacket hover src updates when the city changes")
 
 # Homepage default shelf: apparel, without stitched windbreakers, hero tees, or printed jackets.
 apparel = {
@@ -382,7 +389,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   await new Promise(r => ws.addEventListener("open", r));
   bind(ws);
   await send(ws, "Emulation.setDeviceMetricsOverride", {width:%d, height:%d, deviceScaleFactor:1, mobile:%s});
-  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8791/index.html"});
+  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8795/index.html"});
   await sleep(1200);
   const ev = await send(ws, "Runtime.evaluate", {expression:`(() => { const el = document.querySelector('.SiteHead .Wordmark'); const r = el.getBoundingClientRect(); const center = r.left + r.width/2; const bag = document.querySelector('.BagBtn').getBoundingClientRect(); const menu = document.querySelector('.MenuBtn'); const mr = menu ? menu.getBoundingClientRect() : null; const overlap = (a,b) => a && b && !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom); const width = document.documentElement.clientWidth; const probe = document.createElement('img'); probe.className = 'Card__img Card__img--model Card__img--full'; document.body.appendChild(probe); const fit = getComputedStyle(probe).objectFit; probe.remove(); return JSON.stringify({off: Math.abs(center - width/2), overlapBag: overlap(r, bag), overlapMenu: mr && menu.offsetParent ? overlap(r, mr) : false, fit}); })()`, returnByValue:true});
   console.log(ev.result.result.value);
@@ -398,9 +405,121 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     os.unlink(path.name)
     return json.loads(out.strip().splitlines()[-1])
 
+def gallery_browser(pages):
+    import tempfile
+    import os
+    script = r'''
+const { spawn } = require("child_process");
+const port = 9377;
+const chrome = spawn("google-chrome", ["--headless=new","--disable-gpu","--no-sandbox","--disable-dev-shm-usage",`--remote-debugging-port=${port}`,"about:blank"], {stdio:"ignore"});
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+const pages = PAGES_JSON;
+(async () => {
+  let version;
+  for (let i = 0; i < 40; i++) {
+    try { version = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json(); break; }
+    catch { await sleep(150); }
+  }
+  const browser = new WebSocket(version.webSocketDebuggerUrl);
+  await new Promise(r => browser.addEventListener("open", r));
+  let id = 0; const pending = new Map();
+  const bind = (ws) => ws.addEventListener("message", (ev) => { const msg = JSON.parse(ev.data); if (msg.id && pending.has(msg.id)) pending.get(msg.id)(msg); });
+  bind(browser);
+  const send = (ws, method, params={}) => new Promise((resolve) => { const msgId = ++id; pending.set(msgId, resolve); ws.send(JSON.stringify({id:msgId, method, params})); });
+  const created = await send(browser, "Target.createTarget", {url:"about:blank"});
+  const targets = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+  const page = targets.find(t => t.id === created.result.targetId);
+  const ws = new WebSocket(page.webSocketDebuggerUrl);
+  await new Promise(r => ws.addEventListener("open", r));
+  bind(ws);
+  await send(ws, "Emulation.setDeviceMetricsOverride", {width:1280, height:900, deviceScaleFactor:1, mobile:false});
+  const out = {pages: []};
+  for (const path of pages) {
+    await send(ws, "Page.navigate", {url:"http://127.0.0.1:8795/" + path});
+    await sleep(700);
+    const ev = await send(ws, "Runtime.evaluate", {expression:`(() => {
+      const img = document.getElementById("staticMainProdImg");
+      const pathOf = (url) => { try { return new URL(url, location.href).pathname; } catch (e) { return ""; } };
+      if (!img || !window.setStaticMainImage) return JSON.stringify({error:"missing gallery"});
+      let source = null;
+      if (location.pathname.indexOf("zone-2-engine-builder-embroidered-dad-hat") !== -1) {
+        const picture = document.createElement("picture");
+        source = document.createElement("source");
+        source.srcset = img.getAttribute("srcset") || "";
+        source.sizes = "100vw";
+        img.parentNode.insertBefore(picture, img);
+        picture.appendChild(source);
+        picture.appendChild(img);
+      }
+      const firstToken = (value) => ((value || "").trim().split(" ")[0] || "");
+      const buttons = [...document.querySelectorAll("button")].filter((b) => (b.getAttribute("onclick") || "").indexOf("staticMainProdImg") !== -1);
+      const clicks = [];
+      for (const btn of buttons) {
+        const code = btn.getAttribute("onclick") || "";
+        const quoted = code.split("src='")[1] || "";
+        const raw = quoted.split("'")[0];
+        if (!raw) continue;
+        const before = pathOf(img.currentSrc || img.src);
+        btn.click();
+        clicks.push({want: pathOf(raw), now: pathOf(img.currentSrc), set: pathOf(firstToken(img.getAttribute("srcset"))), sizes: img.hasAttribute("sizes"), source: source ? pathOf(firstToken(source.getAttribute("srcset"))) : "", sourceSizes: source ? source.hasAttribute("sizes") : false, before});
+      }
+      return JSON.stringify({clicks});
+    })()`, returnByValue:true});
+    out.pages.push({path, report: JSON.parse(ev.result.result.value)});
+  }
+  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8795/index.html"});
+  await sleep(1200);
+  const jacket = await send(ws, "Runtime.evaluate", {expression:`(() => {
+    const card = document.querySelector("[data-jacket-card]");
+    if (!card) return "nocard";
+    const rows = [];
+    for (const btn of card.querySelectorAll("[data-jacket-city]")) {
+      btn.click();
+      const lead = card.querySelector("[data-role=photo]");
+      const hover = card.querySelector("[data-role=hover]");
+      rows.push({id: btn.getAttribute("data-jacket-city"), lead: lead.getAttribute("src").split("?")[0], hover: hover ? hover.getAttribute("src").split("?")[0] : "", cls: hover ? hover.className : ""});
+    }
+    return JSON.stringify(rows);
+  })()`, returnByValue:true});
+  out.jackets = JSON.parse(jacket.result.result.value);
+  console.log(JSON.stringify(out));
+  browser.close(); chrome.kill();
+})().catch((err) => { console.error(err); chrome.kill(); process.exit(1); });
+'''
+    script = script.replace("PAGES_JSON", json.dumps(pages))
+    path = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False)
+    path.write(script)
+    path.close()
+    out = subprocess.check_output(["node", path.name], text=True, timeout=90)
+    os.unlink(path.name)
+    return json.loads(out.strip().splitlines()[-1])
+
+thumb_re = re.compile(r"staticMainProdImg['\"]\)\.src\s*=\s*['\"]([^'\"]+)['\"]")
+gallery_pages = [
+    "products/dallas-race-day.html",
+    "products/anaheim-race-day.html",
+    "products/nashville-race-day.html",
+    "products/vancouver-race-day.html",
+    "products/zone-2-engine-builder-embroidered-dad-hat.html",
+    "products/apex-8-station-race-day-tactical-duffle.html",
+    "products/apc-c13.html",
+    "products/apc-c14.html",
+    "products/apc-c46.html",
+    "products/apc-c49.html",
+]
+for extra in sorted(Path("products").glob("*.html")):
+    if len(gallery_pages) >= 12:
+        break
+    rel = str(extra)
+    if rel in gallery_pages:
+        continue
+    files = {src.split("?")[0] for src in thumb_re.findall(extra.read_text())}
+    if len(files) >= 2:
+        gallery_pages.append(rel)
+
 import socket
-sock = socket.socket(); sock.bind(("127.0.0.1", 8791)); sock.close()
-server = subprocess.Popen(["python3", "-m", "http.server", "8791", "--bind", "127.0.0.1"], cwd=str(ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+sock = socket.socket(); sock.bind(("127.0.0.1", 8795)); sock.close()
+server = subprocess.Popen(["python3", "-m", "http.server", "8795", "--bind", "127.0.0.1"], cwd=str(ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 try:
     for width, height in ((390, 844), (768, 1024), (1024, 800), (1440, 900)):
         measured = logo_offset(width, height)
@@ -408,6 +527,31 @@ try:
         check(not measured["overlapBag"] and not measured["overlapMenu"], f"logo does not overlap Menu or Bag at {width}px")
         if width == 1440:
             check(measured.get("fit") == "contain", f"Card__img--full computes to contain ({measured.get('fit')})")
+    measured_gallery = gallery_browser(gallery_pages)
+    check(len(measured_gallery["pages"]) >= 10, f"gallery sample covers at least 10 product pages ({len(measured_gallery['pages'])})")
+    for item in measured_gallery["pages"]:
+        report = item["report"]
+        clicks = report.get("clicks") or []
+        check(not report.get("error") and len(clicks) >= 1, f"{item['path']} thumbs ran ({report.get('error', len(clicks))})")
+        changed = [c for c in clicks if c["want"] != c["before"]]
+        bad = [c for c in clicks if not (c["now"] == c["want"] and c["set"] == c["want"] and not c["sizes"])]
+        check(bool(changed) and not bad, f"{item['path']} thumb click changes currentSrc" + (f" {bad[:1]}" if bad else ""))
+        if "dad-hat" in item["path"]:
+            check(all(c["source"] == c["want"] and not c["sourceSizes"] for c in clicks), "cap gallery updates the picture source with the thumb")
+    rows = measured_gallery["jackets"]
+    check(isinstance(rows, list) and len(rows) == len(JACKETS), "jacket card hover was measured for every city")
+    if isinstance(rows, list):
+        by_row = {row["id"]: row for row in rows}
+        previous = ""
+        for sku in JACKETS:
+            row = by_row[sku]
+            expect = by_id[sku]["hover_image"].split("?")[0]
+            lead = by_id[sku]["primary_image"].split("?")[0]
+            check(row["hover"] == expect and "Card__img--b" in row["cls"], f"{sku} hover src is {expect}")
+            check(row["hover"] != previous, f"{sku} hover src changes with the city")
+            if sku in {"APC-C47", "APC-C75"}:
+                check(row["hover"] == row["lead"] == lead, f"{sku} reuses the lead file for hover")
+            previous = row["hover"]
 finally:
     server.terminate()
 
