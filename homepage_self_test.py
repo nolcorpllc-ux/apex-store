@@ -13,13 +13,14 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent
 os.chdir(ROOT)
 
-HERO = ["APC-C01", "APC-C02", "APC-C03", "APC-C07"]
+HERO = ["APC-C37", "APC-C22", "APC-C06", "APC-C16"]
 HERO_FILES = {
-    "APC-C01": "images/streetwear/hyrx-art/apc-c01-05.jpg",
-    "APC-C02": "images/streetwear/hyrx-art/apc-c02-05.jpg",
-    "APC-C07": "images/streetwear/hyrx-art/apc-c07-05.jpg",
-    "APC-C03": "images/streetwear/hyrx-art/apc-c03-05.jpg",
+    "APC-C37": "images/streetwear/hyrx-art/apc-c37-05.jpg",
+    "APC-C22": "images/streetwear/hyrx-art/apc-c22-05.jpg",
+    "APC-C06": "images/streetwear/hyrx-art/apc-c06-05.jpg",
+    "APC-C16": "images/streetwear/apex-race-city-heavyweight-tee-chicago-championship-division/05.jpg",
 }
+OLD_HERO = ["run-station-repeat-performance-tee", "wall-balls-bad-decisions-oversized-pump-cover", "porta-potty-line-pr-pre-race-tee", "sled-push-enthusiast-race-day-tee"]
 JACKETS = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"]
 JACKET_FILES = {
     "APC-C46": "images/streetwear/apex-dallas-race-day/hood.jpg",
@@ -82,6 +83,11 @@ hashes = []
 for sku, rel in HERO_FILES.items():
     check(rel in "".join(srcs), f"{sku} uses {rel}")
     check(Path(rel).exists() and width(rel) >= HERO_MIN, f"{sku} lead is at least {HERO_MIN}px")
+    corner = Image.open(rel).convert("RGB").getpixel((8, 8))
+    check(210 <= corner[0] <= 245 and abs(corner[0] - corner[1]) < 15 and abs(corner[1] - corner[2]) < 15, f"{sku} hero photo is a light grey studio ({corner})")
+    product = next(p for p in json.loads(Path("catalog.json").read_text())["products"] if p["id"] == sku)
+    check(product.get("fourthwall_product_url", "").startswith("https://apex-hybrid-co-shop.fourthwall.com/products/"), f"{sku} hero buy link is the Fourthwall product")
+    check(f'data-quick="{sku}"' in html, f"{sku} hero card opens that product")
     hashes.append(md5(rel))
 check(len(set(hashes)) == 4, "hero tee files are four different photos")
 check('srcset="' in (hero_srcs[0] if hero_srcs else ""), "hero images declare a 2x source")
@@ -236,9 +242,9 @@ apparel = {
     "Windbreakers",
     "Training Gear",
 }
-seen_paths = set(HERO_FILES.values()) | set(JACKET_FILES.values())
-seen_hash = set(hashes) | set(jacket_hashes)
-seen_ids = set(HERO) | set(JACKETS)
+seen_paths = set(JACKET_FILES.values())
+seen_hash = set(jacket_hashes)
+seen_ids = set(JACKETS)
 switch = json.loads(Path("race-day-switcher.json").read_text())
 wind = switch["windbreakers"][0]["photo"].split("?")[0]
 seen_paths.add(wind)
@@ -250,7 +256,7 @@ for product in catalog["products"]:
         continue
     if "race-day-stitched" in (product.get("handle") or ""):
         continue
-    if product["id"] in HERO or product["id"] in JACKETS:
+    if product["id"] in JACKETS:
         continue
     rel = (product.get("primary_image") or product.get("image") or "").split("?")[0]
     digest = md5(rel) if Path(rel).exists() else ""
@@ -309,7 +315,7 @@ for product in catalog["products"]:
         continue
     if "race-day-stitched" in (product.get("handle") or ""):
         continue
-    if product["id"] in set(HERO) | set(JACKETS):
+    if product["id"] in set(JACKETS):
         continue
     shelf.append(product)
 buckets = {key: [] for key in ("tee", "tank", "hyrx", "women", "hoodie", "gear", "outer")}
@@ -361,6 +367,12 @@ club_present = [handle for handle in CLUB_HANDLES if handle in cards]
 cards = [handle for handle in cards if handle not in CLUB_HANDLES] + club_present
 check(club_present == CLUB_HANDLES, "all three Compromised Running Club items stay on the homepage")
 check(cards[-3:] == CLUB_HANDLES, "Compromised Running Club cards are the last three homepage cards (" + ", ".join(cards[-3:]) + ")")
+check(all(handle in cards for handle in OLD_HERO), "the original four hero tees stay in the apparel grid")
+check(all(by_id[sku]["handle"] in cards for sku in HERO), "the replacement hero tees also stay in the apparel grid")
+for sku in ("APC-C109", "APC-C110"):
+    bra = by_id[sku]["primary_image"].split("?")[0]
+    bra_corner = Image.open(bra).convert("RGB").getpixel((8, 8))
+    check(bra.endswith("/02.jpg") and bra_corner[0] < 20, f"{by_id[sku]['handle']} keeps its black-studio front ({bra_corner})")
 adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i] in ALL_CRESTS and cards[i + 1] in ALL_CRESTS]
 check(cards.count("city-crest") == 1, "homepage shows one city crest card")
 check(not any(handle in ALL_CRESTS for handle in cards), "individual crest products are not repeated beside the crest card")
@@ -408,8 +420,8 @@ def visible_title(product):
     if product["id"] in short_map:
         return short_map[product["id"]]
     return product["title"].split(" - ")[0]
-hero_titles = ["Run Station Repeat", "Wall Balls & Bad Decisions", "Porta-Potty Line PR", "Sled Push Enthusiast"]
-visible = ["Denver Race Day Windbreaker", "Dallas Race Day"] + hero_titles
+hero_titles = ["1KM Split", "Zero Excuses", "Erg Doesn't Care", "Apex Race City - Chicago Championship Division"]
+visible = ["Denver Race Day Windbreaker", "Dallas Race Day"]
 by_handle = {p["handle"]: p for p in catalog["products"]}
 for handle in folded:
     if handle == "city-crest":
@@ -458,7 +470,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   await new Promise(r => ws.addEventListener("open", r));
   bind(ws);
   await send(ws, "Emulation.setDeviceMetricsOverride", {width:%d, height:%d, deviceScaleFactor:1, mobile:%s});
-  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8795/index.html"});
+  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8796/index.html"});
   await sleep(1200);
   const ev = await send(ws, "Runtime.evaluate", {expression:`(() => { const el = document.querySelector('.SiteHead .Wordmark'); const r = el.getBoundingClientRect(); const center = r.left + r.width/2; const bag = document.querySelector('.BagBtn').getBoundingClientRect(); const menu = document.querySelector('.MenuBtn'); const mr = menu ? menu.getBoundingClientRect() : null; const overlap = (a,b) => a && b && !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom); const width = document.documentElement.clientWidth; const probe = document.createElement('img'); probe.className = 'Card__img Card__img--model Card__img--full'; document.body.appendChild(probe); const fit = getComputedStyle(probe).objectFit; probe.remove(); return JSON.stringify({off: Math.abs(center - width/2), overlapBag: overlap(r, bag), overlapMenu: mr && menu.offsetParent ? overlap(r, mr) : false, fit}); })()`, returnByValue:true});
   console.log(ev.result.result.value);
@@ -504,7 +516,7 @@ const pages = PAGES_JSON;
   await send(ws, "Emulation.setDeviceMetricsOverride", {width:1280, height:900, deviceScaleFactor:1, mobile:false});
   const out = {pages: []};
   for (const path of pages) {
-    await send(ws, "Page.navigate", {url:"http://127.0.0.1:8795/" + path});
+    await send(ws, "Page.navigate", {url:"http://127.0.0.1:8796/" + path});
     await sleep(700);
     const ev = await send(ws, "Runtime.evaluate", {expression:`(() => {
       const img = document.getElementById("staticMainProdImg");
@@ -536,7 +548,7 @@ const pages = PAGES_JSON;
     })()`, returnByValue:true});
     out.pages.push({path, report: JSON.parse(ev.result.result.value)});
   }
-  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8795/index.html"});
+  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8796/index.html"});
   await sleep(1200);
   const jacket = await send(ws, "Runtime.evaluate", {expression:`(() => {
     const card = document.querySelector("[data-jacket-card]");
@@ -587,8 +599,8 @@ for extra in sorted(Path("products").glob("*.html")):
         gallery_pages.append(rel)
 
 import socket
-sock = socket.socket(); sock.bind(("127.0.0.1", 8795)); sock.close()
-server = subprocess.Popen(["python3", "-m", "http.server", "8795", "--bind", "127.0.0.1"], cwd=str(ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+sock = socket.socket(); sock.bind(("127.0.0.1", 8796)); sock.close()
+server = subprocess.Popen(["python3", "-m", "http.server", "8796", "--bind", "127.0.0.1"], cwd=str(ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 try:
     for width, height in ((390, 844), (768, 1024), (1024, 800), (1440, 900)):
         measured = logo_offset(width, height)
