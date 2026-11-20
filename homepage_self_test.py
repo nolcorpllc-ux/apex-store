@@ -23,7 +23,7 @@ HERO_FILES = {
 OLD_HERO = ["run-station-repeat-performance-tee", "wall-balls-bad-decisions-oversized-pump-cover", "porta-potty-line-pr-pre-race-tee", "sled-push-enthusiast-race-day-tee"]
 JACKETS = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"]
 JACKET_FILES = {
-    "APC-C46": "images/streetwear/apex-dallas-race-day/hood.jpg",
+    "APC-C46": "images/streetwear/apex-dallas-race-day/fw-01.jpg",
     "APC-C48": "images/streetwear/apex-anaheim-race-day/front.jpg",
     "APC-C49": "images/streetwear/apex-nashville-race-day/front.jpg",
     "APC-C50": "images/streetwear/apex-vancouver-race-day/front.jpg",
@@ -93,6 +93,9 @@ check(len(set(hashes)) == 4, "hero tee files are four different photos")
 check('srcset="' in (hero_srcs[0] if hero_srcs else ""), "hero images declare a 2x source")
 
 app = Path("app.js").read_text()
+hero_strong = re.findall(r"<strong>([^<]+)</strong>", hero_srcs[0] if hero_srcs else "")
+short = dict(re.findall(r'"(APC-C\d+)": "([^"]+)"', app.split("const SHORT = {", 1)[1].split("};", 1)[0]))
+check(hero_strong == [short[sku] for sku in HERO], "hero captions use the existing product names (" + " | ".join(hero_strong) + ")")
 check("JACKET_ORDER" in app and "data-jacket-card" in app, "printed jackets collapse into one Race Day Jacket card")
 check("Card__kind" not in app.split("function renderProducts")[1].split("function setDept")[0], "grid cards drop the kind sub-label")
 check("QuickAdd" not in app.split("function renderProducts")[1].split("function setDept")[0], "grid cards drop size buttons")
@@ -107,7 +110,9 @@ for sku, rel in JACKET_FILES.items():
     product = by_id[sku]
     check(product["primary_image"].split("?")[0] == rel, f"{sku} card image is the Fourthwall lead")
     hover = product.get("hover_image", "").split("?")[0]
-    check(Path(hover).name in {"front.jpg", "hood.jpg"} and Path(hover).parent == Path(rel).parent, f"{sku} hover is a clean pose ({Path(hover).name})")
+    hover_name = Path(hover).name
+    hover_ok = hover_name in {"front.jpg", "hood.jpg"} or (sku == "APC-C46" and hover_name == "fw-02.jpg")
+    check(hover_ok and Path(hover).parent == Path(rel).parent, f"{sku} hover is the Fourthwall second frame ({hover_name})")
     check(width(rel) >= HERO_MIN, f"{sku} lead is full resolution ({width(rel)}px)")
     page = Path("products") / f"{product['handle']}.html"
     body = page.read_text()
@@ -130,7 +135,7 @@ for path in Path(".").rglob("*"):
     if path.suffix not in {".html", ".xml", ".json", ".js", ".md"} or ".git" in path.parts:
         continue
     for match in jacket_ref.finditer(path.read_text(encoding="utf-8", errors="replace")):
-        if match.group(1) not in {"front.jpg", "hood.jpg"}:
+        if match.group(1) not in {"front.jpg", "hood.jpg"} and not re.fullmatch(r"fw-0[1-9]\.jpg", match.group(1)):
             glitched_refs.append(f"{path}: {match.group(0)}")
 check(not glitched_refs, "no glitched jacket image is referenced" + (": " + "; ".join(glitched_refs[:6]) if glitched_refs else ""))
 for sku, expect in (("APC-C13", (1536, 2048)), ("APC-C14", (1536, 2048))):
@@ -172,8 +177,8 @@ check('data-role="hover"' in jacket_fn and "Card__img--b" in jacket_fn, "jacket 
 check("hover.src = hoverSrc" in app, "jacket hover src updates when the city changes")
 check('const CLUB_END = ["APC-C36", "APC-C30", "APC-C11"]' in app, "compromised running club cards are kept and moved as a group")
 LEAD_FACE = {
-    "APC-C109": ("images/streetwear/engine-sports-bra-black/02.jpg", "images/streetwear/engine-sports-bra-black/03.jpg"),
-    "APC-C110": ("images/streetwear/engine-sports-bra-mint/02.jpg", "images/streetwear/engine-sports-bra-mint/03.jpg"),
+    "APC-C109": ("images/streetwear/engine-sports-bra-black/fw-01.jpg", "images/streetwear/engine-sports-bra-black/fw-02.jpg"),
+    "APC-C110": ("images/streetwear/engine-sports-bra-mint/fw-01.jpg", "images/streetwear/engine-sports-bra-mint/fw-02.jpg"),
     "APC-C134": ("images/streetwear/hyrx-rib-beanie-black/04.jpg", "images/streetwear/hyrx-rib-beanie-black/03.jpg"),
     "APC-C135": ("images/streetwear/hyrx-rib-beanie-light-blue/04.jpg", "images/streetwear/hyrx-rib-beanie-light-blue/07.jpg"),
     "APC-C124": ("images/streetwear/hyrx-trucker/04.jpg", "images/streetwear/hyrx-trucker/06.jpg"),
@@ -183,7 +188,7 @@ LEAD_FACE = {
 for sku, (lead, hover) in LEAD_FACE.items():
     product = by_id[sku]
     check(product["primary_image"].split("?")[0] == lead, f"{product['handle']} card lead is the front on-model photo")
-    check(product["hover_image"].split("?")[0] == hover, f"{product['handle']} hover is an on-model front")
+    check(product["hover_image"].split("?")[0] == hover, f"{product['handle']} hover is the Fourthwall second frame")
     page = (Path("products") / f"{product['handle']}.html").read_text()
     check(lead in page and f'content="https://www.apexhybridco.com/{lead}' in page, f"{product['handle']} page and og:image open on the front")
     check("hyrx-rib-beanie" not in lead or ("/05.jpg" not in product["primary_image"] and "/09.jpg" not in product["hover_image"]), f"{sku} does not lead with a back-of-head frame")
@@ -372,7 +377,18 @@ check(all(by_id[sku]["handle"] in cards for sku in HERO), "the replacement hero 
 for sku in ("APC-C109", "APC-C110"):
     bra = by_id[sku]["primary_image"].split("?")[0]
     bra_corner = Image.open(bra).convert("RGB").getpixel((8, 8))
-    check(bra.endswith("/02.jpg") and bra_corner[0] < 20, f"{by_id[sku]['handle']} keeps its black-studio front ({bra_corner})")
+    check(bra.endswith("/fw-01.jpg") and 220 <= bra_corner[0] <= 240 and abs(bra_corner[0] - bra_corner[1]) < 8, f"{by_id[sku]['handle']} lead is the light-grey Fourthwall front ({bra_corner})")
+GREY_LEADS = {
+    "APC-C84": "images/streetwear/engine-training-tank-black/fw-01.jpg",
+    "APC-C85": "images/streetwear/engine-training-tank-mint/fw-01.jpg",
+    "APC-C111": "images/streetwear/engine-biker-shorts-black/fw-01.jpg",
+    "APC-C112": "images/streetwear/engine-biker-shorts-mint/fw-01.jpg",
+}
+for sku, rel in GREY_LEADS.items():
+    product = by_id[sku]
+    corner = Image.open(rel).convert("RGB").getpixel((8, 8))
+    check(product["primary_image"].split("?")[0] == rel and product["hover_image"].split("?")[0].endswith("/fw-02.jpg"), f"{product['handle']} card uses Fourthwall frames 1 and 2")
+    check(width(rel) >= 1920 and 220 <= corner[0] <= 240, f"{product['handle']} lead is a 1920px light-grey studio ({Image.open(rel).size}, {corner})")
 adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i] in ALL_CRESTS and cards[i + 1] in ALL_CRESTS]
 check(cards.count("city-crest") == 1, "homepage shows one city crest card")
 check(not any(handle in ALL_CRESTS for handle in cards), "individual crest products are not repeated beside the crest card")

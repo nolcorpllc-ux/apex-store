@@ -481,11 +481,13 @@ section[aria-label="Featured gear checkout"] a {
   text-transform: uppercase;
   opacity: 0.86;
 }
+.Shot__cap > span:first-child { min-width: 0; }
 .Shot__cap strong, .Shot figcaption strong {
   display: block;
   font-size: 20px;
   letter-spacing: -0.03em;
   font-weight: 600;
+  line-height: 1.15;
 }
 .Shot__tag {
   position: absolute;
