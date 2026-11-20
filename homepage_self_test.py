@@ -396,6 +396,22 @@ for sku, folder in HOODIE_LEADS.items():
     page = (Path("products") / f"{product['handle']}.html").read_text()
     check(f'content="https://www.apexhybridco.com/images/streetwear/{folder}/fw-01.jpg' in page, f"{product['handle']} og:image is the new front")
     check(page.index(f"{folder}/fw-01.jpg") < page.index(f"{folder}/fw-02.jpg"), f"{product['handle']} gallery puts the front before the back")
+BATCH4 = {
+    "APC-C65": "outline-mark",
+    "APC-C68": "sleeve-seal",
+    "APC-C69": "work-the-loop",
+    "APC-C123": "hyrx-quarter-zip",
+    "APC-C14": "apex-8-station-race-day-tactical-duffle",
+    "APC-C128": "hyrx-surf-5-panel",
+    "APC-C13": "zone-2-engine-builder-embroidered-dad-hat",
+}
+for sku, folder in BATCH4.items():
+    product = by_id[sku]
+    lead = product["primary_image"].split("?")[0]
+    hover = product["hover_image"].split("?")[0]
+    corner = Image.open(lead).convert("RGB").getpixel((8, 8))
+    check(lead == f"images/streetwear/{folder}/fw-01.jpg" and hover == f"images/streetwear/{folder}/fw-02.jpg" and lead != hover, f"{product['handle']} uses the new Fourthwall front and back")
+    check(Image.open(lead).size == (1536, 2048) and 210 <= corner[0] <= 245 and corner[0] > 180, f"{product['handle']} lead is 1536x2048 light grey ({corner})")
 hero_handles = {by_id[sku]["handle"] for sku in HERO}
 cards = [handle for handle in cards if handle not in hero_handles]
 check(all(handle in cards for handle in OLD_HERO), "the original four hero tees stay in the apparel grid")
