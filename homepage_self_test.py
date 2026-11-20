@@ -22,12 +22,12 @@ HERO_FILES = {
 }
 JACKETS = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"]
 JACKET_FILES = {
-    "APC-C46": "images/streetwear/apex-dallas-race-day/03.jpg",
-    "APC-C48": "images/streetwear/apex-anaheim-race-day/03.jpg",
-    "APC-C49": "images/streetwear/apex-nashville-race-day/04.jpg",
-    "APC-C50": "images/streetwear/apex-vancouver-race-day/03.jpg",
-    "APC-C47": "images/streetwear/apex-denver-race-day/04.jpg",
-    "APC-C75": "images/streetwear/dallas-race-day-printable/04.jpg",
+    "APC-C46": "images/streetwear/apex-dallas-race-day/hood.jpg",
+    "APC-C48": "images/streetwear/apex-anaheim-race-day/front.jpg",
+    "APC-C49": "images/streetwear/apex-nashville-race-day/front.jpg",
+    "APC-C50": "images/streetwear/apex-vancouver-race-day/front.jpg",
+    "APC-C47": "images/streetwear/apex-denver-race-day/hood.jpg",
+    "APC-C75": "images/streetwear/dallas-race-day-printable/hood.jpg",
 }
 CARD_MIN = 672
 HERO_MIN = 1364
@@ -100,7 +100,8 @@ jacket_hashes = []
 for sku, rel in JACKET_FILES.items():
     product = by_id[sku]
     check(product["primary_image"].split("?")[0] == rel, f"{sku} card image is the Fourthwall lead")
-    check(product.get("hover_image", "").split("?")[0] == rel, f"{sku} hover uses that same lead")
+    hover = product.get("hover_image", "").split("?")[0]
+    check(Path(hover).name in {"front.jpg", "hood.jpg"} and Path(hover).parent == Path(rel).parent, f"{sku} hover is a clean pose ({Path(hover).name})")
     check(width(rel) >= HERO_MIN, f"{sku} lead is full resolution ({width(rel)}px)")
     page = Path("products") / f"{product['handle']}.html"
     body = page.read_text()
@@ -108,11 +109,54 @@ for sku, rel in JACKET_FILES.items():
     jacket_hashes.append(md5(rel))
 check(len(set(jacket_hashes)) == len(JACKETS), "no two Race Day Jacket cities share a lead photo")
 import numpy as np
-for sku in ("APC-C49", "APC-C47", "APC-C75"):
+for sku in JACKETS:
     arr = np.array(Image.open(JACKET_FILES[sku]).convert("RGB")).astype("int16")
     jump = np.abs(arr[1:] - arr[:-1]).mean(axis=2)
     wide = int(((jump > 18).sum(axis=1) > arr.shape[1] * 0.25).sum())
     check(wide == 0, f"{sku} lead has no horizontal line artifact ({wide} rows)")
+jacket_dirs = (
+    "apex-nashville-race-day|apex-denver-race-day|apex-dallas-race-day|"
+    "apex-anaheim-race-day|apex-vancouver-race-day|dallas-race-day-printable"
+)
+jacket_ref = re.compile(rf"images/streetwear/(?:{jacket_dirs})/([A-Za-z0-9_.-]+\.jpg)")
+glitched_refs = []
+for path in Path(".").rglob("*"):
+    if path.suffix not in {".html", ".xml", ".json", ".js", ".md"} or ".git" in path.parts:
+        continue
+    for match in jacket_ref.finditer(path.read_text(encoding="utf-8", errors="replace")):
+        if match.group(1) not in {"front.jpg", "hood.jpg"}:
+            glitched_refs.append(f"{path}: {match.group(0)}")
+check(not glitched_refs, "no glitched jacket image is referenced" + (": " + "; ".join(glitched_refs[:6]) if glitched_refs else ""))
+for sku, expect in (("APC-C13", (1536, 2048)), ("APC-C14", (1536, 2048))):
+    product = by_id[sku]
+    for field in ("primary_image", "hover_image"):
+        rel = product[field].split("?")[0]
+        size = Image.open(rel).size
+        check(size == expect, f"{sku} {field} is {expect[0]}x{expect[1]} ({size[0]}x{size[1]})")
+        check(width(rel) == expect[0], f"{sku} {field} was not upscaled")
+    page = (Path("products") / f"{product['handle']}.html").read_text()
+    check(product["primary_image"] in page, f"{product['handle']} gallery lead is the full-res photo")
+pink = {
+    "e3b8e85b817fdf3f81361fa2bfda32c1",
+    "67eac097306c72fb199c65b4a43da816",
+    "a31120a28a5151ae45f013e5ddd5d803",
+    "c1d1c53a3e141e3dae9ef3d2cb6b9abf",
+}
+pink_hits = []
+for path in Path("images").rglob("*"):
+    if path.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
+        continue
+    if hashlib.md5(path.read_bytes()).hexdigest() in pink:
+        pink_hits.append(str(path))
+check(not pink_hits, "pink Zone 2 model shots are not on the site")
+old_low = []
+for path in Path(".").rglob("*"):
+    if path.suffix not in {".html", ".xml", ".json", ".js", ".md"} or ".git" in path.parts:
+        continue
+    body = path.read_text(encoding="utf-8", errors="replace")
+    if "apc-c13-black" in body or "apc-c14-black" in body:
+        old_low.append(str(path))
+check(not old_low, "old 800px cap and bag files are not referenced")
 
 # Homepage default shelf: apparel, without stitched windbreakers, hero tees, or printed jackets.
 apparel = {
@@ -338,7 +382,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   await new Promise(r => ws.addEventListener("open", r));
   bind(ws);
   await send(ws, "Emulation.setDeviceMetricsOverride", {width:%d, height:%d, deviceScaleFactor:1, mobile:%s});
-  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8788/index.html"});
+  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8791/index.html"});
   await sleep(1200);
   const ev = await send(ws, "Runtime.evaluate", {expression:`(() => { const el = document.querySelector('.SiteHead .Wordmark'); const r = el.getBoundingClientRect(); const center = r.left + r.width/2; const bag = document.querySelector('.BagBtn').getBoundingClientRect(); const menu = document.querySelector('.MenuBtn'); const mr = menu ? menu.getBoundingClientRect() : null; const overlap = (a,b) => a && b && !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom); const width = document.documentElement.clientWidth; const probe = document.createElement('img'); probe.className = 'Card__img Card__img--model Card__img--full'; document.body.appendChild(probe); const fit = getComputedStyle(probe).objectFit; probe.remove(); return JSON.stringify({off: Math.abs(center - width/2), overlapBag: overlap(r, bag), overlapMenu: mr && menu.offsetParent ? overlap(r, mr) : false, fit}); })()`, returnByValue:true});
   console.log(ev.result.result.value);
@@ -355,8 +399,8 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     return json.loads(out.strip().splitlines()[-1])
 
 import socket
-sock = socket.socket(); sock.bind(("127.0.0.1", 8788)); sock.close()
-server = subprocess.Popen(["python3", "-m", "http.server", "8788", "--bind", "127.0.0.1"], cwd=str(ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+sock = socket.socket(); sock.bind(("127.0.0.1", 8791)); sock.close()
+server = subprocess.Popen(["python3", "-m", "http.server", "8791", "--bind", "127.0.0.1"], cwd=str(ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 try:
     for width, height in ((390, 844), (768, 1024), (1024, 800), (1440, 900)):
         measured = logo_offset(width, height)
