@@ -331,6 +331,20 @@ const JACKET_CITY = {
   "APC-C47": "Denver",
   "APC-C75": "Dallas Jacket",
 };
+const CREST_ORDER = ["APC-C99", "APC-C100", "APC-C101", "APC-C102", "APC-C103", "APC-C104", "APC-C105", "APC-C106", "APC-C107", "APC-C108"];
+const CREST_IDS = new Set(CREST_ORDER);
+const CREST_CITY = {
+  "APC-C99": "London",
+  "APC-C100": "Paris",
+  "APC-C101": "Hong Kong",
+  "APC-C102": "Chicago",
+  "APC-C103": "Cancún",
+  "APC-C104": "Dallas",
+  "APC-C105": "Denver",
+  "APC-C106": "Anaheim",
+  "APC-C107": "Nashville",
+  "APC-C108": "Vancouver",
+};
 
 function onHome() {
   const path = (location.pathname || "/").replace(/\/index\.html$/, "/");
@@ -549,6 +563,69 @@ function showJacketCard() {
   return dept === "all" || dept === "apparel" || dept === "Windbreakers";
 }
 
+function crestProducts() {
+  return CREST_ORDER.map((id) => findProduct(id)).filter(Boolean);
+}
+
+function crestCardHtml() {
+  const items = crestProducts();
+  if (!items.length) return "";
+  const first = items[0];
+  const chips = items.map((p, i) => `<button type="button" data-crest-city="${esc(p.id)}" aria-pressed="${i === 0 ? "true" : "false"}">${esc(CREST_CITY[p.id] || shortTitle(p))}</button>`).join("");
+  const buy = first.fourthwall_product_url || first.checkout_url || "#";
+  return `
+    <article class="Card Card--crest" data-crest-card="1">
+      <div class="Card__media">
+        <a data-role="page" href="products/${esc(first.handle)}.html">
+          ${sharpImg(photoOf(first), "City Crest", "Card__img Card__img--model")}
+        </a>
+      </div>
+      <div class="Card__body">
+        <h3>City Crest</h3>
+        <p class="Price" data-role="price">${money(first.retail_price)}</p>
+        <div class="Card__cities" role="group" aria-label="City crest">${chips}</div>
+        <a class="Btn Btn--cobalt Card__buy" data-role="buy" href="${esc(buy)}">Buy</a>
+      </div>
+    </article>`;
+}
+
+function bindCrestCard() {
+  const card = document.querySelector("[data-crest-card]");
+  if (!card) return;
+  const buttons = card.querySelectorAll("[data-crest-city]");
+  function select(id) {
+    const p = findProduct(id);
+    if (!p) return;
+    buttons.forEach((btn) => btn.setAttribute("aria-pressed", btn.dataset.crestCity === id ? "true" : "false"));
+    const img = card.querySelector("img");
+    const photo = photoOf(p);
+    img.src = photo;
+    img.srcset = `${photo} 2x`;
+    img.alt = `${CREST_CITY[p.id] || ""} Crest`.trim();
+    card.querySelector("[data-role=page]").href = `products/${p.handle}.html`;
+    card.querySelector("[data-role=price]").textContent = money(p.retail_price);
+    card.querySelector("[data-role=buy]").href = p.fourthwall_product_url || p.checkout_url || "#";
+  }
+  buttons.forEach((btn) => btn.addEventListener("click", () => select(btn.dataset.crestCity)));
+}
+
+function homepageCards(list) {
+  if (query.trim() || !onHome()) return list.map((p) => ({ kind: "product", p }));
+  const cards = [];
+  let placed = false;
+  list.forEach((p) => {
+    if (CREST_IDS.has(p.id)) {
+      if (!placed) {
+        cards.push({ kind: "crest" });
+        placed = true;
+      }
+      return;
+    }
+    cards.push({ kind: "product", p });
+  });
+  return cards;
+}
+
 function renderProducts() {
   const grid = $("#productGrid");
   const list = visibleProducts();
@@ -557,11 +634,14 @@ function renderProducts() {
   if (count) count.textContent = "";
   renderPills();
   const jacket = showJacketCard() ? jacketCardHtml() : "";
-  if (!list.length && !jacket) {
+  const cards = homepageCards(list);
+  if (!cards.length && !jacket) {
     grid.innerHTML = `<div class="Empty"><p>Nothing in this cut matches that search.</p><button class="Btn Btn--ghost" type="button" data-clear-search="1">Clear search</button></div>`;
     return;
   }
-  grid.innerHTML = jacket + list.map((p) => {
+  grid.innerHTML = jacket + cards.map((card) => {
+    if (card.kind === "crest") return crestCardHtml();
+    const p = card.p;
     const hoverSrc = hoverPhotoOf(p);
     const hover = hoverSrc ? sharpImg(hoverSrc, "", `Card__img Card__img--b${p.model_primary ? " Card__img--model" : ""}`) : "";
     const photo = photoOf(p);
@@ -581,6 +661,7 @@ function renderProducts() {
       </article>`;
   }).join("");
   bindJacketCard();
+  bindCrestCard();
 }
 
 function setDept(next) {
@@ -1250,7 +1331,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeAll();
   });
-  fetch("catalog.json?v=20261120lead")
+  fetch("catalog.json?v=20261120crest")
     .then((res) => {
       if (!res.ok) throw new Error("catalog");
       return res.json();
