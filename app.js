@@ -535,8 +535,14 @@ function ratingMarkup(p) {
   return `<p class="Rating"><span class="Stars" aria-hidden="true">${stars}</span><span>${score.toFixed(1)}${reviews}</span></p>`;
 }
 
-function sharpImg(src, alt, className) {
-  return `<img class="${className}" src="${esc(src)}" srcset="${esc(src)} 2x" alt="${esc(alt)}" loading="lazy" decoding="async" width="1536" height="2048" />`;
+function sharpImg(src, alt, className, attrs) {
+  return `<img class="${className}" src="${esc(src)}" srcset="${esc(src)} 2x" alt="${esc(alt)}" ${attrs || ""} loading="lazy" decoding="async" width="1536" height="2048" />`;
+}
+
+function jacketHoverOf(p) {
+  const alt = (p && (p.hover_image || p.alt_image)) || "";
+  if (!alt || /-white/i.test(alt) || /white\.png/i.test(alt)) return photoOf(p);
+  return alt;
 }
 
 function jacketProducts() {
@@ -549,12 +555,15 @@ function jacketCardHtml() {
   const first = items[0];
   const chips = items.map((p, i) => `<button type="button" data-jacket-city="${esc(p.id)}" aria-pressed="${i === 0 ? "true" : "false"}">${esc(JACKET_CITY[p.id] || shortTitle(p))}</button>`).join("");
   const photo = photoOf(first);
+  const hover = jacketHoverOf(first);
+  const frame = `Card__img Card__img--model${JACKET_CONTAIN.has(first.id) ? " Card__img--full" : ""}`;
   const buy = first.fourthwall_product_url || first.checkout_url || "#";
   return `
     <article class="Card Card--jacket" data-jacket-card="1">
       <div class="Card__media">
         <a data-role="page" href="products/${esc(first.handle)}.html">
-          ${sharpImg(photo, JACKET_TITLE[first.id] || "Race Day Jacket", `Card__img Card__img--model${JACKET_CONTAIN.has(first.id) ? " Card__img--full" : ""}`)}
+          ${sharpImg(photo, JACKET_TITLE[first.id] || "Race Day Jacket", frame, 'data-role="photo"')}
+          ${sharpImg(hover, "", `${frame} Card__img--b`, 'data-role="hover"')}
         </a>
       </div>
       <div class="Card__body">
@@ -574,13 +583,21 @@ function bindJacketCard() {
     const p = findProduct(id);
     if (!p) return;
     buttons.forEach((btn) => btn.setAttribute("aria-pressed", btn.dataset.jacketCity === id ? "true" : "false"));
-    const img = card.querySelector("img");
+    const img = card.querySelector("[data-role=photo]");
+    const hover = card.querySelector("[data-role=hover]");
     const photo = photoOf(p);
+    const hoverSrc = jacketHoverOf(p);
     const title = JACKET_TITLE[p.id] || "Race Day Jacket";
+    const frame = `Card__img Card__img--model${JACKET_CONTAIN.has(p.id) ? " Card__img--full" : ""}`;
     img.src = photo;
     img.srcset = `${photo} 2x`;
     img.alt = title;
-    img.className = `Card__img Card__img--model${JACKET_CONTAIN.has(p.id) ? " Card__img--full" : ""}`;
+    img.className = frame;
+    if (hover) {
+      hover.src = hoverSrc;
+      hover.srcset = `${hoverSrc} 2x`;
+      hover.className = `${frame} Card__img--b`;
+    }
     card.querySelector("[data-role=title]").textContent = title;
     const page = card.querySelector("[data-role=page]");
     page.href = `products/${p.handle}.html`;
