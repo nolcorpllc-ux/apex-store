@@ -3922,7 +3922,7 @@
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
-      "alt_image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
+      "alt_image": "images/streetwear/apc-c43-black-backwear.jpg?v=20261120lays",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -3963,7 +3963,7 @@
         "images/streetwear/apc-c43-black-backwear.jpg?v=20261117fw"
       ],
       "primary_image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
-      "hover_image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
+      "hover_image": "images/streetwear/apc-c43-black-backwear.jpg?v=20261120lays",
       "model_primary": true
     },
     {
@@ -5040,7 +5040,7 @@
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/engine-training-tank-black/fw-01.jpg?v=20261120grey",
-      "alt_image": "images/streetwear/engine-training-tank-black/fw-02.jpg?v=20261120grey",
+      "alt_image": "images/streetwear/engine-training-tank-black/fw-04.jpg?v=20261120lays",
       "extra_images": [
         "images/streetwear/engine-training-tank-black/fw-02.jpg?v=20261120grey",
         "images/streetwear/engine-training-tank-black/fw-03.jpg?v=20261120grey",
@@ -5084,7 +5084,7 @@
       },
       "fourthwall_default_variant_id": "e6e0797a-b54a-4887-8df3-0c5b7339010e",
       "primary_image": "images/streetwear/engine-training-tank-black/fw-01.jpg?v=20261120grey",
-      "hover_image": "images/streetwear/engine-training-tank-black/fw-02.jpg?v=20261120grey",
+      "hover_image": "images/streetwear/engine-training-tank-black/fw-04.jpg?v=20261120lays",
       "model_primary": false
     },
     {
@@ -5100,7 +5100,7 @@
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/engine-training-tank-mint/fw-01.jpg?v=20261120grey",
-      "alt_image": "images/streetwear/engine-training-tank-mint/fw-02.jpg?v=20261120grey",
+      "alt_image": "images/streetwear/engine-training-tank-mint/fw-04.jpg?v=20261120lays",
       "extra_images": [
         "images/streetwear/engine-training-tank-mint/fw-02.jpg?v=20261120grey",
         "images/streetwear/engine-training-tank-mint/fw-03.jpg?v=20261120grey",
@@ -5144,7 +5144,7 @@
       },
       "fourthwall_default_variant_id": "b8969b43-10c5-406c-a0e1-f43ef4be8873",
       "primary_image": "images/streetwear/engine-training-tank-mint/fw-01.jpg?v=20261120grey",
-      "hover_image": "images/streetwear/engine-training-tank-mint/fw-02.jpg?v=20261120grey",
+      "hover_image": "images/streetwear/engine-training-tank-mint/fw-04.jpg?v=20261120lays",
       "model_primary": false
     },
     {
@@ -7598,7 +7598,7 @@
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/hyrx-trucker/04.jpg?v=20261120front",
-      "alt_image": "images/streetwear/hyrx-trucker/06.jpg?v=20261120front",
+      "alt_image": "images/streetwear/hyrx-trucker/05.jpg?v=20261120lays",
       "extra_images": [
         "images/streetwear/hyrx-trucker/01.jpg?v=20261119b",
         "images/streetwear/hyrx-trucker/02.jpg?v=20261119b",
@@ -7641,7 +7641,7 @@
       },
       "fourthwall_default_variant_id": "1d28304a-2bc7-49f3-b616-93c277d85e42",
       "primary_image": "images/streetwear/hyrx-trucker/04.jpg?v=20261120front",
-      "hover_image": "images/streetwear/hyrx-trucker/06.jpg?v=20261120front",
+      "hover_image": "images/streetwear/hyrx-trucker/05.jpg?v=20261120lays",
       "model_primary": true
     },
     {
@@ -8182,7 +8182,7 @@
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/hyrx-rib-beanie-black/04.jpg?v=20261120front",
-      "alt_image": "images/streetwear/hyrx-rib-beanie-black/03.jpg?v=20261120front",
+      "alt_image": "images/streetwear/hyrx-rib-beanie-black/05.jpg?v=20261120lays",
       "extra_images": [
         "images/streetwear/hyrx-rib-beanie-black/01.jpg?v=20261119b",
         "images/streetwear/hyrx-rib-beanie-black/02.jpg?v=20261119b",
@@ -8224,7 +8224,7 @@
       },
       "fourthwall_default_variant_id": "8d79b8c4-f089-47c7-a3b7-e36d7d3cd03f",
       "primary_image": "images/streetwear/hyrx-rib-beanie-black/04.jpg?v=20261120front",
-      "hover_image": "images/streetwear/hyrx-rib-beanie-black/03.jpg?v=20261120front",
+      "hover_image": "images/streetwear/hyrx-rib-beanie-black/05.jpg?v=20261120lays",
       "model_primary": true
     },
     {
@@ -8239,7 +8239,7 @@
       "rating": 0,
       "reviews": 0,
       "image": "images/streetwear/hyrx-rib-beanie-light-blue/04.jpg?v=20261120front",
-      "alt_image": "images/streetwear/hyrx-rib-beanie-light-blue/07.jpg?v=20261120front",
+      "alt_image": "images/streetwear/hyrx-rib-beanie-light-blue/05.jpg?v=20261120lays",
       "extra_images": [
         "images/streetwear/hyrx-rib-beanie-light-blue/01.jpg?v=20261119b",
         "images/streetwear/hyrx-rib-beanie-light-blue/02.jpg?v=20261119b",
@@ -8281,7 +8281,7 @@
       },
       "fourthwall_default_variant_id": "54679c39-a3f5-4a33-b6c7-5914f3663273",
       "primary_image": "images/streetwear/hyrx-rib-beanie-light-blue/04.jpg?v=20261120front",
-      "hover_image": "images/streetwear/hyrx-rib-beanie-light-blue/07.jpg?v=20261120front",
+      "hover_image": "images/streetwear/hyrx-rib-beanie-light-blue/05.jpg?v=20261120lays",
       "model_primary": true
     },
     {

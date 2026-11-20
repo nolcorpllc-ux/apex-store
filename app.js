@@ -321,7 +321,7 @@ function matchesDept(p) {
   return p.dept === wanted;
 }
 
-const HERO_HOME = new Set();
+const HERO_HOME = new Set(["APC-C37", "APC-C22", "APC-C06", "APC-C16"]);
 const CLUB_END = ["APC-C36", "APC-C30", "APC-C11"];
 const JACKET_ORDER = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"];
 const JACKET_CITY = {
@@ -675,11 +675,14 @@ function colorCardHtml(group) {
   const first = items[0];
   const chips = items.map((p, i) => `<button type="button" data-color-id="${esc(p.id)}" aria-pressed="${i === 0 ? "true" : "false"}">${esc(group.labels[i] || "Black")}</button>`).join("");
   const buy = first.fourthwall_product_url || first.checkout_url || "#";
+  const hoverSrc = hoverPhotoOf(first);
+  const hover = hoverSrc ? sharpImg(hoverSrc, "", `Card__img Card__img--b${first.model_primary ? " Card__img--model" : ""}`) : "";
   return `
     <article class="Card Card--color" data-color-card="1">
       <div class="Card__media">
         <a data-role="page" href="products/${esc(first.handle)}.html">
           ${sharpImg(photoOf(first), group.title, `Card__img${first.model_primary ? " Card__img--model" : ""}`)}
+          ${hover}
         </a>
       </div>
       <div class="Card__body">
@@ -703,6 +706,12 @@ function bindColorCards() {
       img.src = photo;
       img.srcset = `${photo} 2x`;
       img.alt = card.querySelector("h3").textContent;
+      const hoverImg = card.querySelector(".Card__img--b");
+      const hover = hoverPhotoOf(p);
+      if (hoverImg && hover) {
+        hoverImg.src = hover;
+        hoverImg.srcset = `${hover} 2x`;
+      }
       card.querySelector("[data-role=page]").href = `products/${p.handle}.html`;
       card.querySelector("[data-role=price]").textContent = money(p.retail_price);
       card.querySelector("[data-role=buy]").href = p.fourthwall_product_url || p.checkout_url || "#";
@@ -750,14 +759,15 @@ function renderProducts() {
     if (card.kind === "crest") return crestCardHtml();
     if (card.kind === "color") return colorCardHtml(card.group);
     const p = card.p;
+    const shorts = /biker-shorts/.test(p.handle || "") ? " Card__img--shorts" : "";
     const hoverSrc = hoverPhotoOf(p);
-    const hover = hoverSrc ? sharpImg(hoverSrc, "", `Card__img Card__img--b${p.model_primary ? " Card__img--model" : ""}`) : "";
+    const hover = hoverSrc ? sharpImg(hoverSrc, "", `Card__img Card__img--b${p.model_primary ? " Card__img--model" : ""}${shorts}`) : "";
     const photo = photoOf(p);
     return `
       <article class="Card">
         <div class="Card__media">
           <button class="Card__hit" type="button" data-quick="${p.id}" aria-label="Quick view ${esc(p.title)}">
-            ${sharpImg(photo, p.seo_title || p.title, `Card__img${p.model_primary ? " Card__img--model" : ""}`)}
+            ${sharpImg(photo, p.seo_title || p.title, `Card__img${p.model_primary ? " Card__img--model" : ""}${shorts}`)}
             ${hover}
           </button>
         </div>
@@ -1440,7 +1450,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeAll();
   });
-  fetch("catalog.json?v=20261120grey")
+  fetch("catalog.json?v=20261120lays")
     .then((res) => {
       if (!res.ok) throw new Error("catalog");
       return res.json();
