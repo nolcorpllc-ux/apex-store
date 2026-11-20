@@ -15,10 +15,10 @@ os.chdir(ROOT)
 
 HERO = ["APC-C01", "APC-C02", "APC-C03", "APC-C07"]
 HERO_FILES = {
-    "APC-C01": "images/streetwear/hyrx-art/apc-c01-03.jpg",
-    "APC-C02": "images/streetwear/hyrx-art/apc-c02-03.jpg",
-    "APC-C07": "images/streetwear/hyrx-art/apc-c07-03.jpg",
-    "APC-C03": "images/streetwear/hyrx-art/apc-c03-03.jpg",
+    "APC-C01": "images/streetwear/hyrx-art/apc-c01-05.jpg",
+    "APC-C02": "images/streetwear/hyrx-art/apc-c02-05.jpg",
+    "APC-C07": "images/streetwear/hyrx-art/apc-c07-05.jpg",
+    "APC-C03": "images/streetwear/hyrx-art/apc-c03-05.jpg",
 }
 JACKETS = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"]
 JACKET_FILES = {
@@ -164,6 +164,66 @@ check(not unwired, "every product page loads the shared gallery script" + (": " 
 jacket_fn = app.split("function jacketCardHtml")[1].split("function bindJacketCard")[0]
 check('data-role="hover"' in jacket_fn and "Card__img--b" in jacket_fn, "jacket card renders a hover layer")
 check("hover.src = hoverSrc" in app, "jacket hover src updates when the city changes")
+check('const CLUB_END = ["APC-C36", "APC-C30", "APC-C11"]' in app, "compromised running club cards are kept and moved as a group")
+LEAD_FACE = {
+    "APC-C109": ("images/streetwear/engine-sports-bra-black/02.jpg", "images/streetwear/engine-sports-bra-black/03.jpg"),
+    "APC-C110": ("images/streetwear/engine-sports-bra-mint/02.jpg", "images/streetwear/engine-sports-bra-mint/03.jpg"),
+    "APC-C134": ("images/streetwear/hyrx-rib-beanie-black/04.jpg", "images/streetwear/hyrx-rib-beanie-black/03.jpg"),
+    "APC-C135": ("images/streetwear/hyrx-rib-beanie-light-blue/04.jpg", "images/streetwear/hyrx-rib-beanie-light-blue/07.jpg"),
+    "APC-C124": ("images/streetwear/hyrx-trucker/04.jpg", "images/streetwear/hyrx-trucker/06.jpg"),
+    "APC-C125": ("images/streetwear/hyrx-trucker-graphic/04.jpg", "images/streetwear/hyrx-trucker-graphic/05.jpg"),
+    "APC-C43": ("images/streetwear/apc-c43-black-wear.jpg", "images/streetwear/apc-c43-black-wear.jpg"),
+}
+for sku, (lead, hover) in LEAD_FACE.items():
+    product = by_id[sku]
+    check(product["primary_image"].split("?")[0] == lead, f"{product['handle']} card lead is the front on-model photo")
+    check(product["hover_image"].split("?")[0] == hover, f"{product['handle']} hover is an on-model front")
+    page = (Path("products") / f"{product['handle']}.html").read_text()
+    check(lead in page and f'content="https://www.apexhybridco.com/{lead}' in page, f"{product['handle']} page and og:image open on the front")
+    check("hyrx-rib-beanie" not in lead or ("/05.jpg" not in product["primary_image"] and "/09.jpg" not in product["hover_image"]), f"{sku} does not lead with a back-of-head frame")
+banned_back = (
+    "hyrx-rib-beanie-black/05.jpg",
+    "hyrx-rib-beanie-black/09.jpg",
+    "hyrx-rib-beanie-light-blue/05.jpg",
+    "hyrx-rib-beanie-light-blue/09.jpg",
+    "hyrx-trucker/05.jpg",
+    "engine-sports-bra-black/05.jpg",
+    "engine-sports-bra-mint/05.jpg",
+)
+for sku, product in by_id.items():
+    for field in ("primary_image", "hover_image"):
+        rel = (product.get(field) or "").split("?")[0]
+        check(not any(rel.endswith(bad) for bad in banned_back), f"{product['handle']} {field} is not a known back view")
+
+def is_white_flat(rel):
+    if not rel or not Path(rel).exists():
+        return False
+    im = Image.open(rel).convert("RGB")
+    w, h = im.size
+    cols = [im.getpixel(p) for p in ((4, 4), (w - 5, 4), (4, h - 5))]
+    return all(min(c) > 248 for c in cols)
+
+missing_model = []
+for product in catalog["products"]:
+    rel = (product.get("primary_image") or "").split("?")[0]
+    if not is_white_flat(rel):
+        continue
+    folder = Path(rel).parent
+    own = folder != Path("images/streetwear")
+    has_model = False
+    if own and folder.exists():
+        for sib in folder.iterdir():
+            if sib.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"} and not is_white_flat(sib):
+                has_model = True
+                break
+    if has_model:
+        check(False, f"{product['handle']} still uses a flat lead although an on-model photo exists")
+    else:
+        missing_model.append(f"{product['handle']} ({product.get('fourthwall_handle') or 'no-fourthwall-slug'})")
+check(bool(missing_model), "products with no on-model photo are listed for a studio shoot")
+print("NO ON-MODEL PHOTO:")
+for row in missing_model:
+    print("  " + row)
 
 # Homepage default shelf: apparel, without stitched windbreakers, hero tees, or printed jackets.
 apparel = {
@@ -292,6 +352,15 @@ for handle in mixed:
             crest_placed = True
         continue
     cards.append(handle)
+CLUB_HANDLES = [
+    "compromised-running",
+    "compromised-running-club-breathable-race-tank",
+    "compromised-running-club-fleece-hoodie",
+]
+club_present = [handle for handle in CLUB_HANDLES if handle in cards]
+cards = [handle for handle in cards if handle not in CLUB_HANDLES] + club_present
+check(club_present == CLUB_HANDLES, "all three Compromised Running Club items stay on the homepage")
+check(cards[-3:] == CLUB_HANDLES, "Compromised Running Club cards are the last three homepage cards (" + ", ".join(cards[-3:]) + ")")
 adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i] in ALL_CRESTS and cards[i + 1] in ALL_CRESTS]
 check(cards.count("city-crest") == 1, "homepage shows one city crest card")
 check(not any(handle in ALL_CRESTS for handle in cards), "individual crest products are not repeated beside the crest card")

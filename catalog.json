@@ -3922,8 +3922,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c43-black.jpg?v=20261119b",
-      "alt_image": "images/streetwear/apc-c43-black-detail.jpg?v=20261117fw",
+      "image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
+      "alt_image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -3963,9 +3963,9 @@
         "images/streetwear/apc-c43-black-wear.jpg?v=20261117fw",
         "images/streetwear/apc-c43-black-backwear.jpg?v=20261117fw"
       ],
-      "primary_image": "images/streetwear/apc-c43-black.jpg?v=20261119b",
-      "hover_image": "images/streetwear/apc-c43-black-detail.jpg?v=20261117fw",
-      "model_primary": false
+      "primary_image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
+      "hover_image": "images/streetwear/apc-c43-black-wear.jpg?v=20261120front",
+      "model_primary": true
     },
     {
       "id": "APC-C44",
@@ -6608,8 +6608,8 @@
       "list_price": 43.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/engine-sports-bra-black/05.jpg?v=20261119b",
-      "alt_image": "images/streetwear/engine-sports-bra-black/04.jpg?v=20261119b",
+      "image": "images/streetwear/engine-sports-bra-black/02.jpg?v=20261120front",
+      "alt_image": "images/streetwear/engine-sports-bra-black/03.jpg?v=20261120front",
       "extra_images": [
         "images/streetwear/engine-sports-bra-black/01.jpg?v=20261119b",
         "images/streetwear/engine-sports-bra-black/04.jpg?v=20261119b",
@@ -6653,8 +6653,8 @@
         }
       },
       "fourthwall_default_variant_id": "d8a08e1a-a418-4d19-b130-4d9dd7305509",
-      "primary_image": "images/streetwear/engine-sports-bra-black/05.jpg?v=20261119b",
-      "hover_image": "images/streetwear/engine-sports-bra-black/04.jpg?v=20261119b",
+      "primary_image": "images/streetwear/engine-sports-bra-black/02.jpg?v=20261120front",
+      "hover_image": "images/streetwear/engine-sports-bra-black/03.jpg?v=20261120front",
       "model_primary": true
     },
     {
@@ -6669,8 +6669,8 @@
       "list_price": 43.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/engine-sports-bra-mint/05.jpg?v=20261119b",
-      "alt_image": "images/streetwear/engine-sports-bra-mint/05.jpg?v=20261119b",
+      "image": "images/streetwear/engine-sports-bra-mint/02.jpg?v=20261120front",
+      "alt_image": "images/streetwear/engine-sports-bra-mint/03.jpg?v=20261120front",
       "extra_images": [
         "images/streetwear/engine-sports-bra-mint/01.jpg?v=20261119b",
         "images/streetwear/engine-sports-bra-mint/02.jpg?v=20261119b",
@@ -6714,8 +6714,8 @@
         }
       },
       "fourthwall_default_variant_id": "262fbc77-09c3-4140-8f61-6fc7461c6e7c",
-      "primary_image": "images/streetwear/engine-sports-bra-mint/05.jpg?v=20261119b",
-      "hover_image": "images/streetwear/engine-sports-bra-mint/05.jpg?v=20261119b",
+      "primary_image": "images/streetwear/engine-sports-bra-mint/02.jpg?v=20261120front",
+      "hover_image": "images/streetwear/engine-sports-bra-mint/03.jpg?v=20261120front",
       "model_primary": true
     },
     {
@@ -7598,8 +7598,8 @@
       "list_price": 32.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/hyrx-trucker/05.jpg?v=20261119b",
-      "alt_image": "images/streetwear/hyrx-trucker/06.jpg?v=20261119b",
+      "image": "images/streetwear/hyrx-trucker/04.jpg?v=20261120front",
+      "alt_image": "images/streetwear/hyrx-trucker/06.jpg?v=20261120front",
       "extra_images": [
         "images/streetwear/hyrx-trucker/01.jpg?v=20261119b",
         "images/streetwear/hyrx-trucker/02.jpg?v=20261119b",
@@ -7641,8 +7641,8 @@
         }
       },
       "fourthwall_default_variant_id": "1d28304a-2bc7-49f3-b616-93c277d85e42",
-      "primary_image": "images/streetwear/hyrx-trucker/05.jpg?v=20261119b",
-      "hover_image": "images/streetwear/hyrx-trucker/06.jpg?v=20261119b",
+      "primary_image": "images/streetwear/hyrx-trucker/04.jpg?v=20261120front",
+      "hover_image": "images/streetwear/hyrx-trucker/06.jpg?v=20261120front",
       "model_primary": true
     },
     {
@@ -7656,8 +7656,8 @@
       "list_price": 34.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/hyrx-trucker-graphic/05.jpg?v=20261119b",
-      "alt_image": "images/streetwear/hyrx-trucker-graphic/02.jpg?v=20261119b",
+      "image": "images/streetwear/hyrx-trucker-graphic/04.jpg?v=20261120front",
+      "alt_image": "images/streetwear/hyrx-trucker-graphic/05.jpg?v=20261120front",
       "extra_images": [
         "images/streetwear/hyrx-trucker-graphic/01.jpg?v=20261119b",
         "images/streetwear/hyrx-trucker-graphic/02.jpg?v=20261119b",
@@ -7698,8 +7698,8 @@
         }
       },
       "fourthwall_default_variant_id": "a5b0fbb0-99a2-4b7b-86d6-f7dd30a7ff7e",
-      "primary_image": "images/streetwear/hyrx-trucker-graphic/05.jpg?v=20261119b",
-      "hover_image": "images/streetwear/hyrx-trucker-graphic/02.jpg?v=20261119b",
+      "primary_image": "images/streetwear/hyrx-trucker-graphic/04.jpg?v=20261120front",
+      "hover_image": "images/streetwear/hyrx-trucker-graphic/05.jpg?v=20261120front",
       "model_primary": true
     },
     {
@@ -8182,8 +8182,8 @@
       "list_price": 33.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/hyrx-rib-beanie-black/05.jpg?v=20261119b",
-      "alt_image": "images/streetwear/hyrx-rib-beanie-black/06.jpg?v=20261119b",
+      "image": "images/streetwear/hyrx-rib-beanie-black/04.jpg?v=20261120front",
+      "alt_image": "images/streetwear/hyrx-rib-beanie-black/03.jpg?v=20261120front",
       "extra_images": [
         "images/streetwear/hyrx-rib-beanie-black/01.jpg?v=20261119b",
         "images/streetwear/hyrx-rib-beanie-black/02.jpg?v=20261119b",
@@ -8224,8 +8224,8 @@
         }
       },
       "fourthwall_default_variant_id": "8d79b8c4-f089-47c7-a3b7-e36d7d3cd03f",
-      "primary_image": "images/streetwear/hyrx-rib-beanie-black/05.jpg?v=20261119b",
-      "hover_image": "images/streetwear/hyrx-rib-beanie-black/06.jpg?v=20261119b",
+      "primary_image": "images/streetwear/hyrx-rib-beanie-black/04.jpg?v=20261120front",
+      "hover_image": "images/streetwear/hyrx-rib-beanie-black/03.jpg?v=20261120front",
       "model_primary": true
     },
     {
@@ -8239,8 +8239,8 @@
       "list_price": 33.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/hyrx-rib-beanie-light-blue/05.jpg?v=20261119b",
-      "alt_image": "images/streetwear/hyrx-rib-beanie-light-blue/06.jpg?v=20261119b",
+      "image": "images/streetwear/hyrx-rib-beanie-light-blue/04.jpg?v=20261120front",
+      "alt_image": "images/streetwear/hyrx-rib-beanie-light-blue/07.jpg?v=20261120front",
       "extra_images": [
         "images/streetwear/hyrx-rib-beanie-light-blue/01.jpg?v=20261119b",
         "images/streetwear/hyrx-rib-beanie-light-blue/02.jpg?v=20261119b",
@@ -8281,8 +8281,8 @@
         }
       },
       "fourthwall_default_variant_id": "54679c39-a3f5-4a33-b6c7-5914f3663273",
-      "primary_image": "images/streetwear/hyrx-rib-beanie-light-blue/05.jpg?v=20261119b",
-      "hover_image": "images/streetwear/hyrx-rib-beanie-light-blue/06.jpg?v=20261119b",
+      "primary_image": "images/streetwear/hyrx-rib-beanie-light-blue/04.jpg?v=20261120front",
+      "hover_image": "images/streetwear/hyrx-rib-beanie-light-blue/07.jpg?v=20261120front",
       "model_primary": true
     },
     {
