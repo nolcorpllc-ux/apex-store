@@ -176,14 +176,18 @@ jacket_fn = app.split("function jacketCardHtml")[1].split("function bindJacketCa
 check('data-role="hover"' in jacket_fn and "Card__img--b" in jacket_fn, "jacket card renders a hover layer")
 check("hover.src = hoverSrc" in app, "jacket hover src updates when the city changes")
 check('const CLUB_END = ["APC-C36", "APC-C30", "APC-C11"]' in app, "compromised running club cards are kept and moved as a group")
+check('const HERO_HOME = new Set(["APC-C37", "APC-C22", "APC-C06", "APC-C16"])' in app, "hero tees are removed from the apparel grid")
+check("Card__img--b" in app.split("function colorCardHtml")[1].split("function bindColorCards")[0], "homepage color cards render a hover layer")
+women = Path("collections/womens.html").read_text()
+check("object-fit:cover" in women and "#0b0f17" not in women.split(".WBCard__media")[1].split(".WBCard strong")[0], "women's collection cards fill without a dark letterbox")
 LEAD_FACE = {
     "APC-C109": ("images/streetwear/engine-sports-bra-black/fw-01.jpg", "images/streetwear/engine-sports-bra-black/fw-02.jpg"),
     "APC-C110": ("images/streetwear/engine-sports-bra-mint/fw-01.jpg", "images/streetwear/engine-sports-bra-mint/fw-02.jpg"),
-    "APC-C134": ("images/streetwear/hyrx-rib-beanie-black/04.jpg", "images/streetwear/hyrx-rib-beanie-black/03.jpg"),
-    "APC-C135": ("images/streetwear/hyrx-rib-beanie-light-blue/04.jpg", "images/streetwear/hyrx-rib-beanie-light-blue/07.jpg"),
-    "APC-C124": ("images/streetwear/hyrx-trucker/04.jpg", "images/streetwear/hyrx-trucker/06.jpg"),
+    "APC-C134": ("images/streetwear/hyrx-rib-beanie-black/04.jpg", "images/streetwear/hyrx-rib-beanie-black/05.jpg"),
+    "APC-C135": ("images/streetwear/hyrx-rib-beanie-light-blue/04.jpg", "images/streetwear/hyrx-rib-beanie-light-blue/05.jpg"),
+    "APC-C124": ("images/streetwear/hyrx-trucker/04.jpg", "images/streetwear/hyrx-trucker/05.jpg"),
     "APC-C125": ("images/streetwear/hyrx-trucker-graphic/04.jpg", "images/streetwear/hyrx-trucker-graphic/05.jpg"),
-    "APC-C43": ("images/streetwear/apc-c43-black-wear.jpg", "images/streetwear/apc-c43-black-wear.jpg"),
+    "APC-C43": ("images/streetwear/apc-c43-black-wear.jpg", "images/streetwear/apc-c43-black-backwear.jpg"),
 }
 for sku, (lead, hover) in LEAD_FACE.items():
     product = by_id[sku]
@@ -202,9 +206,8 @@ banned_back = (
     "engine-sports-bra-mint/05.jpg",
 )
 for sku, product in by_id.items():
-    for field in ("primary_image", "hover_image"):
-        rel = (product.get(field) or "").split("?")[0]
-        check(not any(rel.endswith(bad) for bad in banned_back), f"{product['handle']} {field} is not a known back view")
+    rel = (product.get("primary_image") or "").split("?")[0]
+    check(not any(rel.endswith(bad) for bad in banned_back), f"{product['handle']} primary_image is not a known back view")
 
 def is_white_flat(rel):
     if not rel or not Path(rel).exists():
@@ -372,8 +375,11 @@ club_present = [handle for handle in CLUB_HANDLES if handle in cards]
 cards = [handle for handle in cards if handle not in CLUB_HANDLES] + club_present
 check(club_present == CLUB_HANDLES, "all three Compromised Running Club items stay on the homepage")
 check(cards[-3:] == CLUB_HANDLES, "Compromised Running Club cards are the last three homepage cards (" + ", ".join(cards[-3:]) + ")")
+check(by_id["APC-C36"]["handle"] == "compromised-running" and by_id["APC-C30"]["handle"] == "compromised-running-club-breathable-race-tank" and by_id["APC-C11"]["handle"] == "compromised-running-club-fleece-hoodie", "the last three slugs are the crest, race tank, and fleece hoodie")
+hero_handles = {by_id[sku]["handle"] for sku in HERO}
+cards = [handle for handle in cards if handle not in hero_handles]
 check(all(handle in cards for handle in OLD_HERO), "the original four hero tees stay in the apparel grid")
-check(all(by_id[sku]["handle"] in cards for sku in HERO), "the replacement hero tees also stay in the apparel grid")
+check(not any(handle in cards for handle in hero_handles), "the four hero tees are not repeated in the apparel grid")
 for sku in ("APC-C109", "APC-C110"):
     bra = by_id[sku]["primary_image"].split("?")[0]
     bra_corner = Image.open(bra).convert("RGB").getpixel((8, 8))
@@ -387,7 +393,9 @@ GREY_LEADS = {
 for sku, rel in GREY_LEADS.items():
     product = by_id[sku]
     corner = Image.open(rel).convert("RGB").getpixel((8, 8))
-    check(product["primary_image"].split("?")[0] == rel and product["hover_image"].split("?")[0].endswith("/fw-02.jpg"), f"{product['handle']} card uses Fourthwall frames 1 and 2")
+    hover_name = Path(product["hover_image"].split("?")[0]).name
+    back_hover = hover_name == "fw-04.jpg" if sku in {"APC-C84", "APC-C85"} else hover_name == "fw-02.jpg"
+    check(product["primary_image"].split("?")[0] == rel and back_hover, f"{product['handle']} card uses the Fourthwall front and the matching hover")
     check(width(rel) >= 1920 and 220 <= corner[0] <= 240, f"{product['handle']} lead is a 1920px light-grey studio ({Image.open(rel).size}, {corner})")
 adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i] in ALL_CRESTS and cards[i + 1] in ALL_CRESTS]
 check(cards.count("city-crest") == 1, "homepage shows one city crest card")
