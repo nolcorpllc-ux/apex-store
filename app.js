@@ -331,6 +331,26 @@ const JACKET_CITY = {
   "APC-C47": "Denver",
   "APC-C75": "Dallas Jacket",
 };
+const JACKET_TITLE = {
+  "APC-C46": "Dallas Race Day Jacket",
+  "APC-C48": "Anaheim Race Day Jacket",
+  "APC-C49": "Nashville Race Day Jacket",
+  "APC-C50": "Vancouver Race Day Jacket",
+  "APC-C47": "Denver Race Day Jacket",
+  "APC-C75": "Dallas Race Day Jacket",
+};
+const JACKET_CONTAIN = new Set(["APC-C48", "APC-C50", "APC-C49", "APC-C47", "APC-C75"]);
+const HOME_HIDE = new Set(["APC-C09", "APC-C10", "APC-C32", "APC-C33", "APC-C85", "APC-C112"]);
+const COLOR_GROUPS = [
+  { title: "HYRX Run 5-Panel", ids: ["APC-C126", "APC-C127"], labels: ["Black", "Light Blue/White"] },
+  { title: "HYRX Cuff Beanie", ids: ["APC-C132", "APC-C133"], labels: ["Black", "Heather Grey"] },
+  { title: "HYRX Rib Beanie", ids: ["APC-C134", "APC-C135"], labels: ["Black", "Light Blue"] },
+  { title: "HYRX Gym Sack", ids: ["APC-C136", "APC-C137"], labels: ["Black", "Burgundy"] },
+  { title: "HYRX Station Towel", ids: ["APC-C138", "APC-C139"], labels: ["Black", "Deep Olive"] },
+  { title: "HYRX Pool Slide", ids: ["APC-C140", "APC-C141"], labels: ["Black", "Burgundy"] },
+];
+const COLOR_DEFAULT = new Set(COLOR_GROUPS.map((group) => group.ids[0]));
+const COLOR_EXTRA = new Set(COLOR_GROUPS.flatMap((group) => group.ids.slice(1)));
 const CREST_ORDER = ["APC-C99", "APC-C100", "APC-C101", "APC-C102", "APC-C103", "APC-C104", "APC-C105", "APC-C106", "APC-C107", "APC-C108"];
 const CREST_IDS = new Set(CREST_ORDER);
 const CREST_CITY = {
@@ -524,11 +544,11 @@ function jacketCardHtml() {
     <article class="Card Card--jacket" data-jacket-card="1">
       <div class="Card__media">
         <a data-role="page" href="products/${esc(first.handle)}.html">
-          ${sharpImg(photo, "Race Day Jacket", "Card__img Card__img--model")}
+          ${sharpImg(photo, JACKET_TITLE[first.id] || "Race Day Jacket", `Card__img Card__img--model${JACKET_CONTAIN.has(first.id) ? " Card__img--full" : ""}`)}
         </a>
       </div>
       <div class="Card__body">
-        <h3>Race Day Jacket</h3>
+        <h3 data-role="title">${esc(JACKET_TITLE[first.id] || "Race Day Jacket")}</h3>
         <p class="Price" data-role="price">From ${money(first.retail_price)}</p>
         <div class="Card__cities" role="group" aria-label="Race Day Jacket cities">${chips}</div>
         <a class="Btn Btn--cobalt Card__buy" data-role="buy" href="${esc(buy)}">Buy</a>
@@ -546,9 +566,12 @@ function bindJacketCard() {
     buttons.forEach((btn) => btn.setAttribute("aria-pressed", btn.dataset.jacketCity === id ? "true" : "false"));
     const img = card.querySelector("img");
     const photo = photoOf(p);
+    const title = JACKET_TITLE[p.id] || "Race Day Jacket";
     img.src = photo;
     img.srcset = `${photo} 2x`;
-    img.alt = `${JACKET_CITY[p.id] || ""} Race Day Jacket`.trim();
+    img.alt = title;
+    img.className = `Card__img Card__img--model${JACKET_CONTAIN.has(p.id) ? " Card__img--full" : ""}`;
+    card.querySelector("[data-role=title]").textContent = title;
     const page = card.querySelector("[data-role=page]");
     page.href = `products/${p.handle}.html`;
     card.querySelector("[data-role=price]").textContent = `From ${money(p.retail_price)}`;
@@ -609,16 +632,67 @@ function bindCrestCard() {
   buttons.forEach((btn) => btn.addEventListener("click", () => select(btn.dataset.crestCity)));
 }
 
+function colorGroupFor(id) {
+  return COLOR_GROUPS.find((group) => group.ids[0] === id);
+}
+
+function colorCardHtml(group) {
+  const items = group.ids.map((id) => findProduct(id)).filter(Boolean);
+  if (!items.length) return "";
+  const first = items[0];
+  const chips = items.map((p, i) => `<button type="button" data-color-id="${esc(p.id)}" aria-pressed="${i === 0 ? "true" : "false"}">${esc(group.labels[i] || "Black")}</button>`).join("");
+  const buy = first.fourthwall_product_url || first.checkout_url || "#";
+  return `
+    <article class="Card Card--color" data-color-card="1">
+      <div class="Card__media">
+        <a data-role="page" href="products/${esc(first.handle)}.html">
+          ${sharpImg(photoOf(first), group.title, `Card__img${first.model_primary ? " Card__img--model" : ""}`)}
+        </a>
+      </div>
+      <div class="Card__body">
+        <h3>${esc(group.title)}</h3>
+        <p class="Price" data-role="price">${money(first.retail_price)}</p>
+        <div class="Card__cities" role="group" aria-label="${esc(group.title)} colors">${chips}</div>
+        <a class="Btn Btn--cobalt Card__buy" data-role="buy" href="${esc(buy)}">Buy</a>
+      </div>
+    </article>`;
+}
+
+function bindColorCards() {
+  document.querySelectorAll("[data-color-card]").forEach((card) => {
+    const buttons = card.querySelectorAll("[data-color-id]");
+    function select(id) {
+      const p = findProduct(id);
+      if (!p) return;
+      buttons.forEach((btn) => btn.setAttribute("aria-pressed", btn.dataset.colorId === id ? "true" : "false"));
+      const img = card.querySelector("img");
+      const photo = photoOf(p);
+      img.src = photo;
+      img.srcset = `${photo} 2x`;
+      img.alt = card.querySelector("h3").textContent;
+      card.querySelector("[data-role=page]").href = `products/${p.handle}.html`;
+      card.querySelector("[data-role=price]").textContent = money(p.retail_price);
+      card.querySelector("[data-role=buy]").href = p.fourthwall_product_url || p.checkout_url || "#";
+    }
+    buttons.forEach((btn) => btn.addEventListener("click", () => select(btn.dataset.colorId)));
+  });
+}
+
 function homepageCards(list) {
   if (query.trim() || !onHome()) return list.map((p) => ({ kind: "product", p }));
   const cards = [];
-  let placed = false;
+  let crestPlaced = false;
   list.forEach((p) => {
+    if (HOME_HIDE.has(p.id) || COLOR_EXTRA.has(p.id)) return;
     if (CREST_IDS.has(p.id)) {
-      if (!placed) {
+      if (!crestPlaced) {
         cards.push({ kind: "crest" });
-        placed = true;
+        crestPlaced = true;
       }
+      return;
+    }
+    if (COLOR_DEFAULT.has(p.id)) {
+      cards.push({ kind: "color", group: colorGroupFor(p.id) });
       return;
     }
     cards.push({ kind: "product", p });
@@ -641,6 +715,7 @@ function renderProducts() {
   }
   grid.innerHTML = jacket + cards.map((card) => {
     if (card.kind === "crest") return crestCardHtml();
+    if (card.kind === "color") return colorCardHtml(card.group);
     const p = card.p;
     const hoverSrc = hoverPhotoOf(p);
     const hover = hoverSrc ? sharpImg(hoverSrc, "", `Card__img Card__img--b${p.model_primary ? " Card__img--model" : ""}`) : "";
@@ -662,6 +737,7 @@ function renderProducts() {
   }).join("");
   bindJacketCard();
   bindCrestCard();
+  bindColorCards();
 }
 
 function setDept(next) {
@@ -1331,7 +1407,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeAll();
   });
-  fetch("catalog.json?v=20261120crest")
+  fetch("catalog.json?v=20261120qa")
     .then((res) => {
       if (!res.ok) throw new Error("catalog");
       return res.json();

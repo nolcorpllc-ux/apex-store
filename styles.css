@@ -650,6 +650,11 @@ section[aria-label="Featured gear checkout"] a {
   transition: transform 220ms ease;
 }
 .Card__img--model, .Card__img--b.Card__img--model { object-position: center top; }
+.Card__img--full {
+  object-fit: contain;
+  object-position: center center;
+  background: #0b0f17;
+}
 @media (hover: hover) and (pointer: fine) {
   .Card:hover .Card__img:not(.Card__img--b) {
     transform: scale(1.03);
@@ -1345,6 +1350,13 @@ section[aria-label="Featured gear checkout"] a {
   background: #151b26;
   border-color: #0066ff;
 }
+.SiteHead__row {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+.SiteHead .MenuBtn { grid-column: 1; grid-row: 1; justify-self: start; }
+.SiteHead .Wordmark { grid-column: 2; grid-row: 1; justify-self: center; }
+.SiteHead .Tools { grid-column: 3; grid-row: 1; justify-self: end; }
+.SiteHead .SiteNav { grid-column: 1 / -1; grid-row: 2; justify-content: center; }
 .Hero .Shot {
   aspect-ratio: 4 / 5;
   min-height: 290px;
@@ -1636,4 +1648,9 @@ body.nav-open .SiteHead { z-index: 20040; }
   .Hero .Dek { margin-top: 12px !important; font-size: 14.5px !important; }
   .Hero__cta { margin-top: 16px !important; }
   .Hero__notes { margin-top: 14px !important; font-size: 12px !important; gap: 10px !important; }
+}
+@media (max-width: 860px) {
+  .SiteHead .BagBtn { grid-column: 3; grid-row: 1; justify-self: end; }
+  .SiteHead .Search { grid-column: 1 / -1; grid-row: 2; width: 100%; }
+  .SiteHead .SiteNav { grid-column: auto; grid-row: auto; }
 }
