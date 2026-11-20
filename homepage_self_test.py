@@ -376,6 +376,26 @@ cards = [handle for handle in cards if handle not in CLUB_HANDLES] + club_presen
 check(club_present == CLUB_HANDLES, "all three Compromised Running Club items stay on the homepage")
 check(cards[-3:] == CLUB_HANDLES, "Compromised Running Club cards are the last three homepage cards (" + ", ".join(cards[-3:]) + ")")
 check(by_id["APC-C36"]["handle"] == "compromised-running" and by_id["APC-C30"]["handle"] == "compromised-running-club-breathable-race-tank" and by_id["APC-C11"]["handle"] == "compromised-running-club-fleece-hoodie", "the last three slugs are the crest, race tank, and fleece hoodie")
+HOODIE_LEADS = {
+    "APC-C34": "chicago-dallas-socal-world-series-prep-heavyweight-hoodie",
+    "APC-C09": "run-station-repeat-heavy-blend-hoodie",
+    "APC-C32": "burpee-broad-jumps-build-character-warmup-hoodie",
+    "APC-C33": "the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie",
+    "APC-C10": "wall-balls-bad-decisions-hoodie",
+    "APC-C11": "compromised-running-club-fleece-hoodie",
+    "APC-C12": "defend-my-sled-push-fleece-hoodie",
+    "APC-C67": "call-room",
+}
+for sku, folder in HOODIE_LEADS.items():
+    product = by_id[sku]
+    lead = product["primary_image"].split("?")[0]
+    hover = product["hover_image"].split("?")[0]
+    corner = Image.open(lead).convert("RGB").getpixel((8, 8))
+    check(lead == f"images/streetwear/{folder}/fw-01.jpg" and hover == f"images/streetwear/{folder}/fw-02.jpg", f"{product['handle']} lead and hover are the new Fourthwall frames")
+    check(Image.open(lead).size[0] >= 1536 and 210 <= corner[0] <= 245, f"{product['handle']} lead is a full-res light-grey studio ({corner})")
+    page = (Path("products") / f"{product['handle']}.html").read_text()
+    check(f'content="https://www.apexhybridco.com/images/streetwear/{folder}/fw-01.jpg' in page, f"{product['handle']} og:image is the new front")
+    check(page.index(f"{folder}/fw-01.jpg") < page.index(f"{folder}/fw-02.jpg"), f"{product['handle']} gallery puts the front before the back")
 hero_handles = {by_id[sku]["handle"] for sku in HERO}
 cards = [handle for handle in cards if handle not in hero_handles]
 check(all(handle in cards for handle in OLD_HERO), "the original four hero tees stay in the apparel grid")
