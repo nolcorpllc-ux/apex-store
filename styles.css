@@ -1378,6 +1378,11 @@ section[aria-label="Featured gear checkout"] a {
   object-fit: cover;
   object-position: center center;
 }
+.Card__img.Card__img--full {
+  object-fit: contain;
+  object-position: center center;
+  background: #0b0f17;
+}
 .Train__grid button {
   aspect-ratio: 4 / 5;
   min-height: 260px;

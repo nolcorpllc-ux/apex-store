@@ -24,10 +24,10 @@ JACKETS = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"]
 JACKET_FILES = {
     "APC-C46": "images/streetwear/apex-dallas-race-day/03.jpg",
     "APC-C48": "images/streetwear/apex-anaheim-race-day/03.jpg",
-    "APC-C49": "images/streetwear/apex-nashville-race-day/03.jpg",
+    "APC-C49": "images/streetwear/apex-nashville-race-day/04.jpg",
     "APC-C50": "images/streetwear/apex-vancouver-race-day/03.jpg",
-    "APC-C47": "images/streetwear/apex-denver-race-day/05.jpg",
-    "APC-C75": "images/streetwear/dallas-race-day-printable/05.jpg",
+    "APC-C47": "images/streetwear/apex-denver-race-day/04.jpg",
+    "APC-C75": "images/streetwear/dallas-race-day-printable/04.jpg",
 }
 CARD_MIN = 672
 HERO_MIN = 1364
@@ -107,6 +107,12 @@ for sku, rel in JACKET_FILES.items():
     check(product["primary_image"] in body and 'id="staticMainProdImg"' in body, f"{product['handle']} gallery lead is the new photo")
     jacket_hashes.append(md5(rel))
 check(len(set(jacket_hashes)) == len(JACKETS), "no two Race Day Jacket cities share a lead photo")
+import numpy as np
+for sku in ("APC-C49", "APC-C47", "APC-C75"):
+    arr = np.array(Image.open(JACKET_FILES[sku]).convert("RGB")).astype("int16")
+    jump = np.abs(arr[1:] - arr[:-1]).mean(axis=2)
+    wide = int(((jump > 18).sum(axis=1) > arr.shape[1] * 0.25).sum())
+    check(wide == 0, f"{sku} lead has no horizontal line artifact ({wide} rows)")
 
 # Homepage default shelf: apparel, without stitched windbreakers, hero tees, or printed jackets.
 apparel = {
@@ -169,6 +175,7 @@ CRESTS = {
     "london-crest", "paris-crest", "hong-kong-crest", "chicago-crest", "cancun-crest",
     "dallas-crest", "denver-crest", "anaheim-crest", "nashville-crest", "vancouver-crest",
 }
+ALL_CRESTS = {p["handle"] for p in catalog["products"] if p["handle"].endswith("-crest")}
 crest_dims = []
 for handle in sorted(CRESTS):
     product = next(p for p in catalog["products"] if p["handle"] == handle)
@@ -228,16 +235,21 @@ while buckets["outer"] and mixed:
 cards = []
 crest_placed = False
 for handle in mixed:
-    if handle in CRESTS:
+    if handle in ALL_CRESTS:
         if not crest_placed:
             cards.append("city-crest")
             crest_placed = True
         continue
     cards.append(handle)
-adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i] in CRESTS and cards[i + 1] in CRESTS]
+adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i] in ALL_CRESTS and cards[i + 1] in ALL_CRESTS]
 check(cards.count("city-crest") == 1, "homepage shows one city crest card")
-check(not any(handle in CRESTS for handle in cards), "individual crest products are not repeated beside the crest card")
+check(not any(handle in ALL_CRESTS for handle in cards), "individual crest products are not repeated beside the crest card")
 check(not adjacent, "no two adjacent homepage cards are crest products")
+crest_order = re.findall(r'"(APC-C\d+)"', app.split("const CREST_ORDER = [", 1)[1].split("];", 1)[0])
+crest_ids = {p["id"] for p in catalog["products"] if p["handle"].endswith("-crest")}
+crest_cities = re.findall(r'"(APC-C\d+)": "([^"]+)"', app.split("const CREST_CITY = {", 1)[1].split("};", 1)[0])
+check(set(crest_order) == crest_ids, "crest card includes every crest product")
+check(len(crest_cities) == len(crest_ids) and len({name for _, name in crest_cities}) == len(crest_ids), "crest card lists every crest city")
 
 HOME_HIDE = {
     "run-station-repeat-heavy-blend-hoodie",
@@ -277,7 +289,7 @@ def visible_title(product):
         return short_map[product["id"]]
     return product["title"].split(" - ")[0]
 hero_titles = ["Run Station Repeat", "Wall Balls & Bad Decisions", "Porta-Potty Line PR", "Sled Push Enthusiast"]
-visible = ["Denver Race Day Windbreaker", "Dallas Race Day Jacket"] + hero_titles
+visible = ["Denver Race Day Windbreaker", "Dallas Race Day"] + hero_titles
 by_handle = {p["handle"]: p for p in catalog["products"]}
 for handle in folded:
     if handle == "city-crest":
@@ -291,7 +303,10 @@ check(not dup_titles, "no duplicate visible titles on homepage" + (": " + ", ".j
 nonblack = [handle for handle in folded if handle in COLOR_EXTRA or handle in {"engine-training-tank-mint", "engine-biker-shorts-mint"}]
 check(not nonblack, "no non-black default cards except the Mint Engine bra")
 check("engine-sports-bra-mint" in folded, "Mint Engine bra stays on the homepage")
-check("JACKET_TITLE" in app and "Anaheim Race Day Jacket" in app and "data-role=\"title\"" in app, "jacket title changes with the selected city")
+jacket_titles = re.findall(r'"(APC-C\d+)": "([^"]+)"', app.split("const JACKET_TITLE = {", 1)[1].split("};", 1)[0])
+jacket_names = [name for _, name in jacket_titles]
+check(len(jacket_names) == len(set(jacket_names)) == len(JACKETS), "all jacket city titles are unique")
+check("Dallas Race Day" in jacket_names and "Dallas Race Day Jacket" in jacket_names, "Dallas and the printed jacket use different Fourthwall names")
 switch = json.loads(Path("race-day-switcher.json").read_text())
 wind_titles = [item["title"] for item in switch["windbreakers"]]
 check(len(set(wind_titles)) == len(wind_titles), "each windbreaker city has its own title")
@@ -325,7 +340,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   await send(ws, "Emulation.setDeviceMetricsOverride", {width:%d, height:%d, deviceScaleFactor:1, mobile:%s});
   await send(ws, "Page.navigate", {url:"http://127.0.0.1:8788/index.html"});
   await sleep(1200);
-  const ev = await send(ws, "Runtime.evaluate", {expression:`(() => { const el = document.querySelector('.SiteHead .Wordmark'); const r = el.getBoundingClientRect(); const center = r.left + r.width/2; const bag = document.querySelector('.BagBtn').getBoundingClientRect(); const menu = document.querySelector('.MenuBtn'); const mr = menu ? menu.getBoundingClientRect() : null; const overlap = (a,b) => a && b && !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom); const width = document.documentElement.clientWidth; return JSON.stringify({off: Math.abs(center - width/2), overlapBag: overlap(r, bag), overlapMenu: mr && menu.offsetParent ? overlap(r, mr) : false}); })()`, returnByValue:true});
+  const ev = await send(ws, "Runtime.evaluate", {expression:`(() => { const el = document.querySelector('.SiteHead .Wordmark'); const r = el.getBoundingClientRect(); const center = r.left + r.width/2; const bag = document.querySelector('.BagBtn').getBoundingClientRect(); const menu = document.querySelector('.MenuBtn'); const mr = menu ? menu.getBoundingClientRect() : null; const overlap = (a,b) => a && b && !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom); const width = document.documentElement.clientWidth; const probe = document.createElement('img'); probe.className = 'Card__img Card__img--model Card__img--full'; document.body.appendChild(probe); const fit = getComputedStyle(probe).objectFit; probe.remove(); return JSON.stringify({off: Math.abs(center - width/2), overlapBag: overlap(r, bag), overlapMenu: mr && menu.offsetParent ? overlap(r, mr) : false, fit}); })()`, returnByValue:true});
   console.log(ev.result.result.value);
   browser.close(); chrome.kill();
 })().catch((err) => { console.error(err); chrome.kill(); process.exit(1); });
@@ -347,6 +362,8 @@ try:
         measured = logo_offset(width, height)
         check(measured["off"] <= 4, f"logo centered at {width}px (off {measured['off']:.2f}px)")
         check(not measured["overlapBag"] and not measured["overlapMenu"], f"logo does not overlap Menu or Bag at {width}px")
+        if width == 1440:
+            check(measured.get("fit") == "contain", f"Card__img--full computes to contain ({measured.get('fit')})")
 finally:
     server.terminate()
 
