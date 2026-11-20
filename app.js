@@ -332,7 +332,7 @@ const JACKET_CITY = {
   "APC-C75": "Dallas Jacket",
 };
 const JACKET_TITLE = {
-  "APC-C46": "Dallas Race Day Jacket",
+  "APC-C46": "Dallas Race Day",
   "APC-C48": "Anaheim Race Day Jacket",
   "APC-C49": "Nashville Race Day Jacket",
   "APC-C50": "Vancouver Race Day Jacket",
@@ -351,7 +351,7 @@ const COLOR_GROUPS = [
 ];
 const COLOR_DEFAULT = new Set(COLOR_GROUPS.map((group) => group.ids[0]));
 const COLOR_EXTRA = new Set(COLOR_GROUPS.flatMap((group) => group.ids.slice(1)));
-const CREST_ORDER = ["APC-C99", "APC-C100", "APC-C101", "APC-C102", "APC-C103", "APC-C104", "APC-C105", "APC-C106", "APC-C107", "APC-C108"];
+const CREST_ORDER = ["APC-C99", "APC-C100", "APC-C101", "APC-C102", "APC-C103", "APC-C104", "APC-C105", "APC-C106", "APC-C107", "APC-C108", "APC-C71", "APC-C72", "APC-C73", "APC-C77", "APC-C78", "APC-C79", "APC-C80", "APC-C81", "APC-C82", "APC-C83"];
 const CREST_IDS = new Set(CREST_ORDER);
 const CREST_CITY = {
   "APC-C99": "London",
@@ -364,6 +364,16 @@ const CREST_CITY = {
   "APC-C106": "Anaheim",
   "APC-C107": "Nashville",
   "APC-C108": "Vancouver",
+  "APC-C71": "Phoenix",
+  "APC-C72": "Las Vegas",
+  "APC-C73": "Guadalajara",
+  "APC-C77": "Miami Beach",
+  "APC-C78": "Houston",
+  "APC-C79": "Monterrey",
+  "APC-C80": "Atlanta",
+  "APC-C81": "Minneapolis",
+  "APC-C82": "San Diego",
+  "APC-C83": "Portland",
 };
 
 function onHome() {
@@ -1407,7 +1417,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeAll();
   });
-  fetch("catalog.json?v=20261120qa")
+  fetch("catalog.json?v=20261120qa2")
     .then((res) => {
       if (!res.ok) throw new Error("catalog");
       return res.json();
