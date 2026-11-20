@@ -3008,8 +3008,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c42-black.jpg?v=20261119b",
-      "alt_image": "images/streetwear/apc-c42-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c42-black.jpg?v=20261120studio",
+      "alt_image": "images/streetwear/apc-c42-black.jpg?v=20261120studio",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -3046,9 +3046,9 @@
         }
       },
       "fourthwall_default_variant_id": "05d3d05b-848a-4432-9c1e-0e7a9e1af7b5",
-      "primary_image": "images/streetwear/apc-c42-black.jpg?v=20261119b",
-      "hover_image": "images/streetwear/apc-c42-black-detail.jpg?v=20261105h",
-      "model_primary": false
+      "primary_image": "images/streetwear/apc-c42-black.jpg?v=20261120studio",
+      "hover_image": "images/streetwear/apc-c42-black.jpg?v=20261120studio",
+      "model_primary": true
     },
     {
       "id": "APC-C34",
@@ -3978,8 +3978,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c44-black.jpg?v=20261119b",
-      "alt_image": "images/streetwear/apc-c44-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c44-black.jpg?v=20261120studio",
+      "alt_image": "images/streetwear/apc-c44-black.jpg?v=20261120studio",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -4016,9 +4016,9 @@
         }
       },
       "fourthwall_default_variant_id": "14cb80b7-74b4-43c9-839d-37b663f9de74",
-      "primary_image": "images/streetwear/apc-c44-black.jpg?v=20261119b",
-      "hover_image": "images/streetwear/apc-c44-black-detail.jpg?v=20261105h",
-      "model_primary": false
+      "primary_image": "images/streetwear/apc-c44-black.jpg?v=20261120studio",
+      "hover_image": "images/streetwear/apc-c44-black.jpg?v=20261120studio",
+      "model_primary": true
     },
     {
       "id": "APC-C45",
@@ -4031,8 +4031,8 @@
       "list_price": 68.0,
       "rating": 0,
       "reviews": 0,
-      "image": "images/streetwear/apc-c45-black.jpg?v=20261119b",
-      "alt_image": "images/streetwear/apc-c45-black-detail.jpg?v=20261105h",
+      "image": "images/streetwear/apc-c45-black.jpg?v=20261120studio",
+      "alt_image": "images/streetwear/apc-c45-black.jpg?v=20261120studio",
       "badge": "",
       "ship_time": "Free US shipping",
       "stock_status": "Made to order",
@@ -4069,9 +4069,9 @@
         }
       },
       "fourthwall_default_variant_id": "ec91cc61-cfae-4341-9766-97859144e369",
-      "primary_image": "images/streetwear/apc-c45-black.jpg?v=20261119b",
-      "hover_image": "images/streetwear/apc-c45-black-detail.jpg?v=20261105h",
-      "model_primary": false
+      "primary_image": "images/streetwear/apc-c45-black.jpg?v=20261120studio",
+      "hover_image": "images/streetwear/apc-c45-black.jpg?v=20261120studio",
+      "model_primary": true
     },
     {
       "id": "APC-C13",
