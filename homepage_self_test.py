@@ -164,6 +164,80 @@ for row in low:
     print("  " + row)
 check(True, f"low-res slug count {len(low)}")
 
+CRESTS = {
+    "london-crest", "paris-crest", "hong-kong-crest", "chicago-crest", "cancun-crest",
+    "dallas-crest", "denver-crest", "anaheim-crest", "nashville-crest", "vancouver-crest",
+}
+crest_dims = []
+for handle in sorted(CRESTS):
+    product = next(p for p in catalog["products"] if p["handle"] == handle)
+    rel = product["primary_image"].split("?")[0]
+    size = Image.open(rel).size
+    crest_dims.append(size)
+    check(size == (1536, 2048), f"{handle} lead is 1536x2048 ({size[0]}x{size[1]})")
+    check(product.get("hover_image", "").split("?")[0] == rel, f"{handle} hover uses its own lead")
+    page = Path("products") / f"{handle}.html"
+    body = page.read_text()
+    check('id="staticMainProdImg"' in body and f"{handle}/05.jpg?v=20261120crest" in body, f"{handle} gallery lead is the new photo")
+    check(product["fourthwall_product_url"].rstrip("/").endswith(product["fourthwall_handle"]), f"{handle} buy link is unchanged")
+check(len({md5(next(p for p in catalog["products"] if p["handle"] == h)["primary_image"].split("?")[0]) for h in CRESTS}) == 10, "each crest lead is a different photo")
+check("data-crest-card" in app and "CREST_ORDER" in app, "homepage collapses city crests into one card")
+
+# Default homepage card order, with the ten crests folded into one card.
+shelf = []
+for product in catalog["products"]:
+    if product["dept"] not in apparel:
+        continue
+    if "race-day-stitched" in (product.get("handle") or ""):
+        continue
+    if product["id"] in set(HERO) | set(JACKETS):
+        continue
+    shelf.append(product)
+buckets = {key: [] for key in ("tee", "tank", "hyrx", "women", "hoodie", "gear", "outer")}
+hyrx = set(re.findall(r'HYRX_HANDLES = new Set\(\[([^\]]+)\]', app)[0].replace('"', "").split(","))
+hyrx = {item.strip() for item in hyrx if item.strip()}
+
+def kind_of(product):
+    if product["dept"] == "Windbreakers":
+        return "outer"
+    if product["handle"] in hyrx:
+        return "hyrx"
+    if product["dept"] == "Women's":
+        return "women"
+    if product["dept"] == "Muscle Tanks":
+        return "tank"
+    if product["dept"] == "Hoodies":
+        return "hoodie"
+    if product["dept"] == "Training Gear":
+        return "gear"
+    return "tee"
+
+for product in shelf:
+    buckets[kind_of(product)].append(product["handle"])
+mixed = []
+progress = True
+while progress:
+    progress = False
+    for key in ("tee", "tank", "hyrx", "women", "hoodie", "gear"):
+        if buckets[key]:
+            mixed.append(buckets[key].pop(0))
+            progress = True
+while buckets["outer"] and mixed:
+    mixed.append(mixed and buckets["outer"].pop(0))
+cards = []
+crest_placed = False
+for handle in mixed:
+    if handle in CRESTS:
+        if not crest_placed:
+            cards.append("city-crest")
+            crest_placed = True
+        continue
+    cards.append(handle)
+adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i] in CRESTS and cards[i + 1] in CRESTS]
+check(cards.count("city-crest") == 1, "homepage shows one city crest card")
+check(not any(handle in CRESTS for handle in cards), "individual crest products are not repeated beside the crest card")
+check(not adjacent, "no two adjacent homepage cards are crest products")
+
 # Card 2x bar: nothing on the homepage shelf is under 672. Recorded above per product.
 print(f"\n{len(failures)} failure(s)")
 sys.exit(1 if failures else 0)
