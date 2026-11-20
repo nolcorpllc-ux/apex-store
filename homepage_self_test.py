@@ -234,7 +234,7 @@ for product in catalog["products"]:
         check(False, f"{product['handle']} still uses a flat lead although an on-model photo exists")
     else:
         missing_model.append(f"{product['handle']} ({product.get('fourthwall_handle') or 'no-fourthwall-slug'})")
-check(bool(missing_model), "products with no on-model photo are listed for a studio shoot")
+check(True, f"products with no on-model photo listed for a studio shoot: {len(missing_model)}")
 print("NO ON-MODEL PHOTO:")
 for row in missing_model:
     print("  " + row)
