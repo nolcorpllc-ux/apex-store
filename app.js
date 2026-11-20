@@ -339,7 +339,7 @@ const JACKET_TITLE = {
   "APC-C47": "Denver Race Day Jacket",
   "APC-C75": "Dallas Race Day Jacket",
 };
-const JACKET_CONTAIN = new Set(["APC-C48", "APC-C50", "APC-C49", "APC-C47", "APC-C75"]);
+const JACKET_CONTAIN = new Set(["APC-C46", "APC-C48", "APC-C50", "APC-C49", "APC-C47", "APC-C75"]);
 const HOME_HIDE = new Set(["APC-C09", "APC-C10", "APC-C32", "APC-C33", "APC-C85", "APC-C112"]);
 const COLOR_GROUPS = [
   { title: "HYRX Run 5-Panel", ids: ["APC-C126", "APC-C127"], labels: ["Black", "Light Blue/White"] },
@@ -1417,7 +1417,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeAll();
   });
-  fetch("catalog.json?v=20261120qa2")
+  fetch("catalog.json?v=20261120fw")
     .then((res) => {
       if (!res.ok) throw new Error("catalog");
       return res.json();
