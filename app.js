@@ -322,6 +322,7 @@ function matchesDept(p) {
 }
 
 const HERO_HOME = new Set(["APC-C01", "APC-C02", "APC-C03", "APC-C07"]);
+const CLUB_END = ["APC-C36", "APC-C30", "APC-C11"];
 const JACKET_ORDER = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"];
 const JACKET_CITY = {
   "APC-C46": "Dallas",
@@ -453,7 +454,12 @@ function mixShelf(list) {
     else if (oi < outer.length && ri >= rest.length) break;
   }
   while (ri < rest.length) out.push(rest[ri++]);
-  return out;
+  const tailOrder = new Map(CLUB_END.map((id, i) => [id, i]));
+  const head = [];
+  const tail = [];
+  out.forEach((p) => (tailOrder.has(p.id) ? tail : head).push(p));
+  tail.sort((a, b) => tailOrder.get(a.id) - tailOrder.get(b.id));
+  return head.concat(tail);
 }
 
 function collectionName() {
