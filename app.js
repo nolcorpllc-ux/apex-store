@@ -321,7 +321,7 @@ function matchesDept(p) {
   return p.dept === wanted;
 }
 
-const HERO_HOME = new Set(["APC-C01", "APC-C02", "APC-C03", "APC-C07"]);
+const HERO_HOME = new Set();
 const CLUB_END = ["APC-C36", "APC-C30", "APC-C11"];
 const JACKET_ORDER = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"];
 const JACKET_CITY = {
