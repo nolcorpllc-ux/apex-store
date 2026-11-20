@@ -611,7 +611,7 @@ section[aria-label="Featured gear checkout"] a {
 .Grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 34px 16px;
+  gap: 56px 28px;
 }
 .Card { display: flex; flex-direction: column; min-width: 0; }
 .Card__media {
@@ -698,7 +698,20 @@ section[aria-label="Featured gear checkout"] a {
 .Swatch[aria-pressed="true"] { outline: 2px solid var(--cobalt); outline-offset: 2px; }
 .Swatch--black { background: #12161e; }
 .Swatch--light { background: #f4efe6; }
-.Card__body { padding: 12px 2px 0; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.Card__body { padding: 18px 2px 4px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.Card h3, .Card h3 button { border: 0; outline: 0; box-shadow: none; background: transparent; }
+.Card__cities { display: flex; flex-wrap: wrap; gap: 6px; }
+.Card__cities button {
+  border: 1px solid #d5d5d5;
+  background: #fff;
+  color: #111;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.Card__cities button[aria-pressed="true"] { background: #111; color: #fff; border-color: #111; }
+.Card__buy { width: 100%; margin-top: auto; }
 .Rating {
   display: flex;
   align-items: center;
@@ -751,7 +764,7 @@ section[aria-label="Featured gear checkout"] a {
   letter-spacing: -0.03em;
   font-weight: 580;
   line-height: 1.2;
-  min-height: 2.4em;
+  margin: 0;
 }
 .Card h3 button {
   text-align: left;
@@ -1253,7 +1266,7 @@ section[aria-label="Featured gear checkout"] a {
   .Shot img { min-height: 180px; }
   .Index { grid-template-columns: 1fr 1fr; }
   .Index button { border-bottom: 1px solid var(--line); }
-  .Grid { grid-template-columns: 1fr 1fr; gap: 22px 10px; }
+  .Grid { grid-template-columns: 1fr 1fr; gap: 36px 16px; }
   .LabOpen .long { display: none; }
   .LabOpen .short { display: inline; }
   .LabBar { height: auto; }

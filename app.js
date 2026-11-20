@@ -321,6 +321,22 @@ function matchesDept(p) {
   return p.dept === wanted;
 }
 
+const HERO_HOME = new Set(["APC-C01", "APC-C02", "APC-C03", "APC-C07"]);
+const JACKET_ORDER = ["APC-C46", "APC-C48", "APC-C49", "APC-C50", "APC-C47", "APC-C75"];
+const JACKET_CITY = {
+  "APC-C46": "Dallas",
+  "APC-C48": "Anaheim",
+  "APC-C49": "Nashville",
+  "APC-C50": "Vancouver",
+  "APC-C47": "Denver",
+  "APC-C75": "Dallas Jacket",
+};
+
+function onHome() {
+  const path = (location.pathname || "/").replace(/\/index\.html$/, "/");
+  return path === "/" || path === "";
+}
+
 function visibleProducts() {
   const q = query.trim().toLowerCase();
   let list = PRODUCTS.filter((p) => {
@@ -332,6 +348,16 @@ function visibleProducts() {
     return true;
   });
   if (!q) list = list.filter((p) => !/race-day-stitched/.test(p.handle || ""));
+  if (!q && onHome()) {
+    list = list.filter((p) => !RACE_DAY_JACKETS.has(p.id) && !HERO_HOME.has(p.id));
+    const seen = new Set();
+    list = list.filter((p) => {
+      const key = (photoOf(p) || "").split("?")[0];
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
   if (sort === "price-asc") list.sort((a, b) => a.retail_price - b.retail_price);
   else if (sort === "price-desc") list.sort((a, b) => b.retail_price - a.retail_price);
   else if (sort === "rating") list.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
@@ -465,6 +491,64 @@ function ratingMarkup(p) {
   return `<p class="Rating"><span class="Stars" aria-hidden="true">${stars}</span><span>${score.toFixed(1)}${reviews}</span></p>`;
 }
 
+function sharpImg(src, alt, className) {
+  return `<img class="${className}" src="${esc(src)}" srcset="${esc(src)} 2x" alt="${esc(alt)}" loading="lazy" decoding="async" width="1536" height="2048" />`;
+}
+
+function jacketProducts() {
+  return JACKET_ORDER.map((id) => findProduct(id)).filter(Boolean);
+}
+
+function jacketCardHtml() {
+  const items = jacketProducts();
+  if (!items.length) return "";
+  const first = items[0];
+  const chips = items.map((p, i) => `<button type="button" data-jacket-city="${esc(p.id)}" aria-pressed="${i === 0 ? "true" : "false"}">${esc(JACKET_CITY[p.id] || shortTitle(p))}</button>`).join("");
+  const photo = photoOf(first);
+  const buy = first.fourthwall_product_url || first.checkout_url || "#";
+  return `
+    <article class="Card Card--jacket" data-jacket-card="1">
+      <div class="Card__media">
+        <a data-role="page" href="products/${esc(first.handle)}.html">
+          ${sharpImg(photo, "Race Day Jacket", "Card__img Card__img--model")}
+        </a>
+      </div>
+      <div class="Card__body">
+        <h3>Race Day Jacket</h3>
+        <p class="Price" data-role="price">From ${money(first.retail_price)}</p>
+        <div class="Card__cities" role="group" aria-label="Race Day Jacket cities">${chips}</div>
+        <a class="Btn Btn--cobalt Card__buy" data-role="buy" href="${esc(buy)}">Buy</a>
+      </div>
+    </article>`;
+}
+
+function bindJacketCard() {
+  const card = document.querySelector("[data-jacket-card]");
+  if (!card) return;
+  const buttons = card.querySelectorAll("[data-jacket-city]");
+  function select(id) {
+    const p = findProduct(id);
+    if (!p) return;
+    buttons.forEach((btn) => btn.setAttribute("aria-pressed", btn.dataset.jacketCity === id ? "true" : "false"));
+    const img = card.querySelector("img");
+    const photo = photoOf(p);
+    img.src = photo;
+    img.srcset = `${photo} 2x`;
+    img.alt = `${JACKET_CITY[p.id] || ""} Race Day Jacket`.trim();
+    const page = card.querySelector("[data-role=page]");
+    page.href = `products/${p.handle}.html`;
+    card.querySelector("[data-role=price]").textContent = `From ${money(p.retail_price)}`;
+    const buy = card.querySelector("[data-role=buy]");
+    buy.href = p.fourthwall_product_url || p.checkout_url || buy.href;
+  }
+  buttons.forEach((btn) => btn.addEventListener("click", () => select(btn.dataset.jacketCity)));
+}
+
+function showJacketCard() {
+  if (query.trim() || !onHome()) return false;
+  return dept === "all" || dept === "apparel" || dept === "Windbreakers";
+}
+
 function renderProducts() {
   const grid = $("#productGrid");
   const list = visibleProducts();
@@ -472,43 +556,31 @@ function renderProducts() {
   const count = $("#collectionCount");
   if (count) count.textContent = "";
   renderPills();
-  if (!list.length) {
+  const jacket = showJacketCard() ? jacketCardHtml() : "";
+  if (!list.length && !jacket) {
     grid.innerHTML = `<div class="Empty"><p>Nothing in this cut matches that search.</p><button class="Btn Btn--ghost" type="button" data-clear-search="1">Clear search</button></div>`;
     return;
   }
-  grid.innerHTML = list.map((p) => {
-    const swatches = ""; // black-only — no color toggle
+  grid.innerHTML = jacket + list.map((p) => {
     const hoverSrc = hoverPhotoOf(p);
-    const hover = hoverSrc ? `<img class="Card__img Card__img--b${p.model_primary ? " Card__img--model" : ""}" src="${esc(hoverSrc)}" alt="" loading="lazy" decoding="async" width="1000" height="1250" />` : "";
-    const was = "";
-    const badge = p.badge === "New" ? `<span style="position:absolute;top:8px;left:8px;z-index:2;background:#0066ff;color:#fff;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:999px">New</span>` : "";
-    const sizes = p.has_sizes
-      ? sizesFor(p).map((sz) => `<button type="button" data-quick-add="${p.id}" data-size="${sz}" aria-label="Add size ${sz}">${sz}</button>`).join("")
-      : `<button type="button" data-quick-add="${p.id}">Add</button>`;
+    const hover = hoverSrc ? sharpImg(hoverSrc, "", `Card__img Card__img--b${p.model_primary ? " Card__img--model" : ""}`) : "";
+    const photo = photoOf(p);
     return `
       <article class="Card">
         <div class="Card__media">
-          ${badge}
           <button class="Card__hit" type="button" data-quick="${p.id}" aria-label="Quick view ${esc(p.title)}">
-            <img class="Card__img${p.model_primary ? " Card__img--model" : ""}" src="${esc(photoOf(p))}" alt="${esc(p.seo_title || p.title)}" loading="lazy" decoding="async" width="1000" height="1250" />
+            ${sharpImg(photo, p.seo_title || p.title, `Card__img${p.model_primary ? " Card__img--model" : ""}`)}
             ${hover}
           </button>
-          <div class="QuickAdd" aria-label="Add ${esc(shortTitle(p))} to bag">${sizes}</div>
         </div>
         <div class="Card__body">
-          <div class="Card__top">
-            <h3><button type="button" data-quick="${p.id}">${esc(shortTitle(p))}</button></h3>
-            <p class="Card__kind">${RACE_DAY_JACKETS.has(p.id) ? "Race Day Jacket" : ""}</p>
-            <div class="Price"><span>${HOODIE_FROM.has(p.id) ? "From $56" : money(p.retail_price)}</span>${was}</div>
-          </div>
-          ${ratingMarkup(p) || `<p class="Rating"></p>`}
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px">
-            ${swatches}
-            <button class="Btn Btn--cobalt" type="button" data-buy="${p.id}" style="margin-left:auto;padding:7px 12px;font-size:12.5px;border-radius:6px">Buy Now →</button>
-          </div>
+          <h3><button type="button" data-quick="${p.id}">${esc(shortTitle(p))}</button></h3>
+          <p class="Price">${HOODIE_FROM.has(p.id) ? "From $56" : money(p.retail_price)}</p>
+          <button class="Btn Btn--cobalt Card__buy" type="button" data-buy="${p.id}">Buy</button>
         </div>
       </article>`;
   }).join("");
+  bindJacketCard();
 }
 
 function setDept(next) {
@@ -1178,7 +1250,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeAll();
   });
-  fetch("catalog.json?v=20261119b")
+  fetch("catalog.json?v=20261120lead")
     .then((res) => {
       if (!res.ok) throw new Error("catalog");
       return res.json();

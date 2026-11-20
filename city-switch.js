@@ -9,6 +9,7 @@
       var all=chips.querySelectorAll("button");
       for(var i=0;i<all.length;i++) all[i].setAttribute("aria-pressed", all[i]===btn ? "true" : "false");
       box.querySelector("[data-role=photo]").setAttribute("src", root+item.photo);
+      box.querySelector("[data-role=photo]").setAttribute("srcset", root+item.photo+" 2x");
       box.querySelector("[data-role=photo]").setAttribute("alt", item.title);
       box.querySelector("[data-role=page]").setAttribute("href", root+item.page);
       box.querySelector("[data-role=label]").textContent=item.label;
