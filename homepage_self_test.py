@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -103,7 +104,7 @@ for sku, rel in JACKET_FILES.items():
     check(width(rel) >= HERO_MIN, f"{sku} lead is full resolution ({width(rel)}px)")
     page = Path("products") / f"{product['handle']}.html"
     body = page.read_text()
-    check(f"{rel}?v=20261120lead" in body and 'id="staticMainProdImg"' in body, f"{product['handle']} gallery lead is the new photo")
+    check(product["primary_image"] in body and 'id="staticMainProdImg"' in body, f"{product['handle']} gallery lead is the new photo")
     jacket_hashes.append(md5(rel))
 check(len(set(jacket_hashes)) == len(JACKETS), "no two Race Day Jacket cities share a lead photo")
 
@@ -237,6 +238,117 @@ adjacent = [f"{cards[i]}|{cards[i+1]}" for i in range(len(cards) - 1) if cards[i
 check(cards.count("city-crest") == 1, "homepage shows one city crest card")
 check(not any(handle in CRESTS for handle in cards), "individual crest products are not repeated beside the crest card")
 check(not adjacent, "no two adjacent homepage cards are crest products")
+
+HOME_HIDE = {
+    "run-station-repeat-heavy-blend-hoodie",
+    "wall-balls-bad-decisions-hoodie",
+    "burpee-broad-jumps-build-character-warmup-hoodie",
+    "the-erg-doesnt-care-how-you-feel-heavyweight-fleece-hoodie",
+    "engine-training-tank-mint",
+    "engine-biker-shorts-mint",
+}
+COLOR_EXTRA = {
+    "hyrx-run-5-panel-light-blue-white",
+    "hyrx-cuff-beanie-heather-grey",
+    "hyrx-rib-beanie-light-blue",
+    "hyrx-gym-sack-burgundy",
+    "hyrx-station-towel-deep-olive",
+    "hyrx-pool-slide-burgundy",
+}
+COLOR_DEFAULT = {
+    "hyrx-run-5-panel-black": "HYRX Run 5-Panel",
+    "hyrx-cuff-beanie-black": "HYRX Cuff Beanie",
+    "hyrx-rib-beanie-black": "HYRX Rib Beanie",
+    "hyrx-gym-sack-black": "HYRX Gym Sack",
+    "hyrx-station-towel-black": "HYRX Station Towel",
+    "hyrx-pool-slide-black": "HYRX Pool Slide",
+}
+folded = []
+for handle in cards:
+    if handle in HOME_HIDE or handle in COLOR_EXTRA:
+        continue
+    if handle in COLOR_DEFAULT:
+        folded.append(COLOR_DEFAULT[handle])
+        continue
+    folded.append(handle)
+short_map = dict(re.findall(r'"(APC-C\d+)": "([^"]+)"', app.split("const SHORT = {", 1)[1].split("};", 1)[0]))
+def visible_title(product):
+    if product["id"] in short_map:
+        return short_map[product["id"]]
+    return product["title"].split(" - ")[0]
+hero_titles = ["Run Station Repeat", "Wall Balls & Bad Decisions", "Porta-Potty Line PR", "Sled Push Enthusiast"]
+visible = ["Denver Race Day Windbreaker", "Dallas Race Day Jacket"] + hero_titles
+by_handle = {p["handle"]: p for p in catalog["products"]}
+for handle in folded:
+    if handle == "city-crest":
+        visible.append("City Crest")
+    elif handle in COLOR_DEFAULT.values():
+        visible.append(handle)
+    elif handle in by_handle:
+        visible.append(visible_title(by_handle[handle]))
+dup_titles = sorted({title for title in visible if visible.count(title) > 1})
+check(not dup_titles, "no duplicate visible titles on homepage" + (": " + ", ".join(dup_titles) if dup_titles else ""))
+nonblack = [handle for handle in folded if handle in COLOR_EXTRA or handle in {"engine-training-tank-mint", "engine-biker-shorts-mint"}]
+check(not nonblack, "no non-black default cards except the Mint Engine bra")
+check("engine-sports-bra-mint" in folded, "Mint Engine bra stays on the homepage")
+check("JACKET_TITLE" in app and "Anaheim Race Day Jacket" in app and "data-role=\"title\"" in app, "jacket title changes with the selected city")
+switch = json.loads(Path("race-day-switcher.json").read_text())
+wind_titles = [item["title"] for item in switch["windbreakers"]]
+check(len(set(wind_titles)) == len(wind_titles), "each windbreaker city has its own title")
+check(all(item["city"] in item["title"] for item in switch["windbreakers"]), "windbreaker title includes the selected city")
+check('data-role=title' in html and "item.title" in html, "windbreaker card writes the city title")
+
+def logo_offset(width, height):
+    script = r'''
+const { spawn } = require("child_process");
+const port = 9350 + %d;
+const chrome = spawn("google-chrome", ["--headless=new","--disable-gpu","--no-sandbox","--disable-dev-shm-usage",`--remote-debugging-port=${port}`,"about:blank"], {stdio:"ignore"});
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+(async () => {
+  let version;
+  for (let i = 0; i < 40; i++) {
+    try { version = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json(); break; }
+    catch { await sleep(150); }
+  }
+  const browser = new WebSocket(version.webSocketDebuggerUrl);
+  await new Promise(r => browser.addEventListener("open", r));
+  let id = 0; const pending = new Map();
+  const bind = (ws) => ws.addEventListener("message", (ev) => { const msg = JSON.parse(ev.data); if (msg.id && pending.has(msg.id)) pending.get(msg.id)(msg); });
+  bind(browser);
+  const send = (ws, method, params={}) => new Promise((resolve) => { const msgId = ++id; pending.set(msgId, resolve); ws.send(JSON.stringify({id:msgId, method, params})); });
+  const created = await send(browser, "Target.createTarget", {url:"about:blank"});
+  const targets = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+  const page = targets.find(t => t.id === created.result.targetId);
+  const ws = new WebSocket(page.webSocketDebuggerUrl);
+  await new Promise(r => ws.addEventListener("open", r));
+  bind(ws);
+  await send(ws, "Emulation.setDeviceMetricsOverride", {width:%d, height:%d, deviceScaleFactor:1, mobile:%s});
+  await send(ws, "Page.navigate", {url:"http://127.0.0.1:8788/index.html"});
+  await sleep(1200);
+  const ev = await send(ws, "Runtime.evaluate", {expression:`(() => { const el = document.querySelector('.SiteHead .Wordmark'); const r = el.getBoundingClientRect(); const center = r.left + r.width/2; const bag = document.querySelector('.BagBtn').getBoundingClientRect(); const menu = document.querySelector('.MenuBtn'); const mr = menu ? menu.getBoundingClientRect() : null; const overlap = (a,b) => a && b && !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom); const width = document.documentElement.clientWidth; return JSON.stringify({off: Math.abs(center - width/2), overlapBag: overlap(r, bag), overlapMenu: mr && menu.offsetParent ? overlap(r, mr) : false}); })()`, returnByValue:true});
+  console.log(ev.result.result.value);
+  browser.close(); chrome.kill();
+})().catch((err) => { console.error(err); chrome.kill(); process.exit(1); });
+'''
+    import subprocess, tempfile, os
+    width_js = script % (width, width, height, "true" if width < 800 else "false")
+    path = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False)
+    path.write(width_js)
+    path.close()
+    out = subprocess.check_output(["node", path.name], text=True, timeout=30)
+    os.unlink(path.name)
+    return json.loads(out.strip().splitlines()[-1])
+
+import socket
+sock = socket.socket(); sock.bind(("127.0.0.1", 8788)); sock.close()
+server = subprocess.Popen(["python3", "-m", "http.server", "8788", "--bind", "127.0.0.1"], cwd=str(ROOT), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+try:
+    for width, height in ((390, 844), (768, 1024), (1024, 800), (1440, 900)):
+        measured = logo_offset(width, height)
+        check(measured["off"] <= 4, f"logo centered at {width}px (off {measured['off']:.2f}px)")
+        check(not measured["overlapBag"] and not measured["overlapMenu"], f"logo does not overlap Menu or Bag at {width}px")
+finally:
+    server.terminate()
 
 # Card 2x bar: nothing on the homepage shelf is under 672. Recorded above per product.
 print(f"\n{len(failures)} failure(s)")
