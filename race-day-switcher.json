@@ -1,16 +1,6 @@
 {
   "windbreakers": [
     {
-      "city": "Denver",
-      "slug": "denver-race-day-stitched",
-      "title": "Denver Race Day Windbreaker",
-      "label": "Race Day Windbreaker",
-      "price": 60,
-      "photo": "images/streetwear/denver-race-day-stitched/05.jpg?v=20261119c",
-      "page": "products/denver-race-day-stitched.html",
-      "fourthwall": "https://apex-hybrid-co-shop.fourthwall.com/products/denver-race-day-stitched"
-    },
-    {
       "city": "Anaheim",
       "slug": "anaheim-race-day-stitched",
       "title": "Anaheim Race Day Windbreaker",
@@ -19,6 +9,16 @@
       "photo": "images/streetwear/anaheim-race-day-stitched/05.jpg?v=20261119c",
       "page": "products/anaheim-race-day-stitched.html",
       "fourthwall": "https://apex-hybrid-co-shop.fourthwall.com/products/anaheim-race-day-stitched"
+    },
+    {
+      "city": "Denver",
+      "slug": "denver-race-day-stitched",
+      "title": "Denver Race Day Windbreaker",
+      "label": "Race Day Windbreaker",
+      "price": 60,
+      "photo": "images/streetwear/denver-race-day-stitched/05.jpg?v=20261119c",
+      "page": "products/denver-race-day-stitched.html",
+      "fourthwall": "https://apex-hybrid-co-shop.fourthwall.com/products/denver-race-day-stitched"
     },
     {
       "city": "Nashville",
